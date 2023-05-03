@@ -1,0 +1,159 @@
+.bodyDef 
+{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.thDef 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	text-align: center;
+	
+	
+}
+
+.tdDef 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: left;
+}
+
+.cellBtnSub 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+
+.literalErrorGrande 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 26px;
+	text-align: center;
+}
+
+.paginaTitulo 
+{
+	/*background: #5D7B9D;*/
+	background: #03F;
+	color: #FFF;
+}
+
+.fondoFormularios
+{
+	/*background: #B5C7DE;*/
+	background:#03F;
+	color: #FFF;
+ 	text-align: left;
+}
+
+
+.tablaListadoExtensaCabecera
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+}
+.tablaListadoExtensa
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	cursor:pointer;
+}
+
+.colorFondoFilaImparListado
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #009;
+	color:#FFF;
+}
+
+.colorFondoPrincipalPestana
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	background-color: #EEE;
+}
+
+.colorFondoFilaImparListadoPestana
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #CCC;
+	color:#FFF;
+}
+
+
+
+.colorFondoBtnDesactivado
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: center;
+	background-color: #FFA07A;
+	
+}
+
+.colorFondoBlancoTablaPest
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: left;
+	background-color: #FFF;
+	color:#000;
+	
+}
+
+.tablaApartadosEmpresa
+{
+	background-color: #FFFFCC;
+	color:#000;
+	
+}
+
+.tablaCursos
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align:left;
+}
+
+.encabezadoSeccionLista 
+{
+	background-color:#FF3;
+	color:#000;
+	font-size: 16px;
+	text-align: center;
+}
+
+.filaresaltada
+{
+	background-color: #FFF;
+	color: #000;
+	cursor:pointer;
+}
+
+.formatoMenu 
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: left;
+	background-color:#000;
+	color:#FFF;
+}
+
+.colorTextoBotPest
+{
+	color: #000;	
+}
+
+
+
+
+
+
+
