@@ -4,6 +4,16 @@
  */
 package es.jahernandez.servlets.impresos;
 
+import java.awt.Color;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
@@ -14,30 +24,19 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.ClasesIndivVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AlumnosGestion;
 import es.jahernandez.gestion.ClasesIndivGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.ProfesoresGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -58,16 +57,14 @@ public class ImpClasesIndProfServlet extends HttpServlet
         ServletContext   sc           = null;
         Calendar         cal          = GregorianCalendar.getInstance();
         SimpleDateFormat forFec       = new SimpleDateFormat("dd/MM/yyyy");
-        String           txtFec       = forFec.format(cal.getTime());
-        
+               
 
         Vector           listaClaProf = new Vector();
         ClasesIndivVO    clasIndVO    = new ClasesIndivVO();
         String           codProf      = "";
         String           fecFilt      = "";
         
-        int              tipBus       = -99;         
-      
+             
         String           strCurso     = "";
         String           strFecha     = "";
         String           strAlumno    = "";

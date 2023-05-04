@@ -4,19 +4,17 @@
  */
 package es.jahernandez.servlets.empresas;
 
-import es.jahernandez.accesodatos.SegEmpDAO;
-import es.jahernandez.datos.ConUsuVO;
-import es.jahernandez.datos.SegEmpVO;
-import es.jahernandez.gestion.SegEmpGestion;
-
 import java.io.IOException;
-import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.gestion.SegEmpGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *

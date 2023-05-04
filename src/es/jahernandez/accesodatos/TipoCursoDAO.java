@@ -5,20 +5,17 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.TipoCursoVO;
-import es.jahernandez.gestion.TipoCursoGestion;
-
-import es.jahernandez.tablas.TablaTipoCurso;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.TipoCursoVO;
+import es.jahernandez.gestion.TipoCursoGestion;
+import es.jahernandez.tablas.TablaTipoCurso;
 
 /**
  *
@@ -276,7 +273,7 @@ public class TipoCursoDAO
 
             regActualizados = ps.executeUpdate();
 
-            ps.close();;
+            ps.close();
             
             return regActualizados;
         }

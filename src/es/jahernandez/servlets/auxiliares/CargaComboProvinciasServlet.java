@@ -4,13 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.ListaCodPostDAO;
-import es.jahernandez.accesodatos.TipoDocDAO;
-import es.jahernandez.datos.ListaCodPostVO;
-import es.jahernandez.gestion.ListaCodPostGestion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+
+import es.jahernandez.datos.ListaCodPostVO;
+import es.jahernandez.gestion.ListaCodPostGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

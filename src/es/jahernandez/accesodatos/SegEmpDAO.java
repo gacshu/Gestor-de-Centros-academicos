@@ -156,11 +156,11 @@ public class SegEmpDAO
 
         while (enc)
         {
-            contCar = new Integer(datSeg.size()).toString().length();
+            contCar = (""+ datSeg.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datSeg.size() + avc).toString();
+                codIntrod = "" + (datSeg.size() + avc);
             }
             else
             {
@@ -269,7 +269,7 @@ public class SegEmpDAO
 
             regActualizados = ps.executeUpdate();
 
-            ps.close();;
+            ps.close();
             
             return regActualizados;
         }
@@ -367,7 +367,7 @@ public class SegEmpDAO
 
             regActualizados = ps.executeUpdate();
 
-            ps.close();;
+            ps.close();
 
             return regActualizados;
         }
@@ -402,7 +402,7 @@ public class SegEmpDAO
 
             regActualizados = ps.executeUpdate();
 
-            ps.close();;
+            ps.close();
             
             return regActualizados;
         }

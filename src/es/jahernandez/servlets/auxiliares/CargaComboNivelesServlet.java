@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.NivelesDAO;
-import es.jahernandez.datos.NivelesVO;
-import es.jahernandez.gestion.NivelesGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.NivelesVO;
+import es.jahernandez.gestion.NivelesGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,13 +59,12 @@ public class CargaComboNivelesServlet extends HttpServlet
             valSel = request.getParameter("valSel");
         }
 
-        if(request.getParameter("muestraSelec") != null)
+        if(request.getParameter("muestraSelec") != null  &&
+           request.getParameter("muestraSelec").trim().equals("s"))
         {
-            if(request.getParameter("muestraSelec").trim().equals("s"))
-            {
-                mostrarSel = true;
-            }
+            mostrarSel = true;
         }
+    
         
         try 
         {            

@@ -4,15 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.EmpresasDAO;
-import es.jahernandez.datos.DatosCmbEmp;
-import es.jahernandez.datos.EmpresasVO;
-import es.jahernandez.gestion.EmpresasGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.DatosCmbEmp;
+import es.jahernandez.gestion.EmpresasGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

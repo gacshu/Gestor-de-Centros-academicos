@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.TipoCursoDAO;
-import es.jahernandez.datos.TipoCursoVO;
-import es.jahernandez.gestion.TipoCursoGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.TipoCursoVO;
+import es.jahernandez.gestion.TipoCursoGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

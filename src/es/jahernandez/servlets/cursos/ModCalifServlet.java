@@ -4,19 +4,19 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.CalificacionesDAO;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.CalificacionesVO;
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.gestion.CalificacionesGestion;
-
-import java.io.IOException;
-import java.util.GregorianCalendar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -45,8 +45,7 @@ public class ModCalifServlet extends HttpServlet {
 
         Logger           log        = null;
         ConUsuVO         conUsoVO   = null;
-        String           indPag     = "";   
-        String           strFecha   = "";
+        String           indPag     = "";          
         int              cargaEva   = -99;
         boolean          pagPestana = false;
         
@@ -81,16 +80,15 @@ public class ModCalifServlet extends HttpServlet {
             califVO.setEvaluacion(new Integer(request.getParameter("eva").trim()).intValue());
         }
                 
-        if(request.getParameter("hidFecha" + califVO.devolverClave()) != null)
+        if(request.getParameter("hidFecha" + califVO.devolverClave()) != null &&
+          !request.getParameter("hidFecha" + califVO.devolverClave()).equals(""))
         {
-            if (! request.getParameter("hidFecha" + califVO.devolverClave()).equals(""))
-            {
-                String strFechaCal = request.getParameter("hidFecha" + califVO.devolverClave());
-                califVO.setFecha(new GregorianCalendar(new Integer(strFechaCal.substring(6,10)).intValue(),
-                                                       new Integer(strFechaCal.substring(3,5)).intValue() - 1,
-                                                       new Integer(strFechaCal.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaCal = request.getParameter("hidFecha" + califVO.devolverClave());
+            califVO.setFecha(new GregorianCalendar(new Integer(strFechaCal.substring(6,10)).intValue(),
+                                                   new Integer(strFechaCal.substring(3,5)).intValue() - 1,
+                                                   new Integer(strFechaCal.substring(0,2)).intValue()).getTime());
         }
+        
         
         if(request.getParameter("lstNota" + califVO.devolverClave()) != null)
         {

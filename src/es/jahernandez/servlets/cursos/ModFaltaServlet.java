@@ -4,19 +4,19 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.FaltasDAO;
-import es.jahernandez.datos.FaltasVO;
-import es.jahernandez.datos.ConUsuVO;
-import es.jahernandez.gestion.FaltasGestion;
-
 import java.io.IOException;
 import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.FaltasVO;
+import es.jahernandez.gestion.FaltasGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -45,7 +45,6 @@ public class ModFaltaServlet extends HttpServlet  {
         Logger           log        = null;
         ConUsuVO         conUsoVO   = null;
         String           indPag     = "";   
-        String           strFecha   = "";
         boolean          pagPestana = false;
         
         //Cargamos atributos de log
@@ -74,25 +73,21 @@ public class ModFaltaServlet extends HttpServlet  {
             faltaVO.setIdMod(request.getParameter("codMod").trim());
         }
                
-        if(request.getParameter("fecha") != null)
+        if(request.getParameter("fecha") != null &&
+          !request.getParameter("fecha").equals(""))
         {
-            if (! request.getParameter("fecha").equals(""))
-            {
-                String strFechaFal = request.getParameter("fecha");
-                faltaVO.setFecha(new GregorianCalendar(new Integer(strFechaFal.substring(6,10)).intValue(),
-                                                       new Integer(strFechaFal.substring(3,5)).intValue() - 1,
-                                                       new Integer(strFechaFal.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaFal = request.getParameter("fecha");
+            faltaVO.setFecha(new GregorianCalendar(new Integer(strFechaFal.substring(6,10)).intValue(),
+                                                   new Integer(strFechaFal.substring(3,5)).intValue() - 1,
+                                                   new Integer(strFechaFal.substring(0,2)).intValue()).getTime());
         }
         
-        if(request.getParameter("chkJust" + faltaVO.devolverClave()) != null)
+        if(request.getParameter("chkJust" + faltaVO.devolverClave()) != null &&
+           request.getParameter("chkJust" + faltaVO.devolverClave()).trim().equals("true"))
         {
-            if(request.getParameter("chkJust" + faltaVO.devolverClave()).trim().equals("true"))
-            {
-                faltaVO.setJustificada(true);
-            }
+            faltaVO.setJustificada(true);
         }
-        
+                
         if(request.getParameter("pagPest") != null)
         {
             pagPestana = true;

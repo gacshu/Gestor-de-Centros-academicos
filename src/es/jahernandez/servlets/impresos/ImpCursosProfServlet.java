@@ -4,6 +4,15 @@
  */
 package es.jahernandez.servlets.impresos;
 
+import java.awt.Color;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
@@ -14,8 +23,9 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.EdiModProfAulaVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AreasGestion;
 import es.jahernandez.gestion.AulasGestion;
 import es.jahernandez.gestion.CursosGestion;
@@ -23,23 +33,12 @@ import es.jahernandez.gestion.EdiModProfAulaGestion;
 import es.jahernandez.gestion.EdicionesGestion;
 import es.jahernandez.gestion.ModulosGestion;
 import es.jahernandez.gestion.ProfesoresGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -183,7 +182,7 @@ public class ImpCursosProfServlet extends HttpServlet
                 strArea    = empaVO.getIdAul().trim().equals("") ? "" : AulasGestion.devolverDatosAula(empaVO.getIdAul()).getNombre(); 
                 strArea    = AreasGestion.devuelveNombreArea(ModulosGestion.devolverDatosModulo(empaVO.getIdMod()).getCodArea());
                 strFecIni  = forFec.format(empaVO.getFecIni());
-                strFecFin  = forFec.format(empaVO.getFecFin());;        
+                strFecFin  = forFec.format(empaVO.getFecFin());    
                 strHoraIni = empaVO.getHorIni();
                 strHoraFin = empaVO.getHorFin();
 

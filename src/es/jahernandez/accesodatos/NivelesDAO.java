@@ -26,6 +26,7 @@ import java.util.Vector;
  *
  * @author Alberto
  */
+@SuppressWarnings("unused")
 public class NivelesDAO
 {
     //Método que devuelve los datos de un nivel
@@ -193,11 +194,11 @@ public class NivelesDAO
 
         while (enc)
         {
-            contCar = new Integer(datNiv.size()).toString().length();
+            contCar = (""+ datNiv.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datNiv.size() + avc).toString();
+                codIntrod = "" + (datNiv.size() + avc);
             }
             else
             {

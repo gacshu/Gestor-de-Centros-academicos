@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.AlumnosDAO ;
-import es.jahernandez.datos.AlumnosVO;
-import es.jahernandez.gestion.AlumnosGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.gestion.AlumnosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,8 +47,7 @@ public class CargarComboAlumnosServlet extends HttpServlet
         String	    valSel     = null;
         Vector      vecAlumnos = AlumnosGestion.devolverTodosAluOrd();
         AlumnosVO   aluVO      = null;
-        boolean     mostrarSel = true;
-         
+                
         if(request.getParameter("valSel") != null)
         {
             valSel = request.getParameter("valSel");

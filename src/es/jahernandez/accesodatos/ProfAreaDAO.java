@@ -136,7 +136,6 @@ public class ProfAreaDAO
                                            " FROM "  + TablaProfArea.TABLA   +
                                            " WHERE " + TablaProfArea.CODPROF + " = ? ";
         
-        ProfAreaVO       datProfNiv      = null;
         String           nombresAreas    = ""; 
 
         try

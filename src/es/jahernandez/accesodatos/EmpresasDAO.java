@@ -327,11 +327,11 @@ public class EmpresasDAO
 
         while (enc)
         {
-            contCar = new Integer(datEmp.size()).toString().length();
+            contCar = ("" + datEmp.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datEmp.size() + avc).toString();
+                codIntrod = "" + (datEmp.size() + avc);
             }
             else
             {
@@ -386,7 +386,7 @@ public class EmpresasDAO
             
             if(rs.next())
             {
-                nuevoCod = new Integer(rs.getInt(1)).toString();
+                nuevoCod = "" + (rs.getInt(1));
             }
 
             rs.close();

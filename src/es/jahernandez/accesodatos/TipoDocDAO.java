@@ -5,19 +5,16 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.TipoDocVO;
-
-import es.jahernandez.tablas.TablaTipoDocumento;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.TipoDocVO;
+import es.jahernandez.tablas.TablaTipoDocumento;
 
 /**
  *

@@ -4,11 +4,6 @@
  */
 package es.jahernandez.utilidades;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat; 
-import java.util.Date;
-import org.apache.log4j.*;
-
 /**
  *
  * @author JuanAlberto

@@ -4,19 +4,19 @@
  */
 package es.jahernandez.servlets.alumnos;
 
-import es.jahernandez.accesodatos.ClasesIndivDAO;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ClasesIndivVO;
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.gestion.ClasesIndivGestion;
-
-import java.io.IOException;
-import java.util.GregorianCalendar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -69,16 +69,15 @@ public class AltaClaseIndServlet extends HttpServlet
             clasIndVO.setIdAlu(request.getParameter("txtCodAlu").trim());
         }
         
-        if(request.getParameter("hidNuevaFecha") != null)
+        if(request.getParameter("hidNuevaFecha") != null  &&
+          ! request.getParameter("hidNuevaFecha").equals(""))
         {
-            if (! request.getParameter("hidNuevaFecha").equals(""))
-            {
-                String strFechaCla = request.getParameter("hidNuevaFecha");
-                clasIndVO.setFecClase(new GregorianCalendar(new Integer(strFechaCla.substring(6,10)).intValue(),
-                                                            new Integer(strFechaCla.substring(3,5)).intValue() - 1,
-                                                            new Integer(strFechaCla.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaCla = request.getParameter("hidNuevaFecha");
+            clasIndVO.setFecClase(new GregorianCalendar(new Integer(strFechaCla.substring(6,10)).intValue(),
+                                                        new Integer(strFechaCla.substring(3,5)).intValue() - 1,
+                                                        new Integer(strFechaCla.substring(0,2)).intValue()).getTime());
         }
+        
         
         if(request.getParameter("lstNuevoProf") != null)
         {

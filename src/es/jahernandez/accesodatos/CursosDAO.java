@@ -5,11 +5,18 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import es.jahernandez.datos.CentrosVO;
+import es.jahernandez.datos.CursosAluVO;
 import es.jahernandez.datos.CursosVO;
 import es.jahernandez.datos.ResultadoBusqAlu;
-import es.jahernandez.datos.CursosAluVO;
-import es.jahernandez.datos.CentrosVO;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.CentrosGestion;
 import es.jahernandez.gestion.CurNivGestion;
@@ -18,21 +25,11 @@ import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
 import es.jahernandez.gestion.SeguimientosGestion;
 //import es.jahernandez.datos.AlumnosEdiVO;
-
-import es.jahernandez.tablas.TablaCursos;
 import es.jahernandez.tablas.TablaAlumnos;
 import es.jahernandez.tablas.TablaAlumnosEdiciones;
+import es.jahernandez.tablas.TablaCursos;
 import es.jahernandez.tablas.TablaCursosAlumnos;
 import es.jahernandez.tablas.TablaEdiciones;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.Vector;
 
 /**
  *
@@ -518,11 +515,11 @@ public class CursosDAO
 
         while (enc)
         {
-            contCar = new Integer(datCur.size()).toString().length();
+            contCar = ("" + datCur.size()).length();
 
             if (contCar > 0)
             {
-               codIntrod = new Integer(datCur.size() + avc).toString();
+               codIntrod = "" + (datCur.size() + avc);
             }
             else
             {

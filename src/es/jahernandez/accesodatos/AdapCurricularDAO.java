@@ -4,7 +4,6 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
 import es.jahernandez.datos.AdapCurricularVO;
 import es.jahernandez.gestion.AdapCurricularGestion;
 import es.jahernandez.tablas.TablaAdapCurricular;
@@ -13,9 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.dom4j.util.UserDataDocumentFactory;
 
 /**
  *
@@ -190,11 +190,12 @@ public class AdapCurricularDAO
 
         while (enc)
         {
-            contCar = new Integer(datAdapCur.size()).toString().length();
+        	contCar = ("" + datAdapCur.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datAdapCur.size() + avc).toString();
+                codIntrod = "" + (datAdapCur.size() + avc);
+                
             }
             else
             {

@@ -4,11 +4,11 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.CursosDAO;
-import es.jahernandez.datos.CursosVO;
-import es.jahernandez.gestion.CursosGestion;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.gestion.CursosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

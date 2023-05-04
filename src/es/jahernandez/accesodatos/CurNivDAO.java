@@ -4,22 +4,18 @@
  */
 
 package es.jahernandez.accesodatos;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.CurNivVO;
-import es.jahernandez.gestion.CursosAluGestion;
-import es.jahernandez.tablas.TablaActividades;
-
-import es.jahernandez.tablas.TablaCursoNiveles;
-import es.jahernandez.tablas.TablaNiveles;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.CurNivVO;
+import es.jahernandez.gestion.CursosAluGestion;
+import es.jahernandez.tablas.TablaCursoNiveles;
+import es.jahernandez.tablas.TablaNiveles;
 
 /**
  *

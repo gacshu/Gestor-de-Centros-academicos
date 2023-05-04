@@ -4,24 +4,21 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ProfesoresVO;
-import es.jahernandez.datos.DatosBusqProfVO;
-import es.jahernandez.gestion.ProfesoresGestion;
-import es.jahernandez.tablas.TablaProfArea;
-
-import es.jahernandez.tablas.TablaProfesores;
-import es.jahernandez.tablas.TablaProvincias;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.DatosBusqProfVO;
+import es.jahernandez.datos.ProfesoresVO;
+import es.jahernandez.gestion.ProfesoresGestion;
+import es.jahernandez.tablas.TablaProfArea;
+import es.jahernandez.tablas.TablaProfesores;
+import es.jahernandez.tablas.TablaProvincias;
 
 /**
  *
@@ -38,8 +35,6 @@ public class ProfesoresDAO
         Vector            listaProf      = new Vector();
 
         ProfesoresVO      datResBus      = null;
-
-        String            strAux         =  "";
         
         String            cadenaConsulta =  "SELECT " + TablaProfesores.CODPROFESOR   + " , "      
                                                       + TablaProfesores.NOMBRE        + " , "     
@@ -64,7 +59,7 @@ public class ProfesoresDAO
             datBus.getNumDoc().equals("") && datBus.getCodArea().equals("-1") && ! datBus.isActivo())
         {
 
-            //No hay condición de búsqueda
+        	cadenaConsulta = cadenaConsulta + "";
         }
         else
         {
@@ -553,11 +548,11 @@ public class ProfesoresDAO
 
         while (enc)
         {
-            contCar = new Integer(datProf.size()).toString().length();
+            contCar = ("" + datProf.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datProf.size() + avc).toString();
+                codIntrod = "" + (datProf.size() + avc);
             }
             else
             {

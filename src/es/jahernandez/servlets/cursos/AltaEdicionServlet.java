@@ -4,20 +4,19 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
-import es.jahernandez.gestion.EdicionesGestion;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.GregorianCalendar;
-import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.gestion.EdicionesGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -81,27 +80,25 @@ public class AltaEdicionServlet extends HttpServlet {
             ediVO.setIdAula(request.getParameter("lstAula").trim());
         }
         
-        if(request.getParameter("txtFecInicio") != null)
+        if(request.getParameter("txtFecInicio") != null &&
+          !request.getParameter("txtFecInicio").equals(""))
         {
-            if (! request.getParameter("txtFecInicio").equals(""))
-            {
-                String strFechaIni = request.getParameter("txtFecInicio");
-                ediVO.setFecIn(new GregorianCalendar(new Integer(strFechaIni.substring(6,10)).intValue(),
-                                                     new Integer(strFechaIni.substring(3,5)).intValue() - 1,
-                                                     new Integer(strFechaIni.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaIni = request.getParameter("txtFecInicio");
+            ediVO.setFecIn(new GregorianCalendar(new Integer(strFechaIni.substring(6,10)).intValue(),
+                                                 new Integer(strFechaIni.substring(3,5)).intValue() - 1,
+                                                 new Integer(strFechaIni.substring(0,2)).intValue()).getTime());
+        }
+       
+        
+        if(request.getParameter("txtFecFin") != null &&
+          !request.getParameter("txtFecFin").equals(""))
+        {
+            String strFechaFin = request.getParameter("txtFecFin");
+            ediVO.setFecFi(new GregorianCalendar(new Integer(strFechaFin.substring(6,10)).intValue(),
+                                                 new Integer(strFechaFin.substring(3,5)).intValue() - 1,
+                                                 new Integer(strFechaFin.substring(0,2)).intValue()).getTime());
         }
         
-        if(request.getParameter("txtFecFin") != null)
-        {
-            if (! request.getParameter("txtFecFin").equals(""))
-            {
-                String strFechaFin = request.getParameter("txtFecFin");
-                ediVO.setFecFi(new GregorianCalendar(new Integer(strFechaFin.substring(6,10)).intValue(),
-                                                     new Integer(strFechaFin.substring(3,5)).intValue() - 1,
-                                                     new Integer(strFechaFin.substring(0,2)).intValue()).getTime());
-            }
-        }
 
         if(request.getParameter("txtPlazas") != null)
         {
@@ -153,160 +150,137 @@ public class AltaEdicionServlet extends HttpServlet {
             ediVO.setPrecioR(new Double(request.getParameter("txtPrecioPlazo").replace(',','.').trim()).doubleValue());
         }
         
-        if(request.getParameter("chkAplazado") != null)
+        if(request.getParameter("chkAplazado") != null &&
+        request.getParameter("chkAplazado").equals("true"))
         {
-            if(request.getParameter("chkAplazado").equals("true"))
-            {
-                ediVO.setPlazos(true);
-            }
+            ediVO.setPlazos(true);
         }
         
-        if(request.getParameter("chkLunes") != null)
+        if(request.getParameter("chkLunes") != null &&
+           request.getParameter("chkLunes").equals("true"))
         {
-            if(request.getParameter("chkLunes").equals("true"))
-            {
-                ediVO.setHayLun(true);
-            }
+            ediVO.setHayLun(true);
         }
         
-        if(request.getParameter("chkMartes") != null)
+        if(request.getParameter("chkMartes") != null &&
+           request.getParameter("chkMartes").equals("true"))
         {
-            if(request.getParameter("chkMartes").equals("true"))
-            {
-                ediVO.setHayMar(true);
-            }
+            ediVO.setHayMar(true);
         }
         
-        if(request.getParameter("chkMiercoles") != null)
+        
+        if(request.getParameter("chkMiercoles") != null &&
+           request.getParameter("chkMiercoles").equals("true"))
         {
-            if(request.getParameter("chkMiercoles").equals("true"))
-            {
-                ediVO.setHayMie(true);
-            }
+            ediVO.setHayMie(true);
         }
         
-        if(request.getParameter("chkJueves") != null)
+        
+        if(request.getParameter("chkJueves") != null &&
+           request.getParameter("chkJueves").equals("true"))
         {
-            if(request.getParameter("chkJueves").equals("true"))
-            {
-                ediVO.setHayJue(true);
-            }
+            ediVO.setHayJue(true);
+        }
+       
+        
+        if(request.getParameter("chkViernes") != null &&
+           request.getParameter("chkViernes").equals("true"))
+        {
+            ediVO.setHayVie(true);
+        }
+    
+        
+        if(request.getParameter("chkSabado") != null &&
+           request.getParameter("chkSabado").equals("true"))
+        {
+            ediVO.setHaySab(true);
         }
         
-        if(request.getParameter("chkViernes") != null)
-        {
-            if(request.getParameter("chkViernes").equals("true"))
-            {
-                ediVO.setHayVie(true);
-            }
-        }
-        
-        if(request.getParameter("chkSabado") != null)
-        {
-            if(request.getParameter("chkSabado").equals("true"))
-            {
-                ediVO.setHaySab(true);
-            }
-        }
         
         if(ediVO.isPlazos())
         {
+            if(request.getParameter("chkEnero") != null &&
+               request.getParameter("chkEnero").equals("true"))
+            {
+                ediVO.setEne(true);
+            }
+            
         
-            if(request.getParameter("chkEnero") != null)
+            if(request.getParameter("chkFebrero") != null &&
+               request.getParameter("chkFebrero").equals("true"))
             {
-                if(request.getParameter("chkEnero").equals("true"))
-                {
-                    ediVO.setEne(true);
-                }
+                ediVO.setFeb(true);
             }
-        
-            if(request.getParameter("chkFebrero") != null)
+           
+            
+            if(request.getParameter("chkMarzo") != null &&
+               request.getParameter("chkMarzo").equals("true"))
             {
-                if(request.getParameter("chkFebrero").equals("true"))
-                {
-                    ediVO.setFeb(true);
-                }
+                ediVO.setMar(true);
             }
             
-            if(request.getParameter("chkMarzo") != null)
+            
+            if(request.getParameter("chkAbril") != null &&
+               request.getParameter("chkAbril").equals("true"))
             {
-                if(request.getParameter("chkMarzo").equals("true"))
-                {
-                    ediVO.setMar(true);
-                }
+                ediVO.setAbr(true);
             }
             
-            if(request.getParameter("chkAbril") != null)
-            {
-                if(request.getParameter("chkAbril").equals("true"))
-                {
-                    ediVO.setAbr(true);
-                }
-            }
             
-            if(request.getParameter("chkMayo") != null)
+            if(request.getParameter("chkMayo") != null &&
+               request.getParameter("chkMayo").equals("true"))
             {
-                if(request.getParameter("chkMayo").equals("true"))
-                {
-                    ediVO.setMay(true);
-                }
+                ediVO.setMay(true);
             }
         
-            if(request.getParameter("chkJunio") != null)
+        
+            if(request.getParameter("chkJunio") != null &&
+               request.getParameter("chkJunio").equals("true"))
             {
-                if(request.getParameter("chkJunio").equals("true"))
-                {
-                    ediVO.setJun(true);
-                }
+                ediVO.setJun(true);
             }
             
-            if(request.getParameter("chkJulio") != null)
+            
+            if(request.getParameter("chkJulio") != null &&
+               request.getParameter("chkJulio").equals("true"))
             {
-                if(request.getParameter("chkJulio").equals("true"))
-                {
-                    ediVO.setJul(true);
-                }
+                ediVO.setJul(true);
             }
             
-            if(request.getParameter("chkAgosto") != null)
+            
+            if(request.getParameter("chkAgosto") != null &&
+               request.getParameter("chkAgosto").equals("true"))
             {
-                if(request.getParameter("chkAgosto").equals("true"))
-                {
-                    ediVO.setAgo(true);
-                }
+                ediVO.setAgo(true);
             }
             
-            if(request.getParameter("chkSeptiembre") != null)
+            
+            if(request.getParameter("chkSeptiembre") != null &&
+               request.getParameter("chkSeptiembre").equals("true"))
             {
-                if(request.getParameter("chkSeptiembre").equals("true"))
-                {
-                    ediVO.setSep(true);
-                }
+                ediVO.setSep(true);
+            }	
+        
+            if(request.getParameter("chkOctubre") != null &&
+               request.getParameter("chkOctubre").equals("true"))
+            {
+                ediVO.setOct(true);
+            }
+            
+            
+            if(request.getParameter("chkNoviembre") != null &&
+               request.getParameter("chkNoviembre").equals("true"))
+            {
+                ediVO.setNov(true);
             }
         
-            if(request.getParameter("chkOctubre") != null)
-            {
-                if(request.getParameter("chkOctubre").equals("true"))
-                {
-                    ediVO.setOct(true);
-                }
-            }
             
-            if(request.getParameter("chkNoviembre") != null)
+            if(request.getParameter("chkDiciembre") != null &&
+               request.getParameter("chkDiciembre").equals("true"))
             {
-                if(request.getParameter("chkNoviembre").equals("true"))
-                {
-                    ediVO.setNov(true);
-                }
+                ediVO.setDic(true);
             }
-            
-            if(request.getParameter("chkDiciembre") != null)
-            {
-                if(request.getParameter("chkDiciembre").equals("true"))
-                {
-                    ediVO.setDic(true);
-                }
-            }                                      
+                                          
         
         }
         

@@ -4,24 +4,19 @@
  */
 package es.jahernandez.servlets.profesores;
 
-import es.jahernandez.accesodatos.ProfesoresDAO;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.datos.ProfesoresVO;
 import es.jahernandez.gestion.ProfesoresGestion;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import jakarta.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -81,15 +76,13 @@ public class AltaProfesorServlet extends HttpServlet
             profAlta.setNumDoc(request.getParameter("txtNumDoc").trim());
         }
         
-        if(request.getParameter("txtFecNac") != null)
+        if(request.getParameter("txtFecNac") != null &&
+          !request.getParameter("txtFecNac").equals(""))
         {
-            if (! request.getParameter("txtFecNac").equals(""))
-            {
-                String strFechaNac = request.getParameter("txtFecNac");
-                profAlta.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
-                                                         new Integer(strFechaNac.substring(3,5)).intValue() - 1,
-                                                         new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaNac = request.getParameter("txtFecNac");
+            profAlta.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
+                                                     new Integer(strFechaNac.substring(3,5)).intValue() - 1,
+                                                     new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
         
         if(request.getParameter("txtDireccion") != null)

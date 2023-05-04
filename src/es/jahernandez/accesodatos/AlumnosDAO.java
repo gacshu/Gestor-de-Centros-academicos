@@ -6,7 +6,6 @@
 package es.jahernandez.accesodatos;
 
 import es.jahernandez.datos.AlumnosVO;
-import es.jahernandez.datos.Conexion;
 import es.jahernandez.datos.DatosBusquedaAlumnos;
 import es.jahernandez.datos.ResultadoBusqAlu;
 import es.jahernandez.gestion.AdapCurricularGestion;
@@ -102,8 +101,6 @@ public class AlumnosDAO
 
         AlumnosVO         datResBus      = null;
 
-        String            strAux         =  "";
-        
         String            cadenaConsulta =  "SELECT " + TablaAlumnos.CODALU         + " , "      
                                                       + TablaAlumnos.TIPODOC        + " , "     
                                                       + TablaAlumnos.NUMERODOC      + " , "
@@ -142,6 +139,7 @@ public class AlumnosDAO
         {
 
             //No hay condición de búsqueda
+        	cadenaConsulta = cadenaConsulta + " ";
         }
         else
         {
@@ -426,7 +424,7 @@ public class AlumnosDAO
 
         if ( ! maxAlu.equals(""))
         {
-            numMax = new Integer(maxAlu).intValue();
+            numMax =  new Integer(maxAlu).intValue();
         }
         else
         {
@@ -1000,11 +998,12 @@ public class AlumnosDAO
 
         while (enc)
         {
-            contCar = new Integer(datAlu.size()).toString().length();
+            contCar = ("" + datAlu.size()).length();
+            
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datAlu.size() + avc).toString();
+                codIntrod = "" + (datAlu.size() + avc); 
             }
             else
             {

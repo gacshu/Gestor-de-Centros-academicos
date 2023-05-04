@@ -385,18 +385,18 @@ public class AluEdiDAO
                 }
                 else
                 {
-                    if((mes ==  1 && ediVO.isEne())  ||
-                       (mes ==  2 && ediVO.isFeb())  ||
-                       (mes ==  3 && ediVO.isMar())  ||
-                       (mes ==  4 && ediVO.isAbr())  ||
-                       (mes ==  5 && ediVO.isMay())  ||
-                       (mes ==  6 && ediVO.isJun())  ||
-                       (mes ==  7 && ediVO.isJul())  ||
-                       (mes ==  8 && ediVO.isAgo())  ||
-                       (mes ==  9 && ediVO.isSep())  ||
-                       (mes == 10 && ediVO.isOct())  ||
-                       (mes == 11 && ediVO.isNov())  ||
-                       (mes == 12 && ediVO.isDic())  )
+                    if(mes ==  1 && ediVO.isEne()  ||
+                       mes ==  2 && ediVO.isFeb()  ||
+                       mes ==  3 && ediVO.isMar()  ||
+                       mes ==  4 && ediVO.isAbr()  ||
+                       mes ==  5 && ediVO.isMay()  ||
+                       mes ==  6 && ediVO.isJun()  ||
+                       mes ==  7 && ediVO.isJul()  ||
+                       mes ==  8 && ediVO.isAgo()  ||
+                       mes ==  9 && ediVO.isSep()  ||
+                       mes == 10 && ediVO.isOct()  ||
+                       mes == 11 && ediVO.isNov()  ||
+                       mes == 12 && ediVO.isDic()  )
                     {
                         listaAluEdi.addElement(datAluEdi);
                     }
@@ -608,18 +608,18 @@ public class AluEdiDAO
                 }
                 else
                 {
-                    if ((mes ==  1 && ediVO.isEne())  ||
-                        (mes ==  2 && ediVO.isFeb())  ||
-                        (mes ==  3 && ediVO.isMar())  ||
-                        (mes ==  4 && ediVO.isAbr())  ||
-                        (mes ==  5 && ediVO.isMay())  ||
-                        (mes ==  6 && ediVO.isJun())  ||
-                        (mes ==  7 && ediVO.isJul())  ||
-                        (mes ==  8 && ediVO.isAgo())  ||
-                        (mes ==  9 && ediVO.isSep())  ||
-                        (mes == 10 && ediVO.isOct())  ||
-                        (mes == 11 && ediVO.isNov())  ||
-                        (mes == 12 && ediVO.isDic()) )
+                    if (mes ==  1 && ediVO.isEne()  ||
+                        mes ==  2 && ediVO.isFeb()  ||
+                        mes ==  3 && ediVO.isMar()  ||
+                        mes ==  4 && ediVO.isAbr()  ||
+                        mes ==  5 && ediVO.isMay()  ||
+                        mes ==  6 && ediVO.isJun()  ||
+                        mes ==  7 && ediVO.isJul()  ||
+                        mes ==  8 && ediVO.isAgo()  ||
+                        mes ==  9 && ediVO.isSep()  ||
+                        mes == 10 && ediVO.isOct()  ||
+                        mes == 11 && ediVO.isNov()  ||
+                        mes == 12 && ediVO.isDic() )
                     {
                         listaAluEdi.addElement(datAluEdi);
                     }

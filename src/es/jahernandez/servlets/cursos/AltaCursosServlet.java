@@ -4,22 +4,19 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
-import es.jahernandez.gestion.CursosGestion;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.gestion.CursosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 
 /**
  *

@@ -4,26 +4,35 @@
  */
 package es.jahernandez.servlets.mensajeria;
 
-import es.jahernandez.datos.ConUsuVO;
-import es.jahernandez.datos.InformacionConf;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Properties;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 
 //Paquetes de manejo de e-mail
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.*;
-import javax.mail.internet.*;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpSession;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.InformacionConf;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -84,13 +93,12 @@ public class enviarMensajeServlet extends HttpServlet
             cuerpo = request.getParameter("txtCuerpo");
         }
         
-        if (request.getParameter("lstArchivos") != null)
-        { 
-            if(! request.getParameter("lstArchivos").trim().equals(""))
-            {
-                listaArchivos = request.getParameter("lstArchivos").split(",");
-            }
+        if (request.getParameter("lstArchivos") != null &&
+           !request.getParameter("lstArchivos").trim().equals(""))
+        {
+            listaArchivos = request.getParameter("lstArchivos").split(",");
         }
+    
                
         //Se envia email
         String from = InformacionConf.mailEnvio;

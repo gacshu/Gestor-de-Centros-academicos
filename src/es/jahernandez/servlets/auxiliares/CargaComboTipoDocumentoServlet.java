@@ -4,12 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.TipoDocDAO;
-import es.jahernandez.datos.TipoDocVO;
-import es.jahernandez.gestion.TipoDocGestion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+
+import es.jahernandez.datos.TipoDocVO;
+import es.jahernandez.gestion.TipoDocGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

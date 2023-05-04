@@ -5,23 +5,21 @@
 
 package es.jahernandez.servlets.alumnos;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
-import es.jahernandez.gestion.AlumnosGestion;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Vector;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.gestion.AlumnosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -74,22 +72,19 @@ public class EditarInteresadoServlet extends HttpServlet
             aluEdi.setNumDocAlu(request.getParameter("txtNumDoc").trim().toUpperCase());
         }
 
-        if(request.getParameter("chkDesempleado") != null)
+        if(request.getParameter("chkDesempleado") != null &&
+           request.getParameter("chkDesempleado").equals("true"))
         {
-            if(request.getParameter("chkDesempleado").equals("true"))
-            {
-                aluEdi.setDesemp(true);
-            }
+            aluEdi.setDesemp(true);
         }
+        
 
-        if(request.getParameter("chkNoDeseado") != null)
+        if(request.getParameter("chkNoDeseado") != null &&
+           request.getParameter("chkNoDeseado").equals("true"))
         {
-            if(request.getParameter("chkNoDeseado").equals("true"))
-            {
-                aluEdi.setAlND(true);
-            }
+            aluEdi.setAlND(true);
         }
-
+       
         if(request.getParameter("hidCodInt") != null)
         {
             aluEdi.setIdAlu(request.getParameter("hidCodInt").trim());
@@ -157,17 +152,15 @@ public class EditarInteresadoServlet extends HttpServlet
 
         aluEdi.setIdCen(1);  //Valor fijo que se mantiene por compatibilidad
 
-        if(request.getParameter("hidFecNac") != null)
+        if(request.getParameter("hidFecNac") != null &&
+          !request.getParameter("hidFecNac").equals(""))
         {
-            if (! request.getParameter("hidFecNac").equals(""))
-            {
-                String strFechaNac = request.getParameter("hidFecNac");
-                aluEdi.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
-                                                        new Integer(strFechaNac.substring(3,5)).intValue() - 1,
-                                                        new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaNac = request.getParameter("hidFecNac");
+            aluEdi.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
+                                                    new Integer(strFechaNac.substring(3,5)).intValue() - 1,
+                                                    new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-
+        
         if(request.getParameter("chkAutCesDat") != null)
         {
             if(request.getParameter("chkAutCesDat").equals("true"))
@@ -176,14 +169,12 @@ public class EditarInteresadoServlet extends HttpServlet
             }
         }
 
-        if(request.getParameter("chkAutComCom") != null)
+        if(request.getParameter("chkAutComCom") != null &&
+           request.getParameter("chkAutComCom").equals("true"))
         {
-            if(request.getParameter("chkAutComCom").equals("true"))
-            {
-                aluEdi.setAutComCom(true);
-            }
+            aluEdi.setAutComCom(true);
         }
-        
+            
         if(request.getParameter("txtResponsable") != null)
         {
             aluEdi.setResponsable(request.getParameter("txtResponsable").trim().toUpperCase());

@@ -43,11 +43,11 @@ public class EdicionesDAO
 
         while (enc)
         {
-            contCar = new Integer(datEdi.size()).toString().length();
+            contCar = ("" + datEdi.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datEdi.size() + avc).toString();
+                codIntrod = "" + (datEdi.size() + avc);
             }
             else
             {
@@ -503,7 +503,7 @@ public class EdicionesDAO
             rs.close();
             ps.close();
             
-            return (numPlazas>numMatric);
+            return numPlazas>numMatric;
 
         }
         catch (Exception exc)
@@ -916,8 +916,6 @@ public class EdicionesDAO
                                      " FROM "  + TablaEdiciones.TABLA        +
                                      " WHERE " + TablaEdiciones.CODCURSO     + " = ?";                        
         
-        EdicionesVO         datEdi    = null;
-
         boolean             hayEdiCur = false;
 
         try

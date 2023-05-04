@@ -383,7 +383,7 @@ public class HisRecDAO
                                                      + TablaHistoricoRecibos.CODALUMNO  + " = ? AND "
                                                      + TablaHistoricoRecibos.FECHAEXP   + " > ? AND " 
                                                      + TablaHistoricoRecibos.FECHAEXP   + " < ? AND " 
-                                                     + TablaHistoricoRecibos.NUMRECIBO  + " LIKE '" + annoAc + "/" + mesAc + "%'";   ;
+                                                     + TablaHistoricoRecibos.NUMRECIBO  + " LIKE '" + annoAc + "/" + mesAc + "%'";   
 
             
         

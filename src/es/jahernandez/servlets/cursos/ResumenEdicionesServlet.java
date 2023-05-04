@@ -4,6 +4,13 @@
  */
 package es.jahernandez.servlets.cursos;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 //Paquetes de manejo de pdf
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
@@ -13,31 +20,21 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
 import es.jahernandez.gestion.TipoCursoGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -64,8 +61,7 @@ public class ResumenEdicionesServlet extends HttpServlet
         
         Vector            listaEdiciones = new Vector();
         CursosVO          curVO          = null;
-        EmpresasVO        empVO          = null;
-        
+               
         String strNomCur    = "";
         String strTipCur    = "";
         String strFecIni    = "";
@@ -118,7 +114,7 @@ public class ResumenEdicionesServlet extends HttpServlet
             logoImage.scaleAbsolute(150, 38);
             
             // step 2: we set the ContentType and create an instance of the Writer
-            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
+            //PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
             
             // step 3
             document.open();
@@ -228,7 +224,7 @@ public class ResumenEdicionesServlet extends HttpServlet
         }
         catch (Exception ex)
         {
-           
+           System.out.println("------Error creando documento----");
         }
         // step 5: Close document
         document.close();

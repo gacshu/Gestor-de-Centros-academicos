@@ -204,11 +204,11 @@ public class ClasesIndivDAO
 
         while (enc)
         {
-            contCar = new Integer(datClaInd.size()).toString().length();
+            contCar = ("" + datClaInd.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datClaInd.size() + avc).toString();
+                codIntrod = "" + (datClaInd.size() + avc);
             }
             else
             {

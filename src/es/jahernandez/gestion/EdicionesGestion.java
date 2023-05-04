@@ -359,8 +359,6 @@ public class EdicionesGestion
         Connection        con      = null;
         Vector            listaEdi = new Vector();
 
-        EdicionesVO       datEdi   = null;
-
         try
         {
             con = Conexion.conectar();

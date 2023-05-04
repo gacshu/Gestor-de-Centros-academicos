@@ -5,21 +5,19 @@
 
 package es.jahernandez.servlets.empresas;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Vector;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 /**
  *
  * @author Alberto
@@ -69,22 +67,19 @@ public class CargaAltaEmpresasServlet extends HttpServlet
             aluAlta.setNumDocAlu(request.getParameter("txtNumDoc").trim().toUpperCase());
         }
 
-        if(request.getParameter("chkDesempleado") != null)
+        if(request.getParameter("chkDesempleado") != null &&
+           request.getParameter("chkDesempleado").equals("true"))
         {
-            if(request.getParameter("chkDesempleado").equals("true"))
-            {
-                aluAlta.setDesemp(true);
-            }
+            aluAlta.setDesemp(true);
         }
+    
 
-        if(request.getParameter("chkNoDeseado") != null)
+        if(request.getParameter("chkNoDeseado") != null &&
+           request.getParameter("chkNoDeseado").equals("true"))
         {
-            if(request.getParameter("chkNoDeseado").equals("true"))
-            {
-                aluAlta.setAlND(true);
-            }
+            aluAlta.setAlND(true);
         }
-
+    
         if(request.getParameter("txtNombre") != null)
         {
             aluAlta.setNombre(request.getParameter("txtNombre").trim().toUpperCase());
@@ -147,44 +142,34 @@ public class CargaAltaEmpresasServlet extends HttpServlet
 
         aluAlta.setIdCen(1);  //Valor fijo para los nuevos interesados
 
-        if(request.getParameter("txtFecNac") != null)
+        if(request.getParameter("txtFecNac") != null &&
+          !request.getParameter("txtFecNac").equals(""))
         {
-            if (! request.getParameter("txtFecNac").equals(""))
-            {
-                String strFechaNac = request.getParameter("txtFecNac");
-                aluAlta.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
-                                                        new Integer(strFechaNac.substring(3,5)).intValue() - 1,
-                                                        new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaNac = request.getParameter("txtFecNac");
+            aluAlta.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
+                                                    new Integer(strFechaNac.substring(3,5)).intValue() - 1,
+                                                    new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-
-        if(request.getParameter("chkAutCesDat") != null)
+    
+        if(request.getParameter("chkAutCesDat") != null &&
+           request.getParameter("chkAutCesDat").equals("true"))
         {
-            if(request.getParameter("chkAutCesDat").equals("true"))
-            {
-                aluAlta.setAutCesDat(true);
-            }
+            aluAlta.setAutCesDat(true);
         }
-
-        if(request.getParameter("chkAutComCom") != null)
+        
+        if(request.getParameter("chkAutComCom") != null &&
+           request.getParameter("chkAutComCom").equals("true"))
         {
-            if(request.getParameter("chkAutComCom").equals("true"))
-            {
-                aluAlta.setAutComCom(true);
-            }
+            aluAlta.setAutComCom(true);
         }
-
-
+        
         //Se compruba si se llama desde la ficha de alumnos
-        if(request.getParameter("fichaAlumno") != null)
+        if(request.getParameter("fichaAlumno") != null &&
+           request.getParameter("fichaAlumno").equals("1"))
         {
-            if(request.getParameter("fichaAlumno").equals("1"))
-            {
-                urlDest = "empresas/altaEmp.jsp?fichaAlumno=1";
-            }
+            urlDest = "empresas/altaEmp.jsp?fichaAlumno=1";
         }
-
-
+        
         //Se introducen los datos del alumno en sesión y se carga la página de alta de empresa
         sesion.setAttribute("datAluAltEmp", aluAlta);
         response.sendRedirect(urlDest);

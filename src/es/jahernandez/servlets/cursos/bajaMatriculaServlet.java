@@ -4,29 +4,25 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.AluEdiDAO;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.AluEdiVO;
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.gestion.AluEdiGestion;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author JuanAlberto
  */
-public class bajaMatriculaServlet extends HttpServlet 
+public class BajaMatriculaServlet extends HttpServlet 
 {
    
     /** 
@@ -72,33 +68,29 @@ public class bajaMatriculaServlet extends HttpServlet
             aluEdiVO.setIdEdi(request.getParameter("hidCodEdi"));
         }
 
-        if(request.getParameter("hidFecAlta") != null)
+        if(request.getParameter("hidFecAlta") != null &&
+          !request.getParameter("hidFecAlta").equals(""))
         {
-            if (! request.getParameter("hidFecAlta").equals(""))
-            {
-                String strFechaAlta = request.getParameter("hidFecAlta");
-                aluEdiVO.setFecAlta(new GregorianCalendar(new Integer(strFechaAlta.substring(6,10)).intValue(),
-                                                        new Integer(strFechaAlta.substring(3,5)).intValue() - 1,
-                                                        new Integer(strFechaAlta.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaAlta = request.getParameter("hidFecAlta");
+            aluEdiVO.setFecAlta(new GregorianCalendar(new Integer(strFechaAlta.substring(6,10)).intValue(),
+                                                    new Integer(strFechaAlta.substring(3,5)).intValue() - 1,
+                                                    new Integer(strFechaAlta.substring(0,2)).intValue()).getTime());
         }
         
-        if(request.getParameter("chkBaja") != null)
+        
+        if(request.getParameter("chkBaja") != null &&
+           request.getParameter("chkBaja").equals("true"))
         {
-            if(request.getParameter("chkBaja").equals("true"))
-            {
-                aluEdiVO.setEsBaja(true);
-            }
+            aluEdiVO.setEsBaja(true);
         }
         
-        if(request.getParameter("chkSusPag") != null)
-        {
-            if(request.getParameter("chkSusPag").equals("true"))
-            {
-                aluEdiVO.setEsCong(true);
-            }
-        }
         
+        if(request.getParameter("chkSusPag") != null &&
+           request.getParameter("chkSusPag").equals("true"))
+        {
+            aluEdiVO.setEsCong(true);
+        }
+    
         if(request.getParameter("txtNumCuenta") != null)
         {
             aluEdiVO.setNumCuenta(request.getParameter("txtNumCuenta"));

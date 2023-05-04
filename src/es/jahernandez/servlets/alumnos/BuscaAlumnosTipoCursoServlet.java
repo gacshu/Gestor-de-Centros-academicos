@@ -5,19 +5,18 @@
 
 package es.jahernandez.servlets.alumnos;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
-import es.jahernandez.gestion.CursosGestion;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.gestion.CursosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -67,11 +66,7 @@ public class BuscaAlumnosTipoCursoServlet extends HttpServlet {
 
       sesion.setAttribute("busAluTipCur", listBus);
 
-      if (listBus == null)
-      {
-        
-      }
-      else
+      if (listBus != null)
       {
             response.sendRedirect("cursos/lisIntTipCur.jsp?tipoCurso=" + codTipCur);
       }

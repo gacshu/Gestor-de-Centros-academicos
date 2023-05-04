@@ -4,23 +4,20 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.EdiModProfAulaDAO;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.datos.EdiModProfAulaVO;
 import es.jahernandez.gestion.EdiModProfAulaGestion;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -78,34 +75,30 @@ public class AltaModEdiServlet extends HttpServlet
             empaVO.setIdProf(request.getParameter("lstProfesores").trim());
         }
         
-        if(request.getParameter("lstAulas") != null)
-        {
-            if(! request.getParameter("lstAulas").equals("-1") )
-            {    
-                empaVO.setIdAul(request.getParameter("lstAulas").trim());
-            }
+        if(request.getParameter("lstAulas") != null &&
+          !request.getParameter("lstAulas").equals("-1") )
+        {    
+            empaVO.setIdAul(request.getParameter("lstAulas").trim());
         }
         
-        if(request.getParameter("hidFecIni") != null)
+        
+        if(request.getParameter("hidFecIni") != null &&
+          !request.getParameter("hidFecIni").equals(""))
         {
-             if (! request.getParameter("hidFecIni").equals(""))
-            {
-                String strFechaIni = request.getParameter("hidFecIni");
-                empaVO.setFecIni(new GregorianCalendar(new Integer(strFechaIni.substring(6,10)).intValue(),
-                                                       new Integer(strFechaIni.substring(3,5)).intValue() - 1,
-                                                       new Integer(strFechaIni.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaIni = request.getParameter("hidFecIni");
+            empaVO.setFecIni(new GregorianCalendar(new Integer(strFechaIni.substring(6,10)).intValue(),
+                                                   new Integer(strFechaIni.substring(3,5)).intValue() - 1,
+                                                   new Integer(strFechaIni.substring(0,2)).intValue()).getTime());
         }
         
-        if(request.getParameter("hidFecFin") != null)
+        
+        if(request.getParameter("hidFecFin") != null &&
+          !request.getParameter("hidFecFin").equals(""))
         {
-             if (! request.getParameter("hidFecFin").equals(""))
-            {
-                String strFechaFin = request.getParameter("hidFecFin");
-                empaVO.setFecFin(new GregorianCalendar(new Integer(strFechaFin.substring(6,10)).intValue(),
-                                                       new Integer(strFechaFin.substring(3,5)).intValue() - 1,
-                                                       new Integer(strFechaFin.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaFin = request.getParameter("hidFecFin");
+            empaVO.setFecFin(new GregorianCalendar(new Integer(strFechaFin.substring(6,10)).intValue(),
+                                                   new Integer(strFechaFin.substring(3,5)).intValue() - 1,
+                                                   new Integer(strFechaFin.substring(0,2)).intValue()).getTime());
         }
         
         if(request.getParameter("txtHoraIni") != null)
@@ -118,53 +111,44 @@ public class AltaModEdiServlet extends HttpServlet
             empaVO.setHorFin(request.getParameter("txtHoraFin").trim());
         }
         
-        if(request.getParameter("chkLunes") != null)
+        if(request.getParameter("chkLunes") != null &&
+           request.getParameter("chkLunes").equals("true"))
         {
-            if(request.getParameter("chkLunes").equals("true"))
-            {
-                empaVO.setHayLun(true);
-            }
+            empaVO.setHayLun(true);
         }
         
-        if(request.getParameter("chkMartes") != null)
+        
+        if(request.getParameter("chkMartes") != null &&
+           request.getParameter("chkMartes").equals("true"))
         {
-            if(request.getParameter("chkMartes").equals("true"))
-            {
-                empaVO.setHayMar(true);
-            }
+            empaVO.setHayMar(true);
+        }
+            
+        if(request.getParameter("chkMierc") != null &&
+           request.getParameter("chkMierc").equals("true"))
+        {
+            empaVO.setHayMie(true);
         }
         
-        if(request.getParameter("chkMierc") != null)
+        
+        if(request.getParameter("chkJueves") != null &&
+           request.getParameter("chkJueves").equals("true"))
         {
-            if(request.getParameter("chkMierc").equals("true"))
-            {
-                empaVO.setHayMie(true);
-            }
+            empaVO.setHayJue(true);
         }
         
-        if(request.getParameter("chkJueves") != null)
+        if(request.getParameter("chkViernes") != null &&
+           request.getParameter("chkViernes").equals("true"))
         {
-            if(request.getParameter("chkJueves").equals("true"))
-            {
-                empaVO.setHayJue(true);
-            }
+            empaVO.setHayVie(true);
         }
         
-        if(request.getParameter("chkViernes") != null)
+        if(request.getParameter("chkSabado") != null &&
+           request.getParameter("chkSabado").equals("true"))
         {
-            if(request.getParameter("chkViernes").equals("true"))
-            {
-                empaVO.setHayVie(true);
-            }
+            empaVO.setHaySab(true);
         }
         
-        if(request.getParameter("chkSabado") != null)
-        {
-            if(request.getParameter("chkSabado").equals("true"))
-            {
-                empaVO.setHaySab(true);
-            }
-        }
         
         if(request.getParameter("ind") != null)
         {

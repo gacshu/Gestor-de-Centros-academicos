@@ -5,18 +5,15 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.ListaCodPostDAO;
-import es.jahernandez.accesodatos.ModulosDAO;
-import es.jahernandez.accesodatos.NivelForDAO;
-import es.jahernandez.accesodatos.NivelesDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ModulosVO;
-import es.jahernandez.datos.NivelesVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.NivelesDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.NivelesVO;
 
 /**
  *

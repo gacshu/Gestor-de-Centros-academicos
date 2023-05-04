@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.CursosDAO;
-import es.jahernandez.datos.CursosVO;
-import es.jahernandez.gestion.CursosGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.gestion.CursosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,14 +67,12 @@ public class CargaComboCursosServlet extends HttpServlet
                 valSel = request.getParameter("valSel");
         }
         
-        if(request.getParameter("muestraSelec") != null)
+        if(request.getParameter("muestraSelec") != null &&
+           request.getParameter("muestraSelec").trim().equals("s"))
         {
-            if(request.getParameter("muestraSelec").trim().equals("s"))
-            {
-                mostrarSel = true;
-            }
+            mostrarSel = true;
         }
-
+        
         try 
         {            
                 if(mostrarSel)

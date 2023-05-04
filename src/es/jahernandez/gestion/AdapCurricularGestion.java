@@ -6,17 +6,15 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.ActividadesDAO;
-import es.jahernandez.accesodatos.AdapCurricularDAO;
-import es.jahernandez.datos.ActividadesVO;
-import es.jahernandez.datos.AdapCurricularVO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.AdapCurricularDAO;
+import es.jahernandez.datos.AdapCurricularVO;
+import es.jahernandez.datos.Conexion;
 
 /**
  *

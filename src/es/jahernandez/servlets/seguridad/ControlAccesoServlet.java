@@ -1,18 +1,18 @@
 package es.jahernandez.servlets.seguridad;
 
-import es.jahernandez.datos.ConUsuVO;
-import es.jahernandez.datos.InformacionConf;
-import es.jahernandez.gestion.ConUsoGestion;
-import es.jahernandez.utilidades.ControlLog;
 import java.io.FileInputStream;
-
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.InformacionConf;
+import es.jahernandez.gestion.ConUsoGestion;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -82,7 +82,7 @@ public class ControlAccesoServlet extends HttpServlet
             if (! propiedades.isEmpty())              
             {                                 
                 //Cargamos las propiedades
-                InformacionConf.dsn          = propiedades.getProperty("dsn") + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";;
+                InformacionConf.dsn          = propiedades.getProperty("dsn") + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
                 InformacionConf.url          = propiedades.getProperty("url");
                 InformacionConf.pwd          = propiedades.getProperty("pwd");
                 InformacionConf.user         = propiedades.getProperty("user");

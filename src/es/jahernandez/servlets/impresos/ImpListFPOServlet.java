@@ -4,7 +4,14 @@
  */
 package es.jahernandez.servlets.impresos;
 
-import com.lowagie.text.BadElementException;
+import java.awt.Color;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
@@ -12,34 +19,26 @@ import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.AluEdiVO;
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.AlumnosGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -185,8 +184,7 @@ public class ImpListFPOServlet extends HttpServlet
 
         Paragraph parTitPag1 = new Paragraph("FORMACIÓN PARA EL EMPLEO-ANEXO X");
         Paragraph parTitPag2 = new Paragraph("JUSTIFICANTE DE ASISTENCIA DE LOS ALUMNOS");
-        Paragraph parTitPag3 = new Paragraph();
-
+        
         parTitPag1.font().setSize(10);
         parTitPag2.font().setSize(10);
 
@@ -207,7 +205,6 @@ public class ImpListFPOServlet extends HttpServlet
         tablaDatSeg.setWidthPercentage(100);
         PdfPCell celPS = new PdfPCell(new Phrase(""));
 
-        PdfPCell cellDNI = null;
         PdfPCell cellNom = null;
         PdfPCell cellLun = null;
         PdfPCell cellMar = null;
@@ -256,7 +253,6 @@ public class ImpListFPOServlet extends HttpServlet
 
         Phrase fraDC1 = new Phrase(datCL1);
         Phrase fraDC2 = new Phrase(datCL2);
-        Phrase fraDNI = null;
         Phrase fraNom = null;
         Phrase fraLun = new Phrase("LUNES");
         Phrase fraMar = new Phrase("MARTES");
@@ -287,7 +283,6 @@ public class ImpListFPOServlet extends HttpServlet
 
         //cellFecVenRec.Colspan = 2;
 
-        Paragraph parIma = new Paragraph();
         Image logoImage  = null;//  
         try
         {
@@ -494,7 +489,7 @@ public class ImpListFPOServlet extends HttpServlet
         }
         catch (DocumentException ex)
         {
-
+        	System.out.println("Error generando informe");
         }
         // step 5: Close document
         document.close();

@@ -4,7 +4,6 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
 import es.jahernandez.datos.AreasVO;
 import es.jahernandez.gestion.AreasGestion;
 
@@ -133,11 +132,11 @@ public class AreasDAO
 
         while (enc)
         {
-            contCar = new Integer(datArea.size()).toString().length();
+            contCar = ("" + datArea.size()).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datArea.size() + avc).toString();
+                codIntrod = "" + (datArea.size() + avc);
             }
             else
             {
@@ -237,7 +236,7 @@ public class AreasDAO
 
             regActualizados = ps.executeUpdate();
 
-            ps.close();;
+            ps.close();
 
             return regActualizados;
         }

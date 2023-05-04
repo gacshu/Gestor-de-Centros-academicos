@@ -4,19 +4,18 @@
  */
 package es.jahernandez.servlets.datosauxiliares;
 
-import es.jahernandez.accesodatos.AreasDAO;
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.AreasVO;
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.gestion.AreasGestion;
-
-import java.io.IOException;
-import java.util.GregorianCalendar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -51,7 +50,7 @@ public class EditaAreaServlet extends HttpServlet {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
             
-            log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Edición �?rea" );
+            log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Edición �?rea" );
                
         }
         

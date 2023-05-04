@@ -5,17 +5,16 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.ProfAreaDAO;
-import es.jahernandez.accesodatos.ProfesoresDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.DatosBusqProfVO;
-import es.jahernandez.datos.ProfAreaVO;
-import es.jahernandez.datos.ProfesoresVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.ProfesoresDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.DatosBusqProfVO;
+import es.jahernandez.datos.ProfesoresVO;
 
 /**
  *

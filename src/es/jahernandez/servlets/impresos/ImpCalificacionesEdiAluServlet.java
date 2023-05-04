@@ -4,47 +4,38 @@
  */
 package es.jahernandez.servlets.impresos;
 
-import com.lowagie.text.BadElementException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
 import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.BaseFont;
-import com.lowagie.text.pdf.PdfCell;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.CalificacionesVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AlumnosGestion;
 import es.jahernandez.gestion.CalificacionesGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
 import es.jahernandez.gestion.ListaCodPostGestion;
 import es.jahernandez.gestion.ModulosGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -80,8 +71,6 @@ public class ImpCalificacionesEdiAluServlet extends HttpServlet
         String            codEdi       = "";
         int               eva          = -99;
         
-        boolean           generaPag    = false;
-
         ConUsuVO          conUsVO      = new ConUsuVO();
            
         Vector            vecCalif     = new Vector();
@@ -202,7 +191,7 @@ public class ImpCalificacionesEdiAluServlet extends HttpServlet
             tablaDatAlu.addCell(cellDatosAlu);
             
             //Detalle calificaciones
-            //Añadimos el detalle de las clases
+            //Aï¿½adimos el detalle de las clases
             cellTit = new PdfPCell();
             parTitDet = new Paragraph("ASIGNATURA");
             parTitDet.setAlignment(Image.ALIGN_CENTER);
@@ -210,7 +199,7 @@ public class ImpCalificacionesEdiAluServlet extends HttpServlet
             cellTit.addElement(parTitDet);
             tablaDetCalif.addCell(cellTit);
             cellTit = new PdfPCell();
-            parTitDet = new Paragraph("EVALUACIÓN");
+            parTitDet = new Paragraph("EVALUACIï¿½N");
             parTitDet.setAlignment(Image.ALIGN_CENTER);
             parTitDet.font().setSize(10);
             cellTit.addElement(parTitDet);
@@ -239,7 +228,7 @@ public class ImpCalificacionesEdiAluServlet extends HttpServlet
                 cellLinea.addElement(parMod);
                 tablaDetCalif.addCell(cellLinea);
                 cellLinea = new PdfPCell();
-                parEva = new Paragraph(califVO.getEvaluacion() + "ª");
+                parEva = new Paragraph(califVO.getEvaluacion() + "ï¿½");
                 parEva.setAlignment(Image.ALIGN_CENTER);
                 parEva.font().setSize(10);
                 cellLinea.addElement(parEva);

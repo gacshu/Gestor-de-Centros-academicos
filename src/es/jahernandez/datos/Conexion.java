@@ -1,7 +1,7 @@
 package es.jahernandez.datos;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.DriverManager;
 
 /**
 * Esta clase realiza la conexión a una base de datos ODBC  mediante el driver puente JDBC-ODBC.
@@ -44,7 +44,7 @@ public class Conexion
 * @exception java.lang.ClassNotFoundException Si no se encuentra el driver arroja esta excepci�n.
 * @exception java.sql.SQLException Si se produce alg�n error sql se arroja esta excepci�n.
 */	
-    public static Connection conectarAccess() throws java.sql.SQLException, java.lang.ClassNotFoundException 
+    public static Connection conectarAccess() throws SQLException, ClassNotFoundException 
     {
 		Connection con = null;
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
@@ -55,7 +55,7 @@ public class Conexion
   
   
   
-    public static Connection conectar() throws java.sql.SQLException, java.lang.ClassNotFoundException 
+    public static Connection conectar() throws SQLException, ClassNotFoundException 
      {
 		Connection con = null;
 		//Class.forName("com.mysql.jdbc.Driver");
@@ -68,7 +68,7 @@ public class Conexion
 * Este m�todo realiza la desconexi�n de la base de datos.
 * @exception java.sql.SQLException Arroja esta excepci�n si se produce alg�n error sql durante la desconexi�n.
 */	
-    public static void desconectar(Connection con) throws java.sql.SQLException 
+    public static void desconectar(Connection con) throws SQLException 
     {
             if(con!=null)
             con.close();

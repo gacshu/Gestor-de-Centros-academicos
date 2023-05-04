@@ -5,15 +5,15 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.TipoDocDAO;
-import es.jahernandez.accesodatos.TrastornosDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.TrastornosVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.TrastornosDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.TrastornosVO;
 
 /**
  *

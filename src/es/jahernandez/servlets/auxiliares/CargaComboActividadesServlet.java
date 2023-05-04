@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.ActividadesDAO;
-import es.jahernandez.datos.ActividadesVO;
-import es.jahernandez.gestion.ActividadesGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.ActividadesVO;
+import es.jahernandez.gestion.ActividadesGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

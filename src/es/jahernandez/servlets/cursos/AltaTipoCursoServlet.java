@@ -4,19 +4,18 @@
  */
 package es.jahernandez.servlets.cursos;
 
-import es.jahernandez.accesodatos.TipoCursoDAO;
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.datos.TipoCursoVO;
 import es.jahernandez.gestion.TipoCursoGestion;
-
-import java.io.IOException;
-import java.util.GregorianCalendar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *

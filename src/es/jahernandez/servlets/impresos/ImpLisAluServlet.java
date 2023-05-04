@@ -5,6 +5,15 @@
 
 package es.jahernandez.servlets.impresos;
 
+import java.awt.Color;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 //Paquetes de manejo de pdf
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
@@ -16,26 +25,17 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.EmpresasVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.EmpresasGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *

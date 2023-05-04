@@ -4,21 +4,19 @@
  */
 package es.jahernandez.servlets.empresas;
 
-import es.jahernandez.accesodatos.EmpresasDAO;
-import es.jahernandez.accesodatos.ProfesoresDAO;
+import java.io.IOException;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.datos.EmpresasVO;
 import es.jahernandez.gestion.EmpresasGestion;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -81,25 +79,21 @@ public class BusEmpServlet extends HttpServlet
             empVO.setCodAct(new Integer(request.getParameter("selActEmp").trim()).intValue());
         }
         
-        if(request.getParameter("txtCNAE") != null)
-        {
-           if(! request.getParameter("txtCNAE").trim().equals(""))
-           { 
-                empVO.setCnae(new Integer(request.getParameter("txtCNAE").trim()).intValue());
-           }
-        }
-        
+        if(request.getParameter("txtCNAE") != null &&
+           request.getParameter("txtCNAE").trim().equals(""))
+       { 
+            empVO.setCnae(new Integer(request.getParameter("txtCNAE").trim()).intValue());
+       }
+            
         if(request.getParameter("selImpExp") != null)
         {
             empVO.setImpExp(request.getParameter("selImpExp").trim());
         }
         
-        if(request.getParameter("chkCliente") != null)
+        if(request.getParameter("chkCliente") != null &&
+          !request.getParameter("chkCliente").trim().equals("true") )
         {
-            if(! request.getParameter("chkCliente").trim().equals("true") )
-            {
-                empVO.setEsCliente(true);
-            }
+            empVO.setEsCliente(true);
         }
         
       listBusq = EmpresasGestion.buscarEmpresas(empVO);

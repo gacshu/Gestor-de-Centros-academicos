@@ -4,23 +4,19 @@
  */
 package es.jahernandez.servlets.datosauxiliares;
 
-import es.jahernandez.accesodatos.TrastornosDAO;
-import es.jahernandez.datos.TrastornosVO;
-import es.jahernandez.datos.ConUsuVO;
-import es.jahernandez.gestion.TrastornosGestion;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.TrastornosVO;
+import es.jahernandez.gestion.TrastornosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -73,14 +69,12 @@ public class AltaTrastornoServlet extends HttpServlet
             trastVO.setCodTipoTrastorno(request.getParameter("lstNuevoTipTrast").trim());
         }
 
-        if(request.getParameter("chkNuevoMedicado") != null)
+        if(request.getParameter("chkNuevoMedicado") != null &&
+           request.getParameter("chkNuevoMedicado").equals("true"))
         {
-            if(request.getParameter("chkNuevoMedicado").equals("true"))
-            {
-                trastVO.setMedicado(true);
-            }
-        }      
-        
+            trastVO.setMedicado(true);
+        }
+                  
         if(request.getParameter("txtNuevaMedicacion") != null)
         {
             trastVO.setMedicacion(request.getParameter("txtNuevaMedicacion").trim());

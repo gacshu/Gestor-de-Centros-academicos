@@ -5,22 +5,20 @@
 
 package es.jahernandez.servlets.alumnos;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
-import es.jahernandez.gestion.AlumnosGestion;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Vector;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.gestion.AlumnosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -72,21 +70,19 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
             aluAlta.setNumDocAlu(request.getParameter("txtNumDoc").trim().toUpperCase());
         }
 
-        if(request.getParameter("chkDesempleado") != null)
+        if(request.getParameter("chkDesempleado") != null &&
+           request.getParameter("chkDesempleado").equals("true"))
         {
-            if(request.getParameter("chkDesempleado").equals("true"))
-            {
-                aluAlta.setDesemp(true);
-            }
+            aluAlta.setDesemp(true);
         }
+        
 
-        if(request.getParameter("chkNoDeseado") != null)
+        if(request.getParameter("chkNoDeseado") != null &&
+           request.getParameter("chkNoDeseado").equals("true"))
         {
-            if(request.getParameter("chkNoDeseado").equals("true"))
-            {
-                aluAlta.setAlND(true);
-            }
+            aluAlta.setAlND(true);
         }
+        
 
         if(request.getParameter("txtNombre") != null)
         {
@@ -150,32 +146,27 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
 
         aluAlta.setIdCen(1);  //Valor fijo para los nuevos interesados
         
-        if(request.getParameter("hidFecNac") != null)
+        if(request.getParameter("hidFecNac") != null &&
+           ! request.getParameter("hidFecNac").equals(""))
         {
-            if (! request.getParameter("hidFecNac").equals(""))
-            {
-                String strFechaNac = request.getParameter("hidFecNac");
-                aluAlta.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
-                                                        new Integer(strFechaNac.substring(3,5)).intValue() - 1,
-                                                        new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaNac = request.getParameter("hidFecNac");
+            aluAlta.setFecNac(new GregorianCalendar(new Integer(strFechaNac.substring(6,10)).intValue(),
+                                                    new Integer(strFechaNac.substring(3,5)).intValue() - 1,
+                                                    new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
 
-        if(request.getParameter("chkAutCesDat") != null)
+        if(request.getParameter("chkAutCesDat") != null &&
+		   request.getParameter("chkAutCesDat").equals("true"))
         {
-            if(request.getParameter("chkAutCesDat").equals("true"))
-            {
-                aluAlta.setAutCesDat(true);
-            }
+            aluAlta.setAutCesDat(true);
         }
 
-        if(request.getParameter("chkAutComCom") != null)
+        if(request.getParameter("chkAutComCom") != null &&
+           request.getParameter("chkAutComCom").equals("true"))
         {
-            if(request.getParameter("chkAutComCom").equals("true"))
-            {
-                aluAlta.setAutComCom(true);
-            }
+            aluAlta.setAutComCom(true);
         }
+        
         
         if(request.getParameter("txtResponsable") != null)
         {

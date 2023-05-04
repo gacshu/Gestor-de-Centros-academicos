@@ -4,23 +4,20 @@
  */
 package es.jahernandez.servlets.empresas;
 
-import es.jahernandez.accesodatos.EmpresasDAO;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.datos.EmpresasVO;
 import es.jahernandez.gestion.EmpresasGestion;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -114,14 +111,12 @@ public class EdicionEmpresaServlet extends HttpServlet
             empEdi.setCodProv(request.getParameter("selProEmp").trim());
         }
 
-        if(request.getParameter("txtCNAE") != null)
+        if(request.getParameter("txtCNAE") != null &&
+          !request.getParameter("txtCNAE").trim().equals(""))
         {
-            if( !request.getParameter("txtCNAE").trim().equals(""))
-            {
-                empEdi.setCnae(new Integer(request.getParameter("txtCNAE")).intValue());
-            }
+            empEdi.setCnae(new Integer(request.getParameter("txtCNAE")).intValue());
         }
-
+    
         if(request.getParameter("txtNomCom") != null)
         {
             empEdi.setNomComercial(request.getParameter("txtNomCom").trim().toUpperCase());
@@ -167,160 +162,128 @@ public class EdicionEmpresaServlet extends HttpServlet
             empEdi.setFaxEmpresa(request.getParameter("txtTelf2").trim());
         }
 
-        if(request.getParameter("chkDatAct") != null)
+        if(request.getParameter("chkDatAct") != null &&
+           request.getParameter("chkDatAct").equals("true"))
         {
-            if(request.getParameter("chkDatAct").equals("true"))
-            {
-                empEdi.setDatAct(true);
-            }
+            empEdi.setDatAct(true);
         }
-
-        if(request.getParameter("txtNumEmp") != null)
+    
+        if(request.getParameter("txtNumEmp") != null &&
+          !request.getParameter("txtNumEmp").trim().equals(""))
         {
-            if( !request.getParameter("txtNumEmp").trim().equals(""))
-            {
-                empEdi.setNumEmp(new Integer(request.getParameter("txtNumEmp")).intValue());
-            }
+            empEdi.setNumEmp(new Integer(request.getParameter("txtNumEmp")).intValue());
         }
-
-        if(request.getParameter("chkAdCon") != null)
+    
+        if(request.getParameter("chkAdCon") != null &&
+           request.getParameter("chkAdCon").equals("true"))
         {
-            if(request.getParameter("chkAdCon").equals("true"))
-            {
-                empEdi.setConvenioAd(true);
-            }
+            empEdi.setConvenioAd(true);
         }
-
-        if(request.getParameter("hidFecCon") != null)
+    
+        if(request.getParameter("hidFecCon") != null &&
+          !request.getParameter("hidFecCon").equals(""))
         {
-            if (! request.getParameter("hidFecCon").equals(""))
-            {
-                String strFechaCon = request.getParameter("hidFecCon");
-                empEdi.setFecCon(new GregorianCalendar(new Integer(strFechaCon.substring(6,10)).intValue(),
-                                                        new Integer(strFechaCon.substring(3,5)).intValue() - 1,
-                                                        new Integer(strFechaCon.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaCon = request.getParameter("hidFecCon");
+            empEdi.setFecCon(new GregorianCalendar(new Integer(strFechaCon.substring(6,10)).intValue(),
+                                                    new Integer(strFechaCon.substring(3,5)).intValue() - 1,
+                                                    new Integer(strFechaCon.substring(0,2)).intValue()).getTime());
         }
-
+        
         if(request.getParameter("selImpExp") != null)
         {
             empEdi.setImpExp(request.getParameter("selImpExp").trim());
         }
 
-        if(request.getParameter("chkesCliente") != null)
+        if(request.getParameter("chkesCliente") != null &&
+           request.getParameter("chkesCliente").equals("true"))
         {
-            if(request.getParameter("chkesCliente").equals("true"))
-            {
-                empEdi.setEsCliente(true);
-            }
+            empEdi.setEsCliente(true);
         }
-
-        if(request.getParameter("txtCuota") != null)
+    
+        if(request.getParameter("txtCuota") != null &&
+          !request.getParameter("txtCuota").trim().equals(""))
         {
-            if( !request.getParameter("txtCuota").trim().equals(""))
-            {
-                empEdi.setCuota(new Integer(request.getParameter("txtCuota")).intValue());
-            }
+            empEdi.setCuota(new Integer(request.getParameter("txtCuota")).intValue());
         }
-
+    
         if(request.getParameter("txtVolNeg") != null)
         {
             empEdi.setVolNeg(request.getParameter("txtVolNeg").trim().toUpperCase());
         }
 
-        if(request.getParameter("chkAutCesDat") != null)
+        if(request.getParameter("chkAutCesDat") != null &&
+           request.getParameter("chkAutCesDat").equals("true"))
         {
-            if(request.getParameter("chkAutCesDat").equals("true"))
-            {
-                empEdi.setAutCesDat(true);
-            }
+            empEdi.setAutCesDat(true);
         }
-
-        if(request.getParameter("chkAcc") != null)
+    
+        if(request.getParameter("chkAcc") != null &&
+           request.getParameter("chkAcc").equals("true"))
         {
-            if(request.getParameter("chkAcc").equals("true"))
-            {
-                empEdi.setAccArco(true);
-            }
+            empEdi.setAccArco(true);
         }
-
-        if(request.getParameter("hidFecAcc") != null)
+    
+        if(request.getParameter("hidFecAcc") != null &&
+          !request.getParameter("hidFecAcc").equals(""))
         {
-            if (! request.getParameter("hidFecAcc").equals(""))
-            {
-                String strFechaAcc = request.getParameter("hidFecAcc");
-                empEdi.setFecAccArc(new GregorianCalendar(new Integer(strFechaAcc.substring(6,10)).intValue(),
-                                                           new Integer(strFechaAcc.substring(3,5)).intValue() - 1,
-                                                           new Integer(strFechaAcc.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaAcc = request.getParameter("hidFecAcc");
+            empEdi.setFecAccArc(new GregorianCalendar(new Integer(strFechaAcc.substring(6,10)).intValue(),
+                                                       new Integer(strFechaAcc.substring(3,5)).intValue() - 1,
+                                                       new Integer(strFechaAcc.substring(0,2)).intValue()).getTime());
         }
-
-        if(request.getParameter("chkRec") != null)
+    
+        if(request.getParameter("chkRec") != null &&
+           request.getParameter("chkRec").equals("true"))
         {
-            if(request.getParameter("chkRec").equals("true"))
-            {
-                empEdi.setRecArco(true);
-            }
+            empEdi.setRecArco(true);
         }
-
-        if(request.getParameter("hidFecRec") != null)
+    
+        if(request.getParameter("hidFecRec") != null &&
+          !request.getParameter("hidFecRec").equals(""))
         {
-            if (! request.getParameter("hidFecRec").equals(""))
-            {
-                String strFechaRec = request.getParameter("hidFecRec");
-                empEdi.setFecRecArc(new GregorianCalendar(new Integer(strFechaRec.substring(6,10)).intValue(),
-                                                           new Integer(strFechaRec.substring(3,5)).intValue() - 1,
-                                                           new Integer(strFechaRec.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaRec = request.getParameter("hidFecRec");
+            empEdi.setFecRecArc(new GregorianCalendar(new Integer(strFechaRec.substring(6,10)).intValue(),
+                                                       new Integer(strFechaRec.substring(3,5)).intValue() - 1,
+                                                       new Integer(strFechaRec.substring(0,2)).intValue()).getTime());
         }
-
-        if(request.getParameter("chkCancel") != null)
+        
+        if(request.getParameter("chkCancel") != null &&
+           request.getParameter("chkCancel").equals("true"))
         {
-            if(request.getParameter("chkCancel").equals("true"))
-            {
-                empEdi.setCanArco(true);
-            }
+            empEdi.setCanArco(true);
         }
-
-        if(request.getParameter("hidFecCan") != null)
+    
+        if(request.getParameter("hidFecCan") != null &&
+          !request.getParameter("hidFecCan").equals(""))
         {
-            if (! request.getParameter("hidFecCan").equals(""))
-            {
-                String strFechaCan = request.getParameter("hidFecCan");
-                empEdi.setFecCanArc(new GregorianCalendar(new Integer(strFechaCan.substring(6,10)).intValue(),
-                                                           new Integer(strFechaCan.substring(3,5)).intValue() - 1,
-                                                           new Integer(strFechaCan.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaCan = request.getParameter("hidFecCan");
+            empEdi.setFecCanArc(new GregorianCalendar(new Integer(strFechaCan.substring(6,10)).intValue(),
+                                                       new Integer(strFechaCan.substring(3,5)).intValue() - 1,
+                                                       new Integer(strFechaCan.substring(0,2)).intValue()).getTime());
         }
-
-        if(request.getParameter("chkOposic") != null)
+        
+        if(request.getParameter("chkOposic") != null &&
+           request.getParameter("chkOposic").equals("true"))
         {
-            if(request.getParameter("chkOposic").equals("true"))
-            {
-                empEdi.setOpoArco(true);
-            }
+            empEdi.setOpoArco(true);
         }
-
-        if(request.getParameter("hidFecOpo") != null)
+    
+        if(request.getParameter("hidFecOpo") != null &&
+          !request.getParameter("hidFecOpo").equals(""))
         {
-            if (! request.getParameter("hidFecOpo").equals(""))
-            {
-                String strFechaOpo = request.getParameter("hidFecOpo");
-                empEdi.setFecOpoArc(new GregorianCalendar(new Integer(strFechaOpo.substring(6,10)).intValue(),
-                                                           new Integer(strFechaOpo.substring(3,5)).intValue() -1 ,
-                                                           new Integer(strFechaOpo.substring(0,2)).intValue()).getTime());
-            }
+            String strFechaOpo = request.getParameter("hidFecOpo");
+            empEdi.setFecOpoArc(new GregorianCalendar(new Integer(strFechaOpo.substring(6,10)).intValue(),
+                                                       new Integer(strFechaOpo.substring(3,5)).intValue() -1 ,
+                                                       new Integer(strFechaOpo.substring(0,2)).intValue()).getTime());
         }
-
+        
         //Se comprueba si se llama desde la ficha de alumnos
-        if(request.getParameter("fichaAlumno") != null)
+        if(request.getParameter("fichaAlumno") != null &&
+           request.getParameter("fichaAlumno").equals("1"))
         {
-            if(request.getParameter("fichaAlumno").equals("1"))
-            {
-                irFicha = true;
-            }
+            irFicha = true;
         }
-
+    
         if(request.getParameter("urlProc") != null)
         {
             urlProc = new Integer(request.getParameter("urlProc")).intValue();

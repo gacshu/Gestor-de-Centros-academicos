@@ -4,7 +4,13 @@
  */
 package es.jahernandez.servlets.impresos;
 
-import com.lowagie.text.BadElementException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -13,35 +19,26 @@ import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.AluEdiVO;
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.datos.EdicionesVO;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.AlumnosGestion;
 import es.jahernandez.gestion.CentrosGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 /**
  *
  * @author JuanAlberto
@@ -208,9 +205,7 @@ public class ImpContMatServlet extends HttpServlet {
         // step 1
         // need to write to memory first due to IE wanting
         // to know the length of the pdf beforehand
-        Document document   = new Document();
-
-        Paragraph parIma    = new Paragraph();
+        Document document   = new Document();     
         
         //Image     logoImage = null; //iTextSharp.text.Image.GetInstance(System.Web.HttpContext.Current.Server.MapPath("~/imagenes/logoEnS.jpg"));
 
@@ -276,7 +271,7 @@ public class ImpContMatServlet extends HttpServlet {
         }
         catch (DocumentException ex)
         {
-
+        	System.out.println("Error generando el informe");
         }
         // step 5: Close document
         document.close();

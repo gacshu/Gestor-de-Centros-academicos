@@ -6,23 +6,23 @@ package es.jahernandez.servlets.auxiliares;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
-import org.apache.commons.io.FilenameUtils; 
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse; 
 
 
 /**
@@ -48,15 +48,11 @@ public class SubirArchivoServlet extends HttpServlet
         
         FileItemFactory   factory = new DiskFileItemFactory();
         ServletFileUpload upload  = new ServletFileUpload(factory);
-        
-        HttpSession       sesion  = request.getSession();
-        
+                
         String            nomFic  = "";
         
         ServletContext    sc      = null;
 			
-			
-        
         String            errMsg  = "";
         int               resIns  = 0;
         boolean           hayErr  = false;
@@ -69,7 +65,7 @@ public class SubirArchivoServlet extends HttpServlet
         List items = null;
         try 
         {
-            items = upload.parseRequest(new ServletRequestContext(request));
+            items = upload.parseRequest(new ServletRequestContext((javax.servlet.http.HttpServletRequest) request));
         } 
         catch (FileUploadException ex) 
         {

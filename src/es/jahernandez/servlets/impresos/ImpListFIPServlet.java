@@ -4,8 +4,13 @@
  */
 package es.jahernandez.servlets.impresos;
 
-//Paquetes de manejo de pdf
-import com.lowagie.text.BadElementException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
@@ -13,35 +18,27 @@ import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.AluEdiVO;
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.AlumnosGestion;
 import es.jahernandez.gestion.CentrosGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 /**
  *
  * @author JuanAlberto
@@ -178,7 +175,7 @@ public class ImpListFIPServlet extends HttpServlet
 
         Paragraph parTitPag1 = new Paragraph("PLAN FIP");
         Paragraph parTitPag2 = new Paragraph("CONTROL DE FIRMAS DE ASISTENCIA DE ALUMNOS");
-        Paragraph parTitPag3 = new Paragraph();
+       
 
         parTitPag1.font().setSize(10);
         parTitPag2.font().setSize(10);
@@ -283,8 +280,7 @@ public class ImpListFIPServlet extends HttpServlet
         tablaDatSem.setSpacingAfter(5);
 
         //cellFecVenRec.Colspan = 2;
-
-        Paragraph parIma = new Paragraph();
+       
         Image logoImage = null;
 
         try
@@ -507,7 +503,7 @@ public class ImpListFIPServlet extends HttpServlet
         }
         catch (DocumentException ex)
         {
-
+        	System.out.println("Error generando informe");
         }
         // step 5: Close document
         

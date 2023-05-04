@@ -4,20 +4,17 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ModulosVO;
-import es.jahernandez.gestion.ModulosGestion;
-
-import es.jahernandez.tablas.TablaModulos;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.ModulosVO;
+import es.jahernandez.gestion.ModulosGestion;
+import es.jahernandez.tablas.TablaModulos;
 
 
 /**
@@ -202,11 +199,11 @@ public class ModulosDAO
 
         while (enc)
         {
-            contCar = new Integer(datMod.size()).toString().length();
+            contCar = ("" + (datMod.size())).length();
 
             if (contCar > 0)
             {
-                codIntrod = new Integer(datMod.size() + avc).toString();
+                codIntrod = "" + (datMod.size() + avc);
             }
             else
             {

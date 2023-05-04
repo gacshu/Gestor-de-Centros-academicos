@@ -82,7 +82,7 @@ public class EdicionesVO
         minIn      = 0;
         minFin     = 0;
         horDis     = 0;
-        horTelef   = 0;;
+        horTelef   = 0;
         idAula     = "";
         bonif      = "";
         plazos     = false;

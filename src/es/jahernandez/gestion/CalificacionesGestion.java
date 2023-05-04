@@ -6,26 +6,15 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.AluEdiDAO;
-import es.jahernandez.accesodatos.AlumnosDAO;
-import es.jahernandez.accesodatos.AreasDAO;
-import es.jahernandez.accesodatos.AulasDAO;
-import es.jahernandez.accesodatos.BancosDAO;
-import es.jahernandez.accesodatos.CalificacionesDAO;
-import es.jahernandez.datos.AluEdiVO;
-import es.jahernandez.datos.AlumnosVO;
-import es.jahernandez.datos.AreasVO;
-import es.jahernandez.datos.AulasVO;
-import es.jahernandez.datos.CalificacionesVO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.DatosBusquedaAlumnos;
-import es.jahernandez.datos.EdicionesVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.CalificacionesDAO;
+import es.jahernandez.datos.CalificacionesVO;
+import es.jahernandez.datos.Conexion;
 
 /**
  *

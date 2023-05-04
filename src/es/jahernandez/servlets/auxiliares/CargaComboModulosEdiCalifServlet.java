@@ -4,16 +4,13 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.EdiModProfAulaDAO;
-import es.jahernandez.accesodatos.ModulosDAO;
-import es.jahernandez.datos.EdiModProfAulaVO;
-import es.jahernandez.gestion.EdiModProfAulaGestion;
-import es.jahernandez.gestion.ModulosGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.EdiModProfAulaVO;
+import es.jahernandez.gestion.EdiModProfAulaGestion;
+import es.jahernandez.gestion.ModulosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

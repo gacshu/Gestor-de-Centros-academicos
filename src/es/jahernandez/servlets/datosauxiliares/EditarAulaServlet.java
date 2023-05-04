@@ -5,23 +5,19 @@
 
 package es.jahernandez.servlets.datosauxiliares;
 
-import es.jahernandez.accesodatos.AulasDAO;
+import java.io.IOException;
+
+//import org.apache.catalina.SessionEvent;
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.AulasVO;
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.gestion.AulasGestion;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-//import org.apache.catalina.SessionEvent;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -83,13 +79,12 @@ public class EditarAulaServlet extends HttpServlet
             aulEdi.setDescripcion(request.getParameter("txtDescripcion").trim());
         }
 
-        if(request.getParameter("chkAulaInformatica") != null)
+        if(request.getParameter("chkAulaInformatica") != null &&
+           request.getParameter("chkAulaInformatica").equals("true"))
         {
-            if(request.getParameter("chkAulaInformatica").equals("true"))
-            {
-                aulEdi.setEsAulInf(true);
-            }
+            aulEdi.setEsAulInf(true);
         }
+        
 
         if(request.getParameter("chkTelevision") != null)
         {

@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.ModulosDAO;
-import es.jahernandez.datos.ModulosVO;
-import es.jahernandez.gestion.ModulosGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.ModulosVO;
+import es.jahernandez.gestion.ModulosGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,7 +46,7 @@ public class CargaComboModEdiServlet extends HttpServlet {
         String	    valSel     = null;
         Vector      vecModulos = null; 
         ModulosVO   modVO      = null;
-        boolean     mostrarSel = false;
+       
  
         if(request.getParameter("codCur") != null )
         {

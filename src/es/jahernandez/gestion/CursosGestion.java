@@ -6,15 +6,15 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.CursosAluDAO;
-import es.jahernandez.accesodatos.CursosDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.CursosVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.CursosDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.CursosVO;
 
 /**
  *

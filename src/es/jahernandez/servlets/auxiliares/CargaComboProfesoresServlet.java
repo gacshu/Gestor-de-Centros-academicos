@@ -4,17 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.ModulosDAO;
-import es.jahernandez.accesodatos.ProfAreaDAO;
-import es.jahernandez.accesodatos.ProfesoresDAO;
-import es.jahernandez.datos.ProfAreaVO;
-import es.jahernandez.datos.ProfesoresVO;
-import es.jahernandez.gestion.ProfesoresGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.ProfesoresVO;
+import es.jahernandez.gestion.ProfesoresGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.TipTrastDAO;
-import es.jahernandez.datos.TipTrastVO;
-import es.jahernandez.gestion.TipTrastGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.TipTrastVO;
+import es.jahernandez.gestion.TipTrastGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

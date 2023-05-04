@@ -4,12 +4,17 @@
  */
 package es.jahernandez.servlets.impresos;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.log4j.Logger;
+
 //Paquetes de manejo de pdf
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.BaseFont;
@@ -17,30 +22,23 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import es.jahernandez.accesodatos.*;
-import es.jahernandez.datos.*;
+import es.jahernandez.datos.AluEdiVO;
+import es.jahernandez.datos.AlumnosVO;
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.CursosVO;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.datos.InformacionConf;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.AlumnosGestion;
 import es.jahernandez.gestion.CursosGestion;
 import es.jahernandez.gestion.EdicionesGestion;
 import es.jahernandez.gestion.ListaCodPostGestion;
-import java.awt.Color;
-import java.io.File;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -91,9 +89,6 @@ public class ImpImpresoMatServlet extends HttpServlet
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir impreso matrícula" );
                
         }
-
-        String cent01 = "";
-        String cent02 = "";
 
         String formaPago = "";// "Contado";
 
@@ -432,7 +427,7 @@ public class ImpImpresoMatServlet extends HttpServlet
     }// </editor-fold>
     
     
-    private final int getMonthsDifference(Date dateFi, Date dateIn) 
+    private int getMonthsDifference(Date dateFi, Date dateIn) 
     { 
         //int m1 = date1.getYear() * 12 + (date1.getMonth()+1); 
         //int m2 = date2.getYear() * 12 + (date2.getMonth()+1); 

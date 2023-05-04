@@ -90,7 +90,7 @@ public class HisRecGestion
 
         try
         {
-            con = Conexion.conectar();;
+            con = Conexion.conectar();
             regActualizados = HisRecDAO.cambEstadoPagado(numRec, codAlu, estado,con);
             Conexion.desconectar(con);
 

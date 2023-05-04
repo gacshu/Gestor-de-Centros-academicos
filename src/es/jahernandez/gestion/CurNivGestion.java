@@ -6,15 +6,14 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.ControlRecDAO;
-import es.jahernandez.accesodatos.CurNivDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ControlRecVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.CurNivDAO;
+import es.jahernandez.datos.Conexion;
 
 /**
  *

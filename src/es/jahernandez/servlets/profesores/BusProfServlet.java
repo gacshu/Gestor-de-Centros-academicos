@@ -4,20 +4,19 @@
  */
 package es.jahernandez.servlets.profesores;
 
-import es.jahernandez.accesodatos.ProfesoresDAO;
+import java.io.IOException;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
 import es.jahernandez.datos.ConUsuVO;
 import es.jahernandez.datos.DatosBusqProfVO;
 import es.jahernandez.gestion.ProfesoresGestion;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Vector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -80,15 +79,13 @@ public class BusProfServlet extends HttpServlet
             datBP.setCodArea(request.getParameter("lstAreas").trim());
         }
         
-        if(request.getParameter("chkActivo") != null)
+        if(request.getParameter("chkActivo") != null &&
+           request.getParameter("chkActivo").equals("true"))
         {
-            if( request.getParameter("chkActivo").equals("true"))
-            {
-                datBP.setActivo(true);
-            } 
-        }
-        
-       
+            datBP.setActivo(true);
+        } 
+    
+           
       listBusq = ProfesoresGestion.devolverDatosConsultaProf(datBP);
 
       sesion.setAttribute("busProf", listBusq);

@@ -4,14 +4,12 @@
  */
 package es.jahernandez.servlets.auxiliares;
 
-import es.jahernandez.accesodatos.EdicionesDAO;
-import es.jahernandez.datos.EdicionesVO;
-import es.jahernandez.gestion.EdicionesGestion;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.gestion.EdicionesGestion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
