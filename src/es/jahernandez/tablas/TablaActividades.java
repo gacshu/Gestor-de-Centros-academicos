@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaActividades 
+public class TablaActividades
 {
     public static final String TABLA  = "tbAct";
     public static final String CODIGO = "idAct";

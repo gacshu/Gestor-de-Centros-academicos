@@ -5,27 +5,28 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.TipoCursoDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.TipoCursoVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.TipoCursoDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.TipoCursoVO;
+
 /**
  *
  * @author Alberto
  */
-public class TipoCursoGestion 
+public class TipoCursoGestion
 {
     //Método que devuelve los datos a mostrar en los combos de Tipo de Curso
     public static Vector devolverDatosTipCur()
     {
         Connection        con           = null;
         Vector            listaTipCur   = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -77,7 +78,7 @@ public class TipoCursoGestion
     }
 
     //Mátodo que devuelve el nombre de un tipo de curso
-    public static String devuelveNombreTipo(int codTipoCur) 
+    public static String devuelveNombreTipo(int codTipoCur)
     {
         Connection       con       = null;
         String           nombreTip = "";
@@ -103,7 +104,7 @@ public class TipoCursoGestion
             return null;
         }
     }
-    
+
     //Método que genera un nuevo código de tipo curso
     public static int generarNuevoCodTipCur()
     {
@@ -131,7 +132,7 @@ public class TipoCursoGestion
             return -1;
         }
     }
-    
+
     //Método que guarda un tipo de curso
     public static int guardarTipoCurso(TipoCursoVO tipCurVO)
     {
@@ -160,7 +161,7 @@ public class TipoCursoGestion
             return -1;
         }
     }
-    
+
     //Edita el registro de un tipo de curso
     public static int editarTipoCurso(TipoCursoVO tipCurVO)
     {

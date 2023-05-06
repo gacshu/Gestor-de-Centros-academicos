@@ -25,8 +25,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class AltaAulaServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -45,18 +45,18 @@ public class AltaAulaServlet extends HttpServlet
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta aula" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtNombre") != null)
         {
@@ -89,33 +89,33 @@ public class AltaAulaServlet extends HttpServlet
         {
             aulAlta.setTieneTV(true);
         }
-        
+
 
         if(request.getParameter("chkImpresora") != null &&
            request.getParameter("chkImpresora").equals("true"))
         {
             aulAlta.setTieneImp(true);
         }
-        
+
         if(request.getParameter("chkProyector") != null  &&
            request.getParameter("chkProyector").equals("true"))
         {
             aulAlta.setTieneProy(true);
         }
-        
-            
+
+
         if(request.getParameter("chkAireAcond") != null &&
            request.getParameter("chkAireAcond").equals("true"))
         {
             aulAlta.setTieneAC(true);
         }
-        
+
         if(request.getParameter("chkInternet") != null &&
            request.getParameter("chkInternet").equals("true"))
         {
             aulAlta.setTieneInt(true);
         }
-        
+
         resultadoAlt = AulasGestion.guardarAula(aulAlta);
 
         if(resultadoAlt.equals("-1") || resultadoAlt.equals("-2"))
@@ -127,16 +127,16 @@ public class AltaAulaServlet extends HttpServlet
             response.sendRedirect("aulas/anaAula.jsp?errorCode=" + resultadoAlt);
         }
         else
-        {            
+        {
             //Redireccionar a página edición de aulas
             response.sendRedirect("aulas/ediAula.jsp?lstAula=" + resultadoAlt) ;
         }
-        
 
-    } 
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -147,9 +147,9 @@ public class AltaAulaServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -162,7 +162,7 @@ public class AltaAulaServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

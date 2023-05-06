@@ -4,24 +4,24 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ProfAreaVO;
-import es.jahernandez.gestion.AreasGestion;
-import es.jahernandez.tablas.TablaProfArea;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.ProfAreaVO;
+import es.jahernandez.gestion.AreasGestion;
+import es.jahernandez.tablas.TablaProfArea;
 
 /**
  *
  * @author JuanAlberto
  */
-public class ProfAreaDAO 
+public class ProfAreaDAO
 {
     //Método que devuelve los datos de ProfesorArea
     public static Vector devolverTodosProfArea(Connection con) throws Exception
@@ -29,10 +29,10 @@ public class ProfAreaDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF  + " , " 
-                                                     + TablaProfArea.CODAREA  +  
+        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF  + " , "
+                                                     + TablaProfArea.CODAREA  +
                                            " FROM "  + TablaProfArea.TABLA;
-        
+
         ProfAreaVO       datProfNiv     = null;
         Vector           listaProfArea  = new Vector();
 
@@ -48,59 +48,7 @@ public class ProfAreaDAO
 
                 datProfNiv.setCodProf(rs.getString(TablaProfArea.CODPROF));
                 datProfNiv.setCodArea(rs.getString(TablaProfArea.CODAREA));
-                
-                listaProfArea.add(datProfNiv);
-            }
 
-            rs.close();
-            ps.close();
-
-            return listaProfArea;
-        }
-        catch (Exception exc)
-        {
-            try
-            {
-                rs.close();
-                ps.close();              
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfAreaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            throw exc;
-        }
-    }
-
-    //Método que devuelve las areas de un profesor 
-    public static Vector devolverAreasProf(String codProf,Connection con) throws Exception
-    {
-        PreparedStatement ps             = null;
-        ResultSet         rs             = null;
-
-        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF + " , " 
-                                                     + TablaProfArea.CODAREA +  
-                                           " FROM "  + TablaProfArea.TABLA   +
-                                           " WHERE " + TablaProfArea.CODPROF + " = ? ";
-        
-        ProfAreaVO       datProfNiv     = null;
-        Vector           listaProfArea  = new Vector();
-
-        try
-        {
-            ps  = con.prepareStatement(cadenaConsulta);
-
-            ps.setString(1, codProf);
-            
-            rs  = ps.executeQuery();
-
-            while(rs.next())
-            {
-                datProfNiv = new ProfAreaVO();
-
-                datProfNiv.setCodProf(rs.getString(TablaProfArea.CODPROF));
-                datProfNiv.setCodArea(rs.getString(TablaProfArea.CODAREA));
-                
                 listaProfArea.add(datProfNiv);
             }
 
@@ -124,26 +72,78 @@ public class ProfAreaDAO
         }
     }
 
-    
-     //Método que devuelve los nombre de lass áreas de un profesor 
-    public static String devolverNombresAreasProf(String codProf,Connection con) throws Exception
+    //Método que devuelve las areas de un profesor
+    public static Vector devolverAreasProf(String codProf,Connection con) throws Exception
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF + " , " 
-                                                     + TablaProfArea.CODAREA +  
+        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF + " , "
+                                                     + TablaProfArea.CODAREA +
                                            " FROM "  + TablaProfArea.TABLA   +
                                            " WHERE " + TablaProfArea.CODPROF + " = ? ";
-        
-        String           nombresAreas    = ""; 
+
+        ProfAreaVO       datProfNiv     = null;
+        Vector           listaProfArea  = new Vector();
 
         try
         {
             ps  = con.prepareStatement(cadenaConsulta);
 
             ps.setString(1, codProf);
-            
+
+            rs  = ps.executeQuery();
+
+            while(rs.next())
+            {
+                datProfNiv = new ProfAreaVO();
+
+                datProfNiv.setCodProf(rs.getString(TablaProfArea.CODPROF));
+                datProfNiv.setCodArea(rs.getString(TablaProfArea.CODAREA));
+
+                listaProfArea.add(datProfNiv);
+            }
+
+            rs.close();
+            ps.close();
+
+            return listaProfArea;
+        }
+        catch (Exception exc)
+        {
+            try
+            {
+                rs.close();
+                ps.close();
+            }
+            catch (SQLException ex)
+            {
+                Logger.getLogger(ProfAreaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            throw exc;
+        }
+    }
+
+
+     //Método que devuelve los nombre de lass áreas de un profesor
+    public static String devolverNombresAreasProf(String codProf,Connection con) throws Exception
+    {
+        PreparedStatement ps             = null;
+        ResultSet         rs             = null;
+
+        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF + " , "
+                                                     + TablaProfArea.CODAREA +
+                                           " FROM "  + TablaProfArea.TABLA   +
+                                           " WHERE " + TablaProfArea.CODPROF + " = ? ";
+
+        String           nombresAreas    = "";
+
+        try
+        {
+            ps  = con.prepareStatement(cadenaConsulta);
+
+            ps.setString(1, codProf);
+
             rs  = ps.executeQuery();
 
             while(rs.next())
@@ -153,7 +153,7 @@ public class ProfAreaDAO
 
             rs.close();
             ps.close();
-            
+
             return nombresAreas;
         }
         catch (Exception exc)
@@ -167,22 +167,22 @@ public class ProfAreaDAO
             {
                 Logger.getLogger(ProfAreaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             throw exc;
         }
     }
-    
-    //Método que devuelve los profesores de un area 
+
+    //Método que devuelve los profesores de un area
     public static Vector devolverProfArea(String codArea,Connection con) throws Exception
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF + " , " 
-                                                     + TablaProfArea.CODAREA +  
+        String            cadenaConsulta = "SELECT " + TablaProfArea.CODPROF + " , "
+                                                     + TablaProfArea.CODAREA +
                                            " FROM "  + TablaProfArea.TABLA   +
                                            " WHERE " + TablaProfArea.CODAREA + " = ? ";
-        
+
         ProfAreaVO       datProfNiv     = null;
         Vector           listaProfArea  = new Vector();
 
@@ -191,7 +191,7 @@ public class ProfAreaDAO
             ps  = con.prepareStatement(cadenaConsulta);
 
             ps.setString(1, codArea);
-            
+
             rs  = ps.executeQuery();
 
             while(rs.next())
@@ -200,7 +200,7 @@ public class ProfAreaDAO
 
                 datProfNiv.setCodProf(rs.getString(TablaProfArea.CODPROF));
                 datProfNiv.setCodArea(rs.getString(TablaProfArea.CODAREA));
-                
+
                 listaProfArea.add(datProfNiv);
             }
 
@@ -223,18 +223,18 @@ public class ProfAreaDAO
             throw exc;
         }
     }
-  
+
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarProfArea(ProfAreaVO profAreaVO,Connection con) throws Exception
     {
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaProfArea.TABLA    + " ( "  
-                                                          + TablaProfArea.CODPROF  + " , "  
-                                                          + TablaProfArea.CODAREA  + " ) " + 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaProfArea.TABLA    + " ( "
+                                                          + TablaProfArea.CODPROF  + " , "
+                                                          + TablaProfArea.CODAREA  + " ) " +
                                            " VALUES(?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -248,7 +248,7 @@ public class ProfAreaDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -270,9 +270,9 @@ public class ProfAreaDAO
     {
         PreparedStatement ps     = null;
 
-        String            sql    = "DELETE FROM " + TablaProfArea.TABLA   + 
-                                   " WHERE "      + TablaProfArea.CODPROF + " = ? AND " 
-                                                  + TablaProfArea.CODAREA + " = ? " ; 
+        String            sql    = "DELETE FROM " + TablaProfArea.TABLA   +
+                                   " WHERE "      + TablaProfArea.CODPROF + " = ? AND "
+                                                  + TablaProfArea.CODAREA + " = ? " ;
         int               regAct = 0;
 
         try
@@ -282,11 +282,11 @@ public class ProfAreaDAO
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codProf);
             ps.setString(2, codArea);
-                       
+
             regAct = ps.executeUpdate();
 
             ps.close();
-            
+
             return regAct;
         }
         catch (Exception exc)
@@ -301,15 +301,15 @@ public class ProfAreaDAO
             }
             throw exc;
         }
-    }   
-    
+    }
+
     //Elimina los registros de un profesor
     public static int eliminaAreasProf(String codProf,Connection con) throws Exception
     {
         PreparedStatement ps     = null;
 
-        String            sql    = "DELETE FROM " + TablaProfArea.TABLA   + 
-                                   " WHERE "      + TablaProfArea.CODPROF + " = ? " ; 
+        String            sql    = "DELETE FROM " + TablaProfArea.TABLA   +
+                                   " WHERE "      + TablaProfArea.CODPROF + " = ? " ;
         int               regAct = 0;
 
         try
@@ -319,7 +319,7 @@ public class ProfAreaDAO
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codProf);
-                       
+
             regAct = ps.executeUpdate();
 
             ps.close();
@@ -340,15 +340,15 @@ public class ProfAreaDAO
             }
             return -1;
         }
-    }   
-    
+    }
+
     //Elimina los registros de un área
     public static int eliminaProfArea(String codArea,Connection con) throws Exception
     {
         PreparedStatement ps     = null;
 
-        String            sql    = "DELETE FROM " + TablaProfArea.TABLA   + 
-                                   " WHERE "      + TablaProfArea.CODAREA + " = ? " ; 
+        String            sql    = "DELETE FROM " + TablaProfArea.TABLA   +
+                                   " WHERE "      + TablaProfArea.CODAREA + " = ? " ;
         int               regAct = 0;
 
         try
@@ -357,11 +357,11 @@ public class ProfAreaDAO
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codArea);
-                       
+
             regAct = ps.executeUpdate();
 
             ps.close();
-            
+
             return regAct;
         }
         catch (Exception exc)
@@ -376,5 +376,5 @@ public class ProfAreaDAO
             }
             throw exc;
         }
-    }   
+    }
 }

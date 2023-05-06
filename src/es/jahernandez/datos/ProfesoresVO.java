@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
  *
  * @author JuanAlberto
  */
-public class ProfesoresVO 
+public class ProfesoresVO
 {
     private String  idProf;
     private String  nombre;
@@ -27,10 +27,10 @@ public class ProfesoresVO
     private String  observ;
     private String  telef;
     private String  mov;
-    private String  email;    
+    private String  email;
     private boolean activo;
 
-    public ProfesoresVO() 
+    public ProfesoresVO()
     {
         idProf    = "";
         nombre    = "";
@@ -47,7 +47,7 @@ public class ProfesoresVO
         telef     = "";
         mov       = "";
         email     = "";
-        activo    = false; 
+        activo    = false;
     }
 
     /**
@@ -273,6 +273,6 @@ public class ProfesoresVO
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
-    
+
+
 }

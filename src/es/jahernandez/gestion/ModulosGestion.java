@@ -19,7 +19,7 @@ import es.jahernandez.datos.ModulosVO;
  *
  * @author Alberto
  */
-public class ModulosGestion 
+public class ModulosGestion
 {
     //Método que devuelve los datos de un módulo
     public static ModulosVO devolverDatosModulo(String codMod)
@@ -88,7 +88,7 @@ public class ModulosGestion
             con = Conexion.conectar();
             regActualizados = ModulosDAO.guardarModulo(modVO,con);
             Conexion.desconectar(con);
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -138,7 +138,7 @@ public class ModulosGestion
             return null;
         }
     }
-    
+
      //Edita el registro de un módulo
     public static int editaModulo(ModulosVO modVO)
     {
@@ -176,7 +176,7 @@ public class ModulosGestion
         int               regActualizados = 0;
 
         //Comprobar si existe alguna edición con este módulo
-        
+
         try
         {
             con = Conexion.conectar();
@@ -197,6 +197,6 @@ public class ModulosGestion
             }
             return -1;
         }
-    }        
-    
+    }
+
 }

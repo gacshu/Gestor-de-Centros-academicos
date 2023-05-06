@@ -8,12 +8,12 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class AreasVO 
+public class AreasVO
 {
-    private String codArea; 
+    private String codArea;
     private String nomArea;
-    
-    public AreasVO() 
+
+    public AreasVO()
     {
         codArea = "";
         nomArea = "";
@@ -22,7 +22,7 @@ public class AreasVO
     /**
      * @return the codArea
      */
-    public String getCodArea() 
+    public String getCodArea()
     {
         return codArea;
     }
@@ -30,7 +30,7 @@ public class AreasVO
     /**
      * @param codArea the codArea to set
      */
-    public void setCodArea(String codArea) 
+    public void setCodArea(String codArea)
     {
         this.codArea = codArea;
     }
@@ -38,7 +38,7 @@ public class AreasVO
     /**
      * @return the nomArea
      */
-    public String getNomArea() 
+    public String getNomArea()
     {
         return nomArea;
     }
@@ -46,9 +46,9 @@ public class AreasVO
     /**
      * @param nomArea the nomArea to set
      */
-    public void setNomArea(String nomArea) 
+    public void setNomArea(String nomArea)
     {
         this.nomArea = nomArea;
     }
-    
+
 }

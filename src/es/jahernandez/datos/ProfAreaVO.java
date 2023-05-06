@@ -8,11 +8,11 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class ProfAreaVO 
+public class ProfAreaVO
 {
     private String codProf;
     private String codArea;
-    
+
     public ProfAreaVO()
     {
         codProf = "";
@@ -46,6 +46,6 @@ public class ProfAreaVO
     public void setCodArea(String codArea) {
         this.codArea = codArea;
     }
-    
-    
+
+
 }

@@ -26,8 +26,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class AltaNuevaEmpresaServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -46,23 +46,23 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
         boolean       irFicha       = false;
         String        urlDestino    = "";
         String        urlDestinoErr = "";
-        int           urlProc       = -1;    
+        int           urlProc       = -1;
 
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta empresa" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtRazonSocial") != null)
         {
@@ -114,7 +114,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
         {
             empAlta.setCnae(new Integer(request.getParameter("txtCNAE")).intValue());
         }
-        
+
         if(request.getParameter("txtNomCom") != null)
         {
             empAlta.setNomComercial(request.getParameter("txtNomCom").trim().toUpperCase());
@@ -165,19 +165,19 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
             {
                 empAlta.setDatAct(true);
             }
-        
+
         if(request.getParameter("txtNumEmp") != null &&
           !request.getParameter("txtNumEmp").trim().equals(""))
         {
             empAlta.setNumEmp(new Integer(request.getParameter("txtNumEmp")).intValue());
         }
-        
+
         if(request.getParameter("chkAdCon") != null &&
            request.getParameter("chkAdCon").equals("true"))
         {
             empAlta.setConvenioAd(true);
         }
-    
+
         if(request.getParameter("hidFecCon") != null &&
           !request.getParameter("hidFecCon").equals(""))
         {
@@ -186,7 +186,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
                                                     new Integer(strFechaCon.substring(3,5)).intValue() - 1,
                                                     new Integer(strFechaCon.substring(0,2)).intValue()).getTime());
         }
-   
+
         if(request.getParameter("selImpExp") != null)
         {
             empAlta.setImpExp(request.getParameter("selImpExp").trim());
@@ -203,7 +203,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
         {
             empAlta.setCuota(new Integer(request.getParameter("txtCuota")).intValue());
         }
-    
+
         if(request.getParameter("txtVolNeg") != null)
         {
             empAlta.setVolNeg(request.getParameter("txtVolNeg").trim().toUpperCase());
@@ -214,13 +214,13 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
         {
             empAlta.setAutCesDat(true);
         }
-    
+
         if(request.getParameter("chkAcc") != null &&
            request.getParameter("chkAcc").equals("true"))
         {
             empAlta.setAccArco(true);
         }
-    
+
         if(request.getParameter("hidFecAcc") != null &&
           !request.getParameter("hidFecAcc").equals(""))
         {
@@ -235,7 +235,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
         {
             empAlta.setRecArco(true);
         }
-        
+
         if(request.getParameter("hidFecRec") != null &&
           !request.getParameter("hidFecRec").equals(""))
         {
@@ -244,7 +244,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaRec.substring(3,5)).intValue() - 1,
                                                        new Integer(strFechaRec.substring(0,2)).intValue()).getTime());
         }
-    
+
         if(request.getParameter("chkCancel") != null &&
            request.getParameter("chkCancel").equals("true"))
         {
@@ -259,14 +259,14 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaCan.substring(3,5)).intValue() - 1,
                                                        new Integer(strFechaCan.substring(0,2)).intValue()).getTime());
         }
-        
+
 
         if(request.getParameter("chkOposic") != null &&
            request.getParameter("chkOposic").equals("true"))
         {
             empAlta.setOpoArco(true);
         }
-    
+
         if(request.getParameter("hidFecOpo") != null &&
           !request.getParameter("hidFecOpo").equals(""))
         {
@@ -275,14 +275,14 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaOpo.substring(3,5)).intValue() -1 ,
                                                        new Integer(strFechaOpo.substring(0,2)).intValue()).getTime());
         }
-    
+
         //Se comprueba si se llama desde la ficha de alumnos
         if(request.getParameter("fichaAlumno") != null &&
            request.getParameter("fichaAlumno").equals("1"))
         {
             irFicha = true;
         }
-    
+
         if(request.getParameter("urlProc") != null)
         {
             urlProc = new Integer(request.getParameter("urlProc")).intValue();
@@ -293,7 +293,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
                 case 3: urlDestino = "empresas/datEmpresa.jsp?urlProc=3";      urlDestinoErr = "empresas/altaEmp.jsp"; break;
             }
         }
-        
+
         resultadoAlt = EmpresasGestion.guardaEmp(empAlta);
 
         if(resultadoAlt.equals("0") || resultadoAlt.equals("-1"))
@@ -312,7 +312,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -323,9 +323,9 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -338,7 +338,7 @@ public class AltaNuevaEmpresaServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

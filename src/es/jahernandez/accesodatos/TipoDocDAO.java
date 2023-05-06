@@ -29,11 +29,11 @@ public class TipoDocDAO
         PreparedStatement ps            = null;
         ResultSet         rs            = null;
 
-        String            sql           = "SELECT "    + TablaTipoDocumento.CODTIPDOC + " , " 
-                                                       + TablaTipoDocumento.NOMBRE    +   
+        String            sql           = "SELECT "    + TablaTipoDocumento.CODTIPDOC + " , "
+                                                       + TablaTipoDocumento.NOMBRE    +
                                           " FROM "     + TablaTipoDocumento.TABLA     +
                                           " ORDER BY " + TablaTipoDocumento.CODTIPDOC;
-        
+
         Vector            listaTipDoc   = new Vector();
         TipoDocVO         tipDocVO      = null;
 
@@ -55,7 +55,7 @@ public class TipoDocDAO
 
             rs.close();
             ps.close();
-            
+
             return listaTipDoc;
         }
         catch (Exception exc)
@@ -72,17 +72,17 @@ public class TipoDocDAO
             throw exc;
         }
     }
-    
+
     //Devuelve el tipo de Dni de un documento
     public static String devuelveNombreTipoDoc(int idDoc,Connection con) throws Exception
     {
         PreparedStatement ps        = null;
         ResultSet         rs        = null;
 
-        String            sql       = "SELECT " + TablaTipoDocumento.NOMBRE    +   
+        String            sql       = "SELECT " + TablaTipoDocumento.NOMBRE    +
                                       " FROM "  + TablaTipoDocumento.TABLA     +
                                       " WHERE " + TablaTipoDocumento.CODTIPDOC + " = ?";
-        
+
         String            nombreDoc = "";
 
         try
@@ -100,7 +100,7 @@ public class TipoDocDAO
             }
             rs.close();
             ps.close();
-            
+
             return nombreDoc;
 
         }
@@ -118,5 +118,5 @@ public class TipoDocDAO
 
             throw exc;
         }
-    }    
+    }
 }

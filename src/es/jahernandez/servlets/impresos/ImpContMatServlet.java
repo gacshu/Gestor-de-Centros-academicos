@@ -14,8 +14,8 @@ import org.apache.log4j.Logger;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
-import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
@@ -56,11 +56,11 @@ public class ImpContMatServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         ServletContext sc     = null;
         HttpSession    sesion = request.getSession();
-        
+
         AlumnosVO   aluVO  = null;
         EdicionesVO ediVO  = null;
         CursosVO    curVO  = null;
@@ -70,38 +70,38 @@ public class ImpContMatServlet extends HttpServlet {
         String      codEdi = "";
         String      matEnt = "";
         String      centro = "";
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir control materiales" );
-               
+
         }
-        
-        
+
+
         if(request.getParameter("codEdi") != null)
         {
             codEdi = request.getParameter("codEdi");
         }
-        
+
         if(request.getParameter("txtMatEnt") != null)
         {
             matEnt = request.getParameter("txtMatEnt");
             matEnt = matEnt.replace(',', '\n');
         }
-        
+
         if(request.getParameter("txtCentro") != null)
         {
             centro =  CentrosGestion.nomCentro(request.getParameter("txtCentro"));
         }
-       
-        
+
+
         ediVO = EdicionesGestion.devolverDatosEdi(codEdi);
         curVO = CursosGestion.devolverDatosCurso(ediVO.getIdCur());
 
@@ -118,7 +118,7 @@ public class ImpContMatServlet extends HttpServlet {
 
         tablaLitCon.setWidthPercentage(100);
         tablaLitMat.setWidthPercentage(100);
-        tablaDatAlu.setWidthPercentage(100); 
+        tablaDatAlu.setWidthPercentage(100);
 
         tablaLitCon.setSpacingAfter(10f);
         tablaLitCon.setSpacingAfter(10f);
@@ -166,7 +166,7 @@ public class ImpContMatServlet extends HttpServlet {
         fraFirAlu.font().setSize(10);
         fraFirAlu.font().setStyle(Font.BOLD);
         fraFecEnt.font().setSize(10);
-       
+
         PdfPCell cellConMat = new PdfPCell(fraConMat);
         PdfPCell cellMatLit = new PdfPCell(fraMatEnt);
         PdfPCell cellMatVac = new PdfPCell(fraMatVac);
@@ -176,19 +176,19 @@ public class ImpContMatServlet extends HttpServlet {
         PdfPCell cellFirVac = new PdfPCell();
 
 
-        cellConMat.setHorizontalAlignment(Image.ALIGN_CENTER);
-        cellMatLit.setHorizontalAlignment(Image.ALIGN_CENTER);
-        cellNomCab.setHorizontalAlignment(Image.ALIGN_CENTER);
-        cellFirCab.setHorizontalAlignment(Image.ALIGN_CENTER);
+        cellConMat.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cellMatLit.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cellNomCab.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cellFirCab.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-        cellConMat.setHorizontalAlignment(Image.ALIGN_CENTER);
+        cellConMat.setHorizontalAlignment(Element.ALIGN_CENTER);
         cellConMat.setGrayFill(0.90f);
-        cellMatLit.setHorizontalAlignment(Image.ALIGN_CENTER);
+        cellMatLit.setHorizontalAlignment(Element.ALIGN_CENTER);
         cellMatLit.setGrayFill(0.90f);
         cellMatVac.setMinimumHeight(100f);
-        cellNomCab.setHorizontalAlignment (Image.ALIGN_CENTER);
+        cellNomCab.setHorizontalAlignment (Element.ALIGN_CENTER);
         cellNomCab.setGrayFill(0.90f);
-        cellFirCab.setHorizontalAlignment (Image.ALIGN_CENTER);
+        cellFirCab.setHorizontalAlignment (Element.ALIGN_CENTER);
         cellFirCab.setGrayFill(0.90f);
         cellAluVac.setMinimumHeight(25f);
         cellFirVac.setMinimumHeight(25f);
@@ -205,26 +205,26 @@ public class ImpContMatServlet extends HttpServlet {
         // step 1
         // need to write to memory first due to IE wanting
         // to know the length of the pdf beforehand
-        Document document   = new Document();     
-        
+        Document document   = new Document();
+
         //Image     logoImage = null; //iTextSharp.text.Image.GetInstance(System.Web.HttpContext.Current.Server.MapPath("~/imagenes/logoEnS.jpg"));
 
         try
         {
             sc = getServletContext();
-            
+
             //logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + "logoEnS.jpg"));
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.setPageSize(PageSize.A4);
             document.setMargins(16, 16, 16, 16);
             document.open();
 
             for (int ind = 0; ind < 20; ind++)
-            { 
+            {
                 // step 4
 
                 //Mostramos datos alumno
@@ -240,16 +240,16 @@ public class ImpContMatServlet extends HttpServlet {
                 {
                     strDatAlu = "";
                 }
-                
+
                 fraDatAlu = new Phrase(strDatAlu);
                 fraDatAlu.font().setSize(12);
 
                 cellAluVac = new PdfPCell(fraDatAlu);
-                cellAluVac.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellAluVac.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
                 tablaDatAlu.addCell(cellAluVac);
                 tablaDatAlu.addCell(cellFirVac);
-   
+
             }
 
             document.add(new Paragraph(fraCentro));

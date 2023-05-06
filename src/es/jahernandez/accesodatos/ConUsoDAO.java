@@ -5,20 +5,19 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ConUsuVO;
-
-import es.jahernandez.tablas.TablaControl;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
 import org.apache.commons.codec.digest.DigestUtils;
+
+import es.jahernandez.datos.ConUsuVO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.tablas.TablaControl;
 
 /**
  *
@@ -32,14 +31,14 @@ public class ConUsoDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT " + TablaControl.USUARIO   + "," 
+        String            sql        = "SELECT " + TablaControl.USUARIO   + ","
                                                  + TablaControl.PASSWORD  + ","
                                                  + TablaControl.ACCESO    + ","
                                                  + TablaControl.NOMBRE    + ","
                                                  + TablaControl.CODCENTRO + ","
                                                  + TablaControl.ACTIVO    + ","
-                                                 + TablaControl.CODPROF   +                                                                                                             
-                                       " FROM "  + TablaControl.TABLA     +    
+                                                 + TablaControl.CODPROF   +
+                                       " FROM "  + TablaControl.TABLA     +
                                        " WHERE " + TablaControl.USUARIO   + " = ? AND "
                                                  + TablaControl.PASSWORD  + " = ? AND "
                                                  + TablaControl.ACTIVO    + " = 1";
@@ -69,7 +68,7 @@ public class ConUsoDAO
             }
             rs.close();
             ps.close();
-       
+
             return conUsoVO;
 
         }
@@ -95,16 +94,16 @@ public class ConUsoDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT " + TablaControl.USUARIO   + "," 
+        String            sql        = "SELECT " + TablaControl.USUARIO   + ","
                                                  + TablaControl.PASSWORD  + ","
                                                  + TablaControl.ACCESO    + ","
                                                  + TablaControl.NOMBRE    + ","
                                                  + TablaControl.CODCENTRO + ","
                                                  + TablaControl.ACTIVO    + ","
-                                                 + TablaControl.CODPROF   + 
+                                                 + TablaControl.CODPROF   +
                                        " FROM "  + TablaControl.TABLA     +
-                                       " WHERE " + TablaControl.ACCESO    + " < 9";                
-        
+                                       " WHERE " + TablaControl.ACCESO    + " < 9";
+
         ConUsuVO          conUsoVO   = null;
 
         Vector            listUsers  = new Vector();
@@ -124,13 +123,13 @@ public class ConUsoDAO
                 conUsoVO.setIdCentro   (rs.getInt    (TablaControl.CODCENTRO));
                 conUsoVO.setActivo     (rs.getBoolean(TablaControl.ACTIVO));
                 conUsoVO.setIdProf     (rs.getString (TablaControl.CODPROF));
-                
+
                 listUsers.addElement(conUsoVO);
             }
 
             rs.close();
             ps.close();
-            
+
             return listUsers;
 
         }
@@ -159,13 +158,13 @@ public class ConUsoDAO
         int               resulSql   = 0;
 
         //String            sql        = "INSERT INTO TbControl(usuario,password,nivelAcceso,nombre,idCentro) VALUES(?,?,?,?,?)";
-        String            sql        = "INSERT INTO " + TablaControl.TABLA +  "(" + TablaControl.USUARIO   + " , " 
+        String            sql        = "INSERT INTO " + TablaControl.TABLA +  "(" + TablaControl.USUARIO   + " , "
                                                                                   + TablaControl.PASSWORD  + " , "
                                                                                   + TablaControl.ACCESO    + " , "
                                                                                   + TablaControl.NOMBRE    + " , "
-                                                                                  + TablaControl.CODCENTRO + " , " 
-                                                                                  + TablaControl.ACTIVO    + " , "   
-                                                                                  + TablaControl.CODPROF   + " ) " +  
+                                                                                  + TablaControl.CODCENTRO + " , "
+                                                                                  + TablaControl.ACTIVO    + " , "
+                                                                                  + TablaControl.CODPROF   + " ) " +
                                        " VALUES(?,?,?,?,?,?,?)";
         try
         {
@@ -179,11 +178,11 @@ public class ConUsoDAO
             ps.setInt    (5, conUsVO.getIdCentro());
             ps.setBoolean(6, conUsVO.isActivo());
             ps.setString (7, conUsVO.getIdProf());
-            
+
             resulSql = ps.executeUpdate();
 
             ps.close();
-          
+
            //Opciones de seguridad
            //Desactivado temporalmente
            /*
@@ -222,7 +221,7 @@ public class ConUsoDAO
 
         String            sql        = "DELETE FROM " + TablaControl.TABLA   +
                                        " WHERE "      + TablaControl.USUARIO + " = ?";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -233,7 +232,7 @@ public class ConUsoDAO
             resulSql = ps.executeUpdate();
 
             ps.close();
-            
+
             //Registro de seuuridad
             //Desactivado temporalmente
             /*LogSegVO logSegVO  = new LogSegVO();
@@ -244,7 +243,7 @@ public class ConUsoDAO
 
             LogSegDAO.guardarLog(logSegVO);
              */
-            
+
             return resulSql;
 
         }
@@ -269,18 +268,18 @@ public class ConUsoDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String              sql      = "SELECT " + TablaControl.USUARIO   + "," 
+        String              sql      = "SELECT " + TablaControl.USUARIO   + ","
                                                  + TablaControl.PASSWORD  + ","
                                                  + TablaControl.ACCESO    + ","
                                                  + TablaControl.NOMBRE    + ","
                                                  + TablaControl.CODCENTRO + ","
                                                  + TablaControl.ACTIVO    + ","
                                                  + TablaControl.CODPROF   +
-                                       " FROM "  + TablaControl.TABLA     +  
+                                       " FROM "  + TablaControl.TABLA     +
                                        " WHERE " + TablaControl.USUARIO   + " = ?";
-        
-        
-        
+
+
+
         ConUsuVO          conUsoVO   = null;
 
         try
@@ -317,7 +316,7 @@ public class ConUsoDAO
             }
             rs.close();
             ps.close();
-         
+
             return conUsoVO;
 
         }
@@ -343,18 +342,18 @@ public class ConUsoDAO
         PreparedStatement ps         = null;
         int               resulSql   = 0;
 
-        String            sql        = "UPDATE " + TablaControl.TABLA  + " SET " + TablaControl.PASSWORD  + " = ? , " 
-                                                                                 + TablaControl.ACCESO    + " = ? , " 
-                                                                                 + TablaControl.NOMBRE    + " = ? , "   
-                                                                                 + TablaControl.CODCENTRO + " = ? , "  
-                                                                                 + TablaControl.ACTIVO    + " = ? , "  
+        String            sql        = "UPDATE " + TablaControl.TABLA  + " SET " + TablaControl.PASSWORD  + " = ? , "
+                                                                                 + TablaControl.ACCESO    + " = ? , "
+                                                                                 + TablaControl.NOMBRE    + " = ? , "
+                                                                                 + TablaControl.CODCENTRO + " = ? , "
+                                                                                 + TablaControl.ACTIVO    + " = ? , "
                                                                                  + TablaControl.CODPROF   + " = ?   " +
                                        " WHERE "                                 + TablaControl.USUARIO   + " = ?   " ;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros a la consulta sql
             ps.setString (1, DigestUtils.md5Hex(conVO.getPassword()));
             ps.setInt    (2, conVO.getNivelAcceso());

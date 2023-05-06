@@ -5,21 +5,18 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.NivelesVO;
-import es.jahernandez.gestion.EdicionesGestion;
-import es.jahernandez.gestion.NivelesGestion;
-
-import es.jahernandez.tablas.TablaNiveles;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.NivelesVO;
+import es.jahernandez.gestion.EdicionesGestion;
+import es.jahernandez.gestion.NivelesGestion;
+import es.jahernandez.tablas.TablaNiveles;
 
 
 /**
@@ -35,13 +32,13 @@ public class NivelesDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaNiveles.CODNIVEL  + " , " 
+        String            cadenaConsulta = "SELECT " + TablaNiveles.CODNIVEL  + " , "
                                                      + TablaNiveles.NOMBRE    + " , "
                                                      + TablaNiveles.CONTENIDO + " , "
-                                                     + TablaNiveles.CODCURSO  + 
+                                                     + TablaNiveles.CODCURSO  +
                                            " FROM "  + TablaNiveles.TABLA     +
                                            " WHERE " + TablaNiveles.CODNIVEL  + " = ?";
-        
+
         NivelesVO         datNiv         = new NivelesVO();
 
         try
@@ -90,12 +87,12 @@ public class NivelesDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaNiveles.CODNIVEL  + " , " 
+        String            cadenaConsulta = "SELECT " + TablaNiveles.CODNIVEL  + " , "
                                                      + TablaNiveles.NOMBRE    + " , "
                                                      + TablaNiveles.CONTENIDO + " , "
-                                                     + TablaNiveles.CODCURSO  + 
+                                                     + TablaNiveles.CODCURSO  +
                                            " FROM "  + TablaNiveles.TABLA;
-        
+
         NivelesVO         datNiv         = null;
         Vector            listaNiveles   = new Vector();
 
@@ -142,15 +139,15 @@ public class NivelesDAO
     {
         String            nueCodNiv      = generarNuevoCodNiv();
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaNiveles.TABLA     + " ( "  
-                                                          + TablaNiveles.CODNIVEL  + " , " 
-                                                          + TablaNiveles.NOMBRE    + " , "  
-                                                          + TablaNiveles.CONTENIDO + " , " 
-                                                          + TablaNiveles.CODCURSO  + " ) " + 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaNiveles.TABLA     + " ( "
+                                                          + TablaNiveles.CODNIVEL  + " , "
+                                                          + TablaNiveles.NOMBRE    + " , "
+                                                          + TablaNiveles.CONTENIDO + " , "
+                                                          + TablaNiveles.CODCURSO  + " ) " +
                                            " VALUES(?,?,?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -237,12 +234,12 @@ public class NivelesDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            sql          = "SELECT " + TablaNiveles.CODNIVEL  + " , " 
+        String            sql          = "SELECT " + TablaNiveles.CODNIVEL  + " , "
                                                    + TablaNiveles.NOMBRE    + " , "
                                                    + TablaNiveles.CONTENIDO + " , "
-                                                   + TablaNiveles.CODCURSO  + 
+                                                   + TablaNiveles.CODCURSO  +
                                          " FROM "  + TablaNiveles.TABLA     +
-                                         " WHERE " + TablaNiveles.CODCURSO  + " = ?"; 
+                                         " WHERE " + TablaNiveles.CODCURSO  + " = ?";
         NivelesVO         datNiv       = null;
         Vector            listaNiveles = new Vector();
 
@@ -269,7 +266,7 @@ public class NivelesDAO
 
             rs.close();
             ps.close();
-            
+
             return listaNiveles;
         }
         catch (Exception exc)
@@ -286,17 +283,17 @@ public class NivelesDAO
             throw exc;
         }
     }
-    
+
      //Edita el registro de un curso
     public static int editaNivel(NivelesVO nivVO,Connection con) throws Exception
     {
         PreparedStatement ps  = null;
 
         String            sql = "UPDATE " + TablaNiveles.TABLA     +
-                                " SET "   + TablaNiveles.NOMBRE    + " = ? , " 
+                                " SET "   + TablaNiveles.NOMBRE    + " = ? , "
                                           + TablaNiveles.CONTENIDO + " = ?   " +
                                 " WHERE " + TablaNiveles.CODNIVEL  + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -307,11 +304,11 @@ public class NivelesDAO
             ps.setString(1, nivVO.getNomNiv());
             ps.setString(2, nivVO.getContenidos());
             ps.setString(3, nivVO.getIdNiv());
-           
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -333,29 +330,29 @@ public class NivelesDAO
     {
         PreparedStatement ps  = null;
 
-        String            sql = "DELETE FROM " + TablaNiveles.TABLA  + 
+        String            sql = "DELETE FROM " + TablaNiveles.TABLA  +
                                 " WHERE "      + TablaNiveles.CODNIVEL + " = ?";
-        
+
         int               regActualizados = 0;
 
-        
+
         if(EdicionesGestion.estaNivelenEdicion(codNivel))
         {
             return -2;
         }
-        
-        
+
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codNivel);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -370,5 +367,5 @@ public class NivelesDAO
             }
             throw exc;
         }
-    }        
+    }
 }

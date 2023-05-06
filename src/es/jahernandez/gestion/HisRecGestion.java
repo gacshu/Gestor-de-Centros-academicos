@@ -5,20 +5,21 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.HisRecDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.HisRecVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.HisRecDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.HisRecVO;
+
 /**
  *
  * @author Alberto
  */
-public class HisRecGestion 
+public class HisRecGestion
 {
 //Método que guarda un nuevo registro en la base de datos
     public static int guardarHisRec(HisRecVO hisRecVO)
@@ -31,7 +32,7 @@ public class HisRecGestion
             con = Conexion.conectar();
             regActualizados = HisRecDAO.guardarHisRec(hisRecVO,con);
             Conexion.desconectar(con);
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -122,7 +123,7 @@ public class HisRecGestion
             con = Conexion.conectar();
             datHisRec = HisRecDAO.devDatRecHis(codAlu, numRec,con);
             Conexion.desconectar(con);
-            
+
             return datHisRec;
         }
         catch (Exception exc)
@@ -203,7 +204,7 @@ public class HisRecGestion
     {
         Connection        con         = null;
         Vector           listaHisRec = new Vector();
-       
+
         try
         {
             con = Conexion.conectar();
@@ -254,13 +255,13 @@ public class HisRecGestion
             return -1;
         }
     }
-    
+
     //Método que devuelve ell número de recibos generados un mes
     public static int  numeroRecGenMes(String annoBus, String mesBus)
     {
         Connection       con            = null;
         int              numRecGen      = 0;
-       
+
         try
         {
             con = Conexion.conectar();
@@ -284,5 +285,5 @@ public class HisRecGestion
             return -1;
         }
 
-    } 
+    }
 }

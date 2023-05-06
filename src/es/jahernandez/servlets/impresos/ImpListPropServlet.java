@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -57,46 +58,46 @@ public class ImpListPropServlet extends HttpServlet  {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-     
+
         ServletContext sc     = null;
         HttpSession    sesion = request.getSession();
-        
+
         String         nomMes = "";
         String         codEdi = "";
         String         lugImp = "";
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir listado propio" );
-               
+
         }
-        
+
         if(request.getParameter("codEdi") != null)
         {
             codEdi = request.getParameter("codEdi");
         }
-        
+
         if(request.getParameter("txtMes") != null)
         {
             nomMes = request.getParameter("txtMes").toUpperCase();
         }
-        
+
         if(request.getParameter("txtLugImp") != null)
         {
             lugImp = request.getParameter("txtLugImp");
         }
-               
+
         //Se pasan los datos introducidos a mayusculas
         /*txtNumCur.Text = txtNumCur.Text.ToUpper();
         txtNomProf.Text = txtNomProf.Text.ToUpper();
@@ -140,17 +141,17 @@ public class ImpListPropServlet extends HttpServlet  {
         Document document = new Document();
 
         Paragraph parTitPag2 = new Paragraph("JUSTIFICANTE DE ASISTENCIA DE LOS ALUMNOS");
-        
+
         parTitPag2.font().setSize(10);
 
         parTitPag2.font().setStyle(Font.BOLD);
 
-        parTitPag2.setAlignment(Image.ALIGN_CENTER);
+        parTitPag2.setAlignment(Element.ALIGN_CENTER);
 
         //Instrucciones para meter los datos de concepto en una tabla
-        float[] widths = { 5f, 10f, 1f, 1f, 1f, 1f, 1f, 
-                            1f, 1f, 1f, 1f, 1f, 1f, 1f, 
-                            1f, 1f, 1f, 1f, 1f, 1f, 1f, 
+        float[] widths = { 5f, 10f, 1f, 1f, 1f, 1f, 1f,
+                            1f, 1f, 1f, 1f, 1f, 1f, 1f,
+                            1f, 1f, 1f, 1f, 1f, 1f, 1f,
                             1f, 1f, 1f, 1f ,1f, 1f, 1f,
                             1f, 1f, 1f, 1f, 1f};
 
@@ -240,14 +241,14 @@ public class ImpListPropServlet extends HttpServlet  {
         Phrase fraSem = new Phrase(datCL3);
         PdfPCell celSem = new PdfPCell(fraSem);
 
-        celSem.setHorizontalAlignment(Image.ALIGN_CENTER);
+        celSem.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 
         fraDC1.font().setSize(10);
         fraDC2.font().setSize(10);
         fraTiF.font().setSize(8);
         fraSem.font().setSize(10);
-        
+
         celPS.setBorderWidthLeft(0);
         celPS.setBorderWidthTop(0);
         celPS.setBorderWidthBottom(0);
@@ -259,13 +260,13 @@ public class ImpListPropServlet extends HttpServlet  {
         try
         {
             sc = getServletContext();
-            
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
 
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-           
+
             // step 3
             document.setPageSize(PageSize.A4.rotate());
             document.setMargins(16, 16, 16, 16);
@@ -279,206 +280,206 @@ public class ImpListPropServlet extends HttpServlet  {
             fraDNI = new Phrase("DNI");
             fraDNI.font().setSize(10);
             cellDNI = new PdfPCell(fraDNI);
-            cellDNI.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellDNI.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellDNI.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellDNI.setHorizontalAlignment(Element.ALIGN_CENTER);
             //cellDNI.BackgroundColor = Color.GRAY;
             tablaDatAlu.addCell(cellDNI);
 
             fraNom = new Phrase("APELLIDOS Y NOMBRE");
             fraNom.font().setSize(10);
             cellNom = new PdfPCell(fraNom);
-            cellNom.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellNom.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellNom.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellNom.setHorizontalAlignment(Element.ALIGN_CENTER);
             //cellNom.BackgroundColor = Color.GRAY;
             tablaDatAlu.addCell(cellNom);
 
             fra01.font().setSize(10);
             cell01 = new PdfPCell(fra01);
-            cell01.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell01.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell01.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell01.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell01);
 
             fra02.font().setSize(10);
             cell02 = new PdfPCell(fra02);
-            cell02.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell02.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell02.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell02.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell02);
 
             fra03.font().setSize(10);
             cell03 = new PdfPCell(fra03);
-            cell03.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell03.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell03.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell03.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell03);
 
             fra04.font().setSize(10);
             cell04 = new PdfPCell(fra04);
-            cell04.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell04.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell04.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell04.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell04);
 
             fra05.font().setSize(10);
             cell05 = new PdfPCell(fra05);
-            cell05.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell05.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell05.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell05.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell05);
 
             fra06.font().setSize (10);
             cell06 = new PdfPCell(fra06);
-            cell06.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell06.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell06.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell06.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell06);
 
             fra07.font().setSize(10);
             cell07 = new PdfPCell(fra07);
-            cell07.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell07.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell07.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell07.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell07);
 
             fra08.font().setSize(10);
             cell08 = new PdfPCell(fra08);
-            cell08.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell08.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell08.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell08.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell08);
 
             fra09.font().setSize(10);
             cell09 = new PdfPCell(fra09);
-            cell09.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell09.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell09.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell09.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell09);
 
             fra10.font().setSize(10);
             cell10 = new PdfPCell(fra10);
-            cell10.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell10.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell10.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell10);
 
             fra11.font().setSize(10);
             cell11 = new PdfPCell(fra11);
-            cell11.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell11.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell11.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell11.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell11);
 
             fra12.font().setSize(10);
             cell12 = new PdfPCell(fra12);
-            cell12.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell12.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell12.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell12.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell12);
 
             fra13.font().setSize(10);
             cell13 = new PdfPCell(fra13);
-            cell13.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell13.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell13.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell13.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell13);
 
             fra14.font().setSize(10);
             cell14 = new PdfPCell(fra14);
-            cell14.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell14.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell14.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell14.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell14);
 
             fra15.font().setSize(10);
             cell15 = new PdfPCell(fra15);
-            cell15.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell15.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell15.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell15.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell15);
 
             fra16.font().setSize(10);
             cell16 = new PdfPCell(fra16);
-            cell16.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell16.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell16.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell16.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell16);
 
             fra17.font().setSize(10);
             cell17 = new PdfPCell(fra17);
-            cell17.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell17.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell17.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell17.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell17);
 
             fra18.font().setSize(10);
             cell18 = new PdfPCell(fra18);
-            cell18.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell18.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell18.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell18.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell18);
 
             fra19.font().setSize(10);
             cell19 = new PdfPCell(fra19);
-            cell19.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell19.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell19.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell19.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell19);
 
             fra20.font().setSize(10);
             cell20 = new PdfPCell(fra20);
-            cell20.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell20.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell20.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell20);
 
             fra21.font().setSize(10);
             cell21 = new PdfPCell(fra21);
-            cell21.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell21.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell21.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell21.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell21);
 
             fra22.font().setSize(10);
             cell22 = new PdfPCell(fra22);
-            cell22.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell22.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell22.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell22.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell22);
 
             fra23.font().setSize(10);
             cell23 = new PdfPCell(fra23);
-            cell23.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell23.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell23.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell23.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell23);
 
             fra24.font().setSize(10);
             cell24 = new PdfPCell(fra24);
-            cell24.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell24.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell24.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell24);
 
             fra25.font().setSize(10);
             cell25 = new PdfPCell(fra25);
-            cell25.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell25.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell25.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell25);
 
             fra26.font().setSize(10);
             cell26 = new PdfPCell(fra26);
-            cell26.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell26.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell26.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell26.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell26);
 
             fra27.font().setSize(10);
             cell27 = new PdfPCell(fra27);
-            cell27.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell27.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell27.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell27.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell27);
 
             fra28.font().setSize(10);
             cell28 = new PdfPCell(fra28);
-            cell28.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell28.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell28.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell28.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell28);
 
             fra29.font().setSize(10);
             cell29 = new PdfPCell(fra29);
-            cell29.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell29.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell29.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell29.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell29);
 
             fra30.font().setSize(10);
             cell30 = new PdfPCell(fra30);
-            cell30.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell30.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell30.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell30);
 
             fra31.font().setSize(10);
             cell31 = new PdfPCell(fra31);
-            cell31.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cell31.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cell31.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell31.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cell31);
 
-         
+
             for (int ind = 0; ind < 15; ind++)
             {
 
@@ -503,7 +504,7 @@ public class ImpListPropServlet extends HttpServlet  {
                 fraDNI.font().setSize(10);
                 cellDNI = new PdfPCell(fraDNI);
                 cellDNI.setMinimumHeight(20);
-                cellDNI.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellDNI.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellDNI);
 
 
@@ -511,7 +512,7 @@ public class ImpListPropServlet extends HttpServlet  {
                 fraNom.font().setSize(10);
                 cellNom = new PdfPCell(fraNom);
                 cellNom.setMinimumHeight(25);
-                cellNom.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellNom.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellNom);
 
 
@@ -520,11 +521,11 @@ public class ImpListPropServlet extends HttpServlet  {
                     fra01 = new Phrase("");
                     fra01.font().setSize(10);
                     cell01 = new PdfPCell(fra01);
-                    cell01.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                    cell01.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     tablaDatAlu.addCell(cell01);
                 }
 
-                
+
             }
 
             tablaDatAlu.setSpacingBefore(10);
@@ -535,14 +536,14 @@ public class ImpListPropServlet extends HttpServlet  {
             document.add(new Paragraph(fraSem));
             document.add(tablaDatSem);
             document.add(tablaDatAlu);
-            
+
             if (!hayPag)
             {
                 document.add(new Paragraph("No existen alumnos para generar listado"));
             }
 
 
-        
+
         }
         catch (DocumentException ex)
         {
@@ -551,7 +552,7 @@ public class ImpListPropServlet extends HttpServlet  {
         // step 5: Close document
         document.close();
     }
-    
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -593,7 +594,7 @@ public class ImpListPropServlet extends HttpServlet  {
     public String getServletInfo() {
         return "Imprimir Listado Propio Servlet";
     }// </editor-fold>
-    
+
     private String devuelveMes(int mes)
     {
         switch (mes)

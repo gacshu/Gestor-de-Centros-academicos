@@ -26,7 +26,7 @@ public class CursosVO
         cenCurso   = 0;
         contenido  = "";
     }
-    
+
     /**
      * @return the idCur
      */

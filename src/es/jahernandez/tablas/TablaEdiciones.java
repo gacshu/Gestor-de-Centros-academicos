@@ -8,11 +8,11 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaEdiciones 
+public class TablaEdiciones
 {
-    public static final String TABLA        = "tbedi"; 
-    public static final String CODEDI       = "IdEdi"; 
-    public static final String CODCURSO     = "IdCur"; 
+    public static final String TABLA        = "tbedi";
+    public static final String CODEDI       = "IdEdi";
+    public static final String CODCURSO     = "IdCur";
     public static final String CODNIVEL     = "IdNiv";
     public static final String FECHAINICIO  = "FecIn";
     public static final String FECHAFIN     = "FecFi";
@@ -25,7 +25,7 @@ public class TablaEdiciones
     public static final String PRECIOTOTAL  = "PrecioT";
     public static final String CLASELUNES   = "HayLun";
     public static final String CLASEMARTES  = "HayMar";
-    public static final String CLASEMIERC   = "HayMie"; 
+    public static final String CLASEMIERC   = "HayMie";
     public static final String CLASEJUEVES  = "HayJue";
     public static final String CLASEVIERNES = "HayVie";
     public static final String CLASESABADO  = "HaySab";
@@ -45,12 +45,12 @@ public class TablaEdiciones
     public static final String PAGOJUNIO    = "Jun";
     public static final String PAGOJULIO    = "Jul";
     public static final String PAGOAGOSTO   = "Ago";
-    public static final String PAGOSEPT     = "Sep"; 
-    public static final String PAGOOCTUBRE  = "Oct"; 
-    public static final String PAGONOVIEM   = "Nov"; 
-    public static final String PAGODICIEMB  = "Dic"; 
+    public static final String PAGOSEPT     = "Sep";
+    public static final String PAGOOCTUBRE  = "Oct";
+    public static final String PAGONOVIEM   = "Nov";
+    public static final String PAGODICIEMB  = "Dic";
     public static final String APLAZADO     = "aplaz";
     public static final String DESCRIPCION  = "descripcion";
     public static final String CODPROF      = "idProf";
-    
+
 }

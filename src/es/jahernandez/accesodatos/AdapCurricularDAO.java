@@ -4,9 +4,6 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.AdapCurricularVO;
-import es.jahernandez.gestion.AdapCurricularGestion;
-import es.jahernandez.tablas.TablaAdapCurricular;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,13 +12,15 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.dom4j.util.UserDataDocumentFactory;
+import es.jahernandez.datos.AdapCurricularVO;
+import es.jahernandez.gestion.AdapCurricularGestion;
+import es.jahernandez.tablas.TablaAdapCurricular;
 
 /**
  *
  * @author JuanAlberto
  */
-public class AdapCurricularDAO 
+public class AdapCurricularDAO
 {
     //Método que devuelve los datos de una adaptación curricular
     public static AdapCurricularVO devolverDatosAdapCur(String codAdapCurricular, Connection con) throws Exception
@@ -29,13 +28,13 @@ public class AdapCurricularDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaAdapCurricular.CODADAPCUR + " , " 
+        String            cadenaConsulta = "SELECT " + TablaAdapCurricular.CODADAPCUR + " , "
                                                      + TablaAdapCurricular.CODALU     + " , "
                                                      + TablaAdapCurricular.MATERIA    + " , "
-                                                     + TablaAdapCurricular.CURSO      + 
+                                                     + TablaAdapCurricular.CURSO      +
                                            " FROM "  + TablaAdapCurricular.TABLA      +
                                            " WHERE " + TablaAdapCurricular.CODADAPCUR + " = ?";
-        
+
         AdapCurricularVO  adapCurVO      = new AdapCurricularVO();
 
         try
@@ -86,12 +85,12 @@ public class AdapCurricularDAO
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT * FROM TbNiv";
-        String            cadenaConsulta = "SELECT " + TablaAdapCurricular.CODADAPCUR  + " , " 
+        String            cadenaConsulta = "SELECT " + TablaAdapCurricular.CODADAPCUR  + " , "
                                                      + TablaAdapCurricular.CODALU      + " , "
                                                      + TablaAdapCurricular.MATERIA     + " , "
-                                                     + TablaAdapCurricular.CURSO       + 
+                                                     + TablaAdapCurricular.CURSO       +
                                            " FROM "  + TablaAdapCurricular.TABLA;
-        
+
         AdapCurricularVO  adapCurVO      = null;
         Vector            listaAdapCur   = new Vector();
 
@@ -109,7 +108,7 @@ public class AdapCurricularDAO
                 adapCurVO.setIdAlu     (rs.getString(TablaAdapCurricular.CODALU));
                 adapCurVO.setMateria   (rs.getString(TablaAdapCurricular.MATERIA));
                 adapCurVO.setCurso     (rs.getString(TablaAdapCurricular.CURSO));
-                
+
                 listaAdapCur.add(adapCurVO);
             }
 
@@ -137,16 +136,16 @@ public class AdapCurricularDAO
     public static int guardarAdapCur(AdapCurricularVO adapCurVO, Connection con) throws Exception
     {
         PreparedStatement ps             = null;
-        
+
         //String            cadenaConsulta = "INSERT INTO TbNiv (IdNiv , NomNiv,ContNiv,idCur) VALUES(?,?,?,?) ";
-        String            cadenaConsulta = "INSERT INTO " + TablaAdapCurricular.TABLA      + " ( "  
-                                                          + TablaAdapCurricular.CODADAPCUR + " , " 
-                                                          + TablaAdapCurricular.CODALU     + " , "  
-                                                          + TablaAdapCurricular.MATERIA    + " , " 
-                                                          + TablaAdapCurricular.CURSO      + " ) " + 
+        String            cadenaConsulta = "INSERT INTO " + TablaAdapCurricular.TABLA      + " ( "
+                                                          + TablaAdapCurricular.CODADAPCUR + " , "
+                                                          + TablaAdapCurricular.CODALU     + " , "
+                                                          + TablaAdapCurricular.MATERIA    + " , "
+                                                          + TablaAdapCurricular.CURSO      + " ) " +
                                            " VALUES(?,?,?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -195,7 +194,7 @@ public class AdapCurricularDAO
             if (contCar > 0)
             {
                 codIntrod = "" + (datAdapCur.size() + avc);
-                
+
             }
             else
             {
@@ -237,13 +236,13 @@ public class AdapCurricularDAO
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT " + TablaAdapCurricular.CODADAPCUR + " , " 
+        String            sql          = "SELECT " + TablaAdapCurricular.CODADAPCUR + " , "
                                                    + TablaAdapCurricular.CODALU     + " , "
                                                    + TablaAdapCurricular.MATERIA    + " , "
-                                                   + TablaAdapCurricular.CURSO      + 
+                                                   + TablaAdapCurricular.CURSO      +
                                          " FROM "  + TablaAdapCurricular.TABLA      +
-                                         " WHERE " + TablaAdapCurricular.CODALU     + " = ?"; 
-        
+                                         " WHERE " + TablaAdapCurricular.CODALU     + " = ?";
+
         AdapCurricularVO  adapCurVO    = null;
         Vector            listaAdapCur = new Vector();
 
@@ -287,17 +286,17 @@ public class AdapCurricularDAO
             throw exc;
         }
     }
-    
+
      //Edita el registro de una adaptación curricular
     public static int editaAdapCur(AdapCurricularVO adapCurVO, Connection con) throws Exception
     {
         PreparedStatement ps  = null;
 
         String            sql = "UPDATE " + TablaAdapCurricular.TABLA      +
-                                " SET "   + TablaAdapCurricular.MATERIA    + " = ? , " 
+                                " SET "   + TablaAdapCurricular.MATERIA    + " = ? , "
                                           + TablaAdapCurricular.CURSO      + " = ?   " +
                                 " WHERE " + TablaAdapCurricular.CODADAPCUR + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -308,7 +307,7 @@ public class AdapCurricularDAO
             ps.setString(1, adapCurVO.getMateria());
             ps.setString(2, adapCurVO.getCurso());
             ps.setString(3, adapCurVO.getCodAdapCur());
-           
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -335,19 +334,19 @@ public class AdapCurricularDAO
 
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaAdapCurricular.TABLA      + 
+        String            sql             = "DELETE FROM " + TablaAdapCurricular.TABLA      +
                                             " WHERE "      + TablaAdapCurricular.CODADAPCUR + " = ?";
-        
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAdapCur);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -366,27 +365,27 @@ public class AdapCurricularDAO
             }
             throw exc;
         }
-    }    
-    
+    }
+
     //Borra las adaptaciones curriculares de una lumno
     public static int eliminaAdapCurAlumno(String codAlu , Connection con) throws Exception
     {
 
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaAdapCurricular.TABLA  + 
+        String            sql             = "DELETE FROM " + TablaAdapCurricular.TABLA  +
                                             " WHERE "      + TablaAdapCurricular.CODALU + " = ?";
-        
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAlu);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -405,5 +404,5 @@ public class AdapCurricularDAO
             }
             throw exc;
         }
-    }    
+    }
 }

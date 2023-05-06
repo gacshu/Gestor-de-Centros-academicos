@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Alberto
  */
-public class BajaNivelServlet extends HttpServlet 
+public class BajaNivelServlet extends HttpServlet
 {
 
     /**
@@ -35,51 +35,51 @@ public class BajaNivelServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         String        codNivel     = "";
         String        codCurso     = "";
         int           resultadoAlt = 0;
         String        pagGesNiv    = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Baja nivel" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codNivel") != null)
         {
             codNivel = request.getParameter("codNivel").trim();
         }
-       
+
         if(request.getParameter("codCurso") != null)
         {
             codCurso = request.getParameter("codCurso").trim();
         }
-        
+
         if(request.getParameter("valInfNivel") != null)
         {
             pagGesNiv = request.getParameter("valInfNivel").trim();
         }
-          
+
         resultadoAlt = NivelesGestion.eliminaNivel(codNivel);
-               
+
         //Redireccionar a gestión niveles
-        response.sendRedirect("cursos/gestionNiveles.jsp?codCurso="  + codCurso 
-                                                     + "&resultBor=" + resultadoAlt);           
+        response.sendRedirect("cursos/gestionNiveles.jsp?codCurso="  + codCurso
+                                                     + "&resultBor=" + resultadoAlt);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,36 +5,33 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.AluEdiVO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.EdicionesVO;
-import es.jahernandez.gestion.EdicionesGestion;
-
-import es.jahernandez.tablas.TablaAlumnosEdiciones;
-import es.jahernandez.tablas.TablaEdiciones;
-import es.jahernandez.tablas.TablaAlumnos;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.AluEdiVO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.EdicionesVO;
+import es.jahernandez.gestion.EdicionesGestion;
+import es.jahernandez.tablas.TablaAlumnos;
+import es.jahernandez.tablas.TablaAlumnosEdiciones;
+import es.jahernandez.tablas.TablaEdiciones;
 
 /**
  *
  * @author Alberto
  */
 public class AluEdiDAO
-{    
+{
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarMatAlu(AluEdiVO aluEdiVO, Connection con) throws Exception
     {
@@ -42,18 +39,18 @@ public class AluEdiDAO
 
         int                 regActualizados = 0;
 
-        String              sql = "INSERT INTO " + TablaAlumnosEdiciones.TABLA + "(" 
-                                                 + TablaAlumnosEdiciones.CODALU    + "," 
-                                                 + TablaAlumnosEdiciones.CODEDI    + "," 
-                                                 + TablaAlumnosEdiciones.FECHAALT  + "," 
-                                                 + TablaAlumnosEdiciones.ESBAJA    + "," 
-                                                 + TablaAlumnosEdiciones.OBSERV    + "," 
-                                                 + TablaAlumnosEdiciones.NUMCUENTA + "," 
-                                                 + TablaAlumnosEdiciones.ESCONGEL  + ")" + 
+        String              sql = "INSERT INTO " + TablaAlumnosEdiciones.TABLA + "("
+                                                 + TablaAlumnosEdiciones.CODALU    + ","
+                                                 + TablaAlumnosEdiciones.CODEDI    + ","
+                                                 + TablaAlumnosEdiciones.FECHAALT  + ","
+                                                 + TablaAlumnosEdiciones.ESBAJA    + ","
+                                                 + TablaAlumnosEdiciones.OBSERV    + ","
+                                                 + TablaAlumnosEdiciones.NUMCUENTA + ","
+                                                 + TablaAlumnosEdiciones.ESCONGEL  + ")" +
                                   "VALUES(?,?,?,?,?,?,?)";
-        
-        
-        
+
+
+
         //Se comprueba si hay plazas disponibles en la edición
         if (!EdicionesGestion.hayPlazasLibres(aluEdiVO.getIdEdi()))
         {
@@ -101,17 +98,17 @@ public class AluEdiDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    + "," 
-                                                  + TablaAlumnosEdiciones.CODEDI    + "," 
-                                                  + TablaAlumnosEdiciones.FECHAALT  + "," 
-                                                  + TablaAlumnosEdiciones.ESBAJA    + "," 
-                                                  + TablaAlumnosEdiciones.OBSERV    + "," 
-                                                  + TablaAlumnosEdiciones.NUMCUENTA + "," 
-                                                  + TablaAlumnosEdiciones.ESCONGEL  + 
-                                        " FROM "  + TablaAlumnosEdiciones.TABLA     + 
+        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    + ","
+                                                  + TablaAlumnosEdiciones.CODEDI    + ","
+                                                  + TablaAlumnosEdiciones.FECHAALT  + ","
+                                                  + TablaAlumnosEdiciones.ESBAJA    + ","
+                                                  + TablaAlumnosEdiciones.OBSERV    + ","
+                                                  + TablaAlumnosEdiciones.NUMCUENTA + ","
+                                                  + TablaAlumnosEdiciones.ESCONGEL  +
+                                        " FROM "  + TablaAlumnosEdiciones.TABLA     +
                                         " WHERE " + TablaAlumnosEdiciones.CODALU    + " = ? ";
-        
-        
+
+
         Vector            listaAluEdi = new Vector();
 
         AluEdiVO          datAluEdi   = null;
@@ -168,14 +165,14 @@ public class AluEdiDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    + "," 
-                                                  + TablaAlumnosEdiciones.CODEDI    + "," 
-                                                  + TablaAlumnosEdiciones.FECHAALT  + "," 
-                                                  + TablaAlumnosEdiciones.ESBAJA    + "," 
-                                                  + TablaAlumnosEdiciones.OBSERV    + "," 
-                                                  + TablaAlumnosEdiciones.NUMCUENTA + "," 
-                                                  + TablaAlumnosEdiciones.ESCONGEL  + 
-                                        " FROM "  + TablaAlumnosEdiciones.TABLA     + 
+        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    + ","
+                                                  + TablaAlumnosEdiciones.CODEDI    + ","
+                                                  + TablaAlumnosEdiciones.FECHAALT  + ","
+                                                  + TablaAlumnosEdiciones.ESBAJA    + ","
+                                                  + TablaAlumnosEdiciones.OBSERV    + ","
+                                                  + TablaAlumnosEdiciones.NUMCUENTA + ","
+                                                  + TablaAlumnosEdiciones.ESCONGEL  +
+                                        " FROM "  + TablaAlumnosEdiciones.TABLA     +
                                         " WHERE " + TablaAlumnosEdiciones.CODALU    + " = ? AND "
                                                   + TablaAlumnosEdiciones.CODEDI    + " = ?";
 
@@ -230,15 +227,15 @@ public class AluEdiDAO
     public static int bajaMatAlu(AluEdiVO aluEdiVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
-        String            sql             = "UPDATE " + TablaAlumnosEdiciones.TABLA     + 
-                                            " SET "   + TablaAlumnosEdiciones.ESBAJA    + " = ? , " 
-                                                      + TablaAlumnosEdiciones.ESCONGEL  + " = ? , "  
-                                                      + TablaAlumnosEdiciones.NUMCUENTA + " = ? , "    
+
+        String            sql             = "UPDATE " + TablaAlumnosEdiciones.TABLA     +
+                                            " SET "   + TablaAlumnosEdiciones.ESBAJA    + " = ? , "
+                                                      + TablaAlumnosEdiciones.ESCONGEL  + " = ? , "
+                                                      + TablaAlumnosEdiciones.NUMCUENTA + " = ? , "
                                                       + TablaAlumnosEdiciones.OBSERV    + " = ?   "   +
-                                            "WHERE "  + TablaAlumnosEdiciones.CODALU    + " = ? AND " 
-                                                      + TablaAlumnosEdiciones.CODEDI    + " = ? ";                                
-        
+                                            "WHERE "  + TablaAlumnosEdiciones.CODALU    + " = ? AND "
+                                                      + TablaAlumnosEdiciones.CODEDI    + " = ? ";
+
         int               regActualizados = 0;
 
         try
@@ -256,7 +253,7 @@ public class AluEdiDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-          
+
             return regActualizados;
 
         }
@@ -283,14 +280,14 @@ public class AluEdiDAO
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " +
-                                                "(SELECT " +  TablaEdiciones.CODCURSO +    
-                                                " FROM "   +  TablaEdiciones.TABLA    +  
-                                                " WHERE (" +  TablaEdiciones.CODEDI   +  " = "   + TablaAlumnosEdiciones.TABLA + "."  + TablaAlumnosEdiciones.CODEDI +") AND (" 
-                                                           +  TablaEdiciones.CODCURSO +  " = ?) AND (" 
-                                                           +  TablaEdiciones.FECHAFIN + "> CURDATE())) AS " +  TablaEdiciones.CODCURSO +  
+                                                "(SELECT " +  TablaEdiciones.CODCURSO +
+                                                " FROM "   +  TablaEdiciones.TABLA    +
+                                                " WHERE (" +  TablaEdiciones.CODEDI   +  " = "   + TablaAlumnosEdiciones.TABLA + "."  + TablaAlumnosEdiciones.CODEDI +") AND ("
+                                                           +  TablaEdiciones.CODCURSO +  " = ?) AND ("
+                                                           +  TablaEdiciones.FECHAFIN + "> CURDATE())) AS " +  TablaEdiciones.CODCURSO +
                                         " FROM  " + TablaAlumnosEdiciones.TABLA  +
-                                        " WHERE " + TablaAlumnosEdiciones.CODALU +  " = ?";                
-        
+                                        " WHERE " + TablaAlumnosEdiciones.CODALU +  " = ?";
+
         boolean          respuesta   = false;
         Object           compNull    = null;
 
@@ -343,20 +340,20 @@ public class AluEdiDAO
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
-        
-        String            sql            = "SELECT "    + TablaAlumnosEdiciones.CODALU   + "," 
+
+        String            sql            = "SELECT "    + TablaAlumnosEdiciones.CODALU   + ","
                                                         + TablaAlumnosEdiciones.CODEDI   +
                                            " FROM "     + TablaAlumnosEdiciones.TABLA    +
-                                           " WHERE "    + TablaAlumnosEdiciones.ESBAJA   + " = false AND " 
-                                                        + TablaAlumnosEdiciones.ESCONGEL + " = false AND (" 
-                                                        + TablaAlumnosEdiciones.CODEDI   + " IN (" 
-                                                               + "SELECT "   + TablaEdiciones.CODEDI  +   
-                                                                 " FROM "    + TablaEdiciones.TABLA   + 
-                                                                 " WHERE (CURDATE() >= " + TablaEdiciones.FECHAINICIO  +") AND (" 
+                                           " WHERE "    + TablaAlumnosEdiciones.ESBAJA   + " = false AND "
+                                                        + TablaAlumnosEdiciones.ESCONGEL + " = false AND ("
+                                                        + TablaAlumnosEdiciones.CODEDI   + " IN ("
+                                                               + "SELECT "   + TablaEdiciones.CODEDI  +
+                                                                 " FROM "    + TablaEdiciones.TABLA   +
+                                                                 " WHERE (CURDATE() >= " + TablaEdiciones.FECHAINICIO  +") AND ("
                                                                                          + TablaEdiciones.FECHAFIN     + "> CURDATE()) AND ("
                                                                                          + TablaEdiciones.PRECIORECIBO + "> 0))) " +
                                            " ORDER BY " + TablaAlumnosEdiciones.CODEDI;
-        
+
         Vector           listaAluEdi    = new Vector();
         AluEdiVO         datAluEdi      = null;
         EdicionesVO      ediVO          = new EdicionesVO();
@@ -403,10 +400,10 @@ public class AluEdiDAO
 
                 }
             }
-            
+
             rs.close();
-            ps.close();            
-        
+            ps.close();
+
             return listaAluEdi;
         }
         catch (Exception exc)
@@ -431,18 +428,18 @@ public class AluEdiDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT "      + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU    + "," 
-                                                                                           + TablaAlumnosEdiciones.CODEDI    + "," 
-                                                                                           + TablaAlumnosEdiciones.FECHAALT  + "," 
-                                                                                           + TablaAlumnosEdiciones.ESBAJA    + "," 
-                                                                                           + TablaAlumnosEdiciones.OBSERV    + "," 
-                                                                                           + TablaAlumnosEdiciones.NUMCUENTA + "," 
+        String            sql         = "SELECT "      + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU    + ","
+                                                                                           + TablaAlumnosEdiciones.CODEDI    + ","
+                                                                                           + TablaAlumnosEdiciones.FECHAALT  + ","
+                                                                                           + TablaAlumnosEdiciones.ESBAJA    + ","
+                                                                                           + TablaAlumnosEdiciones.OBSERV    + ","
+                                                                                           + TablaAlumnosEdiciones.NUMCUENTA + ","
                                                                                            + TablaAlumnosEdiciones.ESCONGEL  +
-                                        " FROM "       + TablaAlumnosEdiciones.TABLA     + 
-                                        " INNER JOIN " + TablaAlumnos.TABLA + " ON "     + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU + " = " 
-                                                                                         + TablaAlumnos.TABLA          + "." + TablaAlumnos.CODALU          + 
-                                        " WHERE "      + TablaAlumnosEdiciones.CODEDI    + " = ? AND " 
-                                                       + TablaAlumnosEdiciones.ESBAJA    + " = false " + 
+                                        " FROM "       + TablaAlumnosEdiciones.TABLA     +
+                                        " INNER JOIN " + TablaAlumnos.TABLA + " ON "     + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU + " = "
+                                                                                         + TablaAlumnos.TABLA          + "." + TablaAlumnos.CODALU          +
+                                        " WHERE "      + TablaAlumnosEdiciones.CODEDI    + " = ? AND "
+                                                       + TablaAlumnosEdiciones.ESBAJA    + " = false " +
                                         " ORDER BY "   + TablaAlumnos.TABLA + "." + TablaAlumnos.APE1;
 
         Vector            listaAluEdi = new Vector();
@@ -472,7 +469,7 @@ public class AluEdiDAO
                 listaAluEdi.addElement(datAluEdi);
             }
             rs.close();
-            ps.close();                      
+            ps.close();
 
             return listaAluEdi;
         }
@@ -497,12 +494,12 @@ public class AluEdiDAO
     {
         PreparedStatement ps               = null;
         ResultSet         rs               = null;
-        
+
         String            sql              = "SELECT COUNT(" + TablaAlumnosEdiciones.CODALU + ") AS MATRICULAS " +
-                                             " FROM "        + TablaAlumnosEdiciones.TABLA  + 
+                                             " FROM "        + TablaAlumnosEdiciones.TABLA  +
                                              " WHERE "       + TablaAlumnosEdiciones.CODALU + " = ?";
-        
-        
+
+
         int               numeroMatriculas = 0;
 
         try
@@ -518,9 +515,9 @@ public class AluEdiDAO
             {
                 numeroMatriculas = rs.getInt(1);
             }
-            
+
             rs.close();
-            ps.close();            
+            ps.close();
 
             return numeroMatriculas;
         }
@@ -545,24 +542,24 @@ public class AluEdiDAO
     {
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
-        
-        String            sql         = "SELECT "    + TablaAlumnosEdiciones.CODALU   + "," 
-                                                     + TablaAlumnosEdiciones.CODEDI   + 
+
+        String            sql         = "SELECT "    + TablaAlumnosEdiciones.CODALU   + ","
+                                                     + TablaAlumnosEdiciones.CODEDI   +
                                         " FROM "     + TablaAlumnosEdiciones.TABLA    +
-                                        " WHERE "    + TablaAlumnosEdiciones.ESBAJA   + " = 0 AND "  
-                                                     + TablaAlumnosEdiciones.ESCONGEL + " = 0 AND (" 
+                                        " WHERE "    + TablaAlumnosEdiciones.ESBAJA   + " = 0 AND "
+                                                     + TablaAlumnosEdiciones.ESCONGEL + " = 0 AND ("
                                                      + TablaAlumnosEdiciones.CODEDI   + " IN ("       +
-                                                      "SELECT "     + TablaEdiciones.CODEDI           +  
-                                                      " FROM "      + TablaEdiciones.TABLA            +  
+                                                      "SELECT "     + TablaEdiciones.CODEDI           +
+                                                      " FROM "      + TablaEdiciones.TABLA            +
                                                       " WHERE ("    + TablaEdiciones.FECHAINICIO      +"> ? ) AND ("
                                                                     + TablaEdiciones.FECHAINICIO      +"< ? ) AND ("
                                                                     + TablaEdiciones.FECHAFIN         +"> CURDATE()) AND ("
                                                                     + TablaEdiciones.PRECIORECIBO     +"> 0))) "         +
                                         " ORDER BY " + TablaAlumnosEdiciones.CODEDI;
-        
+
         String            mesSig      = "";
         String            mesAct      = "";
-        
+
         int               mes         = new GregorianCalendar().get(Calendar.MONTH) + 2; //Se añade un mes y empiezan en 0
         int               anno        = new GregorianCalendar().get(Calendar.YEAR);
 
@@ -627,10 +624,10 @@ public class AluEdiDAO
                 }
 
             }
-            
+
             rs.close();
-            ps.close();                       
-        
+            ps.close();
+
             return listaAluEdi;
         }
        catch (Exception exc)
@@ -655,36 +652,36 @@ public class AluEdiDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU          + "," 
-                                                  + TablaAlumnosEdiciones.CODEDI          + "," 
-                                                  + TablaAlumnosEdiciones.FECHAALT        + "," 
-                                                  + TablaAlumnosEdiciones.ESBAJA          + "," 
-                                                  + TablaAlumnosEdiciones.OBSERV          + "," 
-                                                  + TablaAlumnosEdiciones.NUMCUENTA       + "," 
-                                                  + TablaAlumnosEdiciones.ESCONGEL        + 
-                                        " FROM "  + TablaAlumnosEdiciones.TABLA           + 
-                                        " WHERE " + TablaAlumnosEdiciones.ESBAJA          + " = false AND " 
+        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU          + ","
+                                                  + TablaAlumnosEdiciones.CODEDI          + ","
+                                                  + TablaAlumnosEdiciones.FECHAALT        + ","
+                                                  + TablaAlumnosEdiciones.ESBAJA          + ","
+                                                  + TablaAlumnosEdiciones.OBSERV          + ","
+                                                  + TablaAlumnosEdiciones.NUMCUENTA       + ","
+                                                  + TablaAlumnosEdiciones.ESCONGEL        +
+                                        " FROM "  + TablaAlumnosEdiciones.TABLA           +
+                                        " WHERE " + TablaAlumnosEdiciones.ESBAJA          + " = false AND "
                                                   + TablaAlumnosEdiciones.CODEDI          + " IN("  +
-                                                  "SELECT " + TablaEdiciones.CODEDI       + 
-                                                  " FROM "  + TablaEdiciones.TABLA        + 
+                                                  "SELECT " + TablaEdiciones.CODEDI       +
+                                                  " FROM "  + TablaEdiciones.TABLA        +
                                                   " WHERE " + TablaEdiciones.CODCURSO     + " = ? AND "
-                                                            + TablaEdiciones.CODNIVEL     + " = ? AND " 
-                                                            + TablaEdiciones.FECHAINICIO  + " = ? AND " 
-                                                            + TablaEdiciones.FECHAFIN     + " = ? AND " 
-                                                            + TablaEdiciones.HORAS        + " = ? AND " 
-                                                            + TablaEdiciones.HORAINICIO   + " = ? AND " 
-                                                            + TablaEdiciones.HORAFIN      + " = ? AND " 
-                                                            + TablaEdiciones.CLASELUNES   + " = ? AND " 
-                                                            + TablaEdiciones.CLASEMARTES  + " = ? AND " 
-                                                            + TablaEdiciones.CLASEMIERC   + " = ? AND " 
-                                                            + TablaEdiciones.CLASEJUEVES  + " = ? AND " 
-                                                            + TablaEdiciones.CLASEVIERNES + " = ? AND " 
-                                                            + TablaEdiciones.CLASESABADO  + " = ? AND " 
-                                                            + TablaEdiciones.CODCENTRO    + " = ? AND " 
-                                                            + TablaEdiciones.MINUTOINICIO + " = ? AND " 
-                                                            + TablaEdiciones.MINUTOFIN    + " = ? AND " 
+                                                            + TablaEdiciones.CODNIVEL     + " = ? AND "
+                                                            + TablaEdiciones.FECHAINICIO  + " = ? AND "
+                                                            + TablaEdiciones.FECHAFIN     + " = ? AND "
+                                                            + TablaEdiciones.HORAS        + " = ? AND "
+                                                            + TablaEdiciones.HORAINICIO   + " = ? AND "
+                                                            + TablaEdiciones.HORAFIN      + " = ? AND "
+                                                            + TablaEdiciones.CLASELUNES   + " = ? AND "
+                                                            + TablaEdiciones.CLASEMARTES  + " = ? AND "
+                                                            + TablaEdiciones.CLASEMIERC   + " = ? AND "
+                                                            + TablaEdiciones.CLASEJUEVES  + " = ? AND "
+                                                            + TablaEdiciones.CLASEVIERNES + " = ? AND "
+                                                            + TablaEdiciones.CLASESABADO  + " = ? AND "
+                                                            + TablaEdiciones.CODCENTRO    + " = ? AND "
+                                                            + TablaEdiciones.MINUTOINICIO + " = ? AND "
+                                                            + TablaEdiciones.MINUTOFIN    + " = ? AND "
                                                             + TablaEdiciones.HORASDISTAN  + " = ? AND "
-                                                            + TablaEdiciones.HORASTELEF   + " = ? AND " 
+                                                            + TablaEdiciones.HORASTELEF   + " = ? AND "
                                                             + TablaEdiciones.CODAULA      + " = ?) ";
         Vector            listaAluEdi = new Vector();
 
@@ -731,9 +728,9 @@ public class AluEdiDAO
 
                 listaAluEdi.addElement(datAluEdi);
             }
-            
+
             rs.close();
-            ps.close();          
+            ps.close();
 
             return listaAluEdi;
         }
@@ -760,7 +757,7 @@ public class AluEdiDAO
 
         String            sql    = "DELETE FROM " + TablaAlumnosEdiciones.TABLA  +
                                    " WHERE "      + TablaAlumnosEdiciones.CODEDI + " = ? ";
-          
+
         int               devRes = 0;
 
         try
@@ -801,7 +798,7 @@ public class AluEdiDAO
         String            sql        = "SELECT COUNT(" + TablaAlumnosEdiciones.CODEDI + ")" +
                                        " FROM "        + TablaAlumnosEdiciones.TABLA  +
                                        " WHERE "       + TablaAlumnosEdiciones.CODEDI + " = ? AND "
-                                                       + TablaAlumnosEdiciones.ESBAJA + " = false";   
+                                                       + TablaAlumnosEdiciones.ESBAJA + " = false";
         int               numAlumnos = 0;
 
         try
@@ -845,21 +842,21 @@ public class AluEdiDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT "     + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU      + "," 
-                                                                                          + TablaAlumnosEdiciones.CODEDI      + "," 
-                                                                                          + TablaAlumnosEdiciones.FECHAALT    + "," 
-                                                                                          + TablaAlumnosEdiciones.ESBAJA      + "," 
-                                                                                          + TablaAlumnosEdiciones.OBSERV      + "," 
-                                                                                          + TablaAlumnosEdiciones.NUMCUENTA   + "," 
-                                                                                          + TablaAlumnosEdiciones.ESCONGEL    + 
-                                       " FROM "       + TablaAlumnosEdiciones.TABLA       + 
-                                            " INNER JOIN " + TablaAlumnos.TABLA + 
-                                            " ON "         + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU + " = " + TablaAlumnos.TABLA + "." + TablaAlumnos.CODALU + 
-                                       " WHERE "      + TablaAlumnosEdiciones.CODEDI      + " = ? AND " 
+        String            sql         = "SELECT "     + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU      + ","
+                                                                                          + TablaAlumnosEdiciones.CODEDI      + ","
+                                                                                          + TablaAlumnosEdiciones.FECHAALT    + ","
+                                                                                          + TablaAlumnosEdiciones.ESBAJA      + ","
+                                                                                          + TablaAlumnosEdiciones.OBSERV      + ","
+                                                                                          + TablaAlumnosEdiciones.NUMCUENTA   + ","
+                                                                                          + TablaAlumnosEdiciones.ESCONGEL    +
+                                       " FROM "       + TablaAlumnosEdiciones.TABLA       +
+                                            " INNER JOIN " + TablaAlumnos.TABLA +
+                                            " ON "         + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU + " = " + TablaAlumnos.TABLA + "." + TablaAlumnos.CODALU +
+                                       " WHERE "      + TablaAlumnosEdiciones.CODEDI      + " = ? AND "
                                                       + TablaAlumnosEdiciones.ESBAJA      + " = true " +
                                        " ORDER BY "   + TablaAlumnos.TABLA + "." + TablaAlumnos.APE1;
-        
-        
+
+
         Vector           listaAluEdi  = new Vector();
 
         AluEdiVO         datAluEdi    = null;
@@ -886,10 +883,10 @@ public class AluEdiDAO
 
                 listaAluEdi.addElement(datAluEdi);
             }
-            
+
             rs.close();
-            ps.close();           
-       
+            ps.close();
+
             return listaAluEdi;
         }
        catch (Exception exc)
@@ -913,39 +910,39 @@ public class AluEdiDAO
     {
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
- 
-        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU      + "," 
-                                                  + TablaAlumnosEdiciones.CODEDI      + "," 
-                                                  + TablaAlumnosEdiciones.FECHAALT    + "," 
-                                                  + TablaAlumnosEdiciones.ESBAJA      + "," 
-                                                  + TablaAlumnosEdiciones.OBSERV      + "," 
-                                                  + TablaAlumnosEdiciones.NUMCUENTA   + "," 
-                                                  + TablaAlumnosEdiciones.ESCONGEL    + 
+
+        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU      + ","
+                                                  + TablaAlumnosEdiciones.CODEDI      + ","
+                                                  + TablaAlumnosEdiciones.FECHAALT    + ","
+                                                  + TablaAlumnosEdiciones.ESBAJA      + ","
+                                                  + TablaAlumnosEdiciones.OBSERV      + ","
+                                                  + TablaAlumnosEdiciones.NUMCUENTA   + ","
+                                                  + TablaAlumnosEdiciones.ESCONGEL    +
                                        " FROM "   + TablaAlumnosEdiciones.TABLA       +
-                                       " WHERE "  + TablaAlumnosEdiciones.ESBAJA      + " = true AND "  
+                                       " WHERE "  + TablaAlumnosEdiciones.ESBAJA      + " = true AND "
                                                   + TablaAlumnosEdiciones.CODEDI      + " IN ("       +
-                                                  "SELECT "  + TablaEdiciones.CODEDI       + 
-                                                   " FROM "  + TablaEdiciones.TABLA        + 
+                                                  "SELECT "  + TablaEdiciones.CODEDI       +
+                                                   " FROM "  + TablaEdiciones.TABLA        +
                                                    " WHERE " + TablaEdiciones.CODCURSO     + " = ? AND "
-                                                             + TablaEdiciones.CODNIVEL     + " = ? AND " 
-                                                             + TablaEdiciones.FECHAINICIO  + " = ? AND " 
-                                                             + TablaEdiciones.FECHAFIN     + " = ? AND " 
-                                                             + TablaEdiciones.HORAS        + " = ? AND " 
-                                                             + TablaEdiciones.HORAINICIO   + " = ? AND " 
-                                                             + TablaEdiciones.HORAFIN      + " = ? AND " 
-                                                             + TablaEdiciones.CLASELUNES   + " = ? AND " 
-                                                             + TablaEdiciones.CLASEMARTES  + " = ? AND " 
-                                                             + TablaEdiciones.CLASEMIERC   + " = ? AND " 
-                                                             + TablaEdiciones.CLASEJUEVES  + " = ? AND " 
-                                                             + TablaEdiciones.CLASEVIERNES + " = ? AND " 
-                                                             + TablaEdiciones.CLASESABADO  + " = ? AND " 
-                                                             + TablaEdiciones.CODCENTRO    + " = ? AND " 
-                                                             + TablaEdiciones.MINUTOINICIO + " = ? AND " 
-                                                             + TablaEdiciones.MINUTOFIN    + " = ? AND " 
+                                                             + TablaEdiciones.CODNIVEL     + " = ? AND "
+                                                             + TablaEdiciones.FECHAINICIO  + " = ? AND "
+                                                             + TablaEdiciones.FECHAFIN     + " = ? AND "
+                                                             + TablaEdiciones.HORAS        + " = ? AND "
+                                                             + TablaEdiciones.HORAINICIO   + " = ? AND "
+                                                             + TablaEdiciones.HORAFIN      + " = ? AND "
+                                                             + TablaEdiciones.CLASELUNES   + " = ? AND "
+                                                             + TablaEdiciones.CLASEMARTES  + " = ? AND "
+                                                             + TablaEdiciones.CLASEMIERC   + " = ? AND "
+                                                             + TablaEdiciones.CLASEJUEVES  + " = ? AND "
+                                                             + TablaEdiciones.CLASEVIERNES + " = ? AND "
+                                                             + TablaEdiciones.CLASESABADO  + " = ? AND "
+                                                             + TablaEdiciones.CODCENTRO    + " = ? AND "
+                                                             + TablaEdiciones.MINUTOINICIO + " = ? AND "
+                                                             + TablaEdiciones.MINUTOFIN    + " = ? AND "
                                                              + TablaEdiciones.HORASDISTAN  + " = ? AND "
-                                                             + TablaEdiciones.HORASTELEF   + " = ? AND " 
+                                                             + TablaEdiciones.HORASTELEF   + " = ? AND "
                                                              + TablaEdiciones.CODAULA      + " = ?) ";
-                
+
         Vector            listaAluEdi = new Vector();
 
         AluEdiVO          datAluEdi   = null;
@@ -953,7 +950,7 @@ public class AluEdiDAO
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la consulta sql
             ps.setString ( 1, ediVO.getIdCur());
             ps.setString ( 2, ediVO.getIdNiv());
@@ -991,7 +988,7 @@ public class AluEdiDAO
 
                 listaAluEdi.addElement(datAluEdi);
             }
-            
+
             rs.close();
             ps.close();
 
@@ -1013,17 +1010,17 @@ public class AluEdiDAO
             throw exc;
         }
      }
-    
+
     //Método que devuelve si una edición tiene alumunos
     public static boolean edicionTieneAlumnos(String codEdi, Connection con) throws Exception
     {
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    +                                                      
-                                        " FROM "  + TablaAlumnosEdiciones.TABLA     + 
+        String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    +
+                                        " FROM "  + TablaAlumnosEdiciones.TABLA     +
                                         " WHERE " + TablaAlumnosEdiciones.CODEDI    + " = ? ";
-        
+
         boolean           hayAlumnos  = false;
 
         try
@@ -1040,7 +1037,7 @@ public class AluEdiDAO
                 hayAlumnos = true;
             }
             else
-            {   
+            {
                 hayAlumnos = false;
             }
 

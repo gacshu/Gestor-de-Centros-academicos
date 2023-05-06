@@ -29,11 +29,11 @@ public class NivelForDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT "    + TablaNivelFormativo.CODNIVEL + " , " 
-                                                    + TablaNivelFormativo.NOMBRE   + 
+        String            sql        = "SELECT "    + TablaNivelFormativo.CODNIVEL + " , "
+                                                    + TablaNivelFormativo.NOMBRE   +
                                        " FROM  "    + TablaNivelFormativo.TABLA    +
                                        " ORDER BY " + TablaNivelFormativo.NOMBRE;
-                
+
         NivelForVO        nivForVO   = null;
 
         Vector            listNivFor = new Vector();
@@ -54,7 +54,7 @@ public class NivelForDAO
 
             rs.close();
             ps.close();
-            
+
             return listNivFor;
 
         }
@@ -80,16 +80,16 @@ public class NivelForDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT " + TablaNivelFormativo.NOMBRE   + 
-                                       " FROM "  + TablaNivelFormativo.TABLA    + 
+        String            sql        = "SELECT " + TablaNivelFormativo.NOMBRE   +
+                                       " FROM "  + TablaNivelFormativo.TABLA    +
                                        " WHERE " + TablaNivelFormativo.CODNIVEL + " = ? ";
-                
+
         String            strNomNF   = "";
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se le pasan los parámetros a la consulta sql
             ps.setInt(1, new Integer(idNivFor).intValue());
 
@@ -103,7 +103,7 @@ public class NivelForDAO
 
             rs.close();
             ps.close();
-            
+
             return strNomNF;
 
         }
@@ -121,5 +121,5 @@ public class NivelForDAO
 
             throw exc;
         }
-    }   
+    }
 }

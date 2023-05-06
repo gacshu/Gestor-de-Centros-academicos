@@ -8,7 +8,7 @@ package es.jahernandez.datos;
  *
  * @author Alberto
  */
-public class DatosBusquedaAlumnos 
+public class DatosBusquedaAlumnos
 {
     private String numDoc;
     private String apellidos;
@@ -20,7 +20,7 @@ public class DatosBusquedaAlumnos
     private String desempleado;
     private String NoIntCur;
 
-    
+
     public DatosBusquedaAlumnos()
     {
         numDoc      = "";
@@ -33,7 +33,7 @@ public class DatosBusquedaAlumnos
         desempleado = "";
         NoIntCur    = "";
     }
-    
+
     /**
      * @return the numDoc
      */

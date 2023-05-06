@@ -6,36 +6,36 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.ActividadesDAO;
-import es.jahernandez.datos.ActividadesVO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.ActividadesDAO;
+import es.jahernandez.datos.ActividadesVO;
+import es.jahernandez.datos.Conexion;
 
 /**
  *
  * @author JuanAlberto
  */
-public class ActividadesGestion 
+public class ActividadesGestion
 {
     //Devuelve el VALOR MAXIMO de código de código de Actividad
     public static int devuelveMaxAct()
     {
         Connection        con            = null;
-    
+
         int               valorMax       = -1;
 
-    
+
         try
         {
             con = Conexion.conectar();
             valorMax = ActividadesDAO.devuelveMaxAct(con);
             Conexion.desconectar(con);
-            
+
             return  valorMax;
 
         }
@@ -82,7 +82,7 @@ public class ActividadesGestion
         try
         {
             con = Conexion.conectar();
-            
+
             regActualizados = ActividadesDAO.guardarTipoAct(actVO,con);
             Conexion.desconectar(con);
 
@@ -107,13 +107,13 @@ public class ActividadesGestion
     public static int editaTipoAct(ActividadesVO actVO)
     {
         Connection        con             = null;
-        
+
         int               regActualizados = 0;
 
         try
         {
             con = Conexion.conectar();
-          
+
             regActualizados = ActividadesDAO.editaTipoAct(actVO, con);
 
             Conexion.desconectar(con);
@@ -139,7 +139,7 @@ public class ActividadesGestion
     public static int borraActividad(int idAct )
     {
         Connection        con             = null;
- 
+
         int               regActualizados = 0;
 
         try
@@ -169,7 +169,7 @@ public class ActividadesGestion
     public static String devuelveNombreActividad(int idActividad)
     {
         Connection        con            = null;
-        
+
         String            nombAct        = "";
 
         try
@@ -205,7 +205,7 @@ public class ActividadesGestion
     {
         Connection        con           = null;
         Vector            listaAct      = new Vector();
-       
+
         try
         {
             con = Conexion.conectar();

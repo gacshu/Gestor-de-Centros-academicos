@@ -8,9 +8,9 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaControl 
+public class TablaControl
 {
-  public static final String TABLA     = "tbcontrol"; 
+  public static final String TABLA     = "tbcontrol";
   public static final String USUARIO   = "usuario";
   public static final String PASSWORD  = "password";
   public static final String ACCESO    = "nivelAcceso";
@@ -18,6 +18,6 @@ public class TablaControl
   public static final String CODCENTRO = "idCentro";
   public static final String ACTIVO    = "activo";
   public static final String CODPROF   = "idProf";
-  
-  
+
+
 }

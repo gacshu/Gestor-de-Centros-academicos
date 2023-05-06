@@ -22,15 +22,15 @@ import es.jahernandez.tablas.TablaNiveles;
  * @author Alberto
  */
 public class CurNivDAO
-{    
+{
     //Método que guarda los niveles de un curso
     public static int guardarNivCur(String codCur, String codNiv, Connection con) throws Exception
     {
         PreparedStatement ps  = null;
 
         String            sql = "INSERT INTO " + TablaCursoNiveles.TABLA + " (" + TablaCursoNiveles.CODCURSO + " , "
-                                                                                + TablaCursoNiveles.CODNIV   + ")  " +  
-                                " VALUES(?,?)";                
+                                                                                + TablaCursoNiveles.CODNIV   + ")  " +
+                                " VALUES(?,?)";
         int regActualizados = 0;
 
         try
@@ -40,11 +40,11 @@ public class CurNivDAO
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
             ps.setString(2, codNiv);
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-    
+
             return regActualizados;
 
         }
@@ -69,14 +69,14 @@ public class CurNivDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT "      + TablaCursoNiveles.TABLA   + "." + TablaCursoNiveles.CODCURSO     + " , " 
-                                                       + TablaCursoNiveles.TABLA   + "." + TablaCursoNiveles.CODNIV       + 
-                                        " FROM "       + TablaCursoNiveles.TABLA   + 
-                                        " INNER JOIN " + TablaNiveles.TABLA        + " ON " + TablaCursoNiveles.TABLA     + "."     + TablaCursoNiveles.CODNIV + " = " 
-                                                                                            + TablaNiveles.TABLA          + "."     + TablaNiveles.CODNIVEL    + 
+        String            sql         = "SELECT "      + TablaCursoNiveles.TABLA   + "." + TablaCursoNiveles.CODCURSO     + " , "
+                                                       + TablaCursoNiveles.TABLA   + "." + TablaCursoNiveles.CODNIV       +
+                                        " FROM "       + TablaCursoNiveles.TABLA   +
+                                        " INNER JOIN " + TablaNiveles.TABLA        + " ON " + TablaCursoNiveles.TABLA     + "."     + TablaCursoNiveles.CODNIV + " = "
+                                                                                            + TablaNiveles.TABLA          + "."     + TablaNiveles.CODNIVEL    +
                                         " WHERE ("     + TablaCursoNiveles.TABLA   + "."    + TablaCursoNiveles.CODCURSO  + "= ?) " +
                                         " ORDER BY "   + TablaNiveles.TABLA        + "."    + TablaNiveles.NOMBRE;
-        
+
         CurNivVO          datNivCur   = null;
 
         Vector            listaNivCur = new Vector();
@@ -102,7 +102,7 @@ public class CurNivDAO
 
             rs.close();
             ps.close();
-           
+
             return listaNivCur;
         }
         catch (Exception exc)
@@ -126,9 +126,9 @@ public class CurNivDAO
         PreparedStatement ps  = null;
 
         String            sql = "DELETE FROM " + TablaCursoNiveles.TABLA    +
-                                " WHERE "      + TablaCursoNiveles.CODCURSO + " = ? AND "  
+                                " WHERE "      + TablaCursoNiveles.CODCURSO + " = ? AND "
                                                + TablaCursoNiveles.CODNIV   + " = ? ";
-        
+
         int regActualizados = 0;
 
         try
@@ -142,7 +142,7 @@ public class CurNivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             //Se actualiza los niveles de interes de los  alumnos
             CursosAluGestion.ediNivCurAlu(codCur);
 
@@ -169,9 +169,9 @@ public class CurNivDAO
     {
         PreparedStatement ps     = null;
 
-        String            sql    = "DELETE FROM " + TablaCursoNiveles.TABLA    + 
+        String            sql    = "DELETE FROM " + TablaCursoNiveles.TABLA    +
                                    " WHERE  "     + TablaCursoNiveles.CODCURSO + " = ? ";
-        
+
         int               regAct = 0;
 
         try
@@ -180,9 +180,9 @@ public class CurNivDAO
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
-                        
+
             regAct = ps.executeUpdate();
-            
+
             ps.close();
 
             return regAct;
@@ -207,9 +207,9 @@ public class CurNivDAO
     {
         PreparedStatement ps     = null;
 
-        String            sql    = "DELETE FROM " + TablaCursoNiveles.TABLA    +  
+        String            sql    = "DELETE FROM " + TablaCursoNiveles.TABLA    +
                                    " WHERE  "     + TablaCursoNiveles.CODCURSO +  " = ? ";
-        
+
         int               regAct = 0;
         try
         {

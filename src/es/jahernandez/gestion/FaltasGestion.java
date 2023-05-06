@@ -5,20 +5,21 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.FaltasDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.FaltasVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.FaltasDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.FaltasVO;
+
 /**
  *
  * @author Alberto
  */
-public class FaltasGestion 
+public class FaltasGestion
 {
     //Método que devuelve los datos de una falta
     public static FaltasVO devolverDatosFalta(String codEdi, String codMod, String codAlu, java.util.Date fecha)
@@ -87,7 +88,7 @@ public class FaltasGestion
             con = Conexion.conectar();
             regActualizados = FaltasDAO.guardarFalta(faltaVO,con);
             Conexion.desconectar(con);
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -131,13 +132,13 @@ public class FaltasGestion
             return null;
         }
     }
-    
+
     //Método que devuelve el número de faltas de un alumno y una edición
     public static int devolverNumFaltasAluEdi(String codAlu , String codEdi)
     {
         Connection        con          = null;
         int               numFaltas    = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -159,7 +160,7 @@ public class FaltasGestion
             return -1;
         }
     }
-     
+
     //Método que devuelve los datos de falta de una edición
     public static Vector devolverFaltasEdi(String codEdi)
     {
@@ -187,8 +188,8 @@ public class FaltasGestion
             return null;
         }
     }
-   
-    
+
+
     //Edita el registro de una falta
     public static int editarFalta(FaltasVO faltaVO)
     {
@@ -243,14 +244,14 @@ public class FaltasGestion
             }
             return -1;
         }
-    }     
-    
+    }
+
     //Borra las faltas de un alumno
     public static int eliminarFaltasAlumno(String codAlu)
     {
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -271,14 +272,14 @@ public class FaltasGestion
             }
             return -1;
         }
-    } 
-    
+    }
+
     //Método que devuelve si un alumno tiene faltas
     public static boolean tieneAluFaltas(String codAlu )
     {
         Connection        con            = null;
-        boolean            aluTieneFaltas = false; 
-     
+        boolean            aluTieneFaltas = false;
+
         try
         {
             con = Conexion.conectar();
@@ -300,5 +301,5 @@ public class FaltasGestion
             return true;
         }
     }
-    
+
 }

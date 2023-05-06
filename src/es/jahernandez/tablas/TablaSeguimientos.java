@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaSeguimientos 
+public class TablaSeguimientos
 {
     public static final String TABLA          = "tbseg";
     public static final String CODSEGUIMIENTO = "codSeg";

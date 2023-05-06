@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 //Paquetes de manejo de pdf
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -40,7 +41,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ResumenEdicionesServlet extends HttpServlet 
+public class ResumenEdicionesServlet extends HttpServlet
 {
 
     /**
@@ -54,14 +55,14 @@ public class ResumenEdicionesServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         ServletContext    sc             = null;
         HttpSession       sesion         = request.getSession();
-        
+
         Vector            listaEdiciones = new Vector();
         CursosVO          curVO          = null;
-               
+
         String strNomCur    = "";
         String strTipCur    = "";
         String strFecIni    = "";
@@ -77,53 +78,53 @@ public class ResumenEdicionesServlet extends HttpServlet
 
         PdfPTable tablaDatos = new PdfPTable(1);
         PdfPCell celda       = new PdfPCell();
-        Font     fuenteDoc   = null; 
+        Font     fuenteDoc   = null;
         Image    logoImage   = null;
-        
+
         tablaDatos.setWidthPercentage(100);
         tablaDatos.setSpacingBefore(10);
-       
+
         celda.setMinimumHeight(20);
 
         listaEdiciones = EdicionesGestion.devolverResNueEdi();
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir resumen ediciones" );
-               
+
         }
-        
-        
+
+
         // step 1
         Document document = new Document(PageSize.A4,16,16,16,16);
-        
+
         try
         {
             sc = getServletContext();
-            
+
             fuenteDoc = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
             fuenteDoc.setSize(8);
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             //PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.open();
 
             // step 4
-            
+
             //Mostramos cabecera
-            logoImage.setAlignment(Image.ALIGN_LEFT);
-            
+            logoImage.setAlignment(Element.ALIGN_LEFT);
+
             document.add(new Paragraph(""));
             document.add(logoImage);
             document.add(new Paragraph("FECHA " + new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())) + " RESUMEN CURSOS " + muestraCond ));
@@ -138,16 +139,16 @@ public class ResumenEdicionesServlet extends HttpServlet
             tablaDatos.addCell(celda);
 
             for (int ind = 0; ind < listaEdiciones.size(); ind++)
-            {             
+            {
                 curVO = CursosGestion.devolverDatosCurso( ((EdicionesVO)listaEdiciones.elementAt(ind)).getIdCur() );
-                
+
                 strNomCur = curVO.getNomCur() .trim();
                 strTipCur = TipoCursoGestion.devuelveNombreTipo(curVO.getTipCur());
                 strFecIni = new SimpleDateFormat("dd/MM/yyyy").format(((EdicionesVO)listaEdiciones.elementAt(ind)).getFecIn());
                 strFecFin = new SimpleDateFormat("dd/MM/yyyy").format(((EdicionesVO)listaEdiciones.elementAt(ind)).getFecFi());
-                strNumHor = String.valueOf(((EdicionesVO)listaEdiciones.elementAt(ind)).getNumHor());  
+                strNumHor = String.valueOf(((EdicionesVO)listaEdiciones.elementAt(ind)).getNumHor());
                 strNumAlu = String.valueOf(AluEdiGestion.devNumAluEdi(((EdicionesVO)listaEdiciones.elementAt(ind)).getIdEdi()));
-                strPreCur = String.valueOf(((EdicionesVO)listaEdiciones.elementAt(ind)).getPrecioM());   
+                strPreCur = String.valueOf(((EdicionesVO)listaEdiciones.elementAt(ind)).getPrecioM());
                 strPreMes = String.valueOf(((EdicionesVO)listaEdiciones.elementAt(ind)).getPrecioR());
 
                 if (cuentaLineas > 32)
@@ -179,15 +180,15 @@ public class ResumenEdicionesServlet extends HttpServlet
                 }
 
 
-               
+
                 strNomCur = strNomCur + "                                  ";
-                    
+
                 strTipCur = strTipCur + "                                  ";
 
                 strFecIni = strFecIni + "                                  ";
-                  
+
                 strFecFin = strFecFin + "                                  ";
-                
+
                 strNumHor = strNumHor + "                                  ";
 
                 strNumAlu = strNumAlu + "                                  ";
@@ -204,8 +205,8 @@ public class ResumenEdicionesServlet extends HttpServlet
                 strNumAlu = strNumAlu.substring(0, 3);
                 strPreCur = strPreCur.substring(0,5);
                 strPreMes = strPreMes.substring(0,5);
-                
-                
+
+
                 celda = new PdfPCell();
                 celda.setMinimumHeight(20);
 
@@ -213,8 +214,8 @@ public class ResumenEdicionesServlet extends HttpServlet
                 //document.Add(new Paragraph("  " + strNombre + "    " + strApe1 + " " + strPob+ " " + strMov + "   " + strFij,new Font(BaseFont.CreateFont("c:\\windows\\fonts\\cour.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
 
                 tablaDatos.addCell(celda);
-                
-                
+
+
                 cuentaLineas++;
             }
             if (listaEdiciones.size() > 0 && listaEdiciones.size() <= 21)

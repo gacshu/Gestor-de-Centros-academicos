@@ -10,33 +10,33 @@ import java.util.Date;
  *
  * @author JuanAlberto
  */
-public class EdiModProfAulaVO 
+public class EdiModProfAulaVO
 {
-    private String  IdEdi; 
-    private String  IdMod; 
-    private String  IdProf; 
-    private String  IdAul; 
-    private Date    fecIni; 
-    private Date    fecFin; 
-    private String  horIni; 
-    private String  horFin; 
+    private String  IdEdi;
+    private String  IdMod;
+    private String  IdProf;
+    private String  IdAul;
+    private Date    fecIni;
+    private Date    fecFin;
+    private String  horIni;
+    private String  horFin;
     private boolean hayLun;
     private boolean hayMar;
     private boolean hayMie;
     private boolean hayJue;
     private boolean hayVie;
     private boolean haySab;
-    
-    public EdiModProfAulaVO() 
+
+    public EdiModProfAulaVO()
     {
-        IdEdi  = ""; 
-        IdMod  = ""; 
+        IdEdi  = "";
+        IdMod  = "";
         IdProf = "";
-        IdAul  = ""; 
-        fecIni = new Date(); 
+        IdAul  = "";
+        fecIni = new Date();
         fecFin = new Date();
-        horIni = ""; 
-        horFin = "";        
+        horIni = "";
+        horFin = "";
     }
 
     /**
@@ -234,7 +234,7 @@ public class EdiModProfAulaVO
     public void setHaySab(boolean haySab) {
         this.haySab = haySab;
     }
-    
+
     public String devuelveDiasClase()
     {
         String strDatCur = "";
@@ -244,9 +244,9 @@ public class EdiModProfAulaVO
         if (isHayJue()) strDatCur = strDatCur + "J ";
         if (isHayVie()) strDatCur = strDatCur + "V ";
         if (isHaySab()) strDatCur = strDatCur + "S ";
-        
+
         return strDatCur;
-        
+
     }
-    
+
 }

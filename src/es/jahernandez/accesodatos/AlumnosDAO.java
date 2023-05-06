@@ -5,6 +5,15 @@
 
 package es.jahernandez.accesodatos;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import es.jahernandez.datos.AlumnosVO;
 import es.jahernandez.datos.DatosBusquedaAlumnos;
 import es.jahernandez.datos.ResultadoBusqAlu;
@@ -17,16 +26,9 @@ import es.jahernandez.gestion.CursosAluGestion;
 import es.jahernandez.gestion.FaltasGestion;
 import es.jahernandez.gestion.SeguimientosGestion;
 import es.jahernandez.gestion.TrastornosGestion;
-
 import es.jahernandez.tablas.TablaAlumnos;
 import es.jahernandez.tablas.TablaCursosAlumnos;
-import es.jahernandez.tablas.TablaProvincias; 
-
-import java.sql.*;
-
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import es.jahernandez.tablas.TablaProvincias;
 
 
 /**
@@ -34,8 +36,8 @@ import java.util.logging.Logger;
  * @author Alberto
  */
 public class AlumnosDAO
-{           
-        
+{
+
     //Método que devuelve los datos de búsqueda de alumnos con curso
     public static Vector devolverDatosConsulta(String cadenaConsulta, Connection con) throws Exception
     {
@@ -49,7 +51,7 @@ public class AlumnosDAO
         try
         {
             ps  = con.prepareStatement(cadenaConsulta);
-            
+
             rs  = ps.executeQuery();
 
             while (rs.next())
@@ -71,7 +73,7 @@ public class AlumnosDAO
 
             rs.close();
             ps.close();
-            
+
             return listaAlumnos;
 
         }
@@ -101,18 +103,18 @@ public class AlumnosDAO
 
         AlumnosVO         datResBus      = null;
 
-        String            cadenaConsulta =  "SELECT " + TablaAlumnos.CODALU         + " , "      
-                                                      + TablaAlumnos.TIPODOC        + " , "     
+        String            cadenaConsulta =  "SELECT " + TablaAlumnos.CODALU         + " , "
+                                                      + TablaAlumnos.TIPODOC        + " , "
                                                       + TablaAlumnos.NUMERODOC      + " , "
                                                       + TablaAlumnos.NOMBRE         + " , "
-                                                      + TablaAlumnos.APE1           + " , " 
+                                                      + TablaAlumnos.APE1           + " , "
                                                       + TablaAlumnos.APE2           + " , "
                                                       + TablaAlumnos.MOVIL          + " , "
                                                       + TablaAlumnos.TELFIJO        + " , "
                                                       + TablaAlumnos.DIRECCION      + " , "
                                                       + TablaAlumnos.CODPOSTAL      + " , "
                                                       + TablaAlumnos.LOCALIDAD      + " , "
-                                                      + TablaAlumnos.NIVELFORM      + " , " 
+                                                      + TablaAlumnos.NIVELFORM      + " , "
                                                       + TablaAlumnos.EMAIL          + " , "
                                                       + TablaAlumnos.DESEMPLEADO    + " , "
                                                       + TablaAlumnos.CODEMPRESA     + " , "
@@ -125,12 +127,12 @@ public class AlumnosDAO
                                                       + TablaAlumnos.AUTCOMCOM      + " , "
                                                       + TablaAlumnos.RESPONSABLE    + " , "
                                                       + TablaAlumnos.COLEGIO        + " , "
-                                                      + TablaAlumnos.CURSO          + 
-                
+                                                      + TablaAlumnos.CURSO          +
+
                                             " FROM  " + TablaAlumnos.TABLA ;
-        
+
         //Se construye la cadena de búsqueda
-        
+
         if (datBA.getApellidos()  .equals("")  && datBA.getNombre() .equals("")  &&
             datBA.getNumDoc()     .equals("")  && datBA.getCodPost().equals("")  &&
             datBA.getDesempleado().equals("")  && datBA.getCodEmp() .equals("0") &&
@@ -163,40 +165,40 @@ public class AlumnosDAO
 
             if (! datBA.getDesempleado().equals(""))
             {
-                cadenaConsulta = cadenaConsulta + TablaAlumnos.DESEMPLEADO + " = true AND ";                
+                cadenaConsulta = cadenaConsulta + TablaAlumnos.DESEMPLEADO + " = true AND ";
             }
 
             if (! datBA.getNivFor().equals("0"))
             {
-                cadenaConsulta = cadenaConsulta + TablaAlumnos.NIVELFORM   + " = "      + datBA.getNivFor()                  + " AND ";                
+                cadenaConsulta = cadenaConsulta + TablaAlumnos.NIVELFORM   + " = "      + datBA.getNivFor()                  + " AND ";
             }
 
             if (! datBA.getCodEmp().equals("0"))
             {
-                cadenaConsulta = cadenaConsulta + TablaAlumnos.CODEMPRESA  + " LIKE '"  + datBA.getCodEmp()                  + "' AND ";                
+                cadenaConsulta = cadenaConsulta + TablaAlumnos.CODEMPRESA  + " LIKE '"  + datBA.getCodEmp()                  + "' AND ";
             }
 
             if (! datBA.getNoIntCur().equals(""))
             {
-                cadenaConsulta = cadenaConsulta + TablaAlumnos.CODALU      + " NOT IN (SELECT " + TablaCursosAlumnos.CODALUMNO + " FROM " + TablaCursosAlumnos.TABLA  + ") AND ";                
+                cadenaConsulta = cadenaConsulta + TablaAlumnos.CODALU      + " NOT IN (SELECT " + TablaCursosAlumnos.CODALUMNO + " FROM " + TablaCursosAlumnos.TABLA  + ") AND ";
             }
 
             if (! datBA.getCodPost().equals(""))
             {
-                cadenaConsulta = cadenaConsulta + TablaAlumnos.CODPOSTAL   + " LIKE '%" + datBA.getCodPost()                 + "%' AND ";                
+                cadenaConsulta = cadenaConsulta + TablaAlumnos.CODPOSTAL   + " LIKE '%" + datBA.getCodPost()                 + "%' AND ";
             }
 
             if (! datBA.geteMail().equals(""))
             {
                 cadenaConsulta = cadenaConsulta + TablaAlumnos.EMAIL       + " LIKE '%" + datBA.geteMail()                   + "%' AND ";
-            }    
+            }
 
             cadenaConsulta = cadenaConsulta.substring(0, cadenaConsulta.length()- 4);
         }
-           
+
         cadenaConsulta = cadenaConsulta + " ORDER BY "  + TablaAlumnos.APE1;
-        
-               
+
+
         try
         {
             ps  = con.prepareStatement(cadenaConsulta);
@@ -232,7 +234,7 @@ public class AlumnosDAO
                 datResBus.setResponsable(rs.getString (TablaAlumnos.RESPONSABLE));
                 datResBus.setColegio    (rs.getString (TablaAlumnos.COLEGIO));
                 datResBus.setCurso      (rs.getString (TablaAlumnos.CURSO));
-                
+
                 listaAlumnos.addElement(datResBus);
             }
 
@@ -319,18 +321,18 @@ public class AlumnosDAO
 
         AlumnosVO         datAlu       = null;
 
-        String            sql          = "SELECT " + TablaAlumnos.CODALU         + " , "      
-                                                   + TablaAlumnos.TIPODOC        + " , "     
+        String            sql          = "SELECT " + TablaAlumnos.CODALU         + " , "
+                                                   + TablaAlumnos.TIPODOC        + " , "
                                                    + TablaAlumnos.NUMERODOC      + " , "
                                                    + TablaAlumnos.NOMBRE         + " , "
-                                                   + TablaAlumnos.APE1           + " , " 
+                                                   + TablaAlumnos.APE1           + " , "
                                                    + TablaAlumnos.APE2           + " , "
                                                    + TablaAlumnos.MOVIL          + " , "
                                                    + TablaAlumnos.TELFIJO        + " , "
                                                    + TablaAlumnos.DIRECCION      + " , "
                                                    + TablaAlumnos.CODPOSTAL      + " , "
                                                    + TablaAlumnos.LOCALIDAD      + " , "
-                                                   + TablaAlumnos.NIVELFORM      + " , " 
+                                                   + TablaAlumnos.NIVELFORM      + " , "
                                                    + TablaAlumnos.EMAIL          + " , "
                                                    + TablaAlumnos.DESEMPLEADO    + " , "
                                                    + TablaAlumnos.CODEMPRESA     + " , "
@@ -343,10 +345,10 @@ public class AlumnosDAO
                                                    + TablaAlumnos.AUTCOMCOM      + " , "
                                                    + TablaAlumnos.RESPONSABLE    + " , "
                                                    + TablaAlumnos.COLEGIO        + " , "
-                                                   + TablaAlumnos.CURSO          + 
-                                         " FROM  " + TablaAlumnos.TABLA          + 
+                                                   + TablaAlumnos.CURSO          +
+                                         " FROM  " + TablaAlumnos.TABLA          +
                                          " WHERE " + TablaAlumnos.CODALU         + " = ?";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -365,7 +367,7 @@ public class AlumnosDAO
                 datAlu.setTipDocAlu  (rs.getInt    (TablaAlumnos.TIPODOC));
                 datAlu.setNumDocAlu  (rs.getString (TablaAlumnos.NUMERODOC));
                 datAlu.setNombre     (rs.getString (TablaAlumnos.NOMBRE));
-                datAlu.setAp1Alu     (rs.getString (TablaAlumnos.APE1));              
+                datAlu.setAp1Alu     (rs.getString (TablaAlumnos.APE1));
                 datAlu.setMovAlu     (rs.getString (TablaAlumnos.MOVIL));
                 datAlu.setFijAlu     (rs.getString (TablaAlumnos.TELFIJO));
                 datAlu.setDirAlu     (rs.getString (TablaAlumnos.DIRECCION));
@@ -389,7 +391,7 @@ public class AlumnosDAO
 
             rs.close();
             ps.close();
-          
+
             return datAlu;
         }
         catch (Exception exc)
@@ -484,19 +486,19 @@ public class AlumnosDAO
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
-        
-        String            sql          = "SELECT " + TablaAlumnos.CODALU         + " , "      
-                                                   + TablaAlumnos.TIPODOC        + " , "     
+
+        String            sql          = "SELECT " + TablaAlumnos.CODALU         + " , "
+                                                   + TablaAlumnos.TIPODOC        + " , "
                                                    + TablaAlumnos.NUMERODOC      + " , "
                                                    + TablaAlumnos.NOMBRE         + " , "
-                                                   + TablaAlumnos.APE1           + " , " 
+                                                   + TablaAlumnos.APE1           + " , "
                                                    + TablaAlumnos.APE2           + " , "
                                                    + TablaAlumnos.MOVIL          + " , "
                                                    + TablaAlumnos.TELFIJO        + " , "
                                                    + TablaAlumnos.DIRECCION      + " , "
                                                    + TablaAlumnos.CODPOSTAL      + " , "
                                                    + TablaAlumnos.LOCALIDAD      + " , "
-                                                   + TablaAlumnos.NIVELFORM      + " , " 
+                                                   + TablaAlumnos.NIVELFORM      + " , "
                                                    + TablaAlumnos.EMAIL          + " , "
                                                    + TablaAlumnos.DESEMPLEADO    + " , "
                                                    + TablaAlumnos.CODEMPRESA     + " , "
@@ -510,8 +512,8 @@ public class AlumnosDAO
                                                    + TablaAlumnos.RESPONSABLE    + " , "
                                                    + TablaAlumnos.COLEGIO        + " , "
                                                    + TablaAlumnos.CURSO          +
-                                         " FROM  " + TablaAlumnos.TABLA;       
-        
+                                         " FROM  " + TablaAlumnos.TABLA;
+
         AlumnosVO         datAlu       = null;
         Vector            listaAlumnos = new Vector();
 
@@ -529,7 +531,7 @@ public class AlumnosDAO
                 datAlu.setTipDocAlu  (rs.getInt    (TablaAlumnos.TIPODOC));
                 datAlu.setNumDocAlu  (rs.getString (TablaAlumnos.NUMERODOC));
                 datAlu.setNombre     (rs.getString (TablaAlumnos.NOMBRE));
-                datAlu.setAp1Alu     (rs.getString (TablaAlumnos.APE1));              
+                datAlu.setAp1Alu     (rs.getString (TablaAlumnos.APE1));
                 datAlu.setMovAlu     (rs.getString (TablaAlumnos.MOVIL));
                 datAlu.setFijAlu     (rs.getString (TablaAlumnos.TELFIJO));
                 datAlu.setDirAlu     (rs.getString (TablaAlumnos.DIRECCION));
@@ -549,14 +551,14 @@ public class AlumnosDAO
                 datAlu.setResponsable(rs.getString (TablaAlumnos.RESPONSABLE));
                 datAlu.setColegio    (rs.getString (TablaAlumnos.COLEGIO));
                 datAlu.setCurso      (rs.getString (TablaAlumnos.CURSO));
-                
-                
+
+
                 listaAlumnos.addElement(datAlu);
             }
 
             rs.close();
             ps.close();
-           
+
             return listaAlumnos;
         }
         catch (Exception exc)
@@ -572,27 +574,27 @@ public class AlumnosDAO
             }
 
             throw exc;
-        }        
+        }
     }
-    
+
     //Método que devuelve los datos de alumnos por orden alfabético
     public static Vector devolverTodosAluOrd(Connection con) throws  Exception
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
-        
-        String            sql          = "SELECT "    + TablaAlumnos.CODALU         + " , "      
-                                                      + TablaAlumnos.TIPODOC        + " , "     
+
+        String            sql          = "SELECT "    + TablaAlumnos.CODALU         + " , "
+                                                      + TablaAlumnos.TIPODOC        + " , "
                                                       + TablaAlumnos.NUMERODOC      + " , "
                                                       + TablaAlumnos.NOMBRE         + " , "
-                                                      + TablaAlumnos.APE1           + " , " 
+                                                      + TablaAlumnos.APE1           + " , "
                                                       + TablaAlumnos.APE2           + " , "
                                                       + TablaAlumnos.MOVIL          + " , "
                                                       + TablaAlumnos.TELFIJO        + " , "
                                                       + TablaAlumnos.DIRECCION      + " , "
                                                       + TablaAlumnos.CODPOSTAL      + " , "
                                                       + TablaAlumnos.LOCALIDAD      + " , "
-                                                      + TablaAlumnos.NIVELFORM      + " , " 
+                                                      + TablaAlumnos.NIVELFORM      + " , "
                                                       + TablaAlumnos.EMAIL          + " , "
                                                       + TablaAlumnos.DESEMPLEADO    + " , "
                                                       + TablaAlumnos.CODEMPRESA     + " , "
@@ -609,7 +611,7 @@ public class AlumnosDAO
                                          " FROM "     + TablaAlumnos.TABLA          +
                                          " ORDER BY " + TablaAlumnos.APE1           + " , "
                                                       + TablaAlumnos.NOMBRE ;
-        
+
         AlumnosVO         datAlu       = null;
         Vector            listaAlumnos = new Vector();
 
@@ -627,7 +629,7 @@ public class AlumnosDAO
                 datAlu.setTipDocAlu  (rs.getInt    (TablaAlumnos.TIPODOC));
                 datAlu.setNumDocAlu  (rs.getString (TablaAlumnos.NUMERODOC));
                 datAlu.setNombre     (rs.getString (TablaAlumnos.NOMBRE));
-                datAlu.setAp1Alu     (rs.getString (TablaAlumnos.APE1));              
+                datAlu.setAp1Alu     (rs.getString (TablaAlumnos.APE1));
                 datAlu.setMovAlu     (rs.getString (TablaAlumnos.MOVIL));
                 datAlu.setFijAlu     (rs.getString (TablaAlumnos.TELFIJO));
                 datAlu.setDirAlu     (rs.getString (TablaAlumnos.DIRECCION));
@@ -647,13 +649,13 @@ public class AlumnosDAO
                 datAlu.setResponsable(rs.getString (TablaAlumnos.RESPONSABLE));
                 datAlu.setColegio    (rs.getString (TablaAlumnos.COLEGIO));
                 datAlu.setCurso      (rs.getString (TablaAlumnos.CURSO));
-                
+
                 listaAlumnos.addElement(datAlu);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaAlumnos;
         }
         catch (Exception exc)
@@ -671,8 +673,8 @@ public class AlumnosDAO
             throw exc;
         }
     }
-                
-                
+
+
     //Edita el registro de un interesado
     public static int editaAlumno(AlumnosVO aluVO, Connection con) throws Exception
     {
@@ -705,7 +707,7 @@ public class AlumnosDAO
                                         TablaAlumnos.COLEGIO     + " = ? , "   +
                                         TablaAlumnos.CURSO       + " = ?   "   +
                                   "WHERE " + TablaAlumnos.CODALU + " = ?";
-        
+
         aluPrev = AlumnosGestion.devolverDatosAlumno(aluVO.getIdAlu());
 
         if (!aluPrev.getNumDocAlu().trim().equals(aluVO.getNumDocAlu().trim()) && AlumnosGestion.existeDniAlumno(aluVO.getNumDocAlu()))
@@ -771,10 +773,10 @@ public class AlumnosDAO
         int               regActualizados = 0;
 
         //String            sql             = "DELETE FROM TbAlu WHERE IdAlu = ?";
-        String            sql             = "DELETE FROM " + TablaAlumnos.TABLA  + 
+        String            sql             = "DELETE FROM " + TablaAlumnos.TABLA  +
                                             " WHERE "      + TablaAlumnos.CODALU + " = ?";
-        
-        
+
+
         //Se comprueba que el alumno no tenga matrículas
         if (AluEdiGestion.devNumMat(codAlu) > 0)
         {
@@ -784,13 +786,13 @@ public class AlumnosDAO
         {
             return -1; //El alumno no se borra porque no se pudo comprobar si tiene matríiculas
         }
-        
+
         //Se comprueba que no tenga clases individuales
         if(ClasesIndivGestion.tieneAluClasesInd(codAlu))
         {
             return -4; ////El alumno no se borra porque tiene clases individuales
         }
-       
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -806,10 +808,10 @@ public class AlumnosDAO
             if (CursosAluGestion.borraCurAlu(codAlu) >= 0)
             {
                 //Borra datos de seguimientos del alumno a dar de baja adaptacion curricular  trastornos faltas y claificaciones
-                if (SeguimientosGestion.  eliminaSegAlu          (codAlu) >= 0 && 
+                if (SeguimientosGestion.  eliminaSegAlu          (codAlu) >= 0 &&
                     AdapCurricularGestion.eliminaAdapCurAlumno   (codAlu) >= 0 &&
                     TrastornosGestion.    eliminaTrastornosAlumno(codAlu) >= 0 &&
-                    CalificacionesGestion.eliminarCalificAlumno  (codAlu) >= 0 && 
+                    CalificacionesGestion.eliminarCalificAlumno  (codAlu) >= 0 &&
                     FaltasGestion.        eliminarFaltasAlumno   (codAlu) >=0   )
                 {
                     return regActualizados; //Todo borrado correctamente
@@ -847,9 +849,9 @@ public class AlumnosDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT MAX(" + TablaAlumnos.CODALU +")" + 
+        String            sql        = "SELECT MAX(" + TablaAlumnos.CODALU +")" +
                                        " FROM " + TablaAlumnos.TABLA;
-        
+
         String            nombreDoc  = "";
 
         try
@@ -862,9 +864,9 @@ public class AlumnosDAO
             {
                 nombreDoc = rs.getString(1);
             }
-            
+
             rs.close();
-            ps.close();                        
+            ps.close();
 
             return  nombreDoc;
         }
@@ -889,12 +891,12 @@ public class AlumnosDAO
     public static String insertaAlumno(AlumnosVO aluVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         String            sql             = "INSERT INTO " + TablaAlumnos.TABLA + " ("  + TablaAlumnos.CODALU      + " , "
                                                                                         + TablaAlumnos.TIPODOC     + " , "
                                                                                         + TablaAlumnos.NUMERODOC   + " , "
-                                                                                        + TablaAlumnos.NOMBRE      + " , "  
-                                                                                        + TablaAlumnos.APE1        + " , " 
+                                                                                        + TablaAlumnos.NOMBRE      + " , "
+                                                                                        + TablaAlumnos.APE1        + " , "
                                                                                         + TablaAlumnos.APE2        + " , "
                                                                                         + TablaAlumnos.MOVIL       + " , "
                                                                                         + TablaAlumnos.TELFIJO     + " , "
@@ -916,7 +918,7 @@ public class AlumnosDAO
                                                                                         + TablaAlumnos.COLEGIO     + " , "
                                                                                         + TablaAlumnos.CURSO       + " ) " +
                                             " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         int               regActualizados = 0;
 
         //Se comprueba que no exista el número de documento del alumno el la base de datos
@@ -956,9 +958,9 @@ public class AlumnosDAO
             ps.setString (23, aluVO.getResponsable());
             ps.setString (24, aluVO.getColegio());
             ps.setString (25, aluVO.getCurso());
-           
+
             regActualizados = ps.executeUpdate();
-            
+
             ps.close();
 
             if(regActualizados>0)
@@ -985,7 +987,7 @@ public class AlumnosDAO
         }
 
     }
-    
+
     //Genera un nuevo código de Alumno
     public static String generarNuevoCodAlu()
     {
@@ -999,11 +1001,11 @@ public class AlumnosDAO
         while (enc)
         {
             contCar = ("" + datAlu.size()).length();
-            
+
 
             if (contCar > 0)
             {
-                codIntrod = "" + (datAlu.size() + avc); 
+                codIntrod = "" + (datAlu.size() + avc);
             }
             else
             {
@@ -1045,10 +1047,10 @@ public class AlumnosDAO
         ResultSet         rs              = null;
 
         //String            sql             = "SELECT Ciudad FROM TbCPo WHERE NCodigo = ? ";
-        String            sql             = "SELECT " + TablaProvincias.NOMBRE  + 
-                                            " FROM  " + TablaProvincias.TABLA   + 
+        String            sql             = "SELECT " + TablaProvincias.NOMBRE  +
+                                            " FROM  " + TablaProvincias.TABLA   +
                                             " WHERE " + TablaProvincias.CODPROV + " = ? ";
-                        
+
         String            nombreProvincia = "";
 
         try
@@ -1067,7 +1069,7 @@ public class AlumnosDAO
 
             rs.close();
             ps.close();
-            
+
             return nombreProvincia;
         }
         catch (Exception exc)
@@ -1092,10 +1094,10 @@ public class AlumnosDAO
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT " + TablaAlumnos.CODALU     + 
-                                         " FROM  " + TablaAlumnos.TABLA      + 
+        String            sql          = "SELECT " + TablaAlumnos.CODALU     +
+                                         " FROM  " + TablaAlumnos.TABLA      +
                                          " WHERE " + TablaAlumnos.NUMERODOC  + " = ? ";
-                
+
         boolean          existeDNI     = false;
 
         //Se comprueba que el número de documento no sea una cadena vacía
@@ -1124,7 +1126,7 @@ public class AlumnosDAO
 
             rs.close();
             ps.close();
-                        
+
             return existeDNI;
 
         }

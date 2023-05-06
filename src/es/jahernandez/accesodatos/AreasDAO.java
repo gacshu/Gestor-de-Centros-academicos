@@ -4,26 +4,24 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.AreasVO;
-import es.jahernandez.gestion.AreasGestion;
-
-import es.jahernandez.tablas.TablaArea;
-import es.jahernandez.tablas.TablaProfArea;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.AreasVO;
+import es.jahernandez.gestion.AreasGestion;
+import es.jahernandez.tablas.TablaArea;
+import es.jahernandez.tablas.TablaProfArea;
 
 /**
  *
  * @author JuanAlberto
  */
-public class AreasDAO 
+public class AreasDAO
 {
      //Metodo que devuelve los datos de area
     public static Vector devolverTodAreas(Connection con) throws Exception
@@ -32,10 +30,10 @@ public class AreasDAO
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT * FROM TbNiv";
-        String            cadenaConsulta = "SELECT " + TablaArea.CODAREA  + " , " 
-                                                     + TablaArea.NOMBRE   +   
+        String            cadenaConsulta = "SELECT " + TablaArea.CODAREA  + " , "
+                                                     + TablaArea.NOMBRE   +
                                            " FROM "  + TablaArea.TABLA;
-        
+
         AreasVO           datArea        = null;
         Vector            listaAreas     = new Vector();
 
@@ -51,13 +49,13 @@ public class AreasDAO
 
                 datArea.setCodArea(rs.getString(TablaArea.CODAREA));
                 datArea.setNomArea(rs.getString(TablaArea.NOMBRE));
-                
+
                 listaAreas.add(datArea);
             }
 
             rs.close();
             ps.close();
-           
+
             return listaAreas;
         }
         catch (Exception exc)
@@ -74,17 +72,17 @@ public class AreasDAO
             throw exc;
         }
     }
-    
+
     //MÃ©todo que devuelve el nombre de un Ã¡rea
-    public static String devuelveNombreArea(String codArea, Connection con) throws Exception 
+    public static String devuelveNombreArea(String codArea, Connection con) throws Exception
     {
         PreparedStatement ps        = null;
         ResultSet         rs        = null;
 
-        String            sql       = "SELECT " + TablaArea.NOMBRE       + 
-                                      " FROM "  + TablaArea.TABLA   + 
+        String            sql       = "SELECT " + TablaArea.NOMBRE       +
+                                      " FROM "  + TablaArea.TABLA   +
                                       " WHERE " + TablaArea.CODAREA + " = ?";
-        
+
         String           nombreArea = "";
 
         try
@@ -119,7 +117,7 @@ public class AreasDAO
             throw exc;
         }
     }
-    
+
     //Genera un nuevo cÃ³digo de Ã�rea
     public static String generarNuevoCodArea()
     {
@@ -175,17 +173,17 @@ public class AreasDAO
     public static int guardarArea(AreasVO areaVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         int               regActualizados = 0;
-        
-        
+
+
         String            nueCodArea      = AreasGestion.generarNuevoCodArea();
 
-        String            sql             = "INSERT INTO " + TablaArea.TABLA   + " ( " 
+        String            sql             = "INSERT INTO " + TablaArea.TABLA   + " ( "
                                                            + TablaArea.CODAREA + " , "
                                                            + TablaArea.NOMBRE  + " ) " +
                                             " VALUES (?,?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -193,7 +191,7 @@ public class AreasDAO
             //Se introducen los parÃ¡metros a la consulta sql
             ps.setString(1, nueCodArea);
             ps.setString(2, areaVO.getNomArea());
-           
+
            regActualizados = ps.executeUpdate();
 
            ps.close();
@@ -214,12 +212,12 @@ public class AreasDAO
             throw exc;
         }
     }
-    
+
     //Edita el registro de un Ã�rea
     public static int editarArea(AreasVO areaVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         int               regActualizados = 0;
 
         String            sql             = "UPDATE " + TablaArea.TABLA   +
@@ -260,14 +258,14 @@ public class AreasDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaArea.CODAREA  + " , " 
-                                                     + TablaArea.NOMBRE   +   
-                                           " FROM "  + TablaArea.TABLA    + 
+        String            cadenaConsulta = "SELECT " + TablaArea.CODAREA  + " , "
+                                                     + TablaArea.NOMBRE   +
+                                           " FROM "  + TablaArea.TABLA    +
                                            " WHERE " + TablaArea.CODAREA  + " IN (" +
-                                                " SELECT " + TablaProfArea.CODAREA + 
-                                                " FROM "   + TablaProfArea.TABLA   + 
-                                                " WHERE "  + TablaProfArea.CODPROF + " = ?)";  
-        
+                                                " SELECT " + TablaProfArea.CODAREA +
+                                                " FROM "   + TablaProfArea.TABLA   +
+                                                " WHERE "  + TablaProfArea.CODPROF + " = ?)";
+
         AreasVO           datArea        = null;
         Vector            listaAreas     = new Vector();
 
@@ -276,7 +274,7 @@ public class AreasDAO
             ps  = con.prepareStatement(cadenaConsulta);
 
             ps.setString(1, codProf);
-            
+
             rs  = ps.executeQuery();
 
             while(rs.next())
@@ -285,7 +283,7 @@ public class AreasDAO
 
                 datArea.setCodArea(rs.getString(TablaArea.CODAREA));
                 datArea.setNomArea(rs.getString(TablaArea.NOMBRE));
-                
+
                 listaAreas.add(datArea);
             }
 

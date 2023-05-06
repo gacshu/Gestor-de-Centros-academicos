@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaClaseIndServlet extends HttpServlet 
+public class AltaClaseIndServlet extends HttpServlet
 {
 
      /**
@@ -37,38 +37,38 @@ public class AltaClaseIndServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion    = request.getSession();
-        
+
         ClasesIndivVO clasIndVO = new ClasesIndivVO();
         int           resAlt    = 0;
 
         Logger        log       = null;
         ConUsuVO      conUsoVO  = null;
-        String        indPag    = "";   
+        String        indPag    = "";
         String        strFecha  = "";
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta clase individual" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parÃ¡metros y se inicializan valores
         if(request.getParameter("lstNuevoCurso") != null)
         {
             clasIndVO.setIdCur(request.getParameter("lstNuevoCurso").trim());
         }
-        
+
         if(request.getParameter("txtCodAlu") != null)
         {
             clasIndVO.setIdAlu(request.getParameter("txtCodAlu").trim());
         }
-        
+
         if(request.getParameter("hidNuevaFecha") != null  &&
           ! request.getParameter("hidNuevaFecha").equals(""))
         {
@@ -77,44 +77,44 @@ public class AltaClaseIndServlet extends HttpServlet
                                                         new Integer(strFechaCla.substring(3,5)).intValue() - 1,
                                                         new Integer(strFechaCla.substring(0,2)).intValue()).getTime());
         }
-        
-        
+
+
         if(request.getParameter("lstNuevoProf") != null)
         {
             clasIndVO.setIdProf(request.getParameter("lstNuevoProf").trim());
         }
-        
+
         if(request.getParameter("txtNuevaTarifa") != null)
         {
             clasIndVO.setTarifa(new Float(request.getParameter("txtNuevaTarifa").trim()).floatValue());
         }
-        
+
         if(request.getParameter("valInfClasInd") != null)
         {
             indPag = request.getParameter("valInfClasInd").trim();
         }
-        
+
         if(request.getParameter("strFecha") != null)
         {
             strFecha = request.getParameter("strFecha").trim();
         }
-        
+
         resAlt = ClasesIndivGestion.guardarClasInd(clasIndVO);
 
         if(resAlt > 0)
         {
             //Redireccionar a pÃ¡gina de clases individuales
-            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu() 
-                                                                  + "&valInfClasInd=" + indPag 
+            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu()
+                                                                  + "&valInfClasInd=" + indPag
                                                                   + "&strFecha="      + strFecha);
         }
         else
         {
             //Redireccionar a pÃ¡gina de clases individuales
-            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu() 
+            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu()
                                                                   + "&valInfClasInd=" + indPag
-                                                                  + "&errorCode="     + resAlt 
-                                                                  + "&strFecha="      + strFecha);   
+                                                                  + "&errorCode="     + resAlt
+                                                                  + "&strFecha="      + strFecha);
         }
     }
 
@@ -155,7 +155,7 @@ public class AltaClaseIndServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Alta clase individual Servlet";
     }// </editor-fold>

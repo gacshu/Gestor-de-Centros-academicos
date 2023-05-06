@@ -5,25 +5,23 @@
 
 package es.jahernandez.accesodatos;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import es.jahernandez.datos.Conexion;
 import es.jahernandez.datos.EdicionesVO;
 import es.jahernandez.gestion.AluEdiGestion;
 import es.jahernandez.gestion.EdiModProfAulaGestion;
 import es.jahernandez.gestion.EdicionesGestion;
 import es.jahernandez.gestion.HisRecGestion;
-
-import es.jahernandez.tablas.TablaEdiciones;
 import es.jahernandez.tablas.TablaAlumnosEdiciones;
-
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.Vector;
+import es.jahernandez.tablas.TablaEdiciones;
 
 /**
  *
@@ -89,23 +87,23 @@ public class EdicionesDAO
         ResultSet         rs       = null;
 
         String            sql      = "SELECT " + TablaEdiciones.CODEDI       + " , "
-                                               + TablaEdiciones.CODCURSO     + " , " 
+                                               + TablaEdiciones.CODCURSO     + " , "
                                                + TablaEdiciones.CODNIVEL     + " , "
-                                               + TablaEdiciones.FECHAINICIO  + " , " 
-                                               + TablaEdiciones.FECHAFIN     + " , " 
-                                               + TablaEdiciones.PLAZAS       + " , " 
+                                               + TablaEdiciones.FECHAINICIO  + " , "
+                                               + TablaEdiciones.FECHAFIN     + " , "
+                                               + TablaEdiciones.PLAZAS       + " , "
                                                + TablaEdiciones.HORAS        + " , "
-                                               + TablaEdiciones.HORAINICIO   + " , " 
-                                               + TablaEdiciones.HORAFIN      + " , " 
-                                               + TablaEdiciones.PRECIOMATRIC + " , " 
-                                               + TablaEdiciones.PRECIORECIBO + " , " 
-                                               + TablaEdiciones.PRECIOTOTAL  + " , " 
-                                               + TablaEdiciones.CLASELUNES   + " , " 
-                                               + TablaEdiciones.CLASEMARTES  + " , " 
-                                               + TablaEdiciones.CLASEMIERC   + " , " 
-                                               + TablaEdiciones.CLASEJUEVES  + " , " 
+                                               + TablaEdiciones.HORAINICIO   + " , "
+                                               + TablaEdiciones.HORAFIN      + " , "
+                                               + TablaEdiciones.PRECIOMATRIC + " , "
+                                               + TablaEdiciones.PRECIORECIBO + " , "
+                                               + TablaEdiciones.PRECIOTOTAL  + " , "
+                                               + TablaEdiciones.CLASELUNES   + " , "
+                                               + TablaEdiciones.CLASEMARTES  + " , "
+                                               + TablaEdiciones.CLASEMIERC   + " , "
+                                               + TablaEdiciones.CLASEJUEVES  + " , "
                                                + TablaEdiciones.CLASEVIERNES + " , "
-                                               + TablaEdiciones.CLASESABADO  + " , " 
+                                               + TablaEdiciones.CLASESABADO  + " , "
                                                + TablaEdiciones.CODCENTRO    + " , "
                                                + TablaEdiciones.MINUTOINICIO + " , "
                                                + TablaEdiciones.MINUTOFIN    + " , "
@@ -129,9 +127,9 @@ public class EdicionesDAO
                                                + TablaEdiciones.APLAZADO     + " , "
                                                + TablaEdiciones.DESCRIPCION  + " , "
                                                + TablaEdiciones.CODPROF      +
-                
+
                                      " FROM "  + TablaEdiciones.TABLA;
-                
+
         Vector            listaEdi = new Vector();
 
         EdicionesVO       datEdi   = null;
@@ -215,17 +213,17 @@ public class EdicionesDAO
     //Devuelve el código de edición generado, si se inserta correctamente
     public static String guardarEdicion(EdicionesVO ediVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;         
+        PreparedStatement ps              = null;
         int               regActualizados = 0;
-        
+
         String            nueCodEdi       = generarNuevoCodEdi();
-        
-        String            sql = "INSERT INTO " + TablaEdiciones.TABLA  + "(" + TablaEdiciones.CODEDI       + " , "  
+
+        String            sql = "INSERT INTO " + TablaEdiciones.TABLA  + "(" + TablaEdiciones.CODEDI       + " , "
                                                                              + TablaEdiciones.CODCURSO     + " , "
-                                                                             + TablaEdiciones.CODNIVEL     + " , "  
+                                                                             + TablaEdiciones.CODNIVEL     + " , "
                                                                              + TablaEdiciones.FECHAINICIO  + " , "
-                                                                             + TablaEdiciones.FECHAFIN     + " , "  
-                                                                             + TablaEdiciones.PLAZAS       + " , " 
+                                                                             + TablaEdiciones.FECHAFIN     + " , "
+                                                                             + TablaEdiciones.PLAZAS       + " , "
                                                                              + TablaEdiciones.HORAS        + " , "
                                                                              + TablaEdiciones.HORAINICIO   + " , "
                                                                              + TablaEdiciones.HORAFIN      + " , "
@@ -239,29 +237,29 @@ public class EdicionesDAO
                                                                              + TablaEdiciones.CLASEVIERNES + " , "
                                                                              + TablaEdiciones.CLASESABADO  + " , "
                                                                              + TablaEdiciones.CODCENTRO    + " , "
-                                                                             + TablaEdiciones.MINUTOINICIO + " , " 
+                                                                             + TablaEdiciones.MINUTOINICIO + " , "
                                                                              + TablaEdiciones.MINUTOFIN    + " , "
                                                                              + TablaEdiciones.HORASDISTAN  + " , "
-                                                                             + TablaEdiciones.HORASTELEF   + " , " 
+                                                                             + TablaEdiciones.HORASTELEF   + " , "
                                                                              + TablaEdiciones.CODAULA      + " , "
                                                                              + TablaEdiciones.BONIFICADO   + " , "
                                                                              + TablaEdiciones.PLAZOS       + " , "
                                                                              + TablaEdiciones.PAGOENERO    + " , "
-                                                                             + TablaEdiciones.PAGOFEBRERO  + " , " 
+                                                                             + TablaEdiciones.PAGOFEBRERO  + " , "
                                                                              + TablaEdiciones.PAGOMARZO    + " , "
                                                                              + TablaEdiciones.PAGOABRIL    + " , "
                                                                              + TablaEdiciones.PAGOMAYO     + " , "
                                                                              + TablaEdiciones.PAGOJUNIO    + " , "
-                                                                             + TablaEdiciones.PAGOJULIO    + " , "     
+                                                                             + TablaEdiciones.PAGOJULIO    + " , "
                                                                              + TablaEdiciones.PAGOAGOSTO   + " , "
                                                                              + TablaEdiciones.PAGOSEPT     + " , "
                                                                              + TablaEdiciones.PAGOOCTUBRE  + " , "
                                                                              + TablaEdiciones.PAGONOVIEM   + " , "
                                                                              + TablaEdiciones.PAGODICIEMB  + " , "
-                                                                             + TablaEdiciones.APLAZADO     + " , " 
-                                                                             + TablaEdiciones.DESCRIPCION  + " ,  " 
+                                                                             + TablaEdiciones.APLAZADO     + " , "
+                                                                             + TablaEdiciones.DESCRIPCION  + " ,  "
                                                                              + TablaEdiciones.CODPROF      + ")  " +
-               
+
                                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try
         {
@@ -309,12 +307,12 @@ public class EdicionesDAO
             ps.setString (39, ediVO.getAplaz());
             ps.setString (40, ediVO.getDescripcion());
             ps.setString (41, ediVO.getIdProf());
-            
-            
+
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             if (regActualizados > 0)
             {
                 return nueCodEdi;
@@ -346,23 +344,23 @@ public class EdicionesDAO
         ResultSet         rs       = null;
 
         String            sql     = "SELECT " + TablaEdiciones.CODEDI       + " , "
-                                              + TablaEdiciones.CODCURSO     + " , " 
+                                              + TablaEdiciones.CODCURSO     + " , "
                                               + TablaEdiciones.CODNIVEL     + " , "
-                                              + TablaEdiciones.FECHAINICIO  + " , " 
-                                              + TablaEdiciones.FECHAFIN     + " , " 
-                                              + TablaEdiciones.PLAZAS       + " , " 
+                                              + TablaEdiciones.FECHAINICIO  + " , "
+                                              + TablaEdiciones.FECHAFIN     + " , "
+                                              + TablaEdiciones.PLAZAS       + " , "
                                               + TablaEdiciones.HORAS        + " , "
-                                              + TablaEdiciones.HORAINICIO   + " , " 
-                                              + TablaEdiciones.HORAFIN      + " , " 
-                                              + TablaEdiciones.PRECIOMATRIC + " , " 
-                                              + TablaEdiciones.PRECIORECIBO + " , " 
-                                              + TablaEdiciones.PRECIOTOTAL  + " , " 
-                                              + TablaEdiciones.CLASELUNES   + " , " 
-                                              + TablaEdiciones.CLASEMARTES  + " , " 
-                                              + TablaEdiciones.CLASEMIERC   + " , " 
-                                              + TablaEdiciones.CLASEJUEVES  + " , " 
+                                              + TablaEdiciones.HORAINICIO   + " , "
+                                              + TablaEdiciones.HORAFIN      + " , "
+                                              + TablaEdiciones.PRECIOMATRIC + " , "
+                                              + TablaEdiciones.PRECIORECIBO + " , "
+                                              + TablaEdiciones.PRECIOTOTAL  + " , "
+                                              + TablaEdiciones.CLASELUNES   + " , "
+                                              + TablaEdiciones.CLASEMARTES  + " , "
+                                              + TablaEdiciones.CLASEMIERC   + " , "
+                                              + TablaEdiciones.CLASEJUEVES  + " , "
                                               + TablaEdiciones.CLASEVIERNES + " , "
-                                              + TablaEdiciones.CLASESABADO  + " , " 
+                                              + TablaEdiciones.CLASESABADO  + " , "
                                               + TablaEdiciones.CODCENTRO    + " , "
                                               + TablaEdiciones.MINUTOINICIO + " , "
                                               + TablaEdiciones.MINUTOFIN    + " , "
@@ -384,12 +382,12 @@ public class EdicionesDAO
                                               + TablaEdiciones.PAGONOVIEM   + " , "
                                               + TablaEdiciones.PAGODICIEMB  + " , "
                                               + TablaEdiciones.APLAZADO     + " , "
-                                              + TablaEdiciones.DESCRIPCION  + " , "   
-                                              + TablaEdiciones.CODPROF      +   
-                
+                                              + TablaEdiciones.DESCRIPCION  + " , "
+                                              + TablaEdiciones.CODPROF      +
+
                                     " FROM "  + TablaEdiciones.TABLA        +
                                     " WHERE " + TablaEdiciones.CODEDI       + " = ?";
-        
+
         EdicionesVO       datEdi   = null;
 
         try
@@ -474,24 +472,24 @@ public class EdicionesDAO
     {
         PreparedStatement   ps  = null;
         ResultSet           rs  = null;
-        
+
         String              sql = "SELECT "   + TablaEdiciones.PLAZAS + " AS plazas," +
                                       "(SELECT COUNT(*) AS NumMat " +
-                                      " FROM  "  + TablaAlumnosEdiciones.TABLA  + 
-                                      " WHERE (" + TablaAlumnosEdiciones.CODEDI + " = " + TablaEdiciones.TABLA + "." + TablaEdiciones.CODEDI + ") AND (" 
+                                      " FROM  "  + TablaAlumnosEdiciones.TABLA  +
+                                      " WHERE (" + TablaAlumnosEdiciones.CODEDI + " = " + TablaEdiciones.TABLA + "." + TablaEdiciones.CODEDI + ") AND ("
                                                  + TablaAlumnosEdiciones.ESBAJA + " = false)) AS matric " +
                                   " FROM "    + TablaEdiciones.TABLA  +
-                                  " WHERE ( " + TablaEdiciones.CODEDI + " = ?)";               
-        
+                                  " WHERE ( " + TablaEdiciones.CODEDI + " = ?)";
+
         int numPlazas = 0;
         int numMatric = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros a la consulta sql
-            ps.setString(1, codEdicion);                        
+            ps.setString(1, codEdicion);
             rs = ps.executeQuery();
 
             if (rs.next())
@@ -502,7 +500,7 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-            
+
             return numPlazas>numMatric;
 
         }
@@ -529,23 +527,23 @@ public class EdicionesDAO
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiciones.CODEDI       + " , "
-                                          + TablaEdiciones.CODCURSO     + " , " 
+                                          + TablaEdiciones.CODCURSO     + " , "
                                           + TablaEdiciones.CODNIVEL     + " , "
-                                          + TablaEdiciones.FECHAINICIO  + " , " 
-                                          + TablaEdiciones.FECHAFIN     + " , " 
-                                          + TablaEdiciones.PLAZAS       + " , " 
+                                          + TablaEdiciones.FECHAINICIO  + " , "
+                                          + TablaEdiciones.FECHAFIN     + " , "
+                                          + TablaEdiciones.PLAZAS       + " , "
                                           + TablaEdiciones.HORAS        + " , "
-                                          + TablaEdiciones.HORAINICIO   + " , " 
-                                          + TablaEdiciones.HORAFIN      + " , " 
-                                          + TablaEdiciones.PRECIOMATRIC + " , " 
-                                          + TablaEdiciones.PRECIORECIBO + " , " 
-                                          + TablaEdiciones.PRECIOTOTAL  + " , " 
-                                          + TablaEdiciones.CLASELUNES   + " , " 
-                                          + TablaEdiciones.CLASEMARTES  + " , " 
-                                          + TablaEdiciones.CLASEMIERC   + " , " 
-                                          + TablaEdiciones.CLASEJUEVES  + " , " 
+                                          + TablaEdiciones.HORAINICIO   + " , "
+                                          + TablaEdiciones.HORAFIN      + " , "
+                                          + TablaEdiciones.PRECIOMATRIC + " , "
+                                          + TablaEdiciones.PRECIORECIBO + " , "
+                                          + TablaEdiciones.PRECIOTOTAL  + " , "
+                                          + TablaEdiciones.CLASELUNES   + " , "
+                                          + TablaEdiciones.CLASEMARTES  + " , "
+                                          + TablaEdiciones.CLASEMIERC   + " , "
+                                          + TablaEdiciones.CLASEJUEVES  + " , "
                                           + TablaEdiciones.CLASEVIERNES + " , "
-                                          + TablaEdiciones.CLASESABADO  + " , " 
+                                          + TablaEdiciones.CLASESABADO  + " , "
                                           + TablaEdiciones.CODCENTRO    + " , "
                                           + TablaEdiciones.MINUTOINICIO + " , "
                                           + TablaEdiciones.MINUTOFIN    + " , "
@@ -566,11 +564,11 @@ public class EdicionesDAO
                                           + TablaEdiciones.PAGOOCTUBRE  + " , "
                                           + TablaEdiciones.PAGONOVIEM   + " , "
                                           + TablaEdiciones.PAGODICIEMB  + " , "
-                                          + TablaEdiciones.APLAZADO     + " , " 
-                                          + TablaEdiciones.DESCRIPCION  + " , " 
-                                          + TablaEdiciones.CODPROF      +    
+                                          + TablaEdiciones.APLAZADO     + " , "
+                                          + TablaEdiciones.DESCRIPCION  + " , "
+                                          + TablaEdiciones.CODPROF      +
                              " FROM "     + TablaEdiciones.TABLA        +
-                             " WHERE "    + TablaEdiciones.CODCURSO     + " = ?"  + 
+                             " WHERE "    + TablaEdiciones.CODCURSO     + " = ?"  +
                              " ORDER BY " + TablaEdiciones.FECHAINICIO  + " DESC";
         Vector              listaEdi = new Vector();
 
@@ -656,7 +654,7 @@ public class EdicionesDAO
             throw exc;
         }
     }
-    
+
       //Método que devuelve los datos de edición de las ediciones disponibles de un curso determinado
     public static Vector devolverDatEdiCurDisp(String idCurso,Connection con) throws Exception
     {
@@ -664,23 +662,23 @@ public class EdicionesDAO
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiciones.CODEDI       + " , "
-                                          + TablaEdiciones.CODCURSO     + " , " 
+                                          + TablaEdiciones.CODCURSO     + " , "
                                           + TablaEdiciones.CODNIVEL     + " , "
-                                          + TablaEdiciones.FECHAINICIO  + " , " 
-                                          + TablaEdiciones.FECHAFIN     + " , " 
-                                          + TablaEdiciones.PLAZAS       + " , " 
+                                          + TablaEdiciones.FECHAINICIO  + " , "
+                                          + TablaEdiciones.FECHAFIN     + " , "
+                                          + TablaEdiciones.PLAZAS       + " , "
                                           + TablaEdiciones.HORAS        + " , "
-                                          + TablaEdiciones.HORAINICIO   + " , " 
-                                          + TablaEdiciones.HORAFIN      + " , " 
-                                          + TablaEdiciones.PRECIOMATRIC + " , " 
-                                          + TablaEdiciones.PRECIORECIBO + " , " 
-                                          + TablaEdiciones.PRECIOTOTAL  + " , " 
-                                          + TablaEdiciones.CLASELUNES   + " , " 
-                                          + TablaEdiciones.CLASEMARTES  + " , " 
-                                          + TablaEdiciones.CLASEMIERC   + " , " 
-                                          + TablaEdiciones.CLASEJUEVES  + " , " 
+                                          + TablaEdiciones.HORAINICIO   + " , "
+                                          + TablaEdiciones.HORAFIN      + " , "
+                                          + TablaEdiciones.PRECIOMATRIC + " , "
+                                          + TablaEdiciones.PRECIORECIBO + " , "
+                                          + TablaEdiciones.PRECIOTOTAL  + " , "
+                                          + TablaEdiciones.CLASELUNES   + " , "
+                                          + TablaEdiciones.CLASEMARTES  + " , "
+                                          + TablaEdiciones.CLASEMIERC   + " , "
+                                          + TablaEdiciones.CLASEJUEVES  + " , "
                                           + TablaEdiciones.CLASEVIERNES + " , "
-                                          + TablaEdiciones.CLASESABADO  + " , " 
+                                          + TablaEdiciones.CLASESABADO  + " , "
                                           + TablaEdiciones.CODCENTRO    + " , "
                                           + TablaEdiciones.MINUTOINICIO + " , "
                                           + TablaEdiciones.MINUTOFIN    + " , "
@@ -701,12 +699,12 @@ public class EdicionesDAO
                                           + TablaEdiciones.PAGOOCTUBRE  + " , "
                                           + TablaEdiciones.PAGONOVIEM   + " , "
                                           + TablaEdiciones.PAGODICIEMB  + " , "
-                                          + TablaEdiciones.APLAZADO     + " , " 
+                                          + TablaEdiciones.APLAZADO     + " , "
                                           + TablaEdiciones.DESCRIPCION  + " , "
                                           + TablaEdiciones.CODPROF      +
                              " FROM "     + TablaEdiciones.TABLA        +
-                             " WHERE "    + TablaEdiciones.CODCURSO     + "  = ? AND "  
-                                          + TablaEdiciones.FECHAFIN     + " >= ?    " + 
+                             " WHERE "    + TablaEdiciones.CODCURSO     + "  = ? AND "
+                                          + TablaEdiciones.FECHAFIN     + " >= ?    " +
                              " ORDER BY " + TablaEdiciones.FECHAINICIO  + " DESC";
         Vector              listaEdi = new Vector();
 
@@ -765,15 +763,15 @@ public class EdicionesDAO
                 datEdi.setNov        (rs.getBoolean(TablaEdiciones.PAGONOVIEM));
                 datEdi.setDic        (rs.getBoolean(TablaEdiciones.PAGODICIEMB));
                 datEdi.setAplaz      (rs.getString (TablaEdiciones.APLAZADO));
-                datEdi.setDescripcion(rs.getString (TablaEdiciones.DESCRIPCION )); 
-                datEdi.setIdProf     (rs.getString (TablaEdiciones.CODPROF ));    
+                datEdi.setDescripcion(rs.getString (TablaEdiciones.DESCRIPCION ));
+                datEdi.setIdProf     (rs.getString (TablaEdiciones.CODPROF ));
 
                 listaEdi.addElement(datEdi);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaEdi;
         }
         catch (Exception exc)
@@ -790,33 +788,33 @@ public class EdicionesDAO
             throw exc;
         }
     }
-    
+
     //Edita el registro de una edición
     public static int editaEdicion(EdicionesVO ediVO,Connection con) throws Exception
     {
         PreparedStatement   ps              = null;
 
         int                 regActualizados = 0;
-        
-        String              sql = "UPDATE " + TablaEdiciones.TABLA        + 
-                                  " SET "   + TablaEdiciones.CODNIVEL     + " =  ? , "    
+
+        String              sql = "UPDATE " + TablaEdiciones.TABLA        +
+                                  " SET "   + TablaEdiciones.CODNIVEL     + " =  ? , "
                                             + TablaEdiciones.FECHAINICIO  + " =  ? , "
-                                            + TablaEdiciones.FECHAFIN     + " =  ? , " 
-                                            + TablaEdiciones.PLAZAS       + " =  ? , "  
+                                            + TablaEdiciones.FECHAFIN     + " =  ? , "
+                                            + TablaEdiciones.PLAZAS       + " =  ? , "
                                             + TablaEdiciones.HORAS        + " =  ? , "
                                             + TablaEdiciones.HORAINICIO   + " =  ? , "
                                             + TablaEdiciones.HORAFIN      + " =  ? , "
-                                            + TablaEdiciones.PRECIOMATRIC + " =  ? , " 
-                                            + TablaEdiciones.PRECIORECIBO + " =  ? , " 
+                                            + TablaEdiciones.PRECIOMATRIC + " =  ? , "
+                                            + TablaEdiciones.PRECIORECIBO + " =  ? , "
                                             + TablaEdiciones.PRECIOTOTAL  + " =  ? , "
                                             + TablaEdiciones.CLASELUNES   + " =  ? , "
-                                            + TablaEdiciones.CLASEMARTES  + " =  ? , " 
+                                            + TablaEdiciones.CLASEMARTES  + " =  ? , "
                                             + TablaEdiciones.CLASEMIERC   + " =  ? , "
                                             + TablaEdiciones.CLASEJUEVES  + " =  ? , "
                                             + TablaEdiciones.CLASEVIERNES + " =  ? , "
                                             + TablaEdiciones.CLASESABADO  + " =  ? , "
                                             + TablaEdiciones.CODCENTRO    + " =  ? , "
-                                            + TablaEdiciones.MINUTOINICIO + " =  ? , " 
+                                            + TablaEdiciones.MINUTOINICIO + " =  ? , "
                                             + TablaEdiciones.MINUTOFIN    + " =  ? , "
                                             + TablaEdiciones.HORASDISTAN  + " =  ? , "
                                             + TablaEdiciones.HORASTELEF   + " =  ? , "
@@ -834,10 +832,10 @@ public class EdicionesDAO
                                             + TablaEdiciones.PAGOSEPT     + " =  ? , "
                                             + TablaEdiciones.PAGOOCTUBRE  + " =  ? , "
                                             + TablaEdiciones.PAGONOVIEM   + " =  ? , "
-                                            + TablaEdiciones.PAGODICIEMB  + " =  ? , " 
-                                            + TablaEdiciones.DESCRIPCION  + " =  ? , " 
+                                            + TablaEdiciones.PAGODICIEMB  + " =  ? , "
+                                            + TablaEdiciones.DESCRIPCION  + " =  ? , "
                                             + TablaEdiciones.CODPROF      + " =  ?   " +
-                
+
                                 " WHERE "   + TablaEdiciones.CODEDI       + " =  ? ";
 
         try
@@ -884,7 +882,7 @@ public class EdicionesDAO
             ps.setString (37, ediVO.getDescripcion());
             ps.setString (38, ediVO.getIdProf());
             ps.setString (39, ediVO.getIdEdi());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -912,10 +910,10 @@ public class EdicionesDAO
         PreparedStatement   ps        = null;
         ResultSet           rs        = null;
 
-        String            sql      = "SELECT " + TablaEdiciones.CODEDI       + 
+        String            sql      = "SELECT " + TablaEdiciones.CODEDI       +
                                      " FROM "  + TablaEdiciones.TABLA        +
-                                     " WHERE " + TablaEdiciones.CODCURSO     + " = ?";                        
-        
+                                     " WHERE " + TablaEdiciones.CODCURSO     + " = ?";
+
         boolean             hayEdiCur = false;
 
         try
@@ -938,7 +936,7 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-           
+
             return hayEdiCur;
 
         }
@@ -962,17 +960,17 @@ public class EdicionesDAO
     {
         PreparedStatement   ps     = null;
 
-        String              sql    = "DELETE FROM "  + TablaEdiciones.TABLA  + 
+        String              sql    = "DELETE FROM "  + TablaEdiciones.TABLA  +
                                      " WHERE "       + TablaEdiciones.CODEDI + " = ? ";
-                
+
         int                 devRes = 0;
-        
+
         //No se puede borrar si la edición tiene alumnos
         if(AluEdiGestion.edicionTieneAlumnos(codEdi))
         {
             return -2;
         }
-        
+
         //Se borran los datos del matricula, temario e histórico de la edición eliminada
         devRes = devRes + AluEdiGestion.eliminarDatosMatEdi(codEdi);
         devRes = devRes + EdiModProfAulaGestion.borrarModulosEdi(codEdi);
@@ -981,7 +979,7 @@ public class EdicionesDAO
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
 
@@ -1005,7 +1003,7 @@ public class EdicionesDAO
 
             throw exc;
         }
-        
+
     }
 
     //Método que devuelve los datos de edición de todas las ediciones que empiezan a partir de hoy
@@ -1015,23 +1013,23 @@ public class EdicionesDAO
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaEdiciones.CODEDI       + " , "
-                                                  + TablaEdiciones.CODCURSO     + " , " 
+                                                  + TablaEdiciones.CODCURSO     + " , "
                                                   + TablaEdiciones.CODNIVEL     + " , "
-                                                  + TablaEdiciones.FECHAINICIO  + " , " 
-                                                  + TablaEdiciones.FECHAFIN     + " , " 
-                                                  + TablaEdiciones.PLAZAS       + " , " 
+                                                  + TablaEdiciones.FECHAINICIO  + " , "
+                                                  + TablaEdiciones.FECHAFIN     + " , "
+                                                  + TablaEdiciones.PLAZAS       + " , "
                                                   + TablaEdiciones.HORAS        + " , "
-                                                  + TablaEdiciones.HORAINICIO   + " , " 
-                                                  + TablaEdiciones.HORAFIN      + " , " 
-                                                  + TablaEdiciones.PRECIOMATRIC + " , " 
-                                                  + TablaEdiciones.PRECIORECIBO + " , " 
-                                                  + TablaEdiciones.PRECIOTOTAL  + " , " 
-                                                  + TablaEdiciones.CLASELUNES   + " , " 
-                                                  + TablaEdiciones.CLASEMARTES  + " , " 
-                                                  + TablaEdiciones.CLASEMIERC   + " , " 
-                                                  + TablaEdiciones.CLASEJUEVES  + " , " 
+                                                  + TablaEdiciones.HORAINICIO   + " , "
+                                                  + TablaEdiciones.HORAFIN      + " , "
+                                                  + TablaEdiciones.PRECIOMATRIC + " , "
+                                                  + TablaEdiciones.PRECIORECIBO + " , "
+                                                  + TablaEdiciones.PRECIOTOTAL  + " , "
+                                                  + TablaEdiciones.CLASELUNES   + " , "
+                                                  + TablaEdiciones.CLASEMARTES  + " , "
+                                                  + TablaEdiciones.CLASEMIERC   + " , "
+                                                  + TablaEdiciones.CLASEJUEVES  + " , "
                                                   + TablaEdiciones.CLASEVIERNES + " , "
-                                                  + TablaEdiciones.CLASESABADO  + " , " 
+                                                  + TablaEdiciones.CLASESABADO  + " , "
                                                   + TablaEdiciones.CODCENTRO    + " , "
                                                   + TablaEdiciones.MINUTOINICIO + " , "
                                                   + TablaEdiciones.MINUTOFIN    + " , "
@@ -1055,11 +1053,11 @@ public class EdicionesDAO
                                                   + TablaEdiciones.APLAZADO     + " , "
                                                   + TablaEdiciones.DESCRIPCION  + " , "
                                                   + TablaEdiciones.CODPROF      +
-                
+
                                      " FROM "     + TablaEdiciones.TABLA        +
                                      " WHERE "    + TablaEdiciones.FECHAFIN     + " >= CURDATE() " +
-                                     " ORDER BY " + TablaEdiciones.CODCURSO;                
-        
+                                     " ORDER BY " + TablaEdiciones.CODCURSO;
+
         Vector            listaEdi    = new Vector();
 
         EdicionesVO       datEdi      = null;
@@ -1121,7 +1119,7 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-            
+
             return listaEdi;
         }
         catch (Exception exc)
@@ -1146,18 +1144,18 @@ public class EdicionesDAO
         PreparedStatement   ps        = null;
         ResultSet           rs        = null;
 
-        String              sql       = "SELECT " + TablaEdiciones.CODNIVEL + 
+        String              sql       = "SELECT " + TablaEdiciones.CODNIVEL +
                                         " FROM "  + TablaEdiciones.TABLA    +
                                         " WHERE " + TablaEdiciones.CODNIVEL + " = ?";
-        
+
         boolean             hayNivEdi = false;
-   
+
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros a la consulta sql
-            ps.setString(1, codNivel);                        
+            ps.setString(1, codNivel);
             rs = ps.executeQuery();
 
             if (rs.next())
@@ -1167,7 +1165,7 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-            
+
             return hayNivEdi;
         }
         catch (Exception exc)
@@ -1180,11 +1178,11 @@ public class EdicionesDAO
             {
                 Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de edición de todas las ediciones de un determinado tutor
     public static Vector devolverEdiTutor(String codProf,Connection con) throws Exception
     {
@@ -1192,23 +1190,23 @@ public class EdicionesDAO
         ResultSet         rs       = null;
 
         String            sql      = "SELECT " + TablaEdiciones.CODEDI       + " , "
-                                               + TablaEdiciones.CODCURSO     + " , " 
+                                               + TablaEdiciones.CODCURSO     + " , "
                                                + TablaEdiciones.CODNIVEL     + " , "
-                                               + TablaEdiciones.FECHAINICIO  + " , " 
-                                               + TablaEdiciones.FECHAFIN     + " , " 
-                                               + TablaEdiciones.PLAZAS       + " , " 
+                                               + TablaEdiciones.FECHAINICIO  + " , "
+                                               + TablaEdiciones.FECHAFIN     + " , "
+                                               + TablaEdiciones.PLAZAS       + " , "
                                                + TablaEdiciones.HORAS        + " , "
-                                               + TablaEdiciones.HORAINICIO   + " , " 
-                                               + TablaEdiciones.HORAFIN      + " , " 
-                                               + TablaEdiciones.PRECIOMATRIC + " , " 
-                                               + TablaEdiciones.PRECIORECIBO + " , " 
-                                               + TablaEdiciones.PRECIOTOTAL  + " , " 
-                                               + TablaEdiciones.CLASELUNES   + " , " 
-                                               + TablaEdiciones.CLASEMARTES  + " , " 
-                                               + TablaEdiciones.CLASEMIERC   + " , " 
-                                               + TablaEdiciones.CLASEJUEVES  + " , " 
+                                               + TablaEdiciones.HORAINICIO   + " , "
+                                               + TablaEdiciones.HORAFIN      + " , "
+                                               + TablaEdiciones.PRECIOMATRIC + " , "
+                                               + TablaEdiciones.PRECIORECIBO + " , "
+                                               + TablaEdiciones.PRECIOTOTAL  + " , "
+                                               + TablaEdiciones.CLASELUNES   + " , "
+                                               + TablaEdiciones.CLASEMARTES  + " , "
+                                               + TablaEdiciones.CLASEMIERC   + " , "
+                                               + TablaEdiciones.CLASEJUEVES  + " , "
                                                + TablaEdiciones.CLASEVIERNES + " , "
-                                               + TablaEdiciones.CLASESABADO  + " , " 
+                                               + TablaEdiciones.CLASESABADO  + " , "
                                                + TablaEdiciones.CODCENTRO    + " , "
                                                + TablaEdiciones.MINUTOINICIO + " , "
                                                + TablaEdiciones.MINUTOFIN    + " , "
@@ -1235,7 +1233,7 @@ public class EdicionesDAO
                                      " FROM "  + TablaEdiciones.TABLA        +
                                      " WHERE " + TablaEdiciones.CODPROF      + " = ? " +
                                      " ORDER BY " + TablaEdiciones.FECHAINICIO + " DESC";
-                     
+
         Vector            listaEdi = new Vector();
 
         EdicionesVO       datEdi   = null;
@@ -1246,7 +1244,7 @@ public class EdicionesDAO
 
             //Se pasan los parámetros
             ps.setString(1, codProf);
-            
+
             rs  = ps.executeQuery();
 
             while (rs.next())
@@ -1300,7 +1298,7 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-           
+
             return listaEdi;
         }
         catch (Exception exc)

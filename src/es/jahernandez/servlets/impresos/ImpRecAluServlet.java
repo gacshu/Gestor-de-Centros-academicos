@@ -12,6 +12,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -49,7 +50,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpRecAluServlet extends HttpServlet 
+public class ImpRecAluServlet extends HttpServlet
 {
 
     /**
@@ -63,32 +64,32 @@ public class ImpRecAluServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         HttpSession    sesion = request.getSession();
         ServletContext sc     = null;
-        
+
         ConUsuVO       user   = (ConUsuVO) sesion.getAttribute("usuario");
-        
-        
+
+
         //Se generan los recibos sino se han generado. Si se han generado, simplemente se muestran.
-        String mesAc   = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));   
-        String annoAc  = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));  
-          
+        String mesAc   = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));
+        String annoAc  = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir recibos" );
-               
+
         }
-        
-        
+
+
         if(! ControlRecGestion.generadosRec(annoAc + mesAc))
         {
             AlumnosVO   aluVO        = null;
@@ -107,10 +108,10 @@ public class ImpRecAluServlet extends HttpServlet
             //Se cargan datos de la lista de recibos
             listaRecibos = AluEdiGestion.devRecAluEdi();
 
-            conUsVO = (ConUsuVO) sesion.getAttribute("usuario");  
+            conUsVO = (ConUsuVO) sesion.getAttribute("usuario");
             // step 1
             Document document = new Document();
-            
+
             Paragraph par14  = null;
 
             //Instrucciones para meter los datos de concepto en una tabla
@@ -133,7 +134,7 @@ public class ImpRecAluServlet extends HttpServlet
             Phrase    frasImportCur = null;
             Paragraph parIma        = new Paragraph();
             Image     logoImage     = null;
-            
+
             String    strRecibo     = "";
             String    strDatAlu     = "";
             String    strDatNumRec  = "";
@@ -143,33 +144,33 @@ public class ImpRecAluServlet extends HttpServlet
             String    strFecVenRec  = "";
             String    strDatCuenta  = "";
             String    strNombreBan  = "";
-            
+
             tablaRecibo.setWidthPercentage(100);
             tablaDatAlu.setWidthPercentage(100);
-            
+
             tablaFin.setWidthPercentage(100);
             tablaFec.setWidthPercentage(100);
 
             tablaFec.setWidthPercentage(100);
 
-            
+
             //iTextSharp.text.Image logoImage = null; // iTextSharp.text.Image.GetInstance(System.Web.HttpContext.Current.Server.MapPath("~/imagenes/logoEnTeST.jpg"));
-            
+
             try
             {
                 sc = getServletContext();
-                
+
                 // step 2: we set the ContentType and create an instance of the Writer
                 PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-                
-                
+
+
                 // step 3
                 document.setMargins(32, 32, 16, 0);
                 document.open();
-                
+
                 for(int ind=0 ; ind<listaRecibos.size() ; ind++)
                 {
-                    
+
                     aluVO  = AlumnosGestion.devolverDatosAlumno( ((AluEdiVO) listaRecibos.elementAt(ind)).getIdAlu());
                     ediVO  = EdicionesGestion.devolverDatosEdi ( ((AluEdiVO) listaRecibos.elementAt(ind)).getIdEdi());
                     curVO  = CursosGestion.devolverDatosCurso  (ediVO.getIdCur());
@@ -183,7 +184,7 @@ public class ImpRecAluServlet extends HttpServlet
                     if(ediVO.getCodCen() == conUsVO.getIdCentro() || conUsVO.getIdCentro()==0)
                     {
                         hayPag = true;
-                        
+
                         tablaRecibo = new PdfPTable(1);
                         tablaRecibo.setWidthPercentage(100);
                         tablaDatAlu = new PdfPTable(1);
@@ -203,13 +204,13 @@ public class ImpRecAluServlet extends HttpServlet
 
                         par14.font().setSize(8);
                         parIma = new Paragraph();
-                        parIma.setAlignment(Image.ALIGN_LEFT);
+                        parIma.setAlignment(Element.ALIGN_LEFT);
                         parIma.add(logoImage);
 
                         // step 4
 
                         //Mostramos cabecera
-                        
+
                         strDatNumRec  = "RECIBO NUMERO\n" + annoAc + "/" + mesAc + "-" + (ind+1);
                         frasDatNumRec = new Phrase(strDatNumRec, new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
                         frasDatNumRec.font().setSize(12);
@@ -223,7 +224,7 @@ public class ImpRecAluServlet extends HttpServlet
                         cellDatLocRec = new PdfPCell(frasLocExpedi);
                         tablaFin.addCell(cellDatLocRec);
 
-                        strDatImpRec = "IMPORTE\n           " + ediVO.getPrecioR() + " €"; 
+                        strDatImpRec = "IMPORTE\n           " + ediVO.getPrecioR() + " €";
                         frasImportCur = new Phrase(strDatImpRec, new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
                         frasImportCur.font().setSize(12);
                         frasImportCur.font().setStyle(Font.BOLD);
@@ -237,7 +238,7 @@ public class ImpRecAluServlet extends HttpServlet
                         strFecVenRec = "FECHA VENCIMIENTO\n" + new SimpleDateFormat("dd/MM/yyy").format(new Date(System.currentTimeMillis() + 432000000  ));
                         cellFecVenRec = new PdfPCell(new Phrase(strFecVenRec));
                         tablaFec.addCell(cellFecVenRec);
-                        
+
                         strDatCuenta = "PAGADERO EN CAJA O BANCO        OFICINA       CLAVE O NÚMERO DE CUENTA\n";
                         if (alEvo.getNumCuenta().trim().equals(""))
                         {
@@ -247,7 +248,7 @@ public class ImpRecAluServlet extends HttpServlet
                         {
                             strNombreBan = BancosGestion.devolverNombreBanco(alEvo.getNumCuenta().substring(0,4));
                             strNombreBan = strNombreBan + "                                                 ";
-                            
+
                             strNombreBan = strNombreBan.substring(0, 30);
 
                             strDatCuenta = strDatCuenta + strNombreBan + "   " +  alEvo.getNumCuenta().substring(4,4) + "             "  + alEvo.getNumCuenta() ;
@@ -280,7 +281,7 @@ public class ImpRecAluServlet extends HttpServlet
                         document.add(new Paragraph(" "));
                         document.add(tablaDatAlu);
                         document.add(par14);
-                        
+
                         document.add(new Paragraph(" "));
 
                         document.add(parIma);
@@ -317,16 +318,16 @@ public class ImpRecAluServlet extends HttpServlet
                 ControlRecVO contRecVO  = new ControlRecVO();
                 String       mesActual  = mesAc;
                 String       annoActual = annoAc;
-             
+
                 contRecVO.setFecha(annoActual + mesActual);
                 contRecVO.setIdCentro(conUsVO.getIdCentro());
 
                 ControlRecGestion.guardarControlRec(contRecVO);
-                
+
                 if (!hayPag)
                 {
                     document.add(new Paragraph("No existen recibos que generar"));
-                    //document.close();                    
+                    //document.close();
                 }
 
             }
@@ -334,10 +335,10 @@ public class ImpRecAluServlet extends HttpServlet
             {
                 ex.getCause();
             }
-            
+
             // step 5: Close document
             document.close();
-            
+
         }
         else
         {
@@ -350,11 +351,11 @@ public class ImpRecAluServlet extends HttpServlet
             if(user.getIdCentro() != 0)
             {
                 rutaRed = rutaRed + "&lstCentro=" + user.getIdCentro();
-            }    
+            }
 
             //document.add(new Paragraph("No existen recibos que generar"));
             response.sendRedirect(rutaRed);
-            
+
             //response.sendRedirect("./impRecGenServler");
         }
     }
@@ -396,12 +397,12 @@ public class ImpRecAluServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Imprimir recibos alumnos servlet";
     }// </editor-fold>
-    
-    
+
+
     private String devuelveMes(int mes)
     {
         switch (mes)

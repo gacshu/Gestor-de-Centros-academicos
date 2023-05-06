@@ -5,20 +5,21 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.TipTrastDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.TipTrastVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.TipTrastDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.TipTrastVO;
+
 /**
  *
  * @author Alberto
  */
-public class TipTrastGestion 
+public class TipTrastGestion
 {
      //Método que devuelve los datos de tipo Trastorno
     public static Vector devolverTodTipTrast()
@@ -47,9 +48,9 @@ public class TipTrastGestion
             return null;
         }
     }
-    
+
     //Método que devuelve el nombre de un tipo de trastorno
-    public static String devuelveNombreTipoTrastorno(String codTrast) 
+    public static String devuelveNombreTipoTrastorno(String codTrast)
     {
         Connection        con       = null;
         String            nomTrast  = "";
@@ -75,7 +76,7 @@ public class TipTrastGestion
             return null;
         }
     }
-    
+
     //Genera un nuevo código de tipo trastorno
     public static String generarNuevoCodTipTrast()
     {
@@ -87,7 +88,7 @@ public class TipTrastGestion
     {
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -110,7 +111,7 @@ public class TipTrastGestion
             return -1;
         }
     }
-    
+
     //Edita el registro de un tipo de trastorno
     public static int editarTipTrast(TipTrastVO tipTrastVO)
     {

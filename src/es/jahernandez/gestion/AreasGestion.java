@@ -20,7 +20,7 @@ import es.jahernandez.datos.Conexion;
  *
  * @author JuanAlberto
  */
-public class AreasGestion 
+public class AreasGestion
 {
      //Método que devuelve los datos de Área
     public static Vector devolverTodAreas()
@@ -49,9 +49,9 @@ public class AreasGestion
             return null;
         }
     }
-    
+
     //Método que devuelve el nombre de un área
-    public static String devuelveNombreArea(String codArea) 
+    public static String devuelveNombreArea(String codArea)
     {
         Connection       con        = null;
         String           nombreArea = "";
@@ -77,14 +77,14 @@ public class AreasGestion
             return null;
         }
     }
-    
+
     //Genera un nuevo código de Área
     public static String generarNuevoCodArea()
     {
         String codIntrod = "";
-        
+
         codIntrod = AreasDAO.generarNuevoCodArea();
-        
+
         return codIntrod;
     }
 
@@ -93,7 +93,7 @@ public class AreasGestion
     {
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -116,7 +116,7 @@ public class AreasGestion
             return -1;
         }
     }
-    
+
     //Edita el registro de un Área
     public static int editarArea(AreasVO areaVO)
     {
@@ -145,7 +145,7 @@ public class AreasGestion
         }
     }
 
-    public static Vector devolverAreasProf(String codProf) 
+    public static Vector devolverAreasProf(String codProf)
     {
         Connection        con            = null;
         Vector            listaAreas     = new Vector();
@@ -155,7 +155,7 @@ public class AreasGestion
             con = Conexion.conectar();
             listaAreas = AreasDAO.devolverAreasProf(codProf,con);
             Conexion.desconectar(con);
-            
+
             return listaAreas;
         }
         catch (Exception exc)

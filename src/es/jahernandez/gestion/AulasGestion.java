@@ -19,15 +19,15 @@ import es.jahernandez.datos.Conexion;
  *
  * @author JuanAlberto
  */
-public class AulasGestion 
+public class AulasGestion
 {
     //Método que genera un nuevo código de Aula
     public static String generarNuevoCodAula()
     {
         String    codIntrod = "";
-        
+
         codIntrod = AulasDAO.generarNuevoCodAula();
-        
+
         return codIntrod;
     }
 
@@ -96,7 +96,7 @@ public class AulasGestion
     {
         Connection        con             = null;
         String            nueCodAul       = generarNuevoCodAula();
-        
+
         try
         {
             con = Conexion.conectar();

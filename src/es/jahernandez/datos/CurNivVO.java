@@ -20,7 +20,7 @@ public class CurNivVO
         idNiv = "";
         idCur = "";
     }
-            
+
     /**
      * @return the idNiv
      */

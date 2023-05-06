@@ -32,13 +32,13 @@ public class CerrarSesionServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession sesion = request.getSession();
-        
+
         sesion.invalidate();
-        
+
         response.sendRedirect("./loginAp.jsp");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

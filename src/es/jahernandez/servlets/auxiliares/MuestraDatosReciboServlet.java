@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author JuanAlberto
  */
-public class MuestraDatosReciboServlet extends HttpServlet 
+public class MuestraDatosReciboServlet extends HttpServlet
 {
       /**
      * Processes requests for both HTTP
@@ -34,44 +34,44 @@ public class MuestraDatosReciboServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+
         PrintWriter out    = response.getWriter();
-         
+
         HisRecVO hisRecVO  = new HisRecVO();
-        
+
        if(request.getParameter("numRec") != null && request.getParameter("codAlu") != null )
        {
            hisRecVO = HisRecGestion.devDatRecHis(request.getParameter("numRec"),request.getParameter("codAlu"));
        }
-          
-       try 
-       {            
-           
+
+       try
+       {
+
             out.printf("function Recibo() {");
             out.printf("this.fechaEx="   + "'" + new SimpleDateFormat("dd/MM/yyy").format(hisRecVO.getFecExp()) + "';");
             out.printf("this.curso="     + "'" + CursosGestion.devolverDatosCurso(hisRecVO.getIdCur()).getNomCur()  + "';");
             out.printf("this.importe="   + "'" + EdicionesGestion.devolverDatosEdi(hisRecVO.getIdEdi()).getPrecioR()+ "';");
-            
+
             out.printf("}");
-       } 
-       finally 
-       {            
+       }
+       finally
+       {
             if (out!=null)
             {
                 out.flush();
-                out.close();        
+                out.close();
             }
-       } 
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

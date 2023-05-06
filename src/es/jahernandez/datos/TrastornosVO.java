@@ -8,21 +8,21 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class TrastornosVO 
+public class TrastornosVO
 {
     private String  codTrastorno;
     private String  idAlu;
     private String  codTipoTrastorno;
     private boolean medicado;
     private String  medicacion;
-    
+
     public TrastornosVO()
     {
-        codTrastorno     = ""; 
+        codTrastorno     = "";
         idAlu            = "";
         codTipoTrastorno = "";
         medicado         = false;
-        medicacion       = ""; 
+        medicacion       = "";
     }
 
     /**
@@ -94,5 +94,5 @@ public class TrastornosVO
     public void setMedicacion(String medicacion) {
         this.medicacion = medicacion;
     }
-    
+
 }

@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Image;
+import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
@@ -55,14 +55,14 @@ public class ImpSegAlumServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-     
+
         ServletContext sc     = null;
         HttpSession    sesion = request.getSession();
-        
+
         AlumnosVO   aluVO   = null;
         EdicionesVO ediVO   = null;
         CursosVO    curVO   = null;
@@ -71,38 +71,38 @@ public class ImpSegAlumServlet extends HttpServlet {
 
         String      codEdi  = "";
         String      nomMes  = "";
-        String      nomCent = ""; 
-        
+        String      nomCent = "";
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir seguimiento alumnos" );
-               
+
         }
-        
-        
+
+
         if(request.getParameter("codEdi") != null)
         {
             codEdi = request.getParameter("codEdi");
         }
-        
+
         if(request.getParameter("txtMes") != null)
         {
             nomMes = request.getParameter("txtMes").toUpperCase();
         }
-        
+
         if(request.getParameter("txtCent") != null)
         {
             nomCent = CentrosGestion.nomCentro(request.getParameter("txtCent"));
         }
-        
-        
+
+
         ediVO = EdicionesGestion.devolverDatosEdi(codEdi);
         curVO = CursosGestion.devolverDatosCurso(ediVO.getIdCur());
 
@@ -117,9 +117,9 @@ public class ImpSegAlumServlet extends HttpServlet {
 
         String  cl1   =  nomCent + "                                                                                                         F-25";
         String  clSeg = "SEGUIMIENTO DEL ALUMNO";
-        String  cl2   = ""; 
+        String  cl2   = "";
         String  cl3   = "CURSO: " + curVO.getNomCur();
-        String  cl4   = "FECHA INICIO:" + new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecIn()) + "              FECHA FIN: " + new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecFi());   
+        String  cl4   = "FECHA INICIO:" + new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecIn()) + "              FECHA FIN: " + new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecFi());
 
         String  litFec = "Fecha Hora";
         String  litObs = "Tema/Observaciones";
@@ -142,7 +142,7 @@ public class ImpSegAlumServlet extends HttpServlet {
         Paragraph parFin = new Paragraph(litPag);
 
         parFin.font().setSize(12);
-        parFin.setAlignment(Image.ALIGN_CENTER);
+        parFin.setAlignment(Element.ALIGN_CENTER);
 
         fra1.font().setSize(16);
         fra2.font().setSize(14);
@@ -150,12 +150,12 @@ public class ImpSegAlumServlet extends HttpServlet {
         fra4.font().setSize(14);
 
         fraSeg.font().setSize(14);
-        
+
         fraFec.font().setSize(12);
         fraObs.font().setSize(12);
         fraFPr.font().setSize(12);
         fraFAl.font().setSize(12);
-        
+
         PdfPCell   cellSeg = null;
         PdfPCell   cellHor = null;
         PdfPCell   cellTem = null;
@@ -165,16 +165,16 @@ public class ImpSegAlumServlet extends HttpServlet {
 
         // step 1
         Document document = new Document();
-        
-        
+
+
         try
         {
             sc = getServletContext();
-            
-            
+
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.setPageSize(PageSize.A4.rotate());
             document.setMargins(16, 16, 16, 16);
@@ -184,7 +184,7 @@ public class ImpSegAlumServlet extends HttpServlet {
             {
                 aluVO = AlumnosGestion.devolverDatosAlumno( ((AluEdiVO) listaAlu.elementAt(ind)).getIdAlu());
                 alEvo = AluEdiGestion.devDatAluEdi(aluVO.getIdAlu(), ediVO.getIdEdi());
-                
+
                 hayPag = true;
 
                 // step 4
@@ -210,35 +210,35 @@ public class ImpSegAlumServlet extends HttpServlet {
 
                 cellSeg = new PdfPCell(fraSeg);
                 cellSeg.setBackgroundColor(Color.LIGHT_GRAY);
-                cellSeg.setHorizontalAlignment(Image.ALIGN_CENTER);
+                cellSeg.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tablaDatSeg.setSpacingAfter(5f);
                 tablaDatSeg.setSpacingBefore(5f);
                 tablaDatSeg.addCell(cellSeg);
-            
+
                 tablaDatAlu.setSpacingAfter(5f);
                 tablaDatAlu.setSpacingBefore(5f);
 
                 //Se genera la cabecera de la tabla
                 cellHor = new PdfPCell(fraFec);
                 cellHor.setMinimumHeight(20);
-                cellHor.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellHor.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellHor);
 
                 cellTem = new PdfPCell(fraObs);
-                cellTem.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellTem.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellTem);
 
                 cellFPr = new PdfPCell(fraFPr);
-                cellFPr.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellFPr.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellFPr);
 
                 cellFAl = new PdfPCell(fraFAl);
-                cellFAl.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellFAl.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellFAl);
-                
+
                 cellFAl = new PdfPCell(new Phrase(""));
                 cellFAl.setMinimumHeight(350);
-                
+
                 tablaDatAlu.addCell(cellFAl);
                 tablaDatAlu.addCell(cellFAl);
                 tablaDatAlu.addCell(cellFAl);
@@ -255,7 +255,7 @@ public class ImpSegAlumServlet extends HttpServlet {
 
                 document.newPage();
             }
-            
+
             if (!hayPag)
             {
                 document.add(new Paragraph("No existen alumnos para generar listado"));

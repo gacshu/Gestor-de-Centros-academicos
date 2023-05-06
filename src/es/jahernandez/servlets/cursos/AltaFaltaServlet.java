@@ -38,43 +38,43 @@ public class AltaFaltaServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion     = request.getSession();
-        
+
         FaltasVO         faltaVO    = new FaltasVO();
         int              resAlt     = 0;
 
         Logger           log        = null;
         ConUsuVO         conUsoVO   = null;
-        String           indPag     = "";   
+        String           indPag     = "";
         boolean          pagPestana = false;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta falta individual" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodAlu") != null)
         {
             faltaVO.setIdAlu(request.getParameter("txtCodAlu").trim());
         }
-        
+
         if(request.getParameter("txtCodEdi") != null)
         {
             faltaVO.setIdEdi(request.getParameter("txtCodEdi").trim());
         }
-        
+
         if(request.getParameter("lstNuevoMod") != null)
         {
             faltaVO.setIdMod(request.getParameter("lstNuevoMod").trim());
         }
-        
+
         if(request.getParameter("hidNuevaFecha") != null &&
           !request.getParameter("hidNuevaFecha").equals(""))
         {
@@ -83,25 +83,25 @@ public class AltaFaltaServlet extends HttpServlet
                                                    new Integer(strFechaFal.substring(3,5)).intValue() - 1,
                                                    new Integer(strFechaFal.substring(0,2)).intValue()).getTime());
         }
-        
-        
+
+
         if(request.getParameter("chkNuevoJust") != null &&
            request.getParameter("chkNuevoJust").trim().equals("true"))
         {
             faltaVO.setJustificada(true);
         }
-        
-                 
+
+
         if(request.getParameter("pagPest") != null)
         {
             pagPestana = true;
         }
-                
+
         if(request.getParameter("valInfFalta") != null)
         {
             indPag = request.getParameter("valInfFalta").trim();
         }
-        
+
         resAlt = FaltasGestion.guardarFalta(faltaVO);
 
         if(resAlt > 0)
@@ -127,14 +127,14 @@ public class AltaFaltaServlet extends HttpServlet
             {
                 response.sendRedirect("./interesados/faltasFichaAlumno.jsp?codInt="      + faltaVO.getIdAlu()
                                                                        + "&codEdi="      + faltaVO.getIdEdi()
-                                                                       + "&valInfFalta=" + indPag 
+                                                                       + "&valInfFalta=" + indPag
                                                                        + "&errorCode="   + resAlt);
             }
             else
             {
                 response.sendRedirect("./ediciones/gestionFaltas.jsp?codInt="      + faltaVO.getIdAlu()
                                                                  + "&codEdi="      + faltaVO.getIdEdi()
-                                                                 + "&valInfFalta=" + indPag 
+                                                                 + "&valInfFalta=" + indPag
                                                                  + "&errorCode="   + resAlt);
             }
         }
@@ -177,7 +177,7 @@ public class AltaFaltaServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Alta falta Servlet";
     }// </editor-fold>

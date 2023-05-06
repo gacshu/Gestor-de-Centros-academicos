@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaAreaProfServlet extends HttpServlet  
+public class AltaAreaProfServlet extends HttpServlet
 {
         /**
      * Processes requests for both HTTP
@@ -35,57 +35,57 @@ public class AltaAreaProfServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         ProfAreaVO    profAreaVO   = new ProfAreaVO();
         int           resultadoAlt = 0;
         String        pagAreaProf  = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta Ã�rea profesor " );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parÃ¡metros y se inicializan valores
         if(request.getParameter("hidCodProf") != null)
         {
             profAreaVO.setCodProf(request.getParameter("hidCodProf").trim());
         }
-       
+
         if(request.getParameter("lstNuevoArea") != null)
         {
             profAreaVO.setCodArea(request.getParameter("lstNuevoArea").trim());
-        }      
-        
+        }
+
         if(request.getParameter("valInfProfArea") != null)
         {
             pagAreaProf =  request.getParameter("valInfProfArea");
-        } 
-         
+        }
+
         resultadoAlt = ProfAreaGestion.guardarProfArea(profAreaVO);
-        
+
         if(resultadoAlt <= 0)
         {
-            
+
             //Redireccionar a gestiÃ³n areas
             response.sendRedirect("profesores/gestionAreas.jsp?codProf="        + profAreaVO.getCodProf()
-                                                           + "&errorCode="      + resultadoAlt 
+                                                           + "&errorCode="      + resultadoAlt
                                                            + "&valInfProfArea=" + pagAreaProf);
         }
         else
-        {            
+        {
             //Redireccionar a gestiÃ³n areas
             response.sendRedirect("profesores/gestionAreas.jsp?codProf="        + profAreaVO.getCodProf()
                                                            + "&valInfProfArea=" + pagAreaProf);

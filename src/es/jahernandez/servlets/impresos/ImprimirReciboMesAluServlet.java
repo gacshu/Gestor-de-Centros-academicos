@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -48,7 +49,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImprimirReciboMesAluServlet extends HttpServlet 
+public class ImprimirReciboMesAluServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -61,12 +62,12 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         HttpSession    sesion       = request.getSession();
         ServletContext sc           = null;
-        
+
         AlumnosVO      aluVO        = null;
         EdicionesVO    ediVO        = null;
         CursosVO       curVO        = null;
@@ -75,32 +76,32 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
         boolean        generaPag    = false;
 
         ConUsuVO       conUsVO      = new ConUsuVO();
-           
-        String         mesAc        = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));   
-        String         annoAc       = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));  
-        
+
+        String         mesAc        = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));
+        String         annoAc       = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));
+
 
         Date           fechaHoy     = new Date(System.currentTimeMillis());
 
         Vector         listaRecibos = new Vector();
 
         int            numRecMes    = 0;
-        
+
         conUsVO =(ConUsuVO) sesion.getAttribute("usuario");
 
         Logger         log      = null;
-       
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsVO.getUsuario() + "               " ).substring(0,10) + "Imprimir recibo mes alumno" );
-               
+
         }
-        
-        
+
+
         //Se cargan datos de la lista de recibos
         listaRecibos = AluEdiGestion.devRecPendAluEdi();
         numRecMes = HisRecGestion.devNumRecMes(annoAc + "/" + mesAc);
@@ -126,7 +127,7 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
         Phrase   frasDatNumRec = null;
         Phrase   frasLocExpedi = null;
         Phrase   frasImportCur = null;
-        
+
         String   strDatNumRec  = "";
         String   strDatLocRec  = "";
         String   strDatImpRec  = "";
@@ -136,12 +137,12 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
         String   strNombreBan  = "";
         String   strRecibo     = "";
         String   strDatAlu     = "";
-        
+
         tablaRecibo.setWidthPercentage(100);
-        
+
         PdfPTable tablaDatAlu = new PdfPTable(1);
         tablaDatAlu.setWidthPercentage(100);
-       
+
         PdfPTable tablaFin = new PdfPTable(3);
         tablaFin.setWidthPercentage(100);
 
@@ -154,30 +155,30 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
         Paragraph parIma = new Paragraph();
         Image     logoImage = null; // iTextSharp.text.Image.GetInstance(System.Web.HttpContext.Current.Server.MapPath("~/imagenes/logoEnTeST.jpg"));
 
-        
+
         String    codAlu = "";
         String    codEdi = "";
-        
+
          // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codAlu") != null)
         {
            codAlu = request.getParameter("codAlu").trim();
         }
-       
+
         if(request.getParameter("codEdi") != null)
         {
            codEdi = request.getParameter("codEdi").trim();
         }
-        
-        
+
+
 
         try
         {
             sc = getServletContext();
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.setMargins(32, 32, 16, 0);
             document.open();
@@ -186,10 +187,10 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
 
             aluVO = AlumnosGestion.devolverDatosAlumno(codAlu);
             ediVO = EdicionesGestion.devolverDatosEdi(codEdi);
-            
+
             if (! HisRecGestion.reciboGenerado( codAlu, codEdi ) && ediVO.getPrecioR() > 0)
-            {          
-                
+            {
+
                 curVO = CursosGestion.devolverDatosCurso(ediVO.getIdCur());
                 alEvo = AluEdiGestion.devDatAluEdi(aluVO.getIdAlu() , ediVO.getIdEdi() );
 
@@ -219,7 +220,7 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
 
                     par14.font().setSize(8);
                     parIma = new Paragraph();
-                    parIma.setAlignment(Image.ALIGN_LEFT);
+                    parIma.setAlignment(Element.ALIGN_LEFT);
                     parIma.add(logoImage);
 
                     // step 4
@@ -335,7 +336,7 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
                     //Fin control centro
                 }
             }
-            
+
 
             if (! generaPag)
             {
@@ -348,8 +349,8 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
               ex.getCause();
         }
         // step 5: Close document
-        
-        
+
+
         document.close();
 
     }
@@ -394,7 +395,7 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
     public String getServletInfo() {
         return "Imprimir recibos pendientes servlet";
     }// </editor-fold>
-    
+
     private String devuelveMes(int mes)
     {
         switch (mes)
@@ -414,5 +415,5 @@ public class ImprimirReciboMesAluServlet extends HttpServlet
             default: return null;
         }
     }
-    
+
 }

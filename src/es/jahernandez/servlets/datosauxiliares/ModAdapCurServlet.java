@@ -35,40 +35,40 @@ public class ModAdapCurServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion       = request.getSession();
         AdapCurricularVO adapCurVO    = new AdapCurricularVO();
         int              resultadoEdi = -99;
         String           pagAdapCur   = "0";
-        
+
         Logger           log          = null;
         ConUsuVO         conUsoVO     = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Edición Adaptación curricular" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodAdapCur") != null)
         {
             adapCurVO.setCodAdapCur(request.getParameter("txtCodAdapCur").trim());
         }
-        
+
         if(request.getParameter("codInt") != null)
         {
             adapCurVO.setIdAlu(request.getParameter("codInt").trim());
         }
-       
+
         if(request.getParameter("txtMateria" + adapCurVO.getCodAdapCur()) != null)
         {
             adapCurVO.setMateria(request.getParameter("txtMateria" + adapCurVO.getCodAdapCur()).trim());
@@ -77,30 +77,30 @@ public class ModAdapCurServlet extends HttpServlet
         if(request.getParameter("txtCurso" + adapCurVO.getCodAdapCur()) != null)
         {
             adapCurVO.setCurso(request.getParameter("txtCurso" + adapCurVO.getCodAdapCur()).trim());
-        }      
-        
+        }
+
         if(request.getParameter("valInfACu") != null)
         {
             pagAdapCur =  request.getParameter("valInfACu");
-        } 
-        
-        
+        }
+
+
 
         resultadoEdi = AdapCurricularGestion.editaAdapCur(adapCurVO);
-        
+
         if(resultadoEdi <= 0)
         {
-            
+
             //Redireccionar a gestión niveles
             response.sendRedirect("interesados/adapCurFichaAlumno.jsp?codInt="    + adapCurVO.getIdAlu()
-                                                                  + "&valInfAC="  + pagAdapCur 
+                                                                  + "&valInfAC="  + pagAdapCur
                                                                   + "&errorEdi="  + resultadoEdi);
         }
         else
-        {            
+        {
             //Redireccionar a gestión niveles
             response.sendRedirect("interesados/adapCurFichaAlumno.jsp?codInt="    + adapCurVO.getIdAlu()
-                                                                  + "&valInfAC="  + pagAdapCur);                                                                   
+                                                                  + "&valInfAC="  + pagAdapCur);
         }
     }
 

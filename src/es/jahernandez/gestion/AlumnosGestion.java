@@ -20,9 +20,9 @@ import es.jahernandez.datos.DatosBusquedaAlumnos;
  *
  * @author JuanAlberto
  */
-public class AlumnosGestion 
-{           
-        
+public class AlumnosGestion
+{
+
     //Método que devuelve los datos de búsqueda de alumnos con curso
     public static Vector devolverDatosConsulta(String cadenaConsulta)
     {
@@ -61,7 +61,7 @@ public class AlumnosGestion
 
         try
         {
-            con = Conexion.conectar();    
+            con = Conexion.conectar();
             listaAlumnos = AlumnosDAO.devolverDatosConsAlumno(datBA, con);
             Conexion.desconectar(con);
 
@@ -93,7 +93,7 @@ public class AlumnosGestion
             con = Conexion.conectar();
             listaAlumnos = AlumnosDAO.devolverDatosConsCurso(cadenaConsulta, con);
             Conexion.desconectar(con);
-            
+
             return listaAlumnos;
         }
         catch (Exception exc)
@@ -147,7 +147,7 @@ public class AlumnosGestion
     {
         String  codIntrod = "";
         codIntrod = AlumnosDAO.generarNuevoCodAluB();
-        
+
         return codIntrod;
     }
 
@@ -179,12 +179,12 @@ public class AlumnosGestion
             return null;
         }
     }
-    
+
     //Método que devuelve los datos de alumnos por orden alfabético
     public static Vector devolverTodosAluOrd()
     {
         Connection        con          = null;
-        
+
         Vector            listaAlumnos = new Vector();
 
         try
@@ -208,8 +208,8 @@ public class AlumnosGestion
 
             return null;
         }
-    }                
-                
+    }
+
     //Edita el registro de un interesado
     public static int editaAlumno(AlumnosVO aluVO)
     {
@@ -253,7 +253,7 @@ public class AlumnosGestion
             Conexion.desconectar(con);
 
             return regActualizados; //Todo borrado correctamente
-               
+
         }
         catch (Exception exc)
         {
@@ -327,14 +327,14 @@ public class AlumnosGestion
             return "-2";
         }
     }
-    
+
     //Genera un nuevo código de Alumno
     public static String generarNuevoCodAlu()
     {
         String  codIntrod = "";
-        
+
         codIntrod = AlumnosDAO.generarNuevoCodAlu();
-        
+
         return codIntrod;
     }
 
@@ -377,7 +377,7 @@ public class AlumnosGestion
             con = Conexion.conectar();
             existeDNI = AlumnosDAO.existeDniAlumno(numDoc, con);
             Conexion.desconectar(con);
-                        
+
             return existeDNI;
 
         }

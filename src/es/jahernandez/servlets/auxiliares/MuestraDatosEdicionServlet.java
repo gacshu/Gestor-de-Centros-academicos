@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author JuanAlberto
  */
-public class MuestraDatosEdicionServlet extends HttpServlet 
+public class MuestraDatosEdicionServlet extends HttpServlet
 {
       /**
      * Processes requests for both HTTP
@@ -32,31 +32,31 @@ public class MuestraDatosEdicionServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+
         PrintWriter out    = response.getWriter();
-         
+
         EdicionesVO ediVO  = null;
-        
-        
-        
+
+
+
        if(request.getParameter("codEdi") != null)
        {
            ediVO = EdicionesGestion.devolverDatosEdi(request.getParameter("codEdi"));
        }
-          
-       try 
-       {            
-           
+
+       try
+       {
+
             out.printf("function Edicion() {");
             out.printf("this.fechaIn="   + "'" + new SimpleDateFormat("dd/MM/yyy").format(ediVO.getFecIn()) + "';");
             out.printf("this.fechaFi="   + "'" + new SimpleDateFormat("dd/MM/yyy").format(ediVO.getFecFi()) + "';");
@@ -68,15 +68,15 @@ public class MuestraDatosEdicionServlet extends HttpServlet
             out.printf("this.precioMat=" + "'" + ediVO.getPrecioM() + "';");
             out.printf("this.precioRec=" + "'" + ediVO.getPrecioR() + "';");
             out.printf("}");
-       } 
-       finally 
-       {            
+       }
+       finally
+       {
             if (out!=null)
             {
                 out.flush();
-                out.close();        
+                out.close();
             }
-       } 
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

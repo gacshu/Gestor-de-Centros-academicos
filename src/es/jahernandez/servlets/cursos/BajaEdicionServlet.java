@@ -21,10 +21,10 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BajaEdicionServlet extends HttpServlet 
+public class BajaEdicionServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -43,50 +43,50 @@ public class BajaEdicionServlet extends HttpServlet
         String      idEdi        = "";
         String      idCur        = "";
         String      indInf       = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Baja edición" );
-               
+
         }
-       
+
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codEdi") != null)
         {
             idEdi = request.getParameter("codEdi");
         }
-        
+
         if(request.getParameter("codCur") != null)
         {
-            idCur  = request.getParameter("codCur");   
+            idCur  = request.getParameter("codCur");
         }
-        
+
         if(request.getParameter("valInfEdi") != null)
         {
             indInf = request.getParameter("valInfEdi");
         }
-        
-        
+
+
         resultadoBor = EdicionesGestion.eliminarDatosEdi(idEdi);
 
-        
+
         //Redireccionar a página de ficha alumnos
-        response.sendRedirect("ediciones/listEdiCurso.jsp?codCur="   + idCur 
+        response.sendRedirect("ediciones/listEdiCurso.jsp?codCur="   + idCur
                                                       + "&valInfEdi" + indInf);
-        
+
     }
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -97,9 +97,9 @@ public class BajaEdicionServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -112,7 +112,7 @@ public class BajaEdicionServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

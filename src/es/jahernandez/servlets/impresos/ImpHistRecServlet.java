@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -48,7 +49,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpHistRecServlet extends HttpServlet 
+public class ImpHistRecServlet extends HttpServlet
 {
 
     /**
@@ -62,18 +63,18 @@ public class ImpHistRecServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         ServletContext sc  = null;
         HttpSession          sesion   = request.getSession();
-        
+
         AlumnosVO   aluVO  = null;
         EdicionesVO ediVO  = null;
         CursosVO    curVO  = null;
         AluEdiVO    alEvo  = null;
 
         String      codCur = "";
-        String      fec1   = ""; 
+        String      fec1   = "";
         String      fec2   = "";
         String      codAlu = "";
         int         pagado = 0;
@@ -81,75 +82,75 @@ public class ImpHistRecServlet extends HttpServlet
         int         centro = 0;
 
         Vector      listaRecibos = new Vector();
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir historico recibos" );
-               
+
         }
-        
+
 
         if (request.getParameter("lstCursos") != null)
-        { 
+        {
             codCur = request.getParameter("lstCursos");
         }
-        
+
         if (request.getParameter("hidFechaDe") != null &&
            !request.getParameter("hidFechaDe").equals(""))
         {
             String strFechaDe = request.getParameter("hidFechaDe");
-            
-            fec1 = strFechaDe.substring(6,10) + "/" + 
+
+            fec1 = strFechaDe.substring(6,10) + "/" +
                    strFechaDe.substring(3,5)  + "/" +
                    strFechaDe.substring(0,2);
         }
-    
+
         if (request.getParameter("hidFechaA") != null &&
            !request.getParameter("hidFechaA").equals(""))
             {
                 String strFechaA = request.getParameter("hidFechaA");
-                
-                fec2 = strFechaA.substring(6,10) + "/" + 
+
+                fec2 = strFechaA.substring(6,10) + "/" +
                        strFechaA.substring(3,5)  + "/" +
                        strFechaA.substring(0,2);
             }
-                    
+
         if (request.getParameter("lstAlum") != null)
-        { 
+        {
             codAlu = request.getParameter("lstAlum");
             if(codAlu.equals("-1")) codAlu = "";
         }
 
         if (request.getParameter("lstEstado") != null)
-        { 
+        {
             pagado = new Integer(request.getParameter("lstEstado")).intValue();
         }
-        
+
         if (request.getParameter("lstCentro") != null)
-        { 
+        {
             centro = new Integer(request.getParameter("lstCentro")).intValue();
             if(centro == -1) centro = 0;
         }
-   
+
         if (request.getParameter("chkDomic") != null &&
             request.getParameter("chkDomic").equals("true"))
         {
             domici = 1;
         }
-            
+
         //Se cargan datos de la lista de recibos
         listaRecibos = HisRecGestion.devRecHisAluEdi(codCur,fec1,fec2,codAlu,pagado,centro,domici);
-        
+
         // step 1
         Document document = new Document();
-        
+
         Paragraph par14  = null;
 
         //Instrucciones para meter los datos de concepto en una tabla
@@ -172,7 +173,7 @@ public class ImpHistRecServlet extends HttpServlet
         Phrase    frasImportCur = null;
         Paragraph parIma        = new Paragraph();
         Image     logoImage     = null;
-        
+
         String   strRecibo     = "";
         String   strDatAlu     = "";
         String   strDatNumRec  = "";
@@ -182,24 +183,24 @@ public class ImpHistRecServlet extends HttpServlet
         String   strFecVenRec  = "";
         String   strDatCuenta  = "";
         String   strNombreBan  = "";
-        
-        tablaRecibo.setWidthPercentage(100); 
+
+        tablaRecibo.setWidthPercentage(100);
         tablaDatAlu.setWidthPercentage(100);
         tablaFin.setWidthPercentage(100);
         tablaFec.setWidthPercentage(100);
         tablaFec.setWidthPercentage(100);
-        
+
         try
         {
             sc = getServletContext();
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.setMargins(32, 32, 16, 0);
             document.open();
-            
+
             for(int ind=0 ; ind<listaRecibos.size() ; ind++)
             {
                 aluVO = AlumnosGestion.devolverDatosAlumno(((HisRecVO) listaRecibos.elementAt(ind)).getIdAlu());
@@ -220,19 +221,19 @@ public class ImpHistRecServlet extends HttpServlet
 
                 logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
                 logoImage.scaleAbsolute(150, 38);
-                
+
                 par14 = new Paragraph(InformacionConf.nombEmp + " " + InformacionConf.dirEmp + " CIF: " + InformacionConf.CIFEmp, new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
                 strDatLocRec = "LUGAR DE EXPEDICION\n"+ InformacionConf.pobEmp;
-                
+
                 par14.font().setSize(8);
                 parIma = new Paragraph();
-                parIma.setAlignment(Image.ALIGN_LEFT);
+                parIma.setAlignment(Element.ALIGN_LEFT);
                 parIma.add(logoImage);
 
                 // step 4
 
                 //Mostramos cabecera
-                
+
                 strDatNumRec  = "RECIBO NUMERO\n" + ((HisRecVO) listaRecibos.elementAt(ind)).getNumRec();
                 frasDatNumRec = new Phrase(strDatNumRec, new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
                 frasDatNumRec.font().setSize(12);
@@ -270,7 +271,7 @@ public class ImpHistRecServlet extends HttpServlet
                 {
                     strNombreBan = BancosGestion.devolverNombreBanco(alEvo.getNumCuenta().substring(0,4));
                     strNombreBan = strNombreBan + "                                                 ";
-                    
+
                     strNombreBan = strNombreBan.substring(0, 30);
 
                     strDatCuenta = strDatCuenta + strNombreBan + "   " +  alEvo.getNumCuenta().substring(4,4) + "             "  + alEvo.getNumCuenta() ;
@@ -305,7 +306,7 @@ public class ImpHistRecServlet extends HttpServlet
                 document.add(new Paragraph(" "));
                 document.add(tablaDatAlu);
                 document.add(par14);
-                
+
                 document.add(new Paragraph(" "));
 
                 document.add(parIma);
@@ -329,17 +330,17 @@ public class ImpHistRecServlet extends HttpServlet
             {
                 document.add(new Paragraph("No existen documentos para las condiciones dadas"));
             }
-            
+
         }
         catch (DocumentException ex)
         {
         	System.out.println("Error imprimiendo informe");
         }
         // step 5: Close document
-        
+
         document.close();
 
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -382,7 +383,7 @@ public class ImpHistRecServlet extends HttpServlet
     public String getServletInfo() {
         return "Imprimir Historico recibo servlet";
     }// </editor-fold>
-    
+
     private String devuelveMes(int mes)
     {
         switch (mes)

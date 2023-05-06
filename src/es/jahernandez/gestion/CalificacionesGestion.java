@@ -20,9 +20,9 @@ import es.jahernandez.datos.Conexion;
  *
  * @author JuanAlberto
  */
-public class CalificacionesGestion 
+public class CalificacionesGestion
 {
-    //Método que devuelve los datos de una calificacion 
+    //Método que devuelve los datos de una calificacion
     public static CalificacionesVO devolverDatosCalificacion(String codEdi, String codMod, String codAlu, int evaluacion)
     {
         Connection        con           = null;
@@ -31,7 +31,7 @@ public class CalificacionesGestion
         try
         {
             con = Conexion.conectar();
-            califVO = CalificacionesDAO.devolverDatosCalificacion(codEdi, codMod, codAlu, evaluacion, con); 
+            califVO = CalificacionesDAO.devolverDatosCalificacion(codEdi, codMod, codAlu, evaluacion, con);
             Conexion.desconectar(con);
 
             return califVO;
@@ -133,7 +133,7 @@ public class CalificacionesGestion
             return null;
         }
     }
-    
+
      //Método que devuelve los datos de calificaciones de una edición
     public static Vector devolverCalificacionesEdi(String codEdi)
     {
@@ -161,7 +161,7 @@ public class CalificacionesGestion
             return null;
         }
     }
-   
+
     //Método que devuelve los datos de calificaciones de un alumno y una edición y evaluacion
     public static Vector devolverCalificacionesAluEdiEva(String codAlu , String codEdi, int codEv)
     {
@@ -189,7 +189,7 @@ public class CalificacionesGestion
             return null;
         }
     }
-    
+
    //Método que devuelve los datos de calificaciones de una edición y evaluacion
     public static Vector devolverCalificacionesEdiEva(String codEdi, int codEv)
     {
@@ -217,7 +217,7 @@ public class CalificacionesGestion
             return null;
         }
     }
-    
+
     //Edita el registro de una calificación
     public static int editarCalificacion(CalificacionesVO califVO)
     {
@@ -273,15 +273,15 @@ public class CalificacionesGestion
             }
             return -1;
         }
-    }     
-    
+    }
+
     //Borra las calificaciones de un alumno
     public static int eliminarCalificAlumno(String codAlu)
     {
         Connection        con             = null;
         int               regActualizados = 0;
 
-        
+
         try
         {
             con = Conexion.conectar();
@@ -302,14 +302,14 @@ public class CalificacionesGestion
             }
             return -1;
         }
-    } 
-    
+    }
+
     //Método que devuelve si un alumno tiene calificaciones
     public static boolean tieneAluClasesInd(String codAlu )
     {
         Connection        con          = null;
-        boolean           aluTienCalif = false; 
-     
+        boolean           aluTienCalif = false;
+
         try
         {
             con = Conexion.conectar();
@@ -331,5 +331,5 @@ public class CalificacionesGestion
             return true;
         }
     }
-    
+
 }

@@ -8,7 +8,7 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class InformacionConf 
+public class InformacionConf
 {
     //Parámetros de conexion a base de datos
     public static String dsn          = "";
@@ -29,5 +29,5 @@ public class InformacionConf
     public static String puertoSmtp   = "";
     public static String smtpStartTls = "";
     public static String mailUser     = "";
-    public static String mailPass     = "";   
+    public static String mailPass     = "";
 }

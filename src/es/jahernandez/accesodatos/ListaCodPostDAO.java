@@ -27,12 +27,12 @@ public class ListaCodPostDAO
         PreparedStatement ps            = null;
         ResultSet         rs            = null;
 
-        String            sql           = "SELECT "    + TablaProvincias.CODPROV + " , " 
-                                                       + TablaProvincias.NOMBRE  + 
-                                          " FROM  "    + TablaProvincias.TABLA   +  
+        String            sql           = "SELECT "    + TablaProvincias.CODPROV + " , "
+                                                       + TablaProvincias.NOMBRE  +
+                                          " FROM  "    + TablaProvincias.TABLA   +
                                           " ORDER BY " + TablaProvincias.CODPROV;
-        
-        
+
+
         Vector            listaCP       = new Vector();
         ListaCodPostVO    codPostVO     = null;
 
@@ -54,7 +54,7 @@ public class ListaCodPostDAO
 
             rs.close();
             ps.close();
-            
+
             return listaCP;
         }
         catch (Exception exc)
@@ -71,17 +71,17 @@ public class ListaCodPostDAO
             throw exc;
         }
     }
-    
+
     //Devuelve el nombre de la provincia
     public static String devuelveNombreProv(String idProv,Connection con) throws Exception
     {
         PreparedStatement ps        = null;
         ResultSet         rs        = null;
 
-        String            sql       = "SELECT "  + TablaProvincias.NOMBRE  + 
+        String            sql       = "SELECT "  + TablaProvincias.NOMBRE  +
                                        " FROM "  + TablaProvincias.TABLA   +
                                        " WHERE " + TablaProvincias.CODPROV + " = ? ";
-        
+
         String            nomProv   = "";
 
         try
@@ -100,7 +100,7 @@ public class ListaCodPostDAO
 
             rs.close();
             ps.close();
-            
+
             return nomProv;
         }
         catch (Exception exc)

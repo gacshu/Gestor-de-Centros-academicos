@@ -22,20 +22,20 @@ import es.jahernandez.tablas.TablaCursosAlumnos;
  * @author Alberto
  */
 public class CursosAluDAO
-{  
-    
+{
+
     //Método que guarda los cursos de interes de alumnos y su nivel
     public static int guardarCursosInteres(String codAlumno, String codCurso, String codNiv, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
         ResultSet         rs              = null;
 
-        String            sql             = "INSERT INTO " + TablaCursosAlumnos.TABLA + "(" + TablaCursosAlumnos.CODALUMNO + " , " 
+        String            sql             = "INSERT INTO " + TablaCursosAlumnos.TABLA + "(" + TablaCursosAlumnos.CODALUMNO + " , "
                                                                                             + TablaCursosAlumnos.CODCURSO  + " , "
                                                                                             + TablaCursosAlumnos.CODNIVEL  + " , "
                                                                                             + TablaCursosAlumnos.FECHAINT  + " ) " +
                                             " VALUES(?,?,?,?)";
-                
+
         int               regActualizados = 0;
 
         //Se comprueba que el curso no esté ya dado de alta
@@ -86,10 +86,10 @@ public class CursosAluDAO
 
         String            sql            = "SELECT DISTINCT " + TablaCursosAlumnos.CODALUMNO + " , "
                                                               + TablaCursosAlumnos.CODCURSO  + " , "
-                                                              + TablaCursosAlumnos.CODNIVEL  +  
-                                           " FROM  "          + TablaCursosAlumnos.TABLA     +  
+                                                              + TablaCursosAlumnos.CODNIVEL  +
+                                           " FROM  "          + TablaCursosAlumnos.TABLA     +
                                            " WHERE "          + TablaCursosAlumnos.CODALUMNO + " = ? ";
-        
+
         Vector            listaCursosAlu = new Vector();
 
         CursosAluVO       datResBus      = null;
@@ -116,7 +116,7 @@ public class CursosAluDAO
 
             rs.close();
             ps.close();
-         
+
             return listaCursosAlu;
         }
         catch (Exception exc)
@@ -140,25 +140,25 @@ public class CursosAluDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaCursosAlumnos.TABLA + 
-                                            " WHERE "      + TablaCursosAlumnos.CODALUMNO + " = ? AND " 
-                                                           + TablaCursosAlumnos.CODCURSO  + " = ? AND " 
+        String            sql             = "DELETE FROM " + TablaCursosAlumnos.TABLA +
+                                            " WHERE "      + TablaCursosAlumnos.CODALUMNO + " = ? AND "
+                                                           + TablaCursosAlumnos.CODCURSO  + " = ? AND "
                                                            + TablaCursosAlumnos.CODNIVEL  + " = ? ";
-        
+
         int               regActualizados = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se le pasan los parámetros a la consulta sql
             ps.setString(1, codAlumno);
             ps.setString(2, codCurso);
             ps.setString(3, codNiv);
-            
+
             regActualizados = ps.executeUpdate();
 
-            
+
             ps.close();
             return regActualizados;
 
@@ -184,8 +184,8 @@ public class CursosAluDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaCursosAlumnos.TABLA + 
-                                            " WHERE  "     + TablaCursosAlumnos.CODALUMNO + " = ?";                
+        String            sql             = "DELETE FROM " + TablaCursosAlumnos.TABLA +
+                                            " WHERE  "     + TablaCursosAlumnos.CODALUMNO + " = ?";
         int               regActualizados = 0;
 
         try
@@ -198,7 +198,7 @@ public class CursosAluDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
 
         }
@@ -222,22 +222,22 @@ public class CursosAluDAO
     public static int borrarTodAluCur(String codCur, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
-        String            sql             = "DELETE FROM " + TablaCursosAlumnos.TABLA    + 
+
+        String            sql             = "DELETE FROM " + TablaCursosAlumnos.TABLA    +
                                             " WHERE "      + TablaCursosAlumnos.CODCURSO + " = ? ";
         int               regActualizados = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codCur);
-                                    
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
 
         }
@@ -263,26 +263,26 @@ public class CursosAluDAO
         PreparedStatement ps              = null;
 
         //String            sql             = "UPDATE TbCurAlu SET IdNiv='00000000' WHERE IdCur= ? ";
-        String            sql             = "UPDATE " + TablaCursosAlumnos.TABLA    +   
+        String            sql             = "UPDATE " + TablaCursosAlumnos.TABLA    +
                                             " SET "   + TablaCursosAlumnos.CODNIVEL + " = ? " +
                                             " WHERE " + TablaCursosAlumnos.CODCURSO + " = ? ";
-        
-        
-        
+
+
+
         int               regActualizados = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la consulta sql
-            ps.setString(1, "00000000");                        
-            ps.setString(2, codCur);                        
-            
+            ps.setString(1, "00000000");
+            ps.setString(2, codCur);
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-           
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -309,12 +309,12 @@ public class CursosAluDAO
 
         String            sql            = "SELECT " + TablaCursosAlumnos.CODALUMNO + " , "
                                                      + TablaCursosAlumnos.CODCURSO  + " , "
-                                                     + TablaCursosAlumnos.CODNIVEL  + 
-                                           " FROM "  + TablaCursosAlumnos.TABLA     + 
-                                           " WHERE " + TablaCursosAlumnos.CODALUMNO + " = ? AND " 
-                                                     + TablaCursosAlumnos.CODCURSO  + " = ? AND " 
+                                                     + TablaCursosAlumnos.CODNIVEL  +
+                                           " FROM "  + TablaCursosAlumnos.TABLA     +
+                                           " WHERE " + TablaCursosAlumnos.CODALUMNO + " = ? AND "
+                                                     + TablaCursosAlumnos.CODCURSO  + " = ? AND "
                                                      + TablaCursosAlumnos.CODNIVEL  + " = ?";
-        
+
         boolean           exiCurAlu      = false;
 
         try
@@ -338,7 +338,7 @@ public class CursosAluDAO
             }
             rs.close();
             ps.close();
-           
+
             return exiCurAlu;
         }
         catch (Exception exc)
@@ -367,9 +367,9 @@ public class CursosAluDAO
 
         String            sql             = "INSERT INTO " + TablaCursosAlumnos.TABLA + " (" + TablaCursosAlumnos.CODALUMNO + " , "
                                                                                              + TablaCursosAlumnos.CODCURSO  + " , "
-                                                                                             + TablaCursosAlumnos.FECHAINT  + " ) " + 
+                                                                                             + TablaCursosAlumnos.FECHAINT  + " ) " +
                                             " VALUES(?,?,?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);

@@ -19,12 +19,12 @@ import es.jahernandez.datos.Conexion;
  *
  * @author Alberto
  */
-public class CurNivGestion 
+public class CurNivGestion
 {
     //Método que guarda los niveles de un curso
     public static int guardarNivCur(String codCur, String codNiv)
     {
-        Connection con             = null;           
+        Connection con             = null;
         int        regActualizados = 0;
 
         try

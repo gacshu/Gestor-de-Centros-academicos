@@ -5,20 +5,19 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.SegEmpVO;
-import es.jahernandez.gestion.SegEmpGestion;
-import es.jahernandez.tablas.TablaSeguimientoEmpresas;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.SegEmpVO;
+import es.jahernandez.gestion.SegEmpGestion;
+import es.jahernandez.tablas.TablaSeguimientoEmpresas;
 
 /**
  *
@@ -36,7 +35,7 @@ public class SegEmpDAO
                                           + TablaSeguimientoEmpresas.CODEMPRESA     + " , "
                                           + TablaSeguimientoEmpresas.INCIDENCIAS    + " , "
                                           + TablaSeguimientoEmpresas.FECHA          + " , "
-                                          + TablaSeguimientoEmpresas.USUARIO        + 
+                                          + TablaSeguimientoEmpresas.USUARIO        +
                                 " FROM "  + TablaSeguimientoEmpresas.TABLA          +
                                 " WHERE " + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " = ? " ;
 
@@ -64,7 +63,7 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-            
+
             return datSeg;
 
         }
@@ -94,9 +93,9 @@ public class SegEmpDAO
                                           + TablaSeguimientoEmpresas.CODEMPRESA     + " , "
                                           + TablaSeguimientoEmpresas.INCIDENCIAS    + " , "
                                           + TablaSeguimientoEmpresas.FECHA          + " , "
-                                          + TablaSeguimientoEmpresas.USUARIO        + 
-                                " FROM "  + TablaSeguimientoEmpresas.TABLA;          
-        
+                                          + TablaSeguimientoEmpresas.USUARIO        +
+                                " FROM "  + TablaSeguimientoEmpresas.TABLA;
+
         SegEmpVO          datSeg   = null;
 
         Vector            listaSeg = new Vector();
@@ -106,7 +105,7 @@ public class SegEmpDAO
             ps  = con.prepareStatement(sql);
 
             rs = ps.executeQuery();
-            
+
             while (rs.next())
             {
                 datSeg = new SegEmpVO();
@@ -119,10 +118,10 @@ public class SegEmpDAO
 
                 listaSeg.addElement(datSeg);
             }
-            
+
             rs.close();
             ps.close();
-          
+
             return listaSeg;
         }
         catch (Exception exc)
@@ -200,18 +199,18 @@ public class SegEmpDAO
     public static int guardarSeg(SegEmpVO segVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-   
-        int               regActualizados = 0;     
+
+        int               regActualizados = 0;
         String            nueCodSeg       = generarNuevoCodSeg();
 
-        String            sql             = "INSERT INTO " + TablaSeguimientoEmpresas.TABLA          + " ( " 
+        String            sql             = "INSERT INTO " + TablaSeguimientoEmpresas.TABLA          + " ( "
                                                            + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " , "
                                                            + TablaSeguimientoEmpresas.CODEMPRESA     + " , "
                                                            + TablaSeguimientoEmpresas.INCIDENCIAS    + " , "
                                                            + TablaSeguimientoEmpresas.FECHA          + " , "
                                                            + TablaSeguimientoEmpresas.USUARIO        + " ) " +
                                             " VALUES (?,?,?,?,?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -248,13 +247,13 @@ public class SegEmpDAO
     public static int editaSeg(SegEmpVO segVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         int               regActualizados = 0;
 
         String            sql             = "UPDATE " + TablaSeguimientoEmpresas.TABLA          +
-                                            " SET "   + TablaSeguimientoEmpresas.INCIDENCIAS    + " = ? , " 
-                                                      + TablaSeguimientoEmpresas.FECHA          + " = ? , "  
-                                                      + TablaSeguimientoEmpresas.USUARIO        + " = ?   " + 
+                                            " SET "   + TablaSeguimientoEmpresas.INCIDENCIAS    + " = ? , "
+                                                      + TablaSeguimientoEmpresas.FECHA          + " = ? , "
+                                                      + TablaSeguimientoEmpresas.USUARIO        + " = ?   " +
                                             " WHERE " + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " = ? ";
 
         try
@@ -270,7 +269,7 @@ public class SegEmpDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -298,11 +297,11 @@ public class SegEmpDAO
                                                  + TablaSeguimientoEmpresas.CODEMPRESA     + " , "
                                                  + TablaSeguimientoEmpresas.INCIDENCIAS    + " , "
                                                  + TablaSeguimientoEmpresas.FECHA          + " , "
-                                                 + TablaSeguimientoEmpresas.USUARIO        + 
-                                    " FROM "     + TablaSeguimientoEmpresas.TABLA          +     
+                                                 + TablaSeguimientoEmpresas.USUARIO        +
+                                    " FROM "     + TablaSeguimientoEmpresas.TABLA          +
                                     " WHERE "    + TablaSeguimientoEmpresas.CODEMPRESA     + " = ? " +
                                     " ORDER BY " + TablaSeguimientoEmpresas.FECHA          + " DESC";
-       
+
        SegEmpVO          datSeg   = null;
        Vector            listaSeg = new Vector();
 
@@ -330,7 +329,7 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-            
+
             return listaSeg;
        }
        catch (Exception exp)
@@ -354,14 +353,14 @@ public class SegEmpDAO
     {
         PreparedStatement ps              = null;
         int               regActualizados = 0;
-        
-        String            sql             = "DELETE FROM " + TablaSeguimientoEmpresas.TABLA      + 
+
+        String            sql             = "DELETE FROM " + TablaSeguimientoEmpresas.TABLA      +
                                             " WHERE "      + TablaSeguimientoEmpresas.CODEMPRESA + " = ? ";
-       
+
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codEmp);
 
@@ -390,9 +389,9 @@ public class SegEmpDAO
     {
         PreparedStatement ps              = null;
         int               regActualizados = 0;
-        
+
         String            sql             = "DELETE FROM " + TablaSeguimientoEmpresas.TABLA          +
-                                            " WHERE "      + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " = ? ";        
+                                            " WHERE "      + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " = ? ";
         try
         {
             ps  = con.prepareStatement(sql);
@@ -403,7 +402,7 @@ public class SegEmpDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -427,7 +426,7 @@ public class SegEmpDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            sql            = "SELECT COUNT(" + TablaSeguimientoEmpresas.CODEMPRESA + ")" + 
+        String            sql            = "SELECT COUNT(" + TablaSeguimientoEmpresas.CODEMPRESA + ")" +
                                            " FROM "        + TablaSeguimientoEmpresas.TABLA      +
                                            " WHERE "       + TablaSeguimientoEmpresas.CODEMPRESA + " = ? ";
         int               numSeg         = 0;
@@ -448,7 +447,7 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-           
+
             return numSeg;
         }
 

@@ -8,9 +8,9 @@ package es.jahernandez.tablas;
  *
  * @author JuanAlberto
  */
-public class TablaTipTrast 
+public class TablaTipTrast
 {
     public static final String TABLA      = "tbtiptrast";
     public static final String CODTIPTRAS = "codTipoTrastorno";
-    public static final String DESCRIP    = "descripcion";   
+    public static final String DESCRIP    = "descripcion";
 }

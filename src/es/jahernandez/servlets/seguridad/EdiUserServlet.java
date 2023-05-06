@@ -33,35 +33,35 @@ public class EdiUserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         ConUsuVO      userVO       = new ConUsuVO();
         int           resultadoEdi = 0;
         String        indPrevio    = "";
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Editar usuario" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtUser") != null)
         {
             userVO.setUsuario(request.getParameter("txtUser").trim());
         }
-       
+
         if(request.getParameter("txtPass") != null)
         {
             userVO.setPassword(request.getParameter("txtPass").trim());
@@ -71,47 +71,47 @@ public class EdiUserServlet extends HttpServlet {
         {
             userVO.setNivelAcceso(new Integer(request.getParameter("lstNivAcc").trim()).intValue());
         }
-        
+
         if(request.getParameter("txtNombre") != null)
         {
             userVO.setNombre(request.getParameter("txtNombre").trim());
         }
-        
+
         if(request.getParameter("lstCentros") != null)
         {
             userVO.setIdCentro(new Integer(request.getParameter("lstCentros").trim()).intValue());
         }
-        
+
         if(request.getParameter("chkActivo") != null &&
            request.getParameter("chkActivo").equals("true"))
         {
             userVO.setActivo(true);
         }
-        
-        
+
+
         if(request.getParameter("lstProf") != null)
         {
             userVO.setIdProf(request.getParameter("lstProf").trim());
         }
-        
+
         if(request.getParameter("ind") != null)
         {
             indPrevio = request.getParameter("ind").trim();
         }
-                        
+
         resultadoEdi = ConUsoGestion.editaUser(userVO,"");
-        
+
         if(resultadoEdi <= 0)
         {
-            
+
             //Redireccionar a gestión usuarios
-            response.sendRedirect("control/listaUsers.jsp?ind="        + indPrevio 
+            response.sendRedirect("control/listaUsers.jsp?ind="        + indPrevio
                                                       + "&codErrEdi="  + resultadoEdi);
         }
         else
-        {            
+        {
             //Redireccionar a gestión usuarios
-            response.sendRedirect("control/listaUsers.jsp?ind=" + indPrevio);                                      
+            response.sendRedirect("control/listaUsers.jsp?ind=" + indPrevio);
         }
     }
 

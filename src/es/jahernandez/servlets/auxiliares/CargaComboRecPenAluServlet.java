@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author JuanAlberto
  */
-public class CargaComboRecPenAluServlet extends HttpServlet 
+public class CargaComboRecPenAluServlet extends HttpServlet
 {
 
     /**
@@ -33,38 +33,38 @@ public class CargaComboRecPenAluServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         // TODO Auto-generated method stub
         response.setContentType("text/html; charset=UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        PrintWriter out        = response.getWriter();        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+        PrintWriter out        = response.getWriter();
         String	    valSel     = null;
-        Vector      vecRec     = null; 
+        Vector      vecRec     = null;
         HisRecVO    histRecVO  = null;
-      
+
         if(request.getParameter("codAlu") != null )
         {
             vecRec = HisRecGestion.devRecHisAluEdi("", "", "", request.getParameter("codAlu"), 2, 0, 0);
         }
-        
+
         if(request.getParameter("valSel") != null)
         {
                 valSel = request.getParameter("valSel");
         }
-        
-        try 
-        {            
-               
+
+        try
+        {
+
                 out.printf("<option value=\"-1\">Seleccione...</option>");
-                
-                for (int ind = 0; ind<vecRec.size(); ind ++) 
-                {                
+
+                for (int ind = 0; ind<vecRec.size(); ind ++)
+                {
                     histRecVO = (HisRecVO) vecRec.elementAt(ind);
 
                     if(valSel == null)
@@ -81,15 +81,15 @@ public class CargaComboRecPenAluServlet extends HttpServlet
                             {
                                 out.printf("<option value='%1s'>%2s</option>", histRecVO.getNumRec(), histRecVO.getNumRec());
                             }
-                    }            
-                }        
-        } 
-        finally 
-        {            
+                    }
+                }
+        }
+        finally
+        {
                 if (out!=null)
                 {
                         out.flush();
-                        out.close();        
+                        out.close();
                 }
         }
     }

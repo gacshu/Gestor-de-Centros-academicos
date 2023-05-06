@@ -19,7 +19,7 @@ import es.jahernandez.datos.Conexion;
  *
  * @author JuanAlberto
  */
-public class ConUsoGestion 
+public class ConUsoGestion
 {
     //Método que devuelve los datos de control de un usuario activo
     public static ConUsuVO buscarUsuario(String user, String password)
@@ -30,9 +30,9 @@ public class ConUsoGestion
         try
         {
             con = Conexion.conectar();
-            
+
             conUsoVO = ConUsoDAO.buscarUsuario(user, password,con);
-            
+
             Conexion.desconectar(con);
 
             return conUsoVO;
@@ -41,7 +41,7 @@ public class ConUsoGestion
         catch (Exception exc)
         {
             try
-            {   
+            {
                 Conexion.desconectar(con);
             }
             catch (SQLException ex)
@@ -64,9 +64,9 @@ public class ConUsoGestion
         try
         {
             con = Conexion.conectar();
-            
+
             listUsers = ConUsoDAO.devTodUsuarios(con);
-            
+
             Conexion.desconectar(con);
 
             return listUsers;
@@ -98,9 +98,9 @@ public class ConUsoGestion
         try
         {
            con = Conexion.conectar();
-           
+
            resulSql = ConUsoDAO.guardarUser(conUsVO, usuario,con);
-           
+
            Conexion.desconectar(con);
 
            return resulSql;
@@ -130,12 +130,12 @@ public class ConUsoGestion
         try
         {
             con = Conexion.conectar();
-            
+
             resulSql = ConUsoDAO.borrarUser(login, usuario,con);
-            
+
             Conexion.desconectar(con);
 
-        
+
             return resulSql;
 
         }
@@ -163,9 +163,9 @@ public class ConUsoGestion
         try
         {
             con = Conexion.conectar();
-            
+
             conUsoVO = ConUsoDAO.devDatUsuario(user, usuario,con);
-            
+
             Conexion.desconectar(con);
 
             return conUsoVO;
@@ -191,13 +191,13 @@ public class ConUsoGestion
     {
         Connection        con        = null;
         int               resulSql   = 0;
-        
+
         try
         {
             con = Conexion.conectar();
 
             resulSql = ConUsoDAO.editaUser(conVO, usuario,con);
-            
+
             Conexion.desconectar(con);
 
             return resulSql;

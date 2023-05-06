@@ -5,20 +5,21 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.SeguimientosDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.SeguimientosVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.SeguimientosDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.SeguimientosVO;
+
 /**
  *
  * @author Alberto
  */
-public class SeguimientosGestion 
+public class SeguimientosGestion
 {
     //Método que devuelve los datos de un seguimiento
     public static SeguimientosVO devolverDatosSeg(String codSeg)

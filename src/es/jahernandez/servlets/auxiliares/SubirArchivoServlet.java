@@ -22,14 +22,14 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse; 
+import jakarta.servlet.http.HttpServletResponse;
 
 
 /**
  *
  * @author JuanAlberto
  */
-public class SubirArchivoServlet extends HttpServlet 
+public class SubirArchivoServlet extends HttpServlet
 {
 
     /**
@@ -43,70 +43,70 @@ public class SubirArchivoServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         FileItemFactory   factory = new DiskFileItemFactory();
         ServletFileUpload upload  = new ServletFileUpload(factory);
-                
+
         String            nomFic  = "";
-        
+
         ServletContext    sc      = null;
-			
+
         String            errMsg  = "";
         int               resIns  = 0;
         boolean           hayErr  = false;
-                
+
         //Necesario para saber la ubicación física de los archivo
         sc = getServletContext();
-           
-        
-        
+
+
+
         List items = null;
-        try 
+        try
         {
             items = upload.parseRequest(new ServletRequestContext((javax.servlet.http.HttpServletRequest) request));
-        } 
-        catch (FileUploadException ex) 
+        }
+        catch (FileUploadException ex)
         {
             Logger.getLogger(SubirArchivoServlet.class.getName()).log(Level.SEVERE, null, ex);
-            
+
             errMsg = "Se produjo un error al subir el fichero";
             hayErr = true;
         }
 
         // Se recorren todos los items, que son de tipo FileItem
-        for (Object item : items) 
+        for (Object item : items)
         {
            FileItem uploaded = (FileItem) item;
 
            // Hay que comprobar si es un campo de formulario. Si no lo es, se guarda el fichero
            // subido donde nos interese
-           if (!uploaded.isFormField()) 
+           if (!uploaded.isFormField())
            {
               // No es campo de formulario, guardamos el fichero en algún sitio
               nomFic = FilenameUtils.getName(uploaded.getName());
-              File fichero = new File(sc.getRealPath("/" + "docAdj" + "/" + nomFic ) );                                          
-              try 
+              File fichero = new File(sc.getRealPath("/" + "docAdj" + "/" + nomFic ) );
+              try
               {
                     uploaded.write(fichero);
-              } 
-              catch (Exception ex) 
+              }
+              catch (Exception ex)
               {
                     Logger.getLogger(SubirArchivoServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    
+
                     errMsg = "Se produjo un error al subir el fichero";
                     hayErr = true;
               }
-           } 
-           else 
+           }
+           else
            {
               // es un campo de formulario, podemos obtener clave y valor
               String key = uploaded.getFieldName();
               String valor = uploaded.getString();
            }
         }
-        
+
         //REdireccionamos a la ágina de subida de ficheros
         response.sendRedirect("./mailing/subirFic.jsp?nomArc=" + nomFic);
     }

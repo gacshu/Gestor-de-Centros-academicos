@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -43,7 +44,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpListFIPServlet extends HttpServlet 
+public class ImpListFIPServlet extends HttpServlet
 {
 
     /**
@@ -57,12 +58,12 @@ public class ImpListFIPServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         ServletContext sc     = null;
         HttpSession    sesion = request.getSession();
-        
+
         String codEdi      = "";
         String numCur      = "";
         String diaIni      = "";
@@ -71,64 +72,64 @@ public class ImpListFIPServlet extends HttpServlet
         String numMes      = "";
         String nomProf     = "";
         String nomCent     = "";
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir listado FIP" );
-               
+
         }
-            
+
         if(request.getParameter("codEdi") != null)
         {
             codEdi = request.getParameter("codEdi");
         }
-        
+
         if(request.getParameter("txtNumCur") != null)
         {
             numCur = request.getParameter("txtNumCur");
         }
-        
+
         if(request.getParameter("txtDiaIni") != null)
         {
             diaIni = request.getParameter("txtDiaIni");
         }
-        
+
         if(request.getParameter("txtDiaFin") != null)
         {
             diaFin = request.getParameter("txtDiaFin");
         }
-        
+
         if(request.getParameter("txtNumDiasLect") != null)
         {
             numDiasLect = request.getParameter("txtNumDiasLect");
         }
-        
+
         if(request.getParameter("txtMes") != null)
         {
             numMes = request.getParameter("txtMes");
         }
-        
+
         if(request.getParameter("txtNomProf") != null)
         {
             nomProf = request.getParameter("txtNomProf");
         }
-        
+
         if(request.getParameter("txtCent") != null)
         {
             nomCent = CentrosGestion.nomCentro(request.getParameter("txtCent"));
         }
-        
+
         //Se pasan los datos introducidos a mayusculas
         numCur  = numCur.toUpperCase();
         nomProf = nomProf.toUpperCase();
-        
+
         //Se carga la lista de alumnos
         Vector      listaAlu = AluEdiGestion.devAluMatEdi(codEdi);
 
@@ -175,7 +176,7 @@ public class ImpListFIPServlet extends HttpServlet
 
         Paragraph parTitPag1 = new Paragraph("PLAN FIP");
         Paragraph parTitPag2 = new Paragraph("CONTROL DE FIRMAS DE ASISTENCIA DE ALUMNOS");
-       
+
 
         parTitPag1.font().setSize(10);
         parTitPag2.font().setSize(10);
@@ -183,8 +184,8 @@ public class ImpListFIPServlet extends HttpServlet
         parTitPag1.font().setStyle(Font.BOLD);
         parTitPag2.font().setStyle(Font.BOLD);
 
-        parTitPag1.setAlignment(Image.ALIGN_CENTER);
-        parTitPag2.setAlignment(Image.ALIGN_CENTER);
+        parTitPag1.setAlignment(Element.ALIGN_CENTER);
+        parTitPag2.setAlignment(Element.ALIGN_CENTER);
 
         //Instrucciones para meter los datos de concepto en una tabla
         float[] widths = { 60f, 5f, 200f, 5f, 70f, 5f, 70f, 5f, 70f, 5f, 70f, 5f, 70f, 5f, 70f };
@@ -194,7 +195,7 @@ public class ImpListFIPServlet extends HttpServlet
         PdfPTable tablaDatSeg = new PdfPTable(3);
         tablaDatSem.setWidthPercentage(100);
         tablaDatSeg.setWidthPercentage(100);
-        
+
         PdfPCell celPS = new PdfPCell(new Phrase(""));
 
         PdfPCell cellDNI = null;
@@ -226,7 +227,7 @@ public class ImpListFIPServlet extends HttpServlet
         fraPro.font().setSize(8);
         fraDir.font().setSize(8);
         fraSeg.font().setSize(8);
-        
+
         PdfPCell cellDoc = new PdfPCell(fraLiD);
         PdfPCell cellDi1 = new PdfPCell(fraLDi);
         PdfPCell cellSeg = new PdfPCell(fraLSe);
@@ -255,12 +256,12 @@ public class ImpListFIPServlet extends HttpServlet
         Phrase fraSab = new Phrase("SABADO");
 
         Phrase fraTiF = new Phrase("Nota: Indicar en la casilla correspondiente de alumno y día: J=Falta Justificada //NJ=Falta No Justificada ");
-        
 
-        Phrase fraSem = new Phrase("SEMANA DEL " + diaInS + " AL " + diaFiS + " DE " + mesCur + " DE " + new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis())));         
+
+        Phrase fraSem = new Phrase("SEMANA DEL " + diaInS + " AL " + diaFiS + " DE " + mesCur + " DE " + new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis())));
         PdfPCell celSem = new PdfPCell(fraSem);
 
-        celSem.setHorizontalAlignment(Image.ALIGN_CENTER);
+        celSem.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 
         fraDC1.font().setSize(10);
@@ -280,18 +281,18 @@ public class ImpListFIPServlet extends HttpServlet
         tablaDatSem.setSpacingAfter(5);
 
         //cellFecVenRec.Colspan = 2;
-       
+
         Image logoImage = null;
 
         try
         {
             sc = getServletContext();
-            
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + "logofip.jpg"));
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-           
+
             // step 3
             document.setPageSize(PageSize.A4.rotate());
             document.setMargins(16, 16, 16, 16);
@@ -320,8 +321,8 @@ public class ImpListFIPServlet extends HttpServlet
             fraDNI = new Phrase("DNI");
             fraDNI.font().setSize(10);
             cellDNI = new PdfPCell(fraDNI);
-            cellDNI.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellDNI.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellDNI.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellDNI.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellDNI);
 
             tablaDatAlu.addCell(cellEsp);
@@ -329,56 +330,56 @@ public class ImpListFIPServlet extends HttpServlet
             fraNom = new Phrase("APELLIDOS Y NOMBRE");
             fraNom.font().setSize(10);
             cellNom = new PdfPCell(fraNom);
-            cellNom.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellNom.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellNom.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellNom.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellNom);
 
             tablaDatAlu.addCell(cellEsp);
 
             fraLun.font().setSize(10);
             cellLun = new PdfPCell(fraLun);
-            cellLun.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellLun.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellLun.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellLun.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellLun);
 
             tablaDatAlu.addCell(cellEsp);
 
             fraMar.font().setSize(10);
             cellMar = new PdfPCell(fraMar);
-            cellMar.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellMar.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellMar.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellMar.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellMar);
 
             tablaDatAlu.addCell(cellEsp);
 
             fraMie.font().setSize(10);
             cellMie = new PdfPCell(fraMie);
-            cellMie.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellMie.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellMie.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellMie.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellMie);
 
             tablaDatAlu.addCell(cellEsp);
 
             fraJue.font().setSize(10);
             cellJue = new PdfPCell(fraJue);
-            cellJue.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellJue.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellJue.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellJue.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellJue);
 
             tablaDatAlu.addCell(cellEsp);
 
             fraVie.font().setSize(10);
             cellVie = new PdfPCell(fraVie);
-            cellVie.setVerticalAlignment (Image.ALIGN_MIDDLE);
-            cellVie.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellVie.setVerticalAlignment (Element.ALIGN_MIDDLE);
+            cellVie.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellVie);
 
             tablaDatAlu.addCell(cellEsp);
 
             fraSab.font().setSize(10);
             cellSab = new PdfPCell(fraSab);
-            cellSab.setVerticalAlignment(Image.ALIGN_MIDDLE);
-            cellSab.setHorizontalAlignment(Image.ALIGN_CENTER);
+            cellSab.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellSab.setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaDatAlu.addCell(cellSab);
 
             for (int ind = 0; ind < 15; ind++)
@@ -425,7 +426,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraDNI.font().setSize(10);
                 cellDNI = new PdfPCell(fraDNI);
                 cellDNI.setMinimumHeight(20);
-                cellDNI.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellDNI.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellDNI);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -433,7 +434,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraNom = new Phrase(aluVO.getAp1Alu() + " " + aluVO.getNombre());
                 fraNom.font().setSize(10);
                 cellNom = new PdfPCell(fraNom);
-                cellNom.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellNom.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellNom);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -441,7 +442,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraLun = new Phrase("");
                 fraLun.font().setSize(10);
                 cellLun = new PdfPCell(fraLun);
-                cellLun.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellLun.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellLun);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -449,7 +450,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraMar = new Phrase("");
                 fraMar.font().setSize(10);
                 cellMar = new PdfPCell(fraMar);
-                cellMar.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellMar.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellMar);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -457,7 +458,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraMie = new Phrase("");
                 fraMie.font().setSize(10);
                 cellMie = new PdfPCell(fraMie);
-                cellMie.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellMie.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellMie);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -465,7 +466,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraJue = new Phrase("");
                 fraJue.font().setSize(10);
                 cellJue = new PdfPCell(fraJue);
-                cellJue.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellJue.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellJue);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -473,7 +474,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraVie = new Phrase("");
                 fraVie.font().setSize(10);
                 cellVie = new PdfPCell(fraVie);
-                cellVie.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellVie.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellVie);
 
                 tablaDatAlu.addCell(cellEsp);
@@ -481,7 +482,7 @@ public class ImpListFIPServlet extends HttpServlet
                 fraSab = new Phrase("");
                 fraSab.font().setSize(10);
                 cellSab = new PdfPCell(fraSab);
-                cellSab.setVerticalAlignment(Image.ALIGN_MIDDLE);
+                cellSab.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tablaDatAlu.addCell(cellSab);
             }
 
@@ -494,19 +495,19 @@ public class ImpListFIPServlet extends HttpServlet
             document.add(fraTiF);
             document.add(new Paragraph("                                           "));
             document.add(tablaDatSeg);
- 
+
             if (!hayPag)
             {
                 document.add(new Paragraph("No existen alumnos para generar listado"));
             }
-        
+
         }
         catch (DocumentException ex)
         {
         	System.out.println("Error generando informe");
         }
         // step 5: Close document
-        
+
         document.close();
 
     }

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 //Paquetes de manejo de pdf
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -44,8 +45,8 @@ import jakarta.servlet.http.HttpSession;
  * @author Alberto
  */
 public class impVisAluTipoCurServlet extends HttpServlet {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -65,7 +66,7 @@ public class impVisAluTipoCurServlet extends HttpServlet {
         AlumnosVO        aluVO           = null;
         EmpresasVO       empVO           = null;
         CursosVO         curVO           = null;
-        
+
         String           strNombre       = "";
         String           strApe1         = "";
         String           strMov          = "";
@@ -79,17 +80,17 @@ public class impVisAluTipoCurServlet extends HttpServlet {
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Enviar mensaje" );
-               
+
         }
-        
+
         //Se formatea la tabla del documento pdf
         PdfPTable        tablaDatos      = new PdfPTable(1);
         PdfPCell         celda           = new PdfPCell();
@@ -118,7 +119,7 @@ public class impVisAluTipoCurServlet extends HttpServlet {
 
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
-            logoImage.setAlignment(Image.ALIGN_LEFT);
+            logoImage.setAlignment(Element.ALIGN_LEFT);
 
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
@@ -261,7 +262,7 @@ public class impVisAluTipoCurServlet extends HttpServlet {
                     }
 
                     Paragraph parCur = new Paragraph(curVO.getNomCur().trim(), new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
-                    parCur.setAlignment(Image.ALIGN_CENTER);
+                    parCur.setAlignment(Element.ALIGN_CENTER);
                     celda = new PdfPCell();
                     celda.setMinimumHeight(20);
                     celda.addElement(parCur);
@@ -294,10 +295,10 @@ public class impVisAluTipoCurServlet extends HttpServlet {
         // step 5: Close document
         document.close();
 
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -308,9 +309,9 @@ public class impVisAluTipoCurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -323,7 +324,7 @@ public class impVisAluTipoCurServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

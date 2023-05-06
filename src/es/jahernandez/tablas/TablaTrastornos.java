@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author JuanAlberto
  */
-public class TablaTrastornos 
+public class TablaTrastornos
 {
     public static final String TABLA      = "tbtrastornos";
     public static final String CODTRAST   = "codTrastorno";

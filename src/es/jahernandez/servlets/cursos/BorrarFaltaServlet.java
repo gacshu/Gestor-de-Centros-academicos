@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BorrarFaltaServlet extends HttpServlet 
+public class BorrarFaltaServlet extends HttpServlet
 {
 
      /**
@@ -36,43 +36,43 @@ public class BorrarFaltaServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion     = request.getSession();
-        
+
         FaltasVO         faltaVO    = new FaltasVO();
         int              resBor     = 0;
 
         Logger           log        = null;
         ConUsuVO         conUsoVO   = null;
-        String           indPag     = "";   
+        String           indPag     = "";
         boolean          pagPestana = false;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Borrar falta individual" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodAlu") != null)
         {
             faltaVO.setIdAlu(request.getParameter("txtCodAlu").trim());
         }
-        
+
         if(request.getParameter("txtCodEdi") != null)
         {
             faltaVO.setIdEdi(request.getParameter("txtCodEdi").trim());
         }
-        
+
         if(request.getParameter("codMod") != null)
         {
             faltaVO.setIdMod(request.getParameter("codMod").trim());
         }
-               
+
         if(request.getParameter("fecha") != null &&
           !request.getParameter("fecha").equals(""))
         {
@@ -81,38 +81,38 @@ public class BorrarFaltaServlet extends HttpServlet
                                                    new Integer(strFechaFal.substring(3,5)).intValue() - 1,
                                                    new Integer(strFechaFal.substring(0,2)).intValue()).getTime());
         }
-        
-        
+
+
         if(request.getParameter("pagPest") != null)
         {
             pagPestana = true;
         }
-        
+
         if(request.getParameter("valInfFalta") != null)
         {
             indPag = request.getParameter("valInfFalta").trim();
         }
-        
+
         resBor = FaltasGestion.eliminaFalta(faltaVO.getIdEdi(),faltaVO.getIdMod(),faltaVO.getIdAlu(),faltaVO.getFecha());
-                
-      
+
+
         //Redireccionar a página de clases individuales
         if(pagPestana)
         {
             response.sendRedirect("./interesados/faltasFichaAlumno.jsp?codInt="      + faltaVO.getIdAlu()
                                                                    + "&codEdi="      + faltaVO.getIdEdi()
-                                                                   + "&valInfFalta=" + indPag 
+                                                                   + "&valInfFalta=" + indPag
                                                                    + "&resultBor="   + resBor);
         }
         else
         {
             response.sendRedirect("./ediciones/gestionFaltas.jsp?codInt="      + faltaVO.getIdAlu()
                                                              + "&codEdi="      + faltaVO.getIdEdi()
-                                                             + "&valInfFalta=" + indPag 
+                                                             + "&valInfFalta=" + indPag
                                                              + "&resultBor="   + resBor);
         }
     }
-                  
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -151,7 +151,7 @@ public class BorrarFaltaServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Borrar falta individual Servlet";
     }// </editor-fold>

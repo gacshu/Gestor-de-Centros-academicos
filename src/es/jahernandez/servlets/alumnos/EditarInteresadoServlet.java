@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpSession;
  */
 public class EditarInteresadoServlet extends HttpServlet
 {
-   
+
    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -41,7 +41,7 @@ public class EditarInteresadoServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         AlumnosVO     aluEdi       = new AlumnosVO();
         //String        pestana      = "1";
@@ -49,18 +49,18 @@ public class EditarInteresadoServlet extends HttpServlet
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Editar interesado" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("selValTipDoc") != null)
         {
@@ -77,14 +77,14 @@ public class EditarInteresadoServlet extends HttpServlet
         {
             aluEdi.setDesemp(true);
         }
-        
+
 
         if(request.getParameter("chkNoDeseado") != null &&
            request.getParameter("chkNoDeseado").equals("true"))
         {
             aluEdi.setAlND(true);
         }
-       
+
         if(request.getParameter("hidCodInt") != null)
         {
             aluEdi.setIdAlu(request.getParameter("hidCodInt").trim());
@@ -160,7 +160,7 @@ public class EditarInteresadoServlet extends HttpServlet
                                                     new Integer(strFechaNac.substring(3,5)).intValue() - 1,
                                                     new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-        
+
         if(request.getParameter("chkAutCesDat") != null)
         {
             if(request.getParameter("chkAutCesDat").equals("true"))
@@ -174,17 +174,17 @@ public class EditarInteresadoServlet extends HttpServlet
         {
             aluEdi.setAutComCom(true);
         }
-            
+
         if(request.getParameter("txtResponsable") != null)
         {
             aluEdi.setResponsable(request.getParameter("txtResponsable").trim().toUpperCase());
         }
-        
+
         if(request.getParameter("txtColegio") != null)
         {
             aluEdi.setColegio(request.getParameter("txtColegio").trim().toUpperCase());
         }
-        
+
         if(request.getParameter("txtCurso") != null)
         {
             aluEdi.setCurso(request.getParameter("txtCurso").trim().toUpperCase());
@@ -210,7 +210,7 @@ public class EditarInteresadoServlet extends HttpServlet
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -221,9 +221,9 @@ public class EditarInteresadoServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -236,7 +236,7 @@ public class EditarInteresadoServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

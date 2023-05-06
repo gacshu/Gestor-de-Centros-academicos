@@ -37,7 +37,7 @@ import es.jahernandez.tablas.TablaEdiciones;
  */
 public class CursosDAO
 {
-    
+
     //Método que devuelve los datos de un curso
     public static CursosVO devolverDatosCurso(String codCur, Connection con) throws Exception
     {
@@ -48,15 +48,15 @@ public class CursosDAO
                                           + TablaCursos.NOMBRE    + ","
                                           + TablaCursos.TIPOCURSO + ","
                                           + TablaCursos.CODCENTRO + ","
-                                          + TablaCursos.CONTENIDO + 
-                                " FROM  " + TablaCursos.TABLA     + 
+                                          + TablaCursos.CONTENIDO +
+                                " FROM  " + TablaCursos.TABLA     +
                                 " WHERE " + TablaCursos.CODCURSO  + " = ?";
-        
-        
+
+
         CursosVO          datCur         = null;
 
         try
-        {           
+        {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
@@ -70,7 +70,7 @@ public class CursosDAO
 
                 datCur.setIdCur    (rs.getString(TablaCursos.CODCURSO));
                 datCur.setNomCur   (rs.getString(TablaCursos.NOMBRE));
-                datCur.setTipCur   (rs.getInt   (TablaCursos.TIPOCURSO));      
+                datCur.setTipCur   (rs.getInt   (TablaCursos.TIPOCURSO));
                 datCur.setCenCurso (rs.getInt   (TablaCursos.CODCENTRO));
                 datCur.setContenido(rs.getString(TablaCursos.CONTENIDO));
             }
@@ -105,9 +105,9 @@ public class CursosDAO
                                           + TablaCursos.NOMBRE    + ","
                                           + TablaCursos.TIPOCURSO + ","
                                           + TablaCursos.CODCENTRO + ","
-                                          + TablaCursos.CONTENIDO + 
+                                          + TablaCursos.CONTENIDO +
                                 " FROM  " + TablaCursos.TABLA;
-                
+
         CursosVO          datCur         = null;
         Vector            listaCursos    = new Vector();
 
@@ -158,9 +158,9 @@ public class CursosDAO
 
         String            sql = "SELECT MAX(" + TablaCursos.CODCURSO + ")" +
                                 " FROM "      + TablaCursos.TABLA;
-        
+
         String            valMaxCodCurso = "";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -174,7 +174,7 @@ public class CursosDAO
 
             rs.close();
             ps.close();
-            
+
             return valMaxCodCurso;
         }
         catch (Exception exc)
@@ -256,11 +256,11 @@ public class CursosDAO
                                                         + TablaCursosAlumnos.TABLA + "."    + TablaCursosAlumnos.CODCURSO  + ","
                                                         + TablaCursosAlumnos.TABLA + "."    + TablaCursosAlumnos.CODNIVEL  +
                                          " FROM "       + TablaAlumnos.TABLA       +
-                                         " INNER JOIN " + TablaCursosAlumnos.TABLA + " ON "      
-                                                        + TablaAlumnos.TABLA       + "."    + TablaAlumnos.CODALU          + " = "   
-                                                        + TablaCursosAlumnos.TABLA + "."    + TablaCursosAlumnos.CODALUMNO + 
-                                         " INNER JOIN " + TablaCursos.TABLA        + " ON "  
-                                                        + TablaCursosAlumnos.TABLA + "."    + TablaCursosAlumnos.CODCURSO  + " = " 
+                                         " INNER JOIN " + TablaCursosAlumnos.TABLA + " ON "
+                                                        + TablaAlumnos.TABLA       + "."    + TablaAlumnos.CODALU          + " = "
+                                                        + TablaCursosAlumnos.TABLA + "."    + TablaCursosAlumnos.CODALUMNO +
+                                         " INNER JOIN " + TablaCursos.TABLA        + " ON "
+                                                        + TablaCursosAlumnos.TABLA + "."    + TablaCursosAlumnos.CODCURSO  + " = "
                                                         + TablaCursos.TABLA        + "."    + TablaCursos.CODCURSO         +
                                         " WHERE ( "     + TablaCursos.TABLA        + "."    + TablaCursos.TIPOCURSO        + " = ? ) " +
                                         " ORDER BY "    + TablaCursos.TABLA        + "."    + TablaCursos.CODCURSO;
@@ -320,41 +320,41 @@ public class CursosDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT "      + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODALUMNO + " , " 
-                                                       + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODCURSO  + " , " 
-                                                       + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODNIVEL  + " , " 
-                                                       + TablaAlumnos.TABLA       + "." + TablaAlumnos.APE1            +     
+        String            sql         = "SELECT "      + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODALUMNO + " , "
+                                                       + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODCURSO  + " , "
+                                                       + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODNIVEL  + " , "
+                                                       + TablaAlumnos.TABLA       + "." + TablaAlumnos.APE1            +
                                         " FROM "       + TablaAlumnos.TABLA       +
-                                        " INNER JOIN " + TablaCursosAlumnos.TABLA + " ON " 
-                                                       + TablaAlumnos.TABLA       + "." + TablaAlumnos.CODALU          + " = " 
+                                        " INNER JOIN " + TablaCursosAlumnos.TABLA + " ON "
+                                                       + TablaAlumnos.TABLA       + "." + TablaAlumnos.CODALU          + " = "
                                                        + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODALUMNO +
                                         " WHERE      " + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODCURSO  + " = ? ";
-        
-        
+
+
         //Se completa la sql en función de que haya o no codigo de nivel
         if(codNivel != null && ! codNivel.trim().equals(""))
         {
             sql = sql + " AND " + TablaCursosAlumnos.CODNIVEL + " = ? ";
         }
-        
-        sql = sql + " ORDER BY " + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODNIVEL + " , " 
+
+        sql = sql + " ORDER BY " + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODNIVEL + " , "
                                  + TablaAlumnos.TABLA       + "." + TablaAlumnos.APE1;
-        
+
         CursosAluVO       curAluVO    = null;
         Vector            listaCurAlu = new Vector();
 
         try
         {
             ps  = con.prepareStatement(sql);
-  
+
             //Se pasan los parámetros
             ps.setString(1, codCurso);
-            
+
             if(codNivel != null && ! codNivel.trim().equals(""))
             {
                 ps.setString(2, codNivel);
              }
-                                                    
+
             rs  = ps.executeQuery();
 
             while (rs.next())
@@ -374,7 +374,7 @@ public class CursosDAO
 
             rs.close();
             ps.close();
-            
+
             return listaCurAlu;
         }
         catch (Exception exc)
@@ -399,7 +399,7 @@ public class CursosDAO
     {
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
-        
+
         CursosAluVO       curAluVO    = null;
         Vector            listaCurAlu = new Vector();
 
@@ -442,7 +442,7 @@ public class CursosDAO
                 Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
             throw exc;
-        }  
+        }
 
     }
 
@@ -453,16 +453,16 @@ public class CursosDAO
         String nueCodCur = generarNuevoCodCur();
 
         PreparedStatement ps  = null;
-        
-        String            sql = "INSERT INTO " + TablaCursos.TABLA + "(" + TablaCursos.CODCURSO  + " , " 
+
+        String            sql = "INSERT INTO " + TablaCursos.TABLA + "(" + TablaCursos.CODCURSO  + " , "
                                                                          + TablaCursos.NOMBRE    + " , "
                                                                          + TablaCursos.TIPOCURSO + " , "
                                                                          + TablaCursos.CODCENTRO + " , "
-                                                                         + TablaCursos.CONTENIDO + " ) " + 
+                                                                         + TablaCursos.CONTENIDO + " ) " +
                                 "VALUES(?,?,?,?,?)";
-        
-        
-        
+
+
+
         int regActualizados = 0;
 
         try
@@ -479,7 +479,7 @@ public class CursosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-          
+
             if (regActualizados > 0)
             {
                 return nueCodCur;
@@ -560,14 +560,14 @@ public class CursosDAO
     public static int editaCurso(CursosVO curVO, Connection con) throws Exception
     {
         PreparedStatement ps  = null;
-       
+
         String            sql = "UPDATE " + TablaCursos.TABLA     +
-                                " SET "   + TablaCursos.NOMBRE    + " = ? , " 
-                                          + TablaCursos.TIPOCURSO + " = ? , " 
-                                          + TablaCursos.CODCENTRO + " = ? , " 
+                                " SET "   + TablaCursos.NOMBRE    + " = ? , "
+                                          + TablaCursos.TIPOCURSO + " = ? , "
+                                          + TablaCursos.CODCENTRO + " = ? , "
                                           + TablaCursos.CONTENIDO + " = ?   " +
                                 " WHERE " + TablaCursos.CODCURSO  + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -605,9 +605,9 @@ public class CursosDAO
     {
         PreparedStatement ps  = null;
 
-        String            sql = "DELETE FROM " + TablaCursos.TABLA    + 
+        String            sql = "DELETE FROM " + TablaCursos.TABLA    +
                                 " WHERE  "     + TablaCursos.CODCURSO + " = ?";
-                
+
         int               regActualizados = 0;
 
         boolean           hayEdiCur       = false;
@@ -642,7 +642,7 @@ public class CursosDAO
         catch (Exception exc)
         {
             try
-            {               
+            {
                 ps.close();
             }
             catch (SQLException ex)
@@ -659,10 +659,10 @@ public class CursosDAO
         PreparedStatement ps  = null;
         ResultSet         rs  = null;
 
-        String            sql = "SELECT " + TablaCursos.CODCURSO  + 
-                                " FROM "  + TablaCursos.TABLA     +  
+        String            sql = "SELECT " + TablaCursos.CODCURSO  +
+                                " FROM "  + TablaCursos.TABLA     +
                                 " WHERE " + TablaCursos.TIPOCURSO + " = ?";
-        
+
         boolean           hayCursosTip   = false;
 
         try
@@ -690,7 +690,7 @@ public class CursosDAO
         catch (Exception exc)
         {
             try
-            {               
+            {
                 rs.close();
                 ps.close();
             }
@@ -712,16 +712,16 @@ public class CursosDAO
         Vector            listaCurAlu = new Vector();
 
         CursosAluVO       datResBus   = null;
-        
+
         String            sql        = "SELECT " + TablaAlumnos.TABLA + "." + TablaAlumnos.CODALU  + " , "
                                                  + TablaCursos.TABLA  + "." + TablaCursos.CODCURSO + " , "
-                                                 + TablaAlumnos.TABLA + "." + TablaAlumnos.APE1    + 
-                                        " FROM " + TablaAlumnosEdiciones.TABLA + " INNER JOIN "    
-                                                 + TablaAlumnos.TABLA   + " ON " + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU + " = " + TablaAlumnos.TABLA   + "." + TablaAlumnos.CODALU   + " INNER JOIN " 
-                                                 + TablaEdiciones.TABLA + " ON " + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODEDI + " = " + TablaEdiciones.TABLA + "." + TablaEdiciones.CODEDI + " INNER JOIN " 
+                                                 + TablaAlumnos.TABLA + "." + TablaAlumnos.APE1    +
+                                        " FROM " + TablaAlumnosEdiciones.TABLA + " INNER JOIN "
+                                                 + TablaAlumnos.TABLA   + " ON " + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU + " = " + TablaAlumnos.TABLA   + "." + TablaAlumnos.CODALU   + " INNER JOIN "
+                                                 + TablaEdiciones.TABLA + " ON " + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODEDI + " = " + TablaEdiciones.TABLA + "." + TablaEdiciones.CODEDI + " INNER JOIN "
                                                  + TablaCursos.TABLA    + " ON " + TablaEdiciones.TABLA        + "." + TablaEdiciones.CODCURSO      + " = " + TablaCursos.TABLA    + "." + TablaCursos.CODCURSO  +
-                                        " ORDER BY " + TablaCursos.TABLA + "." + TablaCursos.CODCURSO ; 
-        
+                                        " ORDER BY " + TablaCursos.TABLA + "." + TablaCursos.CODCURSO ;
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -767,10 +767,10 @@ public class CursosDAO
                                           + TablaCursos.NOMBRE    + ","
                                           + TablaCursos.TIPOCURSO + ","
                                           + TablaCursos.CODCENTRO + ","
-                                          + TablaCursos.CONTENIDO + 
-                                " FROM  " + TablaCursos.TABLA     + 
+                                          + TablaCursos.CONTENIDO +
+                                " FROM  " + TablaCursos.TABLA     +
                                 " WHERE " + TablaCursos.TIPOCURSO + " = ?";
-        
+
         Vector            listaCursos    = new Vector();
 
         CursosVO          datCur         = null;
@@ -814,7 +814,7 @@ public class CursosDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de los cursos de un determinado tipo con nombre de longitud limitada para los combos
     public static Vector devolverDatCurTipCombo(int codTip,Connection con) throws Exception
     {
@@ -825,10 +825,10 @@ public class CursosDAO
                                           + TablaCursos.NOMBRE    + ","
                                           + TablaCursos.TIPOCURSO + ","
                                           + TablaCursos.CODCENTRO + ","
-                                          + TablaCursos.CONTENIDO + 
-                                " FROM  " + TablaCursos.TABLA     + 
+                                          + TablaCursos.CONTENIDO +
+                                " FROM  " + TablaCursos.TABLA     +
                                 " WHERE " + TablaCursos.TIPOCURSO + " = ?";
-        
+
         Vector            listaCursos    = new Vector();
 
         CursosVO          datCur         = null;
@@ -852,9 +852,9 @@ public class CursosDAO
                 datCur.setContenido(rs.getString(TablaCursos.CONTENIDO));
 
                 //Se limita el nombre a 50 caracteres
-                if(datCur.getNomCur().length()>50) datCur.setNomCur(datCur.getNomCur().substring(0,50)); 
-                
-                
+                if(datCur.getNomCur().length()>50) datCur.setNomCur(datCur.getNomCur().substring(0,50));
+
+
                 listaCursos.add(datCur);
             }
 
@@ -887,11 +887,11 @@ public class CursosDAO
                                           + TablaCursos.NOMBRE    + ","
                                           + TablaCursos.TIPOCURSO + ","
                                           + TablaCursos.CODCENTRO + ","
-                                          + TablaCursos.CONTENIDO + 
-                                " FROM  " + TablaCursos.TABLA     + 
+                                          + TablaCursos.CONTENIDO +
+                                " FROM  " + TablaCursos.TABLA     +
                                 " WHERE " + TablaCursos.TIPOCURSO + " = ? AND "
-                                          + TablaCursos.CODCENTRO + " = ? ";                        
-        
+                                          + TablaCursos.CODCENTRO + " = ? ";
+
         Vector            listaCursos    = new Vector();
 
         CursosVO          datCur         = null;
@@ -947,7 +947,7 @@ public class CursosDAO
                                              + TablaCursos.NOMBRE    + ","
                                              + TablaCursos.TIPOCURSO + ","
                                              + TablaCursos.CODCENTRO + ","
-                                             + TablaCursos.CONTENIDO + 
+                                             + TablaCursos.CONTENIDO +
                                 " FROM  "    + TablaCursos.TABLA     +
                                 " ORDER BY " + TablaCursos.NOMBRE;
         CursosVO          datCur         = null;
@@ -981,7 +981,7 @@ public class CursosDAO
             try
             {
                 rs.close();
-                ps.close();               
+                ps.close();
             }
             catch (SQLException ex)
             {
@@ -991,15 +991,15 @@ public class CursosDAO
         }
 
     }
-        
+
      //Método que devuelve el centro de un curso dado
     public static Vector datCentrosCurso(String codCurso, Connection con) throws Exception
     {
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT " + TablaCursos.CODCENTRO +  
-                                       " FROM  " + TablaCursos.TABLA     + 
+        String            sql        = "SELECT " + TablaCursos.CODCENTRO +
+                                       " FROM  " + TablaCursos.TABLA     +
                                        " WHERE " + TablaCursos.CODCURSO  + " = ? ";
         CentrosVO         cenVO      = null;
         Vector            datCen     = new Vector();
@@ -1008,19 +1008,19 @@ public class CursosDAO
         {
             ps  = con.prepareStatement(sql);
             ps.setString(1, codCurso);
-            
+
             rs  = ps.executeQuery();
 
             while (rs.next())
             {
                 cenVO = CentrosGestion.datCentro(rs.getInt(TablaCursos.CODCENTRO));
-                
+
                 datCen.addElement(cenVO);
             }
 
             rs.close();
             ps.close();
-            
+
             return datCen;
 
         }

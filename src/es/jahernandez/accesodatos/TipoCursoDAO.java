@@ -29,12 +29,12 @@ public class TipoCursoDAO
         PreparedStatement ps            = null;
         ResultSet         rs            = null;
 
-        String            sql           = "SELECT "    + TablaTipoCurso.CODTIPOCURSO + " , " 
-                                                       + TablaTipoCurso.NOMBRE       + 
-                                          " FROM "     + TablaTipoCurso.TABLA        + 
+        String            sql           = "SELECT "    + TablaTipoCurso.CODTIPOCURSO + " , "
+                                                       + TablaTipoCurso.NOMBRE       +
+                                          " FROM "     + TablaTipoCurso.TABLA        +
                                           " ORDER BY " + TablaTipoCurso.NOMBRE;
-        
-        
+
+
         Vector            listaTipCur   = new Vector();
         TipoCursoVO       tipCursoVO    = null;
 
@@ -56,7 +56,7 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-            
+
             return listaTipCur;
         }
         catch (Exception exc)
@@ -80,11 +80,11 @@ public class TipoCursoDAO
         PreparedStatement ps            = null;
         ResultSet         rs            = null;
 
-        String            sql           = "SELECT " + TablaTipoCurso.CODTIPOCURSO + " , " 
-                                                    + TablaTipoCurso.NOMBRE       + 
-                                          " FROM "  + TablaTipoCurso.TABLA        + 
+        String            sql           = "SELECT " + TablaTipoCurso.CODTIPOCURSO + " , "
+                                                    + TablaTipoCurso.NOMBRE       +
+                                          " FROM "  + TablaTipoCurso.TABLA        +
                                           " WHERE " + TablaTipoCurso.CODTIPOCURSO + " = ?";
-        
+
         TipoCursoVO       tipCursoVO    = null;
 
         try
@@ -105,7 +105,7 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-            
+
             return tipCursoVO;
         }
         catch (Exception exc)
@@ -129,10 +129,10 @@ public class TipoCursoDAO
         PreparedStatement ps       = null;
         ResultSet         rs       = null;
 
-        String            sql      = "SELECT " + TablaTipoCurso.NOMBRE       + 
-                                     " FROM "  + TablaTipoCurso.TABLA        + 
+        String            sql      = "SELECT " + TablaTipoCurso.NOMBRE       +
+                                     " FROM "  + TablaTipoCurso.TABLA        +
                                      " WHERE " + TablaTipoCurso.CODTIPOCURSO + " = ?";
-        
+
         String           nombreTip = "";
 
         try
@@ -150,7 +150,7 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-            
+
             return nombreTip;
         }
         catch (Exception exc)
@@ -167,18 +167,18 @@ public class TipoCursoDAO
             throw exc;
         }
     }
-    
+
     //Método que genera un nuevo código de tipo curso
     public static int generarNuevoCodTipCur(Connection con) throws Exception
     {
         PreparedStatement ps       = null;
         ResultSet         rs       = null;
-        
+
         int               nuevCod  = -99;
 
         String            sql      = "SELECT  MAX(" + TablaTipoCurso.CODTIPOCURSO + ") + 1 " +
                                      " FROM " + TablaTipoCurso.TABLA ;
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -192,7 +192,7 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-            
+
             return nuevCod;
         }
         catch (Exception exc)
@@ -200,7 +200,7 @@ public class TipoCursoDAO
             try
             {
                 rs.close();
-                ps.close();    
+                ps.close();
             }
             catch (SQLException ex)
             {
@@ -209,7 +209,7 @@ public class TipoCursoDAO
             throw exc;
         }
     }
-    
+
 
     //Método que guarda un tipo de curso
     public static int guardarTipoCurso(TipoCursoVO tipCurVO, Connection con) throws Exception
@@ -218,11 +218,11 @@ public class TipoCursoDAO
         int               regActualizados = 0;
         int               nueCodTipCurs   = TipoCursoGestion.generarNuevoCodTipCur();
 
-        String            sql             = "INSERT INTO " + TablaTipoCurso.TABLA        + " ( " 
+        String            sql             = "INSERT INTO " + TablaTipoCurso.TABLA        + " ( "
                                                            + TablaTipoCurso.CODTIPOCURSO + " , "
                                                            + TablaTipoCurso.NOMBRE       + " ) " +
                                             " VALUES (?,?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -230,11 +230,11 @@ public class TipoCursoDAO
             //Se introducen los parámetros a la consulta sql
             ps.setInt   (1, nueCodTipCurs);
             ps.setString(2, tipCurVO.getNomTipCurso());
-           
+
            regActualizados = ps.executeUpdate();
 
            ps.close();
-           
+
            return regActualizados;
         }
         catch (Exception exc)
@@ -251,7 +251,7 @@ public class TipoCursoDAO
             throw exc;
         }
     }
-    
+
     //Edita el registro de un tipo de curso
     public static int editarTipoCurso(TipoCursoVO tipCurVO, Connection con) throws Exception
     {
@@ -262,7 +262,7 @@ public class TipoCursoDAO
         String            sql             = "UPDATE " + TablaTipoCurso.TABLA     +
                                             " SET "   + TablaTipoCurso.NOMBRE    + " = ? " +
                                             " WHERE " + TablaTipoCurso.CODTIPOCURSO + " = ? ";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -274,7 +274,7 @@ public class TipoCursoDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)

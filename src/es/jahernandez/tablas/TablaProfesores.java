@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaProfesores 
+public class TablaProfesores
 {
     public static final String TABLA         = "tbprof";
     public static final String CODPROFESOR   = "IdProf";
@@ -25,6 +25,6 @@ public class TablaProfesores
     public static final String OBSERVACIONES = "Observ";
     public static final String TELEFONO      = "Tel";
     public static final String MOVIL         = "Mov";
-    public static final String MAIL          = "email";    
-    public static final String ACTIVO        = "activo";    
+    public static final String MAIL          = "email";
+    public static final String ACTIVO        = "activo";
 }

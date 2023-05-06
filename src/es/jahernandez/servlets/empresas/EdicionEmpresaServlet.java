@@ -23,9 +23,9 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class EdicionEmpresaServlet extends HttpServlet 
+public class EdicionEmpresaServlet extends HttpServlet
 {
-    /** 
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -44,19 +44,19 @@ public class EdicionEmpresaServlet extends HttpServlet
         boolean       irFicha       = false;
         String        urlDestino    = "empresas/datEmpresa.jsp?codEmp=";
         String        urlDestinoErr = "empresas/datEmpresa.jsp";
-        int           urlProc       = -1;    
-        
+        int           urlProc       = -1;
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Edición empresa" );
-               
+
         }
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
@@ -65,7 +65,7 @@ public class EdicionEmpresaServlet extends HttpServlet
             empEdi.setIdEmpresa(request.getParameter("hidCodEmp").trim().toUpperCase());
             urlDestino = urlDestino + request.getParameter("hidCodEmp").trim();
         }
-        
+
         if(request.getParameter("txtRazonSocial") != null)
         {
             empEdi.setNombreEmpresa(request.getParameter("txtRazonSocial").trim().toUpperCase());
@@ -116,7 +116,7 @@ public class EdicionEmpresaServlet extends HttpServlet
         {
             empEdi.setCnae(new Integer(request.getParameter("txtCNAE")).intValue());
         }
-    
+
         if(request.getParameter("txtNomCom") != null)
         {
             empEdi.setNomComercial(request.getParameter("txtNomCom").trim().toUpperCase());
@@ -167,19 +167,19 @@ public class EdicionEmpresaServlet extends HttpServlet
         {
             empEdi.setDatAct(true);
         }
-    
+
         if(request.getParameter("txtNumEmp") != null &&
           !request.getParameter("txtNumEmp").trim().equals(""))
         {
             empEdi.setNumEmp(new Integer(request.getParameter("txtNumEmp")).intValue());
         }
-    
+
         if(request.getParameter("chkAdCon") != null &&
            request.getParameter("chkAdCon").equals("true"))
         {
             empEdi.setConvenioAd(true);
         }
-    
+
         if(request.getParameter("hidFecCon") != null &&
           !request.getParameter("hidFecCon").equals(""))
         {
@@ -188,7 +188,7 @@ public class EdicionEmpresaServlet extends HttpServlet
                                                     new Integer(strFechaCon.substring(3,5)).intValue() - 1,
                                                     new Integer(strFechaCon.substring(0,2)).intValue()).getTime());
         }
-        
+
         if(request.getParameter("selImpExp") != null)
         {
             empEdi.setImpExp(request.getParameter("selImpExp").trim());
@@ -199,13 +199,13 @@ public class EdicionEmpresaServlet extends HttpServlet
         {
             empEdi.setEsCliente(true);
         }
-    
+
         if(request.getParameter("txtCuota") != null &&
           !request.getParameter("txtCuota").trim().equals(""))
         {
             empEdi.setCuota(new Integer(request.getParameter("txtCuota")).intValue());
         }
-    
+
         if(request.getParameter("txtVolNeg") != null)
         {
             empEdi.setVolNeg(request.getParameter("txtVolNeg").trim().toUpperCase());
@@ -216,13 +216,13 @@ public class EdicionEmpresaServlet extends HttpServlet
         {
             empEdi.setAutCesDat(true);
         }
-    
+
         if(request.getParameter("chkAcc") != null &&
            request.getParameter("chkAcc").equals("true"))
         {
             empEdi.setAccArco(true);
         }
-    
+
         if(request.getParameter("hidFecAcc") != null &&
           !request.getParameter("hidFecAcc").equals(""))
         {
@@ -231,13 +231,13 @@ public class EdicionEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaAcc.substring(3,5)).intValue() - 1,
                                                        new Integer(strFechaAcc.substring(0,2)).intValue()).getTime());
         }
-    
+
         if(request.getParameter("chkRec") != null &&
            request.getParameter("chkRec").equals("true"))
         {
             empEdi.setRecArco(true);
         }
-    
+
         if(request.getParameter("hidFecRec") != null &&
           !request.getParameter("hidFecRec").equals(""))
         {
@@ -246,13 +246,13 @@ public class EdicionEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaRec.substring(3,5)).intValue() - 1,
                                                        new Integer(strFechaRec.substring(0,2)).intValue()).getTime());
         }
-        
+
         if(request.getParameter("chkCancel") != null &&
            request.getParameter("chkCancel").equals("true"))
         {
             empEdi.setCanArco(true);
         }
-    
+
         if(request.getParameter("hidFecCan") != null &&
           !request.getParameter("hidFecCan").equals(""))
         {
@@ -261,13 +261,13 @@ public class EdicionEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaCan.substring(3,5)).intValue() - 1,
                                                        new Integer(strFechaCan.substring(0,2)).intValue()).getTime());
         }
-        
+
         if(request.getParameter("chkOposic") != null &&
            request.getParameter("chkOposic").equals("true"))
         {
             empEdi.setOpoArco(true);
         }
-    
+
         if(request.getParameter("hidFecOpo") != null &&
           !request.getParameter("hidFecOpo").equals(""))
         {
@@ -276,14 +276,14 @@ public class EdicionEmpresaServlet extends HttpServlet
                                                        new Integer(strFechaOpo.substring(3,5)).intValue() -1 ,
                                                        new Integer(strFechaOpo.substring(0,2)).intValue()).getTime());
         }
-        
+
         //Se comprueba si se llama desde la ficha de alumnos
         if(request.getParameter("fichaAlumno") != null &&
            request.getParameter("fichaAlumno").equals("1"))
         {
             irFicha = true;
         }
-    
+
         if(request.getParameter("urlProc") != null)
         {
             urlProc = new Integer(request.getParameter("urlProc")).intValue();
@@ -294,7 +294,7 @@ public class EdicionEmpresaServlet extends HttpServlet
                 case 3: urlDestino = "";      urlDestinoErr = "empresas/altaEmp.jsp"; break;
             }
         }
-        
+
         resultadoEdi = EmpresasGestion.editaEmpresa(empEdi);
 
         if(resultadoEdi <= 0)
@@ -313,7 +313,7 @@ public class EdicionEmpresaServlet extends HttpServlet
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -324,9 +324,9 @@ public class EdicionEmpresaServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -339,7 +339,7 @@ public class EdicionEmpresaServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
@@ -349,5 +349,5 @@ public class EdicionEmpresaServlet extends HttpServlet
     }// </editor-fold>
 
 
-   
+
 }

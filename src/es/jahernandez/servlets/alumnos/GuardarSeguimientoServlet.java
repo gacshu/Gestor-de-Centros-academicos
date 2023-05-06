@@ -38,7 +38,7 @@ public class GuardarSeguimientoServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession          sesion   = request.getSession();
 
         SeguimientosVO segVO  = new SeguimientosVO();
@@ -47,15 +47,15 @@ public class GuardarSeguimientoServlet extends HttpServlet
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Guardar seguimiento alumno" );
-               
+
         }
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
@@ -77,7 +77,7 @@ public class GuardarSeguimientoServlet extends HttpServlet
                                                     new Integer(strFechaNac.substring(3,5)).intValue() - 1,
                                                     new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-        
+
         if(request.getParameter("txtIncidencias") != null)
         {
             segVO.setIncidencias(request.getParameter("txtIncidencias").trim());
@@ -87,12 +87,12 @@ public class GuardarSeguimientoServlet extends HttpServlet
         {
             segVO.setIdCur(request.getParameter("lstCursos").trim());
         }
-        
+
         if(request.getParameter("ind") != null)
         {
             ind = request.getParameter("ind");
         }
-        
+
 
         resAlt = SeguimientosGestion.guardarSeg(segVO);
 

@@ -8,14 +8,14 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class AdapCurricularVO 
+public class AdapCurricularVO
 {
     private String codAdapCur;
     private String idAlu;
     private String materia;
     private String curso;
-    
-    
+
+
     public AdapCurricularVO()
     {
         codAdapCur = "";
@@ -79,5 +79,5 @@ public class AdapCurricularVO
     public void setCurso(String curso) {
         this.curso = curso;
     }
-    
+
 }

@@ -8,12 +8,12 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class BancosVO 
+public class BancosVO
 {
     private String idBanco;
     private String nombreBanco;
 
-    public BancosVO() 
+    public BancosVO()
     {
         idBanco     = "";
         nombreBanco = "";
@@ -46,8 +46,8 @@ public class BancosVO
     public void setNombreBanco(String nombreBanco) {
         this.nombreBanco = nombreBanco;
     }
-    
-    
-    
- 
+
+
+
+
 }

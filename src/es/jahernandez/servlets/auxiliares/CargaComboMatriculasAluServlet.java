@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author JuanAlberto
  */
-public class CargaComboMatriculasAluServlet extends HttpServlet 
+public class CargaComboMatriculasAluServlet extends HttpServlet
 {
 
     /**
@@ -35,37 +35,37 @@ public class CargaComboMatriculasAluServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         // TODO Auto-generated method stub
         response.setContentType("text/html; charset=UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        PrintWriter      out        = response.getWriter();        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+        PrintWriter      out        = response.getWriter();
         String	         valSel     = null;
-        Vector           vecEdiAlu  = null; 
+        Vector           vecEdiAlu  = null;
         AluEdiVO         aluEdiVO   = null;
- 
+
         if(request.getParameter("codAlu") != null )
         {
             vecEdiAlu = AluEdiGestion.devAluEdi(request.getParameter("codAlu"));
         }
-                
+
         if(request.getParameter("valSel") != null)
         {
                 valSel = request.getParameter("valSel");
         }
-        
-        try 
-        {            
+
+        try
+        {
                 out.printf("<option value=\"-1\">Seleccione...</option>");
-                
-                for (int ind = 0; ind<vecEdiAlu.size(); ind ++) 
-                {                
+
+                for (int ind = 0; ind<vecEdiAlu.size(); ind ++)
+                {
                     aluEdiVO = (AluEdiVO) vecEdiAlu.elementAt(ind);
 
                     if(valSel == null)
@@ -82,15 +82,15 @@ public class CargaComboMatriculasAluServlet extends HttpServlet
                             {
                                 out.printf("<option value='%1s'>%2s</option>", aluEdiVO.getIdEdi(), EdicionesGestion.devolverDatosEdi(aluEdiVO.getIdEdi()).getDescripcion() + " --- " + CursosGestion.devolverDatosCurso(EdicionesGestion.devolverDatosEdi(aluEdiVO.getIdEdi()).getIdCur()).getNomCur());
                             }
-                    }            
-                }        
-        } 
-        finally 
-        {            
+                    }
+                }
+        }
+        finally
+        {
                 if (out!=null)
                 {
                         out.flush();
-                        out.close();        
+                        out.close();
                 }
         }
     }

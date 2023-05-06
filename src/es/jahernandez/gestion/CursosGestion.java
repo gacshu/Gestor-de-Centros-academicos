@@ -20,7 +20,7 @@ import es.jahernandez.datos.CursosVO;
  *
  * @author Alberto
  */
-public class CursosGestion 
+public class CursosGestion
 {
     //Método que devuelve los datos de un curso
     public static CursosVO devolverDatosCurso(String codCur)
@@ -83,7 +83,7 @@ public class CursosGestion
     {
         Connection        con            = null;
         String            valMaxCodCurso = "";
-        
+
         try
         {
             con = Conexion.conectar();
@@ -117,7 +117,7 @@ public class CursosGestion
             con = Conexion.conectar();
             listaResBusAlu = CursosDAO.devolverDatosConsCurso2(cadenaConsulta,con);
             Conexion.desconectar(con);
-            
+
             return listaResBusAlu;
         }
        catch (Exception exc)
@@ -178,7 +178,7 @@ public class CursosGestion
         {
             con = Conexion.conectar();
             listaCurAlu = CursosDAO.devolverDatosAluCur(codCurso, codNivel, con);
-           
+
             Conexion.desconectar(con);
             return listaCurAlu;
         }
@@ -222,7 +222,7 @@ public class CursosGestion
                 Logger.getLogger(CursosGestion.class.getName()).log(Level.SEVERE, null, ex);
             }
             return null;
-        }  
+        }
 
     }
 
@@ -232,13 +232,13 @@ public class CursosGestion
     {
         Connection con       = null;
         String     nueCodCur = null;
-        
+
         try
         {
             con = Conexion.conectar();
             nueCodCur = CursosDAO.guardarCurso(curVO, con);
             Conexion.desconectar(con);
-            
+
             return nueCodCur;
         }
         catch (Exception exc)
@@ -307,7 +307,7 @@ public class CursosGestion
         catch (Exception exc)
         {
             try
-            {               
+            {
                 Conexion.desconectar(con);
             }
             catch (SQLException ex)
@@ -335,7 +335,7 @@ public class CursosGestion
         catch (Exception exc)
         {
             try
-            {               
+            {
               Conexion.desconectar(con);
             }
             catch (SQLException ex)
@@ -379,7 +379,7 @@ public class CursosGestion
     {
         Connection        con         = null;
         Vector            listaCursos = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -400,7 +400,7 @@ public class CursosGestion
             return null;
         }
     }
-    
+
     //Método que devuelve los datos de los cursos de un determinado tipo con nombre de longitud limitada para los combos
     public static Vector devolverDatCurTipCombo(int codTip)
     {
@@ -412,7 +412,7 @@ public class CursosGestion
             con = Conexion.conectar();
             listaCursos = CursosDAO.devolverDatCurTipCombo(codTip,con);
             Conexion.desconectar(con);
-            
+
             return listaCursos;
         }
         catch (Exception exc)
@@ -440,7 +440,7 @@ public class CursosGestion
             con = Conexion.conectar();
             listaCursos = CursosDAO.devolverDatCurTipCen(codTip, codCentro, con);
             Conexion.desconectar(con);
-            
+
             return listaCursos;
         }
         catch (Exception exc)
@@ -468,7 +468,7 @@ public class CursosGestion
             con = Conexion.conectar();
             listaCursos = CursosDAO.devolverTodosCurAlfab(con);
             Conexion.desconectar(con);
-            
+
             return listaCursos;
         }
         catch (Exception exc)
@@ -485,7 +485,7 @@ public class CursosGestion
         }
 
     }
-        
+
      //Método que devuelve el centro de un curso dado
     public static Vector datCentrosCurso(String codCurso)
     {

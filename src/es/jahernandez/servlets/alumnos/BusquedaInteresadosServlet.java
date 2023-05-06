@@ -27,8 +27,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class BusquedaInteresadosServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -42,25 +42,25 @@ public class BusquedaInteresadosServlet extends HttpServlet
         request.setCharacterEncoding("utf-8");
 
         HttpSession          sesion   = request.getSession();
-             
+
         Vector               listBusq = new Vector();
         String               muesCond = "";
-        
+
         DatosBusquedaAlumnos datBA    = new DatosBusquedaAlumnos();
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Busqueda Alumnos" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtNumDoc") != null)
         {
@@ -85,30 +85,30 @@ public class BusquedaInteresadosServlet extends HttpServlet
             {
                 datBA.setDesempleado("");
             }
-            
-           muesCond = muesCond + "Desempleados "; 
+
+           muesCond = muesCond + "Desempleados ";
         }
-        
+
         if(request.getParameter("lstNivFor") != null)
         {
             datBA.setNivFor(request.getParameter("lstNivFor").trim());
-            
+
             if(! datBA.getNivFor().equals("0"))
             {
                 muesCond = muesCond + "Formación " +  NivelForGestion.nomNivFor(datBA.getNivFor()) + " ";
             }
         }
-        
+
         if(request.getParameter("lstEmpresas") != null)
         {
             datBA.setCodEmp(request.getParameter("lstEmpresas").trim());
-            
+
             if(! datBA.getCodEmp().equals("0"))
-            {    
+            {
                 muesCond = muesCond + "Empresa " +   EmpresasGestion.devuelveNombreEmpresa(datBA.getCodEmp()) + " ";
             }
         }
-         
+
         if(request.getParameter("chkNoInterCurso") != null)
         {
             datBA.setNoIntCur(request.getParameter("chkNoInterCurso").trim());
@@ -117,27 +117,27 @@ public class BusquedaInteresadosServlet extends HttpServlet
             {
                 datBA.setNoIntCur("");
             }
-            
+
             muesCond = muesCond + "No interesados en curso ";
-        } 
-        
+        }
+
         if(request.getParameter("txtCodPost") != null)
         {
             datBA.setCodPost(request.getParameter("txtCodPost").trim());
-            
+
             if(! datBA.getCodPost().equals(""))
             {
                 muesCond = muesCond + "Cod. Postal " + datBA.getCodPost() + " ";
             }
         }
-        
+
         if(request.getParameter("txtEmail") != null)
         {
             datBA.seteMail(request.getParameter("txtEmail").trim());
             if(! datBA.geteMail().equals(""))
-            {    
-                muesCond = muesCond + "Mail " + datBA.geteMail() + " "; 
-            }                                         
+            {
+                muesCond = muesCond + "Mail " + datBA.geteMail() + " ";
+            }
         }
 
       listBusq = AlumnosGestion.devolverDatosConsAlumno(datBA);
@@ -165,7 +165,7 @@ public class BusquedaInteresadosServlet extends HttpServlet
    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -176,9 +176,9 @@ public class BusquedaInteresadosServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -192,7 +192,7 @@ public class BusquedaInteresadosServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

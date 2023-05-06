@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class LiquidarReciboServlet extends HttpServlet 
+public class LiquidarReciboServlet extends HttpServlet
 {
 
      /**
@@ -36,33 +36,33 @@ public class LiquidarReciboServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession sesion  = request.getSession();
-        
+
         HisRecVO    hisVO   = new HisRecVO();
         int         resEdi  = -1;
 
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Liquidar recibo alumno" );
-               
+
         }
-        
+
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("lstRecPenAlu") != null && request.getParameter("hidCodAlu") != null)
         {
             hisVO  = HisRecGestion.devDatRecHis(request.getParameter("hidCodAlu").trim(),request.getParameter("lstRecPenAlu") );
         }
-        
+
         resEdi = HisRecGestion.cambEstadoPagado(hisVO.getNumRec(), hisVO.getIdAlu(), true);
 
         //Redireccionar a página de edición de area

@@ -20,7 +20,7 @@ import es.jahernandez.tablas.TablaEdiModProfAula;
  *
  * @author JuanAlberto
  */
-public class EdiModProfAulaDAO 
+public class EdiModProfAulaDAO
 {
     //Método que devuelve los datos de un módulo de una edición
     public static EdiModProfAulaVO devolverDatosModEdi(String codMod, String codEdi, Connection con) throws Exception
@@ -28,24 +28,24 @@ public class EdiModProfAulaDAO
         PreparedStatement ps  = null;
         ResultSet         rs  = null;
 
-        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , " 
+        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
                                           + TablaEdiModProfAula.CODMOD       + " , "
                                           + TablaEdiModProfAula.CODPROF      + " , "
                                           + TablaEdiModProfAula.CODAULA      + " , "
                                           + TablaEdiModProfAula.FECHAINICIO  + " , "
                                           + TablaEdiModProfAula.FECHAFIN     + " , "
                                           + TablaEdiModProfAula.HORAINICIO   + " , "
-                                          + TablaEdiModProfAula.HORAFIN      + " , " 
-                                          + TablaEdiModProfAula.CLASELUNES   + " , " 
-                                          + TablaEdiModProfAula.CLASEMARTES  + " , " 
-                                          + TablaEdiModProfAula.CLASEMIERC   + " , " 
-                                          + TablaEdiModProfAula.CLASEJUEVES  + " , " 
+                                          + TablaEdiModProfAula.HORAFIN      + " , "
+                                          + TablaEdiModProfAula.CLASELUNES   + " , "
+                                          + TablaEdiModProfAula.CLASEMARTES  + " , "
+                                          + TablaEdiModProfAula.CLASEMIERC   + " , "
+                                          + TablaEdiModProfAula.CLASEJUEVES  + " , "
                                           + TablaEdiModProfAula.CLASEVIERNES + " , "
-                                          + TablaEdiModProfAula.CLASESABADO  + 
+                                          + TablaEdiModProfAula.CLASESABADO  +
                                 " FROM "  + TablaEdiModProfAula.TABLA        +
                                 " WHERE " + TablaEdiModProfAula.CODMOD       + " = ? AND "
                                           + TablaEdiModProfAula.CODEDI       + " = ? ";
-        
+
         EdiModProfAulaVO  datEMPA = new EdiModProfAulaVO();
 
         try
@@ -61,7 +61,7 @@ public class EdiModProfAulaDAO
             if (rs.next())
             {
                 datEMPA = new EdiModProfAulaVO();
-                
+
                 datEMPA.setIdEdi (rs.getString (TablaEdiModProfAula.CODEDI));
                 datEMPA.setIdMod (rs.getString (TablaEdiModProfAula.CODMOD));
                 datEMPA.setIdProf(rs.getString (TablaEdiModProfAula.CODPROF));
@@ -105,7 +105,7 @@ public class EdiModProfAulaDAO
         PreparedStatement ps  = null;
         ResultSet         rs  = null;
 
-        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , " 
+        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
                                           + TablaEdiModProfAula.CODMOD       + " , "
                                           + TablaEdiModProfAula.CODPROF      + " , "
                                           + TablaEdiModProfAula.CODAULA      + " , "
@@ -113,16 +113,16 @@ public class EdiModProfAulaDAO
                                           + TablaEdiModProfAula.FECHAFIN     + " , "
                                           + TablaEdiModProfAula.HORAINICIO   + " , "
                                           + TablaEdiModProfAula.HORAFIN      + " , "
-                                          + TablaEdiModProfAula.CLASELUNES   + " , " 
-                                          + TablaEdiModProfAula.CLASEMARTES  + " , " 
-                                          + TablaEdiModProfAula.CLASEMIERC   + " , " 
-                                          + TablaEdiModProfAula.CLASEJUEVES  + " , " 
+                                          + TablaEdiModProfAula.CLASELUNES   + " , "
+                                          + TablaEdiModProfAula.CLASEMARTES  + " , "
+                                          + TablaEdiModProfAula.CLASEMIERC   + " , "
+                                          + TablaEdiModProfAula.CLASEJUEVES  + " , "
                                           + TablaEdiModProfAula.CLASEVIERNES + " , "
-                                          + TablaEdiModProfAula.CLASESABADO  + 
+                                          + TablaEdiModProfAula.CLASESABADO  +
                                 " FROM "  + TablaEdiModProfAula.TABLA        +
                                 " WHERE " + TablaEdiModProfAula.CODEDI       + " = ? " ;
-                                         
-        
+
+
         EdiModProfAulaVO datEMPA    = null;
         Vector           listaEMPA  = new Vector();
 
@@ -131,7 +131,7 @@ public class EdiModProfAulaDAO
             ps  = con.prepareStatement(sql);
 
             ps.setString(1, codEdi);
-            
+
             rs  = ps.executeQuery();
 
             while(rs.next())
@@ -152,7 +152,7 @@ public class EdiModProfAulaDAO
                 datEMPA.setHayJue (rs.getBoolean(TablaEdiModProfAula.CLASEJUEVES));
                 datEMPA.setHayVie (rs.getBoolean(TablaEdiModProfAula.CLASEVIERNES));
                 datEMPA.setHaySab (rs.getBoolean(TablaEdiModProfAula.CLASESABADO));
-                
+
 
                 listaEMPA.add(datEMPA);
             }
@@ -175,14 +175,14 @@ public class EdiModProfAulaDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los  módulos de un profesor
     public static Vector devolverModProf(String codProf,Connection con) throws Exception
     {
         PreparedStatement ps  = null;
         ResultSet         rs  = null;
 
-        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , " 
+        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
                                           + TablaEdiModProfAula.CODMOD       + " , "
                                           + TablaEdiModProfAula.CODPROF      + " , "
                                           + TablaEdiModProfAula.CODAULA      + " , "
@@ -190,16 +190,16 @@ public class EdiModProfAulaDAO
                                           + TablaEdiModProfAula.FECHAFIN     + " , "
                                           + TablaEdiModProfAula.HORAINICIO   + " , "
                                           + TablaEdiModProfAula.HORAFIN      + " , "
-                                          + TablaEdiModProfAula.CLASELUNES   + " , " 
-                                          + TablaEdiModProfAula.CLASEMARTES  + " , " 
-                                          + TablaEdiModProfAula.CLASEMIERC   + " , " 
-                                          + TablaEdiModProfAula.CLASEJUEVES  + " , " 
+                                          + TablaEdiModProfAula.CLASELUNES   + " , "
+                                          + TablaEdiModProfAula.CLASEMARTES  + " , "
+                                          + TablaEdiModProfAula.CLASEMIERC   + " , "
+                                          + TablaEdiModProfAula.CLASEJUEVES  + " , "
                                           + TablaEdiModProfAula.CLASEVIERNES + " , "
-                                          + TablaEdiModProfAula.CLASESABADO  +                                                                                                     
+                                          + TablaEdiModProfAula.CLASESABADO  +
                                 " FROM "  + TablaEdiModProfAula.TABLA        +
                                 " WHERE " + TablaEdiModProfAula.CODPROF      + " = ? " ;
-                                         
-        
+
+
         EdiModProfAulaVO datEMPA    = null;
         Vector           listaEMPA  = new Vector();
 
@@ -208,7 +208,7 @@ public class EdiModProfAulaDAO
             ps  = con.prepareStatement(sql);
 
             ps.setString(1, codProf);
-            
+
             rs  = ps.executeQuery();
 
             while(rs.next())
@@ -265,7 +265,7 @@ public class EdiModProfAulaDAO
         PreparedStatement ps  = null;
         ResultSet         rs  = null;
 
-        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , " 
+        String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
                                           + TablaEdiModProfAula.CODMOD       + " , "
                                           + TablaEdiModProfAula.CODPROF      + " , "
                                           + TablaEdiModProfAula.CODAULA      + " , "
@@ -273,17 +273,17 @@ public class EdiModProfAulaDAO
                                           + TablaEdiModProfAula.FECHAFIN     + " , "
                                           + TablaEdiModProfAula.HORAINICIO   + " , "
                                           + TablaEdiModProfAula.HORAFIN      + " , "
-                                          + TablaEdiModProfAula.CLASELUNES   + " , " 
-                                          + TablaEdiModProfAula.CLASEMARTES  + " , " 
-                                          + TablaEdiModProfAula.CLASEMIERC   + " , " 
-                                          + TablaEdiModProfAula.CLASEJUEVES  + " , " 
+                                          + TablaEdiModProfAula.CLASELUNES   + " , "
+                                          + TablaEdiModProfAula.CLASEMARTES  + " , "
+                                          + TablaEdiModProfAula.CLASEMIERC   + " , "
+                                          + TablaEdiModProfAula.CLASEJUEVES  + " , "
                                           + TablaEdiModProfAula.CLASEVIERNES + " , "
-                                          + TablaEdiModProfAula.CLASESABADO  +          
+                                          + TablaEdiModProfAula.CLASESABADO  +
                                 " FROM "  + TablaEdiModProfAula.TABLA        +
-                                " WHERE " + TablaEdiModProfAula.CODPROF      + " =  ? AND " 
+                                " WHERE " + TablaEdiModProfAula.CODPROF      + " =  ? AND "
                                           + TablaEdiModProfAula.FECHAFIN     + " >= ? " ;
-                                         
-        
+
+
         EdiModProfAulaVO datEMPA    = null;
         Vector           listaEMPA  = new Vector();
 
@@ -341,24 +341,24 @@ public class EdiModProfAulaDAO
     public static int guardarEdiMod(EdiModProfAulaVO empaVO,Connection con) throws Exception
     {
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaEdiModProfAula.TABLA        + " ( "  
-                                                          + TablaEdiModProfAula.CODEDI       + " , " 
-                                                          + TablaEdiModProfAula.CODMOD       + " , "  
-                                                          + TablaEdiModProfAula.CODPROF      + " , " 
-                                                          + TablaEdiModProfAula.CODAULA      + " , " 
-                                                          + TablaEdiModProfAula.FECHAINICIO  + " , "  
-                                                          + TablaEdiModProfAula.FECHAFIN     + " , " 
-                                                          + TablaEdiModProfAula.HORAINICIO   + " , "  
-                                                          + TablaEdiModProfAula.HORAFIN      + " , "  
-                                                          + TablaEdiModProfAula.CLASELUNES   + " , " 
-                                                          + TablaEdiModProfAula.CLASEMARTES  + " , " 
-                                                          + TablaEdiModProfAula.CLASEMIERC   + " , " 
-                                                          + TablaEdiModProfAula.CLASEJUEVES  + " , " 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaEdiModProfAula.TABLA        + " ( "
+                                                          + TablaEdiModProfAula.CODEDI       + " , "
+                                                          + TablaEdiModProfAula.CODMOD       + " , "
+                                                          + TablaEdiModProfAula.CODPROF      + " , "
+                                                          + TablaEdiModProfAula.CODAULA      + " , "
+                                                          + TablaEdiModProfAula.FECHAINICIO  + " , "
+                                                          + TablaEdiModProfAula.FECHAFIN     + " , "
+                                                          + TablaEdiModProfAula.HORAINICIO   + " , "
+                                                          + TablaEdiModProfAula.HORAFIN      + " , "
+                                                          + TablaEdiModProfAula.CLASELUNES   + " , "
+                                                          + TablaEdiModProfAula.CLASEMARTES  + " , "
+                                                          + TablaEdiModProfAula.CLASEMIERC   + " , "
+                                                          + TablaEdiModProfAula.CLASEJUEVES  + " , "
                                                           + TablaEdiModProfAula.CLASEVIERNES + " , "
-                                                          + TablaEdiModProfAula.CLASESABADO  + " ) " +         
+                                                          + TablaEdiModProfAula.CLASESABADO  + " ) " +
                                            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         int               regActualizados = 0;
 
         try
@@ -380,7 +380,7 @@ public class EdiModProfAulaDAO
             ps.setBoolean(12, empaVO.isHayJue());
             ps.setBoolean(13, empaVO.isHayVie());
             ps.setBoolean(14, empaVO.isHaySab());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -406,19 +406,19 @@ public class EdiModProfAulaDAO
        PreparedStatement   ps              = null;
 
         String             sql             = "DELETE FROM " + TablaEdiModProfAula.TABLA  +
-                                             " WHERE "      + TablaEdiModProfAula.CODMOD + " = ? AND " 
+                                             " WHERE "      + TablaEdiModProfAula.CODMOD + " = ? AND "
                                                             + TablaEdiModProfAula.CODEDI + " = ? ";
-        
+
         int                regActualizados = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la sentencia sql
             ps.setString(1, codMod);
             ps.setString(2, codEdi);
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -438,7 +438,7 @@ public class EdiModProfAulaDAO
             throw exc;
         }
     }
-    
+
      //Método que borra todos los módulos de una edición
     public static int borrarModulosEdi(String codEdi,Connection con) throws Exception
     {
@@ -446,17 +446,17 @@ public class EdiModProfAulaDAO
 
         String              sql             = "DELETE FROM " + TablaEdiModProfAula.TABLA  +
                                               " WHERE "      + TablaEdiModProfAula.CODEDI + " = ? ";
-        
-        
+
+
         int                 regActualizados = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la sentencia sql
             ps.setString(1, codEdi);
-                        
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -474,37 +474,37 @@ public class EdiModProfAulaDAO
                 Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            throw exc; 
+            throw exc;
         }
     }
-    
+
     //Método que edita un modulo de una edición
     public static int editarEdiModProfAula(EdiModProfAulaVO empaVO,Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
         int               regActualizados = 0;
-        
+
         String            sql             = "UPDATE " + TablaEdiModProfAula.TABLA        +
-                                            " SET "   + TablaEdiModProfAula.CODPROF      + " = ? , "  
-                                                      + TablaEdiModProfAula.CODAULA      + " = ? , "  
-                                                      + TablaEdiModProfAula.FECHAINICIO  + " = ? , "  
-                                                      + TablaEdiModProfAula.FECHAFIN     + " = ? , "  
-                                                      + TablaEdiModProfAula.HORAINICIO   + " = ? , " 
-                                                      + TablaEdiModProfAula.HORAFIN      + " = ? , "  
-                                                      + TablaEdiModProfAula.CLASELUNES   + " = ? , "  
-                                                      + TablaEdiModProfAula.CLASEMARTES  + " = ? , "  
-                                                      + TablaEdiModProfAula.CLASEMIERC   + " = ? , "  
-                                                      + TablaEdiModProfAula.CLASEJUEVES  + " = ? , "  
-                                                      + TablaEdiModProfAula.CLASEVIERNES + " = ? , "  
+                                            " SET "   + TablaEdiModProfAula.CODPROF      + " = ? , "
+                                                      + TablaEdiModProfAula.CODAULA      + " = ? , "
+                                                      + TablaEdiModProfAula.FECHAINICIO  + " = ? , "
+                                                      + TablaEdiModProfAula.FECHAFIN     + " = ? , "
+                                                      + TablaEdiModProfAula.HORAINICIO   + " = ? , "
+                                                      + TablaEdiModProfAula.HORAFIN      + " = ? , "
+                                                      + TablaEdiModProfAula.CLASELUNES   + " = ? , "
+                                                      + TablaEdiModProfAula.CLASEMARTES  + " = ? , "
+                                                      + TablaEdiModProfAula.CLASEMIERC   + " = ? , "
+                                                      + TablaEdiModProfAula.CLASEJUEVES  + " = ? , "
+                                                      + TablaEdiModProfAula.CLASEVIERNES + " = ? , "
                                                       + TablaEdiModProfAula.CLASESABADO  + " = ?   "  +
                                             " WHERE(" + TablaEdiModProfAula.CODMOD       + " = ? AND "
                                                       + TablaEdiModProfAula.CODEDI       + " = ?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros a la consulta sql
             ps.setString ( 1, empaVO.getIdProf());
             ps.setString ( 2, empaVO.getIdAul());
@@ -540,5 +540,5 @@ public class EdiModProfAulaDAO
             throw exc;
         }
     }
- 
+
 }

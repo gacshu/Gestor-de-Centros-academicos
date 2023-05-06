@@ -20,10 +20,10 @@ import jakarta.servlet.http.HttpSession;
  */
 public class ControlAccesoServlet extends HttpServlet
 {
-   
+
 	//private final static Logger log = Logger.getLogger(null);
-	
-	/** 
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -40,18 +40,18 @@ public class ControlAccesoServlet extends HttpServlet
         ConUsuVO  cuEntrada  = new ConUsuVO();
         ConUsuVO  cuSalida   = new ConUsuVO();
         //ConUsoDAO gestUsu    = new ConUsoDAO();
-        
+
         ServletContext   sc  = null;
 
         HttpSession sesion = request.getSession();
-        
+
         //Control de log
         //ControlLog logObject = null;
         //Logger     log       = Logger.getLogger(ControlAccespServlet.class);
 
         if(request.getParameter("txtUser") != null)
         {
-            cuEntrada.setNombre((String)request.getParameter("txtUser"));
+            cuEntrada.setNombre(request.getParameter("txtUser"));
         }
         else
         {
@@ -60,7 +60,7 @@ public class ControlAccesoServlet extends HttpServlet
 
         if(request.getParameter("txtPass") != null)
         {
-            cuEntrada.setPassword((String)request.getParameter("txtPass"));
+            cuEntrada.setPassword(request.getParameter("txtPass"));
         }
         else
         {
@@ -70,17 +70,17 @@ public class ControlAccesoServlet extends HttpServlet
         sc = getServletContext();
         //Cargamos datos de configuración del archivo de propiedades
         try
-        {             
-            //se crea una instancia a la clase Properties             
-            Properties propiedades = new Properties();             
-            
+        {
+            //se crea una instancia a la clase Properties
+            Properties propiedades = new Properties();
+
             FileInputStream in = new FileInputStream(sc.getRealPath("/conf/conf.ini"));
             propiedades.load(in);
             in.close();
-            
-            //si el archivo de propiedades NO esta vacio retornan las propiedes leidas             
-            if (! propiedades.isEmpty())              
-            {                                 
+
+            //si el archivo de propiedades NO esta vacio retornan las propiedes leidas
+            if (! propiedades.isEmpty())
+            {
                 //Cargamos las propiedades
                 InformacionConf.dsn          = propiedades.getProperty("dsn") + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
                 InformacionConf.url          = propiedades.getProperty("url");
@@ -92,36 +92,36 @@ public class ControlAccesoServlet extends HttpServlet
                 InformacionConf.dirEmp       = propiedades.getProperty("dirEmp");
                 InformacionConf.CIFEmp       = propiedades.getProperty("CIFEmp");
                 InformacionConf.pobEmp       = propiedades.getProperty("pobEmp");
-                InformacionConf.mailInfo     = propiedades.getProperty("mailInfo");  
-                InformacionConf.mailEnvio    = propiedades.getProperty("email");  
-                InformacionConf.servSalida   = propiedades.getProperty("serSal");  
+                InformacionConf.mailInfo     = propiedades.getProperty("mailInfo");
+                InformacionConf.mailEnvio    = propiedades.getProperty("email");
+                InformacionConf.servSalida   = propiedades.getProperty("serSal");
                 InformacionConf.protTransp   = propiedades.getProperty("protocolTranspo");
                 InformacionConf.autorSmtp    = propiedades.getProperty("autorSmtp");
                 InformacionConf.puertoSmtp   = propiedades.getProperty("puertoSmtp");
                 InformacionConf.smtpStartTls = propiedades.getProperty("smtpStartTls");
                 InformacionConf.mailUser     = propiedades.getProperty("mailUser");
                 InformacionConf.mailPass     = propiedades.getProperty("mailPassword");
-            }             
-            else 
-            {
-                //sino  retornara NULL                 
-                System.out.println("Archivo de propiedades vacio");       
             }
-            
+            else
+            {
+                //sino  retornara NULL
+                System.out.println("Archivo de propiedades vacio");
+            }
+
             //Cargamos informacion de creación de logs
             //logObject = new ControlLog(sc.getRealPath("/logs/"));
             //log = logObject.getLog();
             //log= new Logger();
-            
+
             //sesion.setAttribute("logControl", log);
-            
-        } 
-        catch (IOException ex) 
+
+        }
+        catch (IOException ex)
         {
-            System.out.println("Error cargando propiedades"); 
-        } 
-        
-        
+            System.out.println("Error cargando propiedades");
+        }
+
+
         System.out.println("usuario" + cuEntrada.getNombre());
         System.out.println("pasword" + cuEntrada.getPassword());
 
@@ -131,12 +131,12 @@ public class ControlAccesoServlet extends HttpServlet
         if (cuSalida == null)
         {
             //P�gina de error usuario no v�lido
-            
+
             //Guardamos entrada de intento de entrada no válido en el log
- 
+
         		//log.error("Intento de acceso no autorizado. Usuario: " + cuEntrada.getNombre() + " HOST: " + request.getRemoteHost() + " IP: " + request.getRemoteAddr());
 
-                
+
             response.sendRedirect("./errorPages/errorNoAutor.jsp");
         }
         else
@@ -144,10 +144,10 @@ public class ControlAccesoServlet extends HttpServlet
             sesion.setAttribute("usuario", cuSalida);
             response.sendRedirect("./paginaPrincipal.jsp"); //Abre la página principal de gestión
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -159,9 +159,9 @@ public class ControlAccesoServlet extends HttpServlet
     throws ServletException, IOException
     {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -175,7 +175,7 @@ public class ControlAccesoServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

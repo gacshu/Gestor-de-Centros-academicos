@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaModuloServlet extends HttpServlet 
+public class AltaModuloServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -35,35 +35,35 @@ public class AltaModuloServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         ModulosVO     modVO        = new ModulosVO();
         int           resultadoAlt = 0;
         String        indPrevio    = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta módulo" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtNuevoNombre") != null)
         {
             modVO.setNombre(request.getParameter("txtNuevoNombre").trim());
         }
-       
+
         if(request.getParameter("txtNuevoDescrip") != null)
         {
             modVO.setDescripcion(request.getParameter("txtNuevoDescrip").trim());
@@ -72,34 +72,34 @@ public class AltaModuloServlet extends HttpServlet
         if(request.getParameter("txtCodCurso") != null)
         {
             modVO.setCodCur(request.getParameter("txtCodCurso").trim());
-        }      
+        }
         if(request.getParameter("lstNuevoArea") != null)
         {
             modVO.setCodArea(request.getParameter("lstNuevoArea").trim());
-        } 
-        
+        }
+
         if(request.getParameter("txtNuevoHoras") != null)
         {
             modVO.setNumHoras(new Integer(request.getParameter("txtNuevoHoras").trim()).intValue());
-        } 
-        
+        }
+
         if(request.getParameter("valInfMod") != null)
         {
             indPrevio = request.getParameter("valInfMod");
-        } 
-        
+        }
+
         resultadoAlt = ModulosGestion.guardarModulo(modVO);
-        
+
         if(resultadoAlt <= 0)
         {
-            
+
             //Redireccionar a gestión modulos
-            response.sendRedirect("cursos/gestionModulos.jsp?codCurso="  + modVO.getCodCur() 
+            response.sendRedirect("cursos/gestionModulos.jsp?codCurso="  + modVO.getCodCur()
                                                          + "&errorCode=" + resultadoAlt
                                                          + "&ind="       + indPrevio );
         }
         else
-        {            
+        {
             //Redireccionar a gestión modulos
             response.sendRedirect("cursos/gestionModulos.jsp?codCurso=" + modVO.getCodCur()
                                                          + "&ind="      + indPrevio );
@@ -145,5 +145,5 @@ public class AltaModuloServlet extends HttpServlet
     @Override
     public String getServletInfo() {
         return "Alta Módulo servlet";
-    }// </editor-fold>    
+    }// </editor-fold>
 }

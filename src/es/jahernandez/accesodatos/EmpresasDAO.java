@@ -5,24 +5,22 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.DatosCmbEmp;
-import es.jahernandez.datos.EmpresasVO;
-import es.jahernandez.gestion.EmpresasGestion;
-import es.jahernandez.gestion.SegEmpGestion;
-
-import es.jahernandez.tablas.TablaAlumnos;
-import es.jahernandez.tablas.TablaEmpresas;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.DatosCmbEmp;
+import es.jahernandez.datos.EmpresasVO;
+import es.jahernandez.gestion.EmpresasGestion;
+import es.jahernandez.gestion.SegEmpGestion;
+import es.jahernandez.tablas.TablaAlumnos;
+import es.jahernandez.tablas.TablaEmpresas;
 
 /**
  *
@@ -59,7 +57,7 @@ public class EmpresasDAO
                                                      + TablaEmpresas.CONVEADSCRIT  + " , "
                                                      + TablaEmpresas.FECHACONVEN   + " , "
                                                      + TablaEmpresas.DATOSACTUAL   + " , "
-                                                     + TablaEmpresas.CUOTA         + " , "                                                     
+                                                     + TablaEmpresas.CUOTA         + " , "
                                                      + TablaEmpresas.ESCLIENTE     + " , "
                                                      + TablaEmpresas.DIRECCOMER    + " , "
                                                      + TablaEmpresas.POBLACIONCOM  + " , "
@@ -73,9 +71,9 @@ public class EmpresasDAO
                                                      + TablaEmpresas.CANCELARCO    + " , "
                                                      + TablaEmpresas.FECCANARCO    + " , "
                                                      + TablaEmpresas.OPOSICARCO    + " , "
-                                                     + TablaEmpresas.FECOPOARCO    +            
-                                           " FROM "  + TablaEmpresas.TABLA;                             
-        
+                                                     + TablaEmpresas.FECOPOARCO    +
+                                           " FROM "  + TablaEmpresas.TABLA;
+
         Vector            listaEmpresas  = new Vector();
 
         EmpresasVO        datEmp         = null;
@@ -149,7 +147,7 @@ public class EmpresasDAO
             }
 
             throw exc;
-        }       
+        }
 }
 
     //Devuelve el VALOR MAXIMO de codigo EMPRESA
@@ -157,12 +155,12 @@ public class EmpresasDAO
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
-     
-        String            sql          = "SELECT MAX(" + TablaEmpresas.CODEMPRESA + ")" + 
+
+        String            sql          = "SELECT MAX(" + TablaEmpresas.CODEMPRESA + ")" +
                                          " FROM  "     + TablaEmpresas.TABLA;
 
         String            strMaxCodEmp = "";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -172,7 +170,7 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-           
+
             return strMaxCodEmp;
         }
         catch (Exception exc)
@@ -195,10 +193,10 @@ public class EmpresasDAO
     public static String guardaEmp(EmpresasVO empVO , Connection  con) throws Exception
     {
         PreparedStatement ps              = null;
-        
-        int               regActualizados = 0;       
 
-        String            sql             = "INSERT INTO " + TablaEmpresas.TABLA         + " ( "  
+        int               regActualizados = 0;
+
+        String            sql             = "INSERT INTO " + TablaEmpresas.TABLA         + " ( "
                                                            + TablaEmpresas.CODEMPRESA    + " , "
                                                            + TablaEmpresas.NOMBRE        + " , "
                                                            + TablaEmpresas.CIF           + " , "
@@ -238,7 +236,7 @@ public class EmpresasDAO
                                                            + TablaEmpresas.OPOSICARCO    + " , "
                                                            + TablaEmpresas.FECOPOARCO    + " ) " +
                                             "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                
+
         try
         {
            ps  = con.prepareStatement(sql);
@@ -278,13 +276,13 @@ public class EmpresasDAO
             ps.setBoolean(30, empVO.isAutCesDat());
             ps.setBoolean(31, empVO.isAccArco());
             ps.setDate(32, new Date(empVO.getFecAccArc().getTime()));
-            ps.setBoolean(33, empVO.isRecArco());            
+            ps.setBoolean(33, empVO.isRecArco());
             ps.setDate(34, new Date(empVO.getFecRecArc().getTime()));
             ps.setBoolean(35, empVO.isCanArco());
             ps.setDate(36, new Date(empVO.getFecCanArc().getTime()));
             ps.setBoolean(37, empVO.isOpoArco());
             ps.setDate(38, new Date(empVO.getFecOpoArc().getTime()));
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -383,7 +381,7 @@ public class EmpresasDAO
             ps  = con.prepareStatement(sql);
 
             rs = ps.executeQuery();
-            
+
             if(rs.next())
             {
                 nuevoCod = "" + (rs.getInt(1));
@@ -391,14 +389,14 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-            
+
             nuevoCod = nuevoCod.trim();
 
             while (nuevoCod.length() < 8)
             {
                 nuevoCod = "0" + nuevoCod;
             }
-            
+
             return nuevoCod;
         }
         catch (Exception exc)
@@ -422,17 +420,17 @@ public class EmpresasDAO
     {
         PreparedStatement ps            = null;
         ResultSet         rs            = null;
-        
-        String            sql           = "SELECT " + TablaEmpresas.CODEMPRESA + "," + 
-                                                    "IF(trim(" + TablaEmpresas.NOMBRE + ")<>''," + TablaEmpresas.NOMBRE + "," + TablaEmpresas.NOMBRECOMER + ") as NOMBRE" + 
-                                          " FROM " + TablaEmpresas.TABLA + 
+
+        String            sql           = "SELECT " + TablaEmpresas.CODEMPRESA + "," +
+                                                    "IF(trim(" + TablaEmpresas.NOMBRE + ")<>''," + TablaEmpresas.NOMBRE + "," + TablaEmpresas.NOMBRECOMER + ") as NOMBRE" +
+                                          " FROM " + TablaEmpresas.TABLA +
                                           " ORDER BY NOMBRE";
-        
-        
+
+
         Vector            listaEmpresas = new Vector();
 
         DatosCmbEmp       datEmp        = null;
-    
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -444,8 +442,8 @@ public class EmpresasDAO
                 datEmp = new DatosCmbEmp();
 
                 datEmp.setIdEmp  (rs.getString(TablaEmpresas.CODEMPRESA));
-                datEmp.setNombEmp(rs.getString("NOMBRE"));                                                             
-                
+                datEmp.setNombEmp(rs.getString("NOMBRE"));
+
                 listaEmpresas.addElement(datEmp);
             }
 
@@ -468,7 +466,7 @@ public class EmpresasDAO
             throw exc;
         }
 
-        
+
     }
 
     //Método que devuelve los datos de una empresa
@@ -500,7 +498,7 @@ public class EmpresasDAO
                                              + TablaEmpresas.CONVEADSCRIT  + " , "
                                              + TablaEmpresas.FECHACONVEN   + " , "
                                              + TablaEmpresas.DATOSACTUAL   + " , "
-                                             + TablaEmpresas.CUOTA         + " , "                                                     
+                                             + TablaEmpresas.CUOTA         + " , "
                                              + TablaEmpresas.ESCLIENTE     + " , "
                                              + TablaEmpresas.DIRECCOMER    + " , "
                                              + TablaEmpresas.POBLACIONCOM  + " , "
@@ -514,10 +512,10 @@ public class EmpresasDAO
                                              + TablaEmpresas.CANCELARCO    + " , "
                                              + TablaEmpresas.FECCANARCO    + " , "
                                              + TablaEmpresas.OPOSICARCO    + " , "
-                                             + TablaEmpresas.FECOPOARCO    +            
-                                   " FROM "  + TablaEmpresas.TABLA         +  
+                                             + TablaEmpresas.FECOPOARCO    +
+                                   " FROM "  + TablaEmpresas.TABLA         +
                                    " WHERE " + TablaEmpresas.CODEMPRESA    +" = ? ";
-        
+
         EmpresasVO        datEmp = null;
 
         try
@@ -576,7 +574,7 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-           
+
             return datEmp;
 
         }
@@ -622,7 +620,7 @@ public class EmpresasDAO
                                                + TablaEmpresas.CONVEADSCRIT  + " , "
                                                + TablaEmpresas.FECHACONVEN   + " , "
                                                + TablaEmpresas.DATOSACTUAL   + " , "
-                                               + TablaEmpresas.CUOTA         + " , "                                                     
+                                               + TablaEmpresas.CUOTA         + " , "
                                                + TablaEmpresas.ESCLIENTE     + " , "
                                                + TablaEmpresas.DIRECCOMER    + " , "
                                                + TablaEmpresas.POBLACIONCOM  + " , "
@@ -636,9 +634,9 @@ public class EmpresasDAO
                                                + TablaEmpresas.CANCELARCO    + " , "
                                                + TablaEmpresas.FECCANARCO    + " , "
                                                + TablaEmpresas.OPOSICARCO    + " , "
-                                               + TablaEmpresas.FECOPOARCO    +            
-                                      " FROM " + TablaEmpresas.TABLA;  
-        
+                                               + TablaEmpresas.FECOPOARCO    +
+                                      " FROM " + TablaEmpresas.TABLA;
+
         Vector            listBusq  = new Vector();
 
         PreparedStatement ps        = null;
@@ -783,45 +781,45 @@ public class EmpresasDAO
     {
         PreparedStatement ps              = null;
         int               regActualizados = 0;
-        
-        String            sql             = "UPDATE " + TablaEmpresas.TABLA         + 
-                                            " SET   " + TablaEmpresas.NOMBRE        + " = ? , "  
-                                                      + TablaEmpresas.CIF           + " = ? , "  
-                                                      + TablaEmpresas.DIRECCION     + " = ? , "  
-                                                      + TablaEmpresas.CODPOSTAL     + " = ? , " 
-                                                      + TablaEmpresas.POBLACION     + " = ? , " 
-                                                      + TablaEmpresas.CODPROVINCIA  + " = ? , " 
-                                                      + TablaEmpresas.TELEFONO      + " = ? , " 
-                                                      + TablaEmpresas.FAX           + " = ? , " 
-                                                      + TablaEmpresas.MAIL          + " = ? , " 
-                                                      + TablaEmpresas.RESPONSABLE   + " = ? , " 
-                                                      + TablaEmpresas.CODSEC        + " = ? , " 
-                                                      + TablaEmpresas.NOMBRECOMER   + " = ? , " 
-                                                      + TablaEmpresas.CNAE          + " = ? , " 
+
+        String            sql             = "UPDATE " + TablaEmpresas.TABLA         +
+                                            " SET   " + TablaEmpresas.NOMBRE        + " = ? , "
+                                                      + TablaEmpresas.CIF           + " = ? , "
+                                                      + TablaEmpresas.DIRECCION     + " = ? , "
+                                                      + TablaEmpresas.CODPOSTAL     + " = ? , "
+                                                      + TablaEmpresas.POBLACION     + " = ? , "
+                                                      + TablaEmpresas.CODPROVINCIA  + " = ? , "
+                                                      + TablaEmpresas.TELEFONO      + " = ? , "
+                                                      + TablaEmpresas.FAX           + " = ? , "
+                                                      + TablaEmpresas.MAIL          + " = ? , "
+                                                      + TablaEmpresas.RESPONSABLE   + " = ? , "
+                                                      + TablaEmpresas.CODSEC        + " = ? , "
+                                                      + TablaEmpresas.NOMBRECOMER   + " = ? , "
+                                                      + TablaEmpresas.CNAE          + " = ? , "
                                                       + TablaEmpresas.EMPLEADOS     + " = ? , "
-                                                      + TablaEmpresas.VOLNEGOCIO    + " = ? , " 
-                                                      + TablaEmpresas.IMPORTEXPORT  + " = ? , " 
-                                                      + TablaEmpresas.CARGO1        + " = ? , " 
-                                                      + TablaEmpresas.CARGO2        + " = ? , " 
+                                                      + TablaEmpresas.VOLNEGOCIO    + " = ? , "
+                                                      + TablaEmpresas.IMPORTEXPORT  + " = ? , "
+                                                      + TablaEmpresas.CARGO1        + " = ? , "
+                                                      + TablaEmpresas.CARGO2        + " = ? , "
                                                       + TablaEmpresas.RESPONSABLE2  + " = ? , "
-                                                      + TablaEmpresas.CONVEADSCRIT  + " = ? , " 
-                                                      + TablaEmpresas.FECHACONVEN   + " = ? , " 
-                                                      + TablaEmpresas.DATOSACTUAL   + " = ? , " 
-                                                      + TablaEmpresas.CUOTA         + " = ? , " 
-                                                      + TablaEmpresas.ESCLIENTE     + " = ? , " 
-                                                      + TablaEmpresas.DIRECCOMER    + " = ? , " 
-                                                      + TablaEmpresas.POBLACIONCOM  + " = ? , " 
-                                                      + TablaEmpresas.CODPROVINCOM  + " = ? , " 
-                                                      + TablaEmpresas.CODPOSTAL     + " = ? , " 
-                                                      + TablaEmpresas.AUTORIZCESDAT + " = ? , " 
-                                                      + TablaEmpresas.ACCESOARCO    + " = ? , " 
-                                                      + TablaEmpresas.FECACCCARCO   + " = ? , " 
-                                                      + TablaEmpresas.RECHAZOARCO   + " = ? , " 
-                                                      + TablaEmpresas.FECRECARCO    + " = ? , " 
-                                                      + TablaEmpresas.CANCELARCO    + " = ? , " 
-                                                      + TablaEmpresas.FECCANARCO    + " = ? , " 
-                                                      + TablaEmpresas.OPOSICARCO    + " = ? , " 
-                                                      + TablaEmpresas.FECOPOARCO    + " = ?   " + 
+                                                      + TablaEmpresas.CONVEADSCRIT  + " = ? , "
+                                                      + TablaEmpresas.FECHACONVEN   + " = ? , "
+                                                      + TablaEmpresas.DATOSACTUAL   + " = ? , "
+                                                      + TablaEmpresas.CUOTA         + " = ? , "
+                                                      + TablaEmpresas.ESCLIENTE     + " = ? , "
+                                                      + TablaEmpresas.DIRECCOMER    + " = ? , "
+                                                      + TablaEmpresas.POBLACIONCOM  + " = ? , "
+                                                      + TablaEmpresas.CODPROVINCOM  + " = ? , "
+                                                      + TablaEmpresas.CODPOSTAL     + " = ? , "
+                                                      + TablaEmpresas.AUTORIZCESDAT + " = ? , "
+                                                      + TablaEmpresas.ACCESOARCO    + " = ? , "
+                                                      + TablaEmpresas.FECACCCARCO   + " = ? , "
+                                                      + TablaEmpresas.RECHAZOARCO   + " = ? , "
+                                                      + TablaEmpresas.FECRECARCO    + " = ? , "
+                                                      + TablaEmpresas.CANCELARCO    + " = ? , "
+                                                      + TablaEmpresas.FECCANARCO    + " = ? , "
+                                                      + TablaEmpresas.OPOSICARCO    + " = ? , "
+                                                      + TablaEmpresas.FECOPOARCO    + " = ?   " +
                                            " WHERE "  + TablaEmpresas.CODEMPRESA    + " = ?";
 
 
@@ -872,7 +870,7 @@ public class EmpresasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -906,9 +904,9 @@ public class EmpresasDAO
 
             //Se introducen los parámetros a la consulta sql
             ps.setString(1, codAct);
-            
+
             rs = ps.executeQuery();
-            
+
             if(rs.next())
             {
                 nomActDev = rs.getString(1);
@@ -989,15 +987,15 @@ public class EmpresasDAO
         {
             PreparedStatement ps              = null;
             ResultSet         rs              = null;
-            
+
             String            sql             = "DELETE FROM " + TablaEmpresas.TABLA      +
                                                 " WHERE "      + TablaEmpresas.CODEMPRESA + " = ?";
-            
+
             int               regActualizados = 0;
             int               segBor          = 0;
 
             //Se borran los seguimientos asociados a la empresa
-            segBor = SegEmpGestion.eliminaSegEmp(codEmp);  
+            segBor = SegEmpGestion.eliminaSegEmp(codEmp);
 
             if(segBor >= 0)
             {
@@ -1042,10 +1040,10 @@ public class EmpresasDAO
         PreparedStatement ps        = null;
         ResultSet         rs        = null;
 
-        String            sql       = "SELECT " + TablaAlumnos.CODALU     + 
+        String            sql       = "SELECT " + TablaAlumnos.CODALU     +
                                       " FROM  " + TablaAlumnos.TABLA      +
                                       " WHERE " + TablaAlumnos.CODEMPRESA + " = ?";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -1085,18 +1083,18 @@ public class EmpresasDAO
             throw exc;
         }
     }
-    
+
     //Devuelve el nombre de la empresa
     public static String devuelveNombreEmpresa(String idEmpresa,Connection  con) throws Exception
     {
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT " + TablaEmpresas.NOMBRE     +  
+        String            sql        = "SELECT " + TablaEmpresas.NOMBRE     +
                                        " FROM  " + TablaEmpresas.TABLA      +
                                        " WHERE " + TablaEmpresas.CODEMPRESA + " = ?";
-        
-        
+
+
         String            nomEmpresa = "";
 
         try

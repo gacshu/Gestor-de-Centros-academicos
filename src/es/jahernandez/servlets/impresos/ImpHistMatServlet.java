@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 //Paquetes de manejo de pdf
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -42,7 +43,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpHistMatServlet extends HttpServlet 
+public class ImpHistMatServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -55,17 +56,17 @@ public class ImpHistMatServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         HttpSession      sesion = request.getSession();
         ServletContext   sc     = null;
-        
+
         Vector     alumnosBusqueda = new Vector();
         AlumnosVO  aluVO           = null;
         CursosVO   curVO           = null;
         NivelesVO  nivVO           = null;
         CursosVO   datCur          = null;
-        EmpresasVO empVO           = null;  
+        EmpresasVO empVO           = null;
 
         String     strNombre       = "";
         String     strApe1         = "";
@@ -80,57 +81,57 @@ public class ImpHistMatServlet extends HttpServlet
 
         PdfPTable tablaDatos       = new PdfPTable(1);
         PdfPCell  celda            = new PdfPCell();
-        Font      fuenteDoc        = null; 
-        
+        Font      fuenteDoc        = null;
+
         int cuentaLineas           = 0;  //Cuenta lineas impresas para saber cuando hacer el salto de página
-        
-        
+
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir histÃ³rico matrículas" );
-               
+
         }
-        
-        
+
+
         tablaDatos.setWidthPercentage(100);
         tablaDatos.setSpacingBefore(10);
-        
-        
-                
-        alumnosBusqueda   = (Vector) sesion.getAttribute("busAluC"); 
+
+
+
+        alumnosBusqueda   = (Vector) sesion.getAttribute("busAluC");
         curVO             = CursosGestion.devolverDatosCurso( ((CursosAluVO) alumnosBusqueda.elementAt(0)).getIdCur());
-        
+
         // step 1
         Document document  = new Document(PageSize.A4.rotate(), 16, 16, 16, 16);
         Image    logoImage = null;
-                
+
         try
         {
             sc = getServletContext();
             fuenteDoc =new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
             fuenteDoc.setSize(8);
-            
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
-            
-            
+
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-          
+
             // step 3
             document.open();
 
             // step 4
 
             //Mostramos cabecera
-            logoImage.setAlignment(Image.ALIGN_LEFT);
+            logoImage.setAlignment(Element.ALIGN_LEFT);
 
             document.add(new Paragraph(""));
             document.add(logoImage);
@@ -139,12 +140,12 @@ public class ImpHistMatServlet extends HttpServlet
 
             document.add(new Paragraph("HISTÓRICO DE MATRÍCULAS", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
             document.add(new Paragraph(""));
-            
+
             //document.Add(new Paragraph("Tipo de Curso: " +TipoCursoGestion.devuelveNombreTipo(curVO.TipCur),new Font(BaseFont.CreateFont("c:\\windows\\fonts\\cour.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
 
             celda.addElement(new Paragraph("       NOMBRE                 APELLIDOS          POBLACION                       MOVIL       FIJO                 MAIL                 EMPRESA                     ND", fuenteDoc));
             tablaDatos.addCell(celda);
-            
+
             //document.Add(new Paragraph("       NOMBRE                 APELLIDOS          POBLACION                       MOVIL       FIJO                 MAIL                 EMPRESA                     ND", fuenteDoc));
             //document.Add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------------------------------------------",fuenteDoc));
 
@@ -202,7 +203,7 @@ public class ImpHistMatServlet extends HttpServlet
                     document.add(new Paragraph(""));
 
                     document.add(new Paragraph("HISTÓRICO DE MATRÍCULAS", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
-                    
+
                     document.add(new Paragraph(""));
 
                     celda = new PdfPCell();
@@ -211,8 +212,8 @@ public class ImpHistMatServlet extends HttpServlet
                     celda.addElement(new Paragraph("       NOMBRE                 APELLIDOS          POBLACION                       MOVIL       FIJO                 MAIL                 EMPRESA                     ND", fuenteDoc));
 
                     tablaDatos.addCell(celda);
-                    
-                    
+
+
                     //document.Add(new Paragraph("       NOMBRE                 APELLIDOS          POBLACION                       MOVIL       FIJO                 MAIL                 EMPRESA                     ND", fuenteDoc));
                     //document.Add(new Paragraph("---------------------------------------------------------------------------------------------------------------------------------------------------------------------", fuenteDoc));
                 }
@@ -239,8 +240,8 @@ public class ImpHistMatServlet extends HttpServlet
                 strFij = strFij.substring(0, 9);
                 strEmp = strEmp.substring(0, 25);
                 strMail = strMail.substring(0, 35);
- 
-               
+
+
 
                 if (! datCur.getNomCur().equals(auxNomCur))
                 {
@@ -277,15 +278,15 @@ public class ImpHistMatServlet extends HttpServlet
 
                         tablaDatos.addCell(celda);
                     }
-  
+
                     auxNomCur = datCur.getNomCur();
                     Paragraph parNiv = new Paragraph(datCur.getNomCur().trim(), new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
-                    parNiv.setAlignment(Image.ALIGN_CENTER);
+                    parNiv.setAlignment(Element.ALIGN_CENTER);
                     celda = new PdfPCell();
                     celda.setMinimumHeight(20);
                     celda.addElement(parNiv);
                     tablaDatos.addCell(celda);
-                    
+
                 }
 
                 celda = new PdfPCell();

@@ -2,7 +2,7 @@ package es.jahernandez.utilidades;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class EncriptaClave 
+public class EncriptaClave
 {
     /**
      * Sole entry point to the class and application used for testing the

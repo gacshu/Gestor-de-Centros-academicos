@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaAlumnos 
+public class TablaAlumnos
 {
     //Nombre de la tabla y de las columnas de la base de datos
     public static final String TABLA          = "tbAlu";

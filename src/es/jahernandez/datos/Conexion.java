@@ -1,7 +1,7 @@
 package es.jahernandez.datos;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
 * Esta clase realiza la conexión a una base de datos ODBC  mediante el driver puente JDBC-ODBC.
@@ -18,13 +18,13 @@ import java.sql.DriverManager;
 *      // Manejo de excepci�n
 * } catch (java.sql.SQLException e) {
 *      // Manejo de excepci�n
-* }	
+* }
 * </pre>
 * Fecha: 7/11/2002
 * @author Juan Alberto Hern�ndez Alvarado
 * @see java.sql.Connection
 */
-public class Conexion 
+public class Conexion
 {
 
     /*private static final String dsn  = "gestcenacad";
@@ -34,8 +34,8 @@ public class Conexion
 
     private static final String user = "admi";
     private static final String pwd  = "181654";
-      */  
-               
+      */
+
 
 /**
 * Este m�todo realiza una conexi�n a la base de datos.
@@ -43,32 +43,32 @@ public class Conexion
 * de datos, en caso de fallar devolver� null.
 * @exception java.lang.ClassNotFoundException Si no se encuentra el driver arroja esta excepci�n.
 * @exception java.sql.SQLException Si se produce alg�n error sql se arroja esta excepci�n.
-*/	
-    public static Connection conectarAccess() throws SQLException, ClassNotFoundException 
+*/
+    public static Connection conectarAccess() throws SQLException, ClassNotFoundException
     {
 		Connection con = null;
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 		con = DriverManager.getConnection("jdbc:odbc:"+ InformacionConf.dsn ,InformacionConf.user, InformacionConf.pwd);
-		return con;		
+		return con;
     }
 
-  
-  
-  
-    public static Connection conectar() throws SQLException, ClassNotFoundException 
+
+
+
+    public static Connection conectar() throws SQLException, ClassNotFoundException
      {
 		Connection con = null;
 		//Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://" + InformacionConf.url +"/"+ InformacionConf.dsn,InformacionConf.user, InformacionConf.pwd);
-                
-		return con;		
+
+		return con;
      }
 
 /**
 * Este m�todo realiza la desconexi�n de la base de datos.
 * @exception java.sql.SQLException Arroja esta excepci�n si se produce alg�n error sql durante la desconexi�n.
-*/	
-    public static void desconectar(Connection con) throws SQLException 
+*/
+    public static void desconectar(Connection con) throws SQLException
     {
             if(con!=null)
             con.close();

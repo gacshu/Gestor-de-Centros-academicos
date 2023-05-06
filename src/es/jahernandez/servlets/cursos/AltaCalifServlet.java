@@ -37,50 +37,50 @@ public class AltaCalifServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion     = request.getSession();
-        
+
         CalificacionesVO califVO    = new CalificacionesVO();
         int              resAlt     = 0;
 
         Logger           log        = null;
         ConUsuVO         conUsoVO   = null;
-        String           indPag     = "";   
-        
+        String           indPag     = "";
+
         int              cargaEva   = -99;
         boolean          pagPestana = false;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta calificación individual" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodAlu") != null)
         {
             califVO.setIdAlu(request.getParameter("txtCodAlu").trim());
         }
-        
+
         if(request.getParameter("txtCodEdi") != null)
         {
             califVO.setIdEdi(request.getParameter("txtCodEdi").trim());
         }
-        
+
         if(request.getParameter("lstNuevoMod") != null)
         {
             califVO.setIdMod(request.getParameter("lstNuevoMod").trim());
         }
-        
+
         if(request.getParameter("lstNuevaEva") != null)
         {
             califVO.setEvaluacion(new Integer(request.getParameter("lstNuevaEva").trim()).intValue());
         }
-                
+
         if(request.getParameter("hidNuevaFecha") != null &&
           !request.getParameter("hidNuevaFecha").equals(""))
         {
@@ -89,28 +89,28 @@ public class AltaCalifServlet extends HttpServlet
                                                    new Integer(strFechaCal.substring(3,5)).intValue() - 1,
                                                    new Integer(strFechaCal.substring(0,2)).intValue()).getTime());
         }
-        
-        
+
+
         if(request.getParameter("lstNuevaNota") != null)
         {
             califVO.setNota(new Integer(request.getParameter("lstNuevaNota").trim()).intValue());
         }
-        
+
         if(request.getParameter("feva") != null)
         {
             cargaEva = new Integer(request.getParameter("feva").trim()).intValue();
         }
-        
+
         if(request.getParameter("pagPest") != null)
         {
             pagPestana = true;
         }
-                
+
         if(request.getParameter("valInfCalif") != null)
         {
             indPag = request.getParameter("valInfCalif").trim();
         }
-        
+
         resAlt = CalificacionesGestion.guardarCalificacion(califVO);
 
         if(resAlt > 0)
@@ -120,7 +120,7 @@ public class AltaCalifServlet extends HttpServlet
             {
                 response.sendRedirect("./interesados/califFichaAlumno.jsp?codInt=" + califVO.getIdAlu()
                                                                  + "&codEdi="      + califVO.getIdEdi()
-                                                                 + "&eva="         + cargaEva 
+                                                                 + "&eva="         + cargaEva
                                                                  + "&valInfCalif=" + indPag );
             }
             else
@@ -137,15 +137,15 @@ public class AltaCalifServlet extends HttpServlet
             {
                 response.sendRedirect("./interesados/califFichaAlumno.jsp?codInt=" + califVO.getIdAlu()
                                                                + "&codEdi="        + califVO.getIdEdi()
-                                                               + "&eva="           + cargaEva 
-                                                               + "&valInfCalif="   + indPag 
+                                                               + "&eva="           + cargaEva
+                                                               + "&valInfCalif="   + indPag
                                                                + "&errorCode="     + resAlt);
             }
             else
             {
                 response.sendRedirect("./ediciones/gestionCalifi.jsp?codInt=" + califVO.getIdAlu()
                                                           + "&codEdi="        + califVO.getIdEdi()
-                                                          + "&valInfCalif="   + indPag 
+                                                          + "&valInfCalif="   + indPag
                                                           + "&errorCode="     + resAlt);
             }
         }
@@ -188,7 +188,7 @@ public class AltaCalifServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Alta calificación individual Servlet";
     }// </editor-fold>

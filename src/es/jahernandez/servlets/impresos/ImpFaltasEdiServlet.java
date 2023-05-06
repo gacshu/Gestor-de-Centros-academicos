@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
@@ -41,7 +42,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpFaltasEdiServlet extends HttpServlet 
+public class ImpFaltasEdiServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -54,58 +55,58 @@ public class ImpFaltasEdiServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         HttpSession       sesion       = request.getSession();
         ServletContext    sc           = null;
-        
+
         AlumnosVO         aluVO        = null;
-        EdicionesVO       ediVO        = null; 
+        EdicionesVO       ediVO        = null;
         CursosVO          curVO        = null;
-        
+
         FaltasVO          faltasVO     = null;
-        
+
         String            codAluAux    = "";
         String            codEdi       = "";
-      
-        boolean           muestraCab   = false; 
+
+        boolean           muestraCab   = false;
 
         ConUsuVO          conUsVO      = new ConUsuVO();
-           
+
         Vector            vecFaltas    = new Vector();
 
         conUsVO =(ConUsuVO) sesion.getAttribute("usuario");
 
         Logger            log          = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
-            log.info((conUsVO.getUsuario() + "               " ).substring(0,10) + "Imprimir Faltas edición" );      
+
+            log.info((conUsVO.getUsuario() + "               " ).substring(0,10) + "Imprimir Faltas edición" );
         }
-       
+
         if(request.getParameter("codEdi") != null   )
         {
             codEdi =  request.getParameter("codEdi").trim();
-            
+
             vecFaltas = FaltasGestion.devolverFaltasEdi(codEdi);
         }
-        
+
         // step 1
         // need to write to memory first due to IE wanting
         // to know the length of the pdf beforehand
         Document document = new Document();
 
         //Instrucciones para meter los datos de concepto en una tabla
-        
+
         PdfPTable tablaConcepto  = new PdfPTable(1);
         PdfPCell  cellConcepto   = null;
         Paragraph parTitConcep   = null;
-        
+
         PdfPTable tablaDatAlu    = new PdfPTable(1);
         PdfPCell  cellDatosAlu   = null;
         Paragraph parTitDatAlu   = new Paragraph("ALUMNO");
@@ -114,7 +115,7 @@ public class ImpFaltasEdiServlet extends HttpServlet
         Paragraph parDirecAlu    = null;
         Paragraph parCPPobAlu    = null;
         Paragraph parProvAlu     = null;
-        
+
         PdfPTable tablaDetFalta  = new PdfPTable(3);
         PdfPCell  cellTit        = null;
         PdfPCell  cellLinea      = null;
@@ -122,60 +123,60 @@ public class ImpFaltasEdiServlet extends HttpServlet
         Paragraph parMod         = null;
         Paragraph parFecha       = null;
         Paragraph parJustif      = null;
-        
+
         Paragraph parIma         = new Paragraph();
         Image     logoImage      = null; // iTextSharp.text.Image.GetInstance(System.Web.HttpContext.Current.Server.MapPath("~/imagenes/logoEnTeST.jpg"));
 
-        
+
         try
         {
             sc = getServletContext();
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.setMargins(32, 32, 16, 0);
             document.open();
 
             ediVO = EdicionesGestion.devolverDatosEdi(codEdi);
             curVO = CursosGestion.devolverDatosCurso(ediVO.getIdCur());
-           
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
-            
+
             for(int ind=0; ind < vecFaltas.size() ; ind ++)
             {
                 faltasVO = (FaltasVO) vecFaltas.elementAt(ind);
-                
+
                 //Formateamos el ancho de las tablas
                 tablaConcepto  = new PdfPTable(1);
                 tablaDatAlu    = new PdfPTable(1);
                 tablaDetFalta  = new PdfPTable(3);
-                
+
                 parIma = new Paragraph();
-                parIma.setAlignment(Image.ALIGN_LEFT);
+                parIma.setAlignment(Element.ALIGN_LEFT);
                 parIma.add(logoImage);
 
                 //par14 = new Paragraph(InformacionConf.nombEmp + " " + InformacionConf.dirEmp + " CIF: " + InformacionConf.CIFEmp, new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
                 if(! faltasVO.getIdAlu().equals(codAluAux) )
-                {    
+                {
                     codAluAux  = faltasVO.getIdAlu();
                     aluVO      = AlumnosGestion.devolverDatosAlumno(faltasVO.getIdAlu());
                     muestraCab = true;
-                                        
+
                     if(ind > 0)
                     {
                         document.newPage();
                     }
-                
+
                     parIma = new Paragraph();
-                    parIma.setAlignment(Image.ALIGN_LEFT);
+                    parIma.setAlignment(Element.ALIGN_LEFT);
                     parIma.add(logoImage);
-                    
+
                     cellConcepto = new PdfPCell();
-                    parTitConcep = new Paragraph("Faltas de la edición " + ediVO.getDescripcion() + " del curso " + curVO.getNomCur() ); 
-                    parTitConcep.setAlignment(Image.ALIGN_LEFT);
+                    parTitConcep = new Paragraph("Faltas de la edición " + ediVO.getDescripcion() + " del curso " + curVO.getNomCur() );
+                    parTitConcep.setAlignment(Element.ALIGN_LEFT);
                     cellConcepto.addElement(parTitConcep);
                     tablaConcepto.addCell(cellConcepto);
 
@@ -197,35 +198,35 @@ public class ImpFaltasEdiServlet extends HttpServlet
                     //Añadimoe el detalle de las clases
                     cellTit = new PdfPCell();
                     parTitDet = new Paragraph("ASIGNATURA");
-                    parTitDet.setAlignment(Image.ALIGN_CENTER);
+                    parTitDet.setAlignment(Element.ALIGN_CENTER);
                     parTitDet.font().setSize(10);
                     cellTit.addElement(parTitDet);
                     tablaDetFalta.addCell(cellTit);
                     cellTit = new PdfPCell();
                     parTitDet = new Paragraph("FECHA");
-                    parTitDet.setAlignment(Image.ALIGN_CENTER);
+                    parTitDet.setAlignment(Element.ALIGN_CENTER);
                     parTitDet.font().setSize(10);
                     cellTit.addElement(parTitDet);
                     tablaDetFalta.addCell(cellTit);
                     cellTit = new PdfPCell();
                     parTitDet = new Paragraph("JUSTIFICADA");
-                    parTitDet.setAlignment(Image.ALIGN_CENTER);
+                    parTitDet.setAlignment(Element.ALIGN_CENTER);
                     parTitDet.font().setSize(10);
                     cellTit.addElement(parTitDet );
                     tablaDetFalta.addCell(cellTit);
                 }
-            
+
                 faltasVO = (FaltasVO) vecFaltas.elementAt(ind);
-                
+
                 cellLinea = new PdfPCell();
                 parMod = new Paragraph(ModulosGestion.devolverDatosModulo(faltasVO.getIdMod()).getNombre());
-                parMod.setAlignment(Image.ALIGN_LEFT);
+                parMod.setAlignment(Element.ALIGN_LEFT);
                 parMod.font().setSize(10);
                 cellLinea.addElement(parMod);
                 tablaDetFalta.addCell(cellLinea);
                 cellLinea = new PdfPCell();
                 parFecha = new Paragraph(new SimpleDateFormat("dd/MM/yyyy").format(faltasVO.getFecha()));
-                parFecha.setAlignment(Image.ALIGN_CENTER);
+                parFecha.setAlignment(Element.ALIGN_CENTER);
                 parFecha.font().setSize(10);
                 cellLinea.addElement(parFecha);
                 tablaDetFalta.addCell(cellLinea);
@@ -237,17 +238,17 @@ public class ImpFaltasEdiServlet extends HttpServlet
                 else
                 {
                     parJustif = new Paragraph(" ");
-                }    
-                parJustif.setAlignment(Image.ALIGN_CENTER);
+                }
+                parJustif.setAlignment(Element.ALIGN_CENTER);
                 parJustif.font().setSize(10);
                 cellLinea.addElement(parJustif);
                 tablaDetFalta.addCell(cellLinea);
-            
+
                 //par14.font().setSize(8);
                 parIma = new Paragraph();
-                parIma.setAlignment(Image.ALIGN_LEFT);
+                parIma.setAlignment(Element.ALIGN_LEFT);
                 parIma.add(logoImage);
-                
+
                 //Formateamos el ancho de las tablas
                 tablaConcepto.setWidthPercentage(100);
                 tablaDatAlu.setWidthPercentage(100);
@@ -265,23 +266,23 @@ public class ImpFaltasEdiServlet extends HttpServlet
                     document.add(new Paragraph(" "));
                     muestraCab = false;
                 }
-                
+
                 document.add(tablaDetFalta);
             }
-            
+
             if (vecFaltas.size() <=0)
             {
                 document.add(new Paragraph("No hay faltas que generar"));
             }
-                    
+
         }
         catch (DocumentException ex)
         {
               ex.getCause();
         }
         // step 5: Close document
-        
-        
+
+
         document.close();
 
     }
@@ -326,5 +327,5 @@ public class ImpFaltasEdiServlet extends HttpServlet
     public String getServletInfo() {
         return "Imprimir faltas edicion servlet";
     }// </editor-fold>
-    
+
 }

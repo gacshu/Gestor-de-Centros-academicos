@@ -17,21 +17,21 @@ import es.jahernandez.tablas.TablaBancos;
  *
  * @author JuanAlberto
  */
-public class BancosDAO 
+public class BancosDAO
 {
-    
+
      public static String devolverNombreBanco(String codBan, Connection con) throws Exception
      {
-        PreparedStatement ps     = null; 
-        ResultSet         rs     = null; 
+        PreparedStatement ps     = null;
+        ResultSet         rs     = null;
 
-        String            sql    = "SELECT " + TablaBancos.NOMBRE   + 
+        String            sql    = "SELECT " + TablaBancos.NOMBRE   +
                                    " FROM "  + TablaBancos.TABLA    +
-                                   " WHERE " + TablaBancos.CODBANCO + " = ? "; 
-                                             
-         
+                                   " WHERE " + TablaBancos.CODBANCO + " = ? ";
+
+
         String            nomBan = "";
-       
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class BancosDAO
             {
                 nomBan = rs.getString(TablaBancos.NOMBRE);
             }
-           
+
             rs.close();
             ps.close();
 
@@ -64,7 +64,7 @@ public class BancosDAO
             }
             throw exc;
         }
-    
+
      }
-    
+
 }

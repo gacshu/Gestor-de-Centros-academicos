@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BajaAreaProfServlet extends HttpServlet  
+public class BajaAreaProfServlet extends HttpServlet
 {
        /**
      * Processes requests for both HTTP
@@ -34,59 +34,59 @@ public class BajaAreaProfServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         String        codProf      = "";
         String        codArea      = "";
         int           resultadoBaj = 0;
         String        pagAreaProf  = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Baja Area profesor" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codProf") != null)
         {
             codProf = request.getParameter("codProf").trim();
         }
-       
+
         if(request.getParameter("codArea") != null)
         {
             codArea = request.getParameter("codArea").trim();
-        }      
-        
+        }
+
         if(request.getParameter("valInfProfArea") != null)
         {
             pagAreaProf =  request.getParameter("valInfProfArea");
-        } 
-         
+        }
+
         resultadoBaj = ProfAreaGestion.eliminaProfArea(codProf,codArea);
-        
+
         if(resultadoBaj <= 0)
         {
-            
+
             //Redireccionar a gestión areas
             response.sendRedirect("profesores/gestionAreas.jsp?codProf="        + codProf
                                                            + "&errorCode="      + resultadoBaj
                                                            + "&valInfProfArea=" + pagAreaProf);
         }
         else
-        {            
+        {
             //Redireccionar a gestión areas
             response.sendRedirect("profesores/gestionAreas.jsp?codProf="        + codProf
                                                            + "&valInfProfArea=" + pagAreaProf);

@@ -12,18 +12,18 @@ import java.util.GregorianCalendar;
  *
  * @author JuanAlberto
  */
-public class CalificacionesVO 
+public class CalificacionesVO
 {
-    private String idEdi;  
+    private String idEdi;
     private String idMod;
     private String idAlu;
     private int    evaluacion;
     private Date   fecha;
     private int    nota;
-  
+
     public CalificacionesVO()
     {
-        idEdi       = "";  
+        idEdi       = "";
         idMod       = "";
         idAlu       = "";
         evaluacion  = -1;
@@ -114,7 +114,7 @@ public class CalificacionesVO
     public void setNota(int nota) {
         this.nota = nota;
     }
-    
+
     public String devolverClave()
     {
         return idEdi + idMod + idAlu + new DecimalFormat("00").format(evaluacion);

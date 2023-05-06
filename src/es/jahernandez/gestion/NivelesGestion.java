@@ -19,7 +19,7 @@ import es.jahernandez.datos.NivelesVO;
  *
  * @author Alberto
  */
-public class NivelesGestion 
+public class NivelesGestion
 {
     //Método que devuelve los datos de un nivel
     public static NivelesVO devolverDatosNivel(String codNiv)
@@ -88,7 +88,7 @@ public class NivelesGestion
             con = Conexion.conectar();
             regActualizados = NivelesDAO.guardarNivel(nivVO,con);
             Conexion.desconectar(con);
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -138,7 +138,7 @@ public class NivelesGestion
             return null;
         }
     }
-    
+
      //Edita el registro de un curso
     public static int editaNivel(NivelesVO nivVO)
     {
@@ -195,5 +195,5 @@ public class NivelesGestion
             }
             return -1;
         }
-    }        
+    }
 }

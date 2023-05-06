@@ -14,12 +14,12 @@ public class TipoCursoVO
     private int    idTipoCurso;
     private String nomTipCurso;
 
-    public TipoCursoVO() 
+    public TipoCursoVO()
     {
         idTipoCurso = -1;
         nomTipCurso = "";
     }
-   
+
     /**
      * @return the idTipoCurso
      */

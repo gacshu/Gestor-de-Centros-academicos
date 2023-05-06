@@ -20,7 +20,7 @@ import es.jahernandez.datos.Conexion;
  *
  * @author JuanAlberto
  */
-public class AdapCurricularGestion 
+public class AdapCurricularGestion
 {
     //Método que devuelve los datos de una adaptación curricular
     public static AdapCurricularVO devolverDatosAdapCur(String codAdapCurricular)
@@ -30,7 +30,7 @@ public class AdapCurricularGestion
 
         try
         {
-            con = Conexion.conectar();           
+            con = Conexion.conectar();
             adapCurVO = AdapCurricularDAO.devolverDatosAdapCur(codAdapCurricular, con);
             Conexion.desconectar(con);
 
@@ -145,7 +145,7 @@ public class AdapCurricularGestion
             return null;
         }
     }
-    
+
      //Edita el registro de una adaptación curricular
     public static int editaAdapCur(AdapCurricularVO adapCurVO)
     {
@@ -182,7 +182,7 @@ public class AdapCurricularGestion
         Connection        con             = null;
         int               regActualizados = 0;
 
-        
+
         try
         {
             con = Conexion.conectar();
@@ -203,8 +203,8 @@ public class AdapCurricularGestion
             }
             return -1;
         }
-    }    
-    
+    }
+
     //Borra las adaptaciones curriculares de un alumno
     public static int eliminaAdapCurAlumno(String codAlu)
     {
@@ -212,7 +212,7 @@ public class AdapCurricularGestion
         Connection        con             = null;
         int               regActualizados = 0;
 
-        
+
         try
         {
             con = Conexion.conectar();
@@ -233,5 +233,5 @@ public class AdapCurricularGestion
             }
             return -1;
         }
-    }       
+    }
 }

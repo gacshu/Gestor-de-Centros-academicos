@@ -6,20 +6,21 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.ControlRecDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ControlRecVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.ControlRecDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.ControlRecVO;
 
 
 /**
  *
  * @author Alberto
  */
-public class ControlRecGestion 
+public class ControlRecGestion
 {
     //Devuelve si han generado los recibos de un mes en un determinado centro
     public static boolean generadosRecMes(String fecha, int codCen)
@@ -46,7 +47,7 @@ public class ControlRecGestion
             return false;
         }
 }
-   
+
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarControlRec(ControlRecVO contRecVO)
     {
@@ -58,7 +59,7 @@ public class ControlRecGestion
             con = Conexion.conectar();
             regAct = ControlRecDAO.guardarControlRec(contRecVO, con);
             Conexion.desconectar(con);
-            
+
             return regAct;
         }
         catch (Exception exc)
@@ -74,18 +75,18 @@ public class ControlRecGestion
             return 0;
         }
     }
-    
+
     //Devuelve si si han generado los recibos
     public static boolean generadosRec(String fecha)
     {
         Connection        con    = null;
         boolean           recGen = false;
-       
+
         try
         {
             con = Conexion.conectar();
             recGen = ControlRecDAO.generadosRec(fecha, con);
-          
+
             return recGen;
         }
         catch (Exception exc)
@@ -101,5 +102,5 @@ public class ControlRecGestion
             return false;
         }
     }
-    
+
 }

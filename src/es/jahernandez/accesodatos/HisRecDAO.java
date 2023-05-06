@@ -5,13 +5,6 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.HisRecVO;
-
-import es.jahernandez.tablas.TablaAlumnosEdiciones;
-import es.jahernandez.tablas.TablaHistoricoRecibos;
-import es.jahernandez.tablas.TablaEdiciones;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,11 +13,16 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import java.util.GregorianCalendar;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.HisRecVO;
+import es.jahernandez.tablas.TablaAlumnosEdiciones;
+import es.jahernandez.tablas.TablaEdiciones;
+import es.jahernandez.tablas.TablaHistoricoRecibos;
 
 /**
  *
@@ -37,12 +35,12 @@ public class HisRecDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "INSERT INTO " + TablaHistoricoRecibos.TABLA      + " ( " 
-                                                           + TablaHistoricoRecibos.CODEDICION + " , " 
+        String            sql             = "INSERT INTO " + TablaHistoricoRecibos.TABLA      + " ( "
+                                                           + TablaHistoricoRecibos.CODEDICION + " , "
                                                            + TablaHistoricoRecibos.CODALUMNO  + " , "
                                                            + TablaHistoricoRecibos.NUMRECIBO  + " , "
-                                                           + TablaHistoricoRecibos.FECHAEXP   + " , "  
-                                                           + TablaHistoricoRecibos.PAGADO     + " , " 
+                                                           + TablaHistoricoRecibos.FECHAEXP   + " , "
+                                                           + TablaHistoricoRecibos.PAGADO     + " , "
                                                            + TablaHistoricoRecibos.CODCURSO   + " ) " +
                                             " VALUES(?,?,?,?,?,?)";
 
@@ -61,9 +59,9 @@ public class HisRecDAO
             ps.setString (6, hisRecVO.getIdCur());
 
             regActualizados = ps.executeUpdate();
-            
+
             ps.close();
-            
+
             return regActualizados;
 
         }
@@ -142,7 +140,7 @@ public class HisRecDAO
         if (centro != 0)
         {
             condEdic = condEdic +  TablaEdiciones.CODEDI    + " IN " +
-                       "(SELECT  " + TablaEdiciones.CODEDI  + 
+                       "(SELECT  " + TablaEdiciones.CODEDI  +
                        " FROM "  + TablaEdiciones.TABLA     +
                        " WHERE " + TablaEdiciones.CODCENTRO + " = " + centro + ") AND " ;
         }
@@ -155,15 +153,15 @@ public class HisRecDAO
             condEdic = "";
         }
 
-        String sql = "SELECT  "   + TablaHistoricoRecibos.CODEDICION + " , " 
+        String sql = "SELECT  "   + TablaHistoricoRecibos.CODEDICION + " , "
                                   + TablaHistoricoRecibos.CODALUMNO  + " , "
                                   + TablaHistoricoRecibos.NUMRECIBO  + " , "
-                                  + TablaHistoricoRecibos.FECHAEXP   + " , "  
-                                  + TablaHistoricoRecibos.PAGADO     + " , " 
-                                  + TablaHistoricoRecibos.CODCURSO   + 
-                     " FROM "     + TablaHistoricoRecibos.TABLA      + "   " +   
+                                  + TablaHistoricoRecibos.FECHAEXP   + " , "
+                                  + TablaHistoricoRecibos.PAGADO     + " , "
+                                  + TablaHistoricoRecibos.CODCURSO   +
+                     " FROM "     + TablaHistoricoRecibos.TABLA      + "   " +
                      condEdic     +  //WHERE
-                     " ORDER BY " + TablaHistoricoRecibos.CODEDICION;                               
+                     " ORDER BY " + TablaHistoricoRecibos.CODEDICION;
         try
         {
             ps  = con.prepareStatement(sql);
@@ -186,7 +184,7 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-            
+
             return listaHisRec;
 
         }
@@ -210,22 +208,22 @@ public class HisRecDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "UPDATE " + TablaHistoricoRecibos.TABLA     + 
-                                            " SET "   + TablaHistoricoRecibos.PAGADO    + " = ? " + 
-                                            " WHERE " + TablaHistoricoRecibos.NUMRECIBO + " = ? AND " 
+        String            sql             = "UPDATE " + TablaHistoricoRecibos.TABLA     +
+                                            " SET "   + TablaHistoricoRecibos.PAGADO    + " = ? " +
+                                            " WHERE " + TablaHistoricoRecibos.NUMRECIBO + " = ? AND "
                                                       + TablaHistoricoRecibos.CODALUMNO + " = ? ";
-        
+
         int               regActualizados = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             //Se pasan los parámetros de la consulta sql
             ps.setBoolean(1, estado );
             ps.setString (2, numRec );
             ps.setString (3, codAlu );
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -254,17 +252,17 @@ public class HisRecDAO
     {
         PreparedStatement ps              = null;
         ResultSet         rs              = null;
-        
-        String            sql             = "SELECT  "   + TablaHistoricoRecibos.CODEDICION + " , " 
+
+        String            sql             = "SELECT  "   + TablaHistoricoRecibos.CODEDICION + " , "
                                                          + TablaHistoricoRecibos.CODALUMNO  + " , "
                                                          + TablaHistoricoRecibos.NUMRECIBO  + " , "
-                                                         + TablaHistoricoRecibos.FECHAEXP   + " , "  
-                                                         + TablaHistoricoRecibos.PAGADO     + " , " 
-                                                         + TablaHistoricoRecibos.CODCURSO   + 
-                                            " FROM "     + TablaHistoricoRecibos.TABLA      +   
-                                            " WHERE "    + TablaHistoricoRecibos.NUMRECIBO  + " = ? AND " 
+                                                         + TablaHistoricoRecibos.FECHAEXP   + " , "
+                                                         + TablaHistoricoRecibos.PAGADO     + " , "
+                                                         + TablaHistoricoRecibos.CODCURSO   +
+                                            " FROM "     + TablaHistoricoRecibos.TABLA      +
+                                            " WHERE "    + TablaHistoricoRecibos.NUMRECIBO  + " = ? AND "
                                                          + TablaHistoricoRecibos.CODALUMNO  + " = ? ";
-        
+
         HisRecVO          datHisRec       = null;
 
         try
@@ -288,10 +286,10 @@ public class HisRecDAO
                 datHisRec.setPagado(rs.getBoolean(TablaHistoricoRecibos.PAGADO));
                 datHisRec.setIdCur (rs.getString (TablaHistoricoRecibos.CODCURSO));
             }
-            
+
             rs.close();
             ps.close();
-            
+
             return datHisRec;
         }
         catch (Exception exc)
@@ -316,18 +314,18 @@ public class HisRecDAO
         PreparedStatement       ps       = null;
         ResultSet               rs       = null;
 
-        String                  sql      = "SELECT COUNT(" + TablaHistoricoRecibos.CODEDICION + ") AS EXPR1 " + 
-                                           " FROM "        + TablaHistoricoRecibos.TABLA      + 
+        String                  sql      = "SELECT COUNT(" + TablaHistoricoRecibos.CODEDICION + ") AS EXPR1 " +
+                                           " FROM "        + TablaHistoricoRecibos.TABLA      +
                                            " WHERE "       + TablaHistoricoRecibos.NUMRECIBO  + " LIKE '"     + fecha + "%'";
-                
+
         int                     numRec   = 0;
 
         try
         {
             ps  = con.prepareStatement(sql);
-            
+
             rs  = ps.executeQuery();
-            
+
             if(rs.next())
             {
                 numRec = rs.getInt(1);
@@ -335,7 +333,7 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-            
+
             return numRec;
         }
         catch (Exception exc)
@@ -360,9 +358,9 @@ public class HisRecDAO
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
-        
-        String            mesAc          = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));   
-        String            annoAc         = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));  
+
+        String            mesAc          = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));
+        String            annoAc         = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));
 
         boolean           reciboGenerado = true;
 
@@ -372,22 +370,22 @@ public class HisRecDAO
         int              mesSig          = new GregorianCalendar().get(Calendar.MONTH) + 2; //Se añanden 2 porque el mes empieza en 0
         int              annoSig         = new GregorianCalendar().get(Calendar.YEAR);
 
-        String           sql             = "SELECT " + TablaHistoricoRecibos.CODEDICION + " , " 
+        String           sql             = "SELECT " + TablaHistoricoRecibos.CODEDICION + " , "
                                                      + TablaHistoricoRecibos.CODALUMNO  + " , "
                                                      + TablaHistoricoRecibos.NUMRECIBO  + " , "
-                                                     + TablaHistoricoRecibos.FECHAEXP   + " , "  
-                                                     + TablaHistoricoRecibos.PAGADO     + " , " 
-                                                     + TablaHistoricoRecibos.CODCURSO   + 
-                                           " FROM "  + TablaHistoricoRecibos.TABLA      +                                                   
-                                           " WHERE " + TablaHistoricoRecibos.CODEDICION + " = ? AND " 
+                                                     + TablaHistoricoRecibos.FECHAEXP   + " , "
+                                                     + TablaHistoricoRecibos.PAGADO     + " , "
+                                                     + TablaHistoricoRecibos.CODCURSO   +
+                                           " FROM "  + TablaHistoricoRecibos.TABLA      +
+                                           " WHERE " + TablaHistoricoRecibos.CODEDICION + " = ? AND "
                                                      + TablaHistoricoRecibos.CODALUMNO  + " = ? AND "
-                                                     + TablaHistoricoRecibos.FECHAEXP   + " > ? AND " 
-                                                     + TablaHistoricoRecibos.FECHAEXP   + " < ? AND " 
-                                                     + TablaHistoricoRecibos.NUMRECIBO  + " LIKE '" + annoAc + "/" + mesAc + "%'";   
+                                                     + TablaHistoricoRecibos.FECHAEXP   + " > ? AND "
+                                                     + TablaHistoricoRecibos.FECHAEXP   + " < ? AND "
+                                                     + TablaHistoricoRecibos.NUMRECIBO  + " LIKE '" + annoAc + "/" + mesAc + "%'";
 
-            
-        
-        
+
+
+
         if (mesSig > 12)
         {
             mesSig = 1;
@@ -396,7 +394,7 @@ public class HisRecDAO
 
         fecMesSig = "01/" + mesSig + "/" + annoSig;
 
-        
+
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
         try
@@ -422,7 +420,7 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-            
+
             return reciboGenerado;
 
         }
@@ -448,22 +446,22 @@ public class HisRecDAO
         PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
-        String            sql         = "SELECT "    + TablaHistoricoRecibos.CODEDICION + " , " 
+        String            sql         = "SELECT "    + TablaHistoricoRecibos.CODEDICION + " , "
                                                      + TablaHistoricoRecibos.CODALUMNO  + " , "
                                                      + TablaHistoricoRecibos.NUMRECIBO  + " , "
-                                                     + TablaHistoricoRecibos.FECHAEXP   + " , "  
-                                                     + TablaHistoricoRecibos.PAGADO     + " , " 
-                                                     + TablaHistoricoRecibos.CODCURSO   + 
-                                        " FROM "     + TablaHistoricoRecibos.TABLA      + 
-                                        " WHERE "    + TablaHistoricoRecibos.FECHAEXP   + " >= ? AND " 
+                                                     + TablaHistoricoRecibos.FECHAEXP   + " , "
+                                                     + TablaHistoricoRecibos.PAGADO     + " , "
+                                                     + TablaHistoricoRecibos.CODCURSO   +
+                                        " FROM "     + TablaHistoricoRecibos.TABLA      +
+                                        " WHERE "    + TablaHistoricoRecibos.FECHAEXP   + " >= ? AND "
                                                      + TablaHistoricoRecibos.FECHAEXP   + " <  ? "     +
                                         " ORDER BY " + TablaHistoricoRecibos.CODEDICION;
-        
-        
+
+
         Vector           listaHisRec = new Vector();
         HisRecVO         datHisRec   = null;
-        
-        
+
+
         int              mesAct      = new GregorianCalendar().get(Calendar.MONTH) + 1;
         int              annoAc      = new GregorianCalendar().get(Calendar.YEAR) + 1;
         int              mesSig      = mesAct + 1;
@@ -485,7 +483,7 @@ public class HisRecDAO
         try
         {
             ps  = con.prepareStatement(sql);
-                        
+
             //Se pasan los parámetros de la consulta sql
             ps.setDate(1, new Date(df.parse(fecAct).getTime()));
             ps.setDate(2, new Date(df.parse(fecSig).getTime()));
@@ -537,7 +535,7 @@ public class HisRecDAO
 
         String            sql     = "DELETE FROM " + TablaHistoricoRecibos.TABLA      +
                                     " WHERE "      + TablaHistoricoRecibos.CODEDICION + " = ? ";
-                
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -548,7 +546,7 @@ public class HisRecDAO
             devRes = ps.executeUpdate();
 
             ps.close();
-            
+
             return devRes;
         }
         catch (Exception exc)
@@ -565,7 +563,7 @@ public class HisRecDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve ell número de recibos generados un mes
     public static int  numeroRecGenMes(String annoBus, String mesBus,Connection con) throws Exception
     {
@@ -573,7 +571,7 @@ public class HisRecDAO
         ResultSet         rs             = null;
 
         int              numRecGen       = 0;
-       
+
         String           sql             = "SELECT COUNT(" + TablaHistoricoRecibos.NUMRECIBO + ")"  +
                                            " FROM " + TablaHistoricoRecibos.TABLA +
                                            " WHERE " + TablaHistoricoRecibos.NUMRECIBO + " LIKE '" + annoBus + "/" + mesBus + "%'";
@@ -587,10 +585,10 @@ public class HisRecDAO
             {
                 numRecGen =  rs.getInt(1);
             }
-            
+
             rs.close();
             ps.close();
-            
+
             return numRecGen;
 
         }
@@ -609,5 +607,5 @@ public class HisRecDAO
             throw exc;
         }
 
-    }   
+    }
 }

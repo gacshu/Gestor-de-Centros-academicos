@@ -1,28 +1,28 @@
 /*
  * Fichero: PasswordHasher.java
  * Autor: Jose Manuel Cejudo Gausi (jmc@jmcejudo.com)
- * 
+ *
  * Ã‰ste programa es software libre: usted tiene derecho a redistribuirlo y/o modificarlo bajo los
  * tÃ©rminos de la Licencia EUPL European Public License publicada por el organismo IDABC de la
  * ComisiÃ³n Europea, en su versiÃ³n 1.0. o posteriores.
- * 
+ *
  * Ã‰ste programa se distribuye de buena fe, pero SIN NINGUNA GARANTÃ�A, incluso sin las presuntas
  * garantÃ­as implÃ­citas de USABILIDAD o ADECUACIÃ“N A PROPÃ“SITO CONCRETO. Para mas informaciÃ³n
  * consulte la Licencia EUPL European Public License.
- * 
+ *
  * Usted recibe una copia de la Licencia EUPL European Public License junto con este programa,
  * si por algÃºn motivo no le es posible visualizarla, puede consultarla en la siguiente
  * URL: http://ec.europa.eu/idabc/servlets/Doc?id=31099
- * 
+ *
  * You should have received a copy of the EUPL European Public License along with this program.
  * If not, see http://ec.europa.eu/idabc/servlets/Doc?id=31096
- * 
+ *
  * Vous devez avoir reÃ§u une copie de la EUPL European Public License avec ce programme.
  * Si non, voir http://ec.europa.eu/idabc/servlets/Doc?id=31205
- * 
+ *
  * Sie sollten eine Kopie der EUPL European Public License zusammen mit diesem Programm.
  * Wenn nicht, finden Sie da http://ec.europa.eu/idabc/servlets/Doc?id=29919
- * 
+ *
  */
 
 package es.jahernandez.utilidades;
@@ -50,7 +50,7 @@ import javax.crypto.spec.SecretKeySpec;
  * </ul>
  * <p>
  * Ejemplo:
- * 
+ *
  * <pre>
  * // Crea el hash de &lt;code&gt;valor&lt;/code&gt;
  * PasswordHash ph = PasswordHasher.hash(valor);
@@ -62,7 +62,7 @@ import javax.crypto.spec.SecretKeySpec;
  * producciÃ³n. Para simplificar su uso todas las excepciones chequeadas se capturan y se relanzan
  * como {@link RuntimeException}. En una implementaciÃ³n mÃ¡s completa podrÃ­a ser conveniente definir
  * excepciones especÃ­ficas.
- * 
+ *
  * @author Jose Manuel Cejudo Gausi
  */
 public final class PasswordHasher {
@@ -89,7 +89,7 @@ public final class PasswordHasher {
 
     /**
      * Representa el resultado de una operaciÃ³n de <code>hash</code> con <code>salt</code>.
-     * 
+     *
      * @author Jose Manuel Cejudo Gausi
      */
     public static class PasswordHash {
@@ -106,7 +106,7 @@ public final class PasswordHasher {
 
         /**
          * Construye una nueva instancia con los valores indicados.
-         * 
+         *
          * @param hash
          *            el valor de <code>hash</code>.
          * @param salt
@@ -121,7 +121,7 @@ public final class PasswordHasher {
 
         /**
          * Devuelve el valor de <code>hash</code>.
-         * 
+         *
          * @return el valor.
          */
         public byte[] getHash() {
@@ -132,7 +132,7 @@ public final class PasswordHasher {
 
         /**
          * Devuelve el valor de <code>salt</code>.
-         * 
+         *
          * @return el valor.
          */
         public byte[] getSalt() {
@@ -160,7 +160,7 @@ public final class PasswordHasher {
      * <p>
      * El objeto {@link PasswordHash} devuelto contiene el <code>hash</code> calculado y el
      * <code>salt</code> generado.
-     * 
+     *
      * @param value
      *            el valor para el que calcular el <code>hash</code>.
      * @return el resultado del cÃ¡lculo <code>hash</code>.
@@ -180,7 +180,7 @@ public final class PasswordHasher {
      * <p>
      * El objeto {@link PasswordHash} devuelto contiene el <code>hash</code> calculado y el
      * <code>salt</code> generado.
-     * 
+     *
      * @param value
      *            el valor para el que calcular el <code>hash</code>.
      * @param salt
@@ -216,7 +216,7 @@ public final class PasswordHasher {
      * igual al <code>hash</code> correcto indicado.
      * <p>
      * Este mÃ©todo permite comprobar si un valor es integro con respecto al <code>hash</code>.
-     * 
+     *
      * @param value
      *            el valor a comprobar.
      * @param correctHash

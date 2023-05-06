@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author JuanAlberto
  */
-public class ClasesIndivVO 
+public class ClasesIndivVO
 {
     private String idClaseInd;
     private String idCur;
@@ -18,7 +18,7 @@ public class ClasesIndivVO
     private Date   fecClase;
     private String idProf;
     private float  tarifa;
-    
+
     public ClasesIndivVO()
     {
         idClaseInd = "";
@@ -113,6 +113,6 @@ public class ClasesIndivVO
         this.idClaseInd = idClaseInd;
     }
 
-    
-    
+
+
 }

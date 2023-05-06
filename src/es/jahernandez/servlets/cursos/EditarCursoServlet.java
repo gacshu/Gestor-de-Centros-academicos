@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Alberto
  */
-public class EditarCursoServlet extends HttpServlet 
+public class EditarCursoServlet extends HttpServlet
 {
 
     /**
@@ -36,7 +36,7 @@ public class EditarCursoServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
@@ -47,15 +47,15 @@ public class EditarCursoServlet extends HttpServlet
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Editar curso" );
-               
+
         }
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
@@ -82,7 +82,7 @@ public class EditarCursoServlet extends HttpServlet
         if(request.getParameter("txtContenido") != null)
         {
              curEdi.setContenido(request.getParameter("txtContenido").trim());
-        }       
+        }
 
         resultadoEdi = CursosGestion.editaCurso(curEdi);
 

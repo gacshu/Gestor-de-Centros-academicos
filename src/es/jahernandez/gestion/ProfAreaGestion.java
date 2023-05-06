@@ -5,20 +5,21 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.ProfAreaDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ProfAreaVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.ProfAreaDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.ProfAreaVO;
+
 /**
  *
  * @author Alberto
  */
-public class ProfAreaGestion 
+public class ProfAreaGestion
 {
     //Método que devuelve los datos de ProfesorArea
     public static Vector devolverTodosProfArea()
@@ -48,7 +49,7 @@ public class ProfAreaGestion
         }
     }
 
-    //Método que devuelve las areas de un profesor 
+    //Método que devuelve las areas de un profesor
     public static Vector devolverAreasProf(String codProf)
     {
         Connection       con            = null;
@@ -76,12 +77,12 @@ public class ProfAreaGestion
         }
     }
 
-    
-     //Método que devuelve los nombre de lass áreas de un profesor 
+
+     //Método que devuelve los nombre de lass áreas de un profesor
     public static String devolverNombresAreasProf(String codProf)
     {
         Connection       con          = null;
-        String           nombresAreas = ""; 
+        String           nombresAreas = "";
 
         try
         {
@@ -104,8 +105,8 @@ public class ProfAreaGestion
             return null;
         }
     }
-    
-    //Método que devuelve los profesores de un area 
+
+    //Método que devuelve los profesores de un area
     public static Vector devolverProfArea(String codArea)
     {
         Connection       con            = null;
@@ -132,7 +133,7 @@ public class ProfAreaGestion
             return null;
         }
     }
-  
+
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarProfArea(ProfAreaVO profAreaVO)
     {
@@ -186,8 +187,8 @@ public class ProfAreaGestion
             }
             return -1;
         }
-    }   
-    
+    }
+
     //Elimina los registros de un profesor
     public static int eliminaAreasProf(String codProf)
     {
@@ -214,8 +215,8 @@ public class ProfAreaGestion
             }
             return -1;
         }
-    }   
-    
+    }
+
     //Elimina los registros de un área
     public static int eliminaProfArea(String codArea)
     {
@@ -242,6 +243,6 @@ public class ProfAreaGestion
             }
             return -1;
         }
-    }   
+    }
 }
 

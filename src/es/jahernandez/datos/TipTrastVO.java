@@ -8,11 +8,11 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class TipTrastVO 
+public class TipTrastVO
 {
     private String codTipTrast;
     private String descrip;
-    
+
     public TipTrastVO()
     {
         codTipTrast = "";
@@ -46,5 +46,5 @@ public class TipTrastVO
     public void setDescrip(String descrip) {
         this.descrip = descrip;
     }
-    
+
 }

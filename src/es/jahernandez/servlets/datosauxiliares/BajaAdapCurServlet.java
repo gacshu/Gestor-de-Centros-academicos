@@ -35,52 +35,52 @@ public class BajaAdapCurServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion       = request.getSession();
         AdapCurricularVO adapCurVO    = new AdapCurricularVO();
         int              resultadoBor = -99;
         String           pagAdapCur   = "0";
-        
+
         Logger           log          = null;
         ConUsuVO         conUsoVO     = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Borrar Adaptación curricular" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codAdapCur") != null)
         {
             adapCurVO.setCodAdapCur(request.getParameter("codAdapCur").trim());
         }
-        
+
         if(request.getParameter("codInt") != null)
         {
             adapCurVO.setIdAlu(request.getParameter("codInt").trim());
         }
-            
+
         if(request.getParameter("valInfACu") != null)
         {
             pagAdapCur =  request.getParameter("valInfACu");
-        } 
-        
+        }
+
         resultadoBor = AdapCurricularGestion.eliminaAdapCur(adapCurVO.getCodAdapCur());
 
         //Redireccionar a gestión niveles
         response.sendRedirect("interesados/adapCurFichaAlumno.jsp?codInt="    + adapCurVO.getIdAlu()
-                                                              + "&valInfAC="  + pagAdapCur 
+                                                              + "&valInfAC="  + pagAdapCur
                                                               + "&resultBor=" + resultadoBor);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

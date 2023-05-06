@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaAreaServlet extends HttpServlet 
+public class AltaAreaServlet extends HttpServlet
 {
 
    /**
@@ -36,26 +36,26 @@ public class AltaAreaServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession sesion = request.getSession();
-        
+
         AreasVO     areaVO = new AreasVO();
         int         resAlt = 0;
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta Ã¡rea" );
-               
+
         }
-        
-        
+
+
 
         // Se comprueba que se hayan pasado los parÃ¡metros y se inicializan valores
         if(request.getParameter("txtNombre") != null)

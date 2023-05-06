@@ -8,7 +8,7 @@ package es.jahernandez.datos;
  *
  * @author Alberto
  */
-public class ModulosVO 
+public class ModulosVO
 {
     private String codMod;
     private String nombre;
@@ -20,7 +20,7 @@ public class ModulosVO
     /**
      * @return the codMod
      */
-    public String getCodMod() 
+    public String getCodMod()
     {
         return codMod;
     }
@@ -28,7 +28,7 @@ public class ModulosVO
     /**
      * @param codMod the codMod to set
      */
-    public void setCodMod(String codMod) 
+    public void setCodMod(String codMod)
     {
         this.codMod = codMod;
     }
@@ -36,7 +36,7 @@ public class ModulosVO
     /**
      * @return the nombre
      */
-    public String getNombre() 
+    public String getNombre()
     {
         return nombre;
     }
@@ -103,5 +103,5 @@ public class ModulosVO
     public void setCodArea(String codArea) {
         this.codArea = codArea;
     }
-    
+
 }

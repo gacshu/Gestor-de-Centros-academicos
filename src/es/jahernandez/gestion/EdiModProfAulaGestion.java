@@ -6,20 +6,21 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.EdiModProfAulaDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.EdiModProfAulaVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.EdiModProfAulaDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.EdiModProfAulaVO;
+
 /**
  *
  * @author Alberto
  */
-public class EdiModProfAulaGestion 
+public class EdiModProfAulaGestion
 {
      //Método que devuelve los datos de un módulo de una edición
     public static EdiModProfAulaVO devolverDatosModEdi(String codMod, String codEdi)
@@ -77,7 +78,7 @@ public class EdiModProfAulaGestion
             return null;
         }
     }
-    
+
     //Método que devuelve los  módulos de un profesor
     public static Vector devolverModProf(String codProf)
     {
@@ -189,7 +190,7 @@ public class EdiModProfAulaGestion
             return -1;
         }
     }
-    
+
     //Método que borra todos los módulos de una edición
     public static int borrarModulosEdi(String codEdi)
     {
@@ -218,13 +219,13 @@ public class EdiModProfAulaGestion
             return -1;
         }
     }
-    
+
     //Método que edita un modulo de una edición
     public static int editarEdiModProfAula(EdiModProfAulaVO empaVO)
     {
         Connection con             = null;
         int        regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -247,5 +248,5 @@ public class EdiModProfAulaGestion
 
             return -1;
         }
-    }   
+    }
 }

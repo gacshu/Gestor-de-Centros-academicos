@@ -12,9 +12,9 @@ import java.util.GregorianCalendar;
  *
  * @author JuanAlberto
  */
-public class FaltasVO 
+public class FaltasVO
 {
-    private String  idEdi;  
+    private String  idEdi;
     private String  idMod;
     private String  idAlu;
     private Date    fecha;
@@ -98,12 +98,12 @@ public class FaltasVO
     public void setJustificada(boolean justificada) {
         this.justificada = justificada;
     }
-    
-    
+
+
     public String devolverClave()
     {
-        return idEdi + idMod + idAlu + new SimpleDateFormat("ddMMyyyy").format(fecha); 
+        return idEdi + idMod + idAlu + new SimpleDateFormat("ddMMyyyy").format(fecha);
     }
-            
+
 
 }

@@ -88,6 +88,6 @@ public class NivelesVO
         this.codCur = codTipCur;
     }
 
-   
+
 
 }

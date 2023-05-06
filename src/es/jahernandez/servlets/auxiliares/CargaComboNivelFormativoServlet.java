@@ -32,17 +32,17 @@ public class CargaComboNivelFormativoServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         // TODO Auto-generated method stub
         response.setContentType("text/html; charset=UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        PrintWriter out      = response.getWriter();        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+        PrintWriter out      = response.getWriter();
         String	    valSel   = null;
         Vector      vecNF    = NivelForGestion.datComNivFor();
         NivelForVO  nivForVO = null;
@@ -53,11 +53,11 @@ public class CargaComboNivelFormativoServlet extends HttpServlet {
 
         }
 
-        try 
-        {            
+        try
+        {
                 out.printf("<option value=\"0\">Seleccione...</option>");
-                for (int ind = 0; ind<vecNF.size(); ind ++) 
-                {                
+                for (int ind = 0; ind<vecNF.size(); ind ++)
+                {
                     nivForVO = (NivelForVO) vecNF.elementAt(ind);
 
                     if(valSel == null)
@@ -74,15 +74,15 @@ public class CargaComboNivelFormativoServlet extends HttpServlet {
                             {
                                 out.printf("<option value='%1s'>%2s</option>", nivForVO.getIdNIvel() , nivForVO.getNomNivel());
                             }
-                    }            
-                }        
-        } 
-        finally 
-        {            
+                    }
+                }
+        }
+        finally
+        {
                 if (out!=null)
                 {
                         out.flush();
-                        out.close();        
+                        out.close();
                 }
         }
     }

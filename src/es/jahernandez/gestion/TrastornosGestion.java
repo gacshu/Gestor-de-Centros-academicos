@@ -19,7 +19,7 @@ import es.jahernandez.datos.TrastornosVO;
  *
  * @author Alberto
  */
-public class TrastornosGestion 
+public class TrastornosGestion
 {
     //Método que devuelve los datos de un trastorno
     public static TrastornosVO devolverDatosTrastorno(String codTrastorno)
@@ -88,7 +88,7 @@ public class TrastornosGestion
             con = Conexion.conectar();
             regActualizados = TrastornosDAO.guardarTrastorno(trastVO,con);
             Conexion.desconectar(con);
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -138,7 +138,7 @@ public class TrastornosGestion
             return null;
         }
     }
-    
+
      //Edita el registro de un trastorno
     public static int editaTrastorno(TrastornosVO trastVO)
     {
@@ -194,14 +194,14 @@ public class TrastornosGestion
             }
             return -1;
         }
-    }     
-    
+    }
+
     //Borra los trastornos de un alumno
     public static int eliminaTrastornosAlumno(String codAlu)
     {
         Connection        con             = null;
         int               regActualizados = 0;
-   
+
         try
         {
             con = Conexion.conectar();
@@ -222,5 +222,5 @@ public class TrastornosGestion
             }
             return -1;
         }
-    }     
+    }
 }

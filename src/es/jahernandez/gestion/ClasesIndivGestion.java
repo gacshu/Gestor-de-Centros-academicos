@@ -21,7 +21,7 @@ import es.jahernandez.datos.Conexion;
  *
  * @author JuanAlberto
  */
-public class ClasesIndivGestion 
+public class ClasesIndivGestion
 {
     //Método que devuelve los datos de una clase individual
     public static ClasesIndivVO devolverDatosClaseIndiv(String codClasInd)
@@ -33,9 +33,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             claIndVO = ClasesIndivDAO.devolverDatosClaseIndiv(codClasInd, con);
-            
+
             Conexion.desconectar(con);
 
             return claIndVO;
@@ -65,9 +65,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             listaClaInd = ClasesIndivDAO.devolverTodasClasesIndividuales(con);
-                    
+
             Conexion.desconectar(con);
 
             return listaClaInd;
@@ -95,11 +95,11 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             regActualizados = ClasesIndivDAO.guardarClasInd(claIndVO, con);
-      
+
             Conexion.desconectar(con);
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -122,7 +122,7 @@ public class ClasesIndivGestion
         String  codIntrod = "";
 
         codIntrod = ClasesIndivDAO.nueCodClasInd();
-        
+
         return codIntrod;
     }
 
@@ -135,9 +135,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             listaClaInd = ClasesIndivDAO.devolverClasesIndAlu(codAlu, con);
-            
+
             Conexion.desconectar(con);
 
             return listaClaInd;
@@ -155,7 +155,7 @@ public class ClasesIndivGestion
             return null;
         }
     }
-    
+
      //Edita el registro de una clase individual
     public static int editarClaseInd(ClasesIndivVO claIndVO)
     {
@@ -165,9 +165,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             regActualizados = ClasesIndivDAO.editarClaseInd(claIndVO,con);
-            
+
             Conexion.desconectar(con);
 
             return regActualizados;
@@ -193,11 +193,11 @@ public class ClasesIndivGestion
         Connection        con             = null;
         int               regActualizados = 0;
 
-        
+
         try
         {
             con = Conexion.conectar();
-           
+
             regActualizados = ClasesIndivDAO.eliminaClaseInd(codClaInd, con);
 
             return regActualizados;
@@ -214,8 +214,8 @@ public class ClasesIndivGestion
             }
             return -1;
         }
-    }     
-    
+    }
+
     //Borra las clases individuales de un alumno
     public static int eliminarClasIndAlumno(String codAlu)
     {
@@ -223,13 +223,13 @@ public class ClasesIndivGestion
         Connection        con             = null;
         int               regActualizados = 0;
 
-        
+
         try
         {
             con = Conexion.conectar();
-            
+
             regActualizados = ClasesIndivDAO.eliminarClasIndAlumno(codAlu, con);
-            
+
             Conexion.desconectar(con);
 
             return regActualizados;
@@ -246,14 +246,14 @@ public class ClasesIndivGestion
             }
             return -1;
         }
-    } 
-    
+    }
+
     //Método que devuelve si un alumno tiene clases individuales
     public static boolean tieneAluClasesInd(String codAlu )
     {
         Connection con            = null;
-        boolean    aluTienClases  = false; 
-     
+        boolean    aluTienClases  = false;
+
         try
         {
             con = Conexion.conectar();
@@ -275,7 +275,7 @@ public class ClasesIndivGestion
             return true;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un alumno y un mes y año concreto ordenasdos for fecha
     public static Vector devolverClasesIndAluMes(String codAlu, String strFecMesAnno)
     {
@@ -285,9 +285,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-           
+
             listaClaInd = ClasesIndivDAO.devolverClasesIndAluMes(codAlu, strFecMesAnno, con);
-            
+
             Conexion.desconectar(con);
 
             return listaClaInd;
@@ -305,7 +305,7 @@ public class ClasesIndivGestion
             return null;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un mes y año concreto ordenados por alumno y fecha
     public static Vector devolverClasesIndMes(String strFecMesAnno)
     {
@@ -315,9 +315,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             listaClaInd = ClasesIndivDAO.devolverClasesIndMes(strFecMesAnno, con);
-            
+
             Conexion.desconectar(con);
 
             return listaClaInd;
@@ -335,19 +335,19 @@ public class ClasesIndivGestion
             return null;
         }
     }
-    
+
     //Método que devuelve el importe total de las clases de un alumno en un mes
     public static float devolverImporteClaseAluMes(String codAlu, String strFecMesAnno)
     {
         Connection con      = null;
-        float      impTotal = 0; 
+        float      impTotal = 0;
 
         try
         {
             con = Conexion.conectar();
-            
+
             impTotal = ClasesIndivDAO.devolverImporteClaseAluMes(codAlu, strFecMesAnno, con);
-            
+
             Conexion.desconectar(con);
 
             return impTotal;
@@ -365,7 +365,7 @@ public class ClasesIndivGestion
             return -1;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un profesor
     public static Vector devolverClasesIndProf(String codProf )
     {
@@ -375,9 +375,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-            
+
             listaClaInd = ClasesIndivDAO.devolverClasesIndProf(codProf,con);
-            
+
             Conexion.desconectar(con);
 
             return listaClaInd;
@@ -395,7 +395,7 @@ public class ClasesIndivGestion
             return null;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un profesor y un mes y año concreto ordenados for fecha
     public static Vector devolverClasesIndProfMes(String codProf, String strFecMesAnno)
     {
@@ -405,9 +405,9 @@ public class ClasesIndivGestion
         try
         {
             con = Conexion.conectar();
-           
+
             listaClaInd = ClasesIndivDAO.devolverClasesIndProfMes(codProf, strFecMesAnno, con);
-            
+
             Conexion.desconectar(con);
 
             return listaClaInd;
@@ -425,5 +425,5 @@ public class ClasesIndivGestion
             return null;
         }
     }
-    
+
 }

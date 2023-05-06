@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -47,7 +48,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class impRecPenAluServlet extends HttpServlet 
+public class impRecPenAluServlet extends HttpServlet
 {
 
     /**
@@ -61,12 +62,12 @@ public class impRecPenAluServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         HttpSession    sesion       = request.getSession();
         ServletContext sc           = null;
-        
+
         AlumnosVO      aluVO        = null;
         EdicionesVO    ediVO        = null;
         CursosVO       curVO        = null;
@@ -75,10 +76,10 @@ public class impRecPenAluServlet extends HttpServlet
         boolean        generaPag    = false;
 
         ConUsuVO       conUsVO      = new ConUsuVO();
-           
-        String         mesAc        = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));   
-        String         annoAc       = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));  
-        
+
+        String         mesAc        = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));
+        String         annoAc       = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));
+
 
         Date           fechaHoy     = new Date(System.currentTimeMillis());
 
@@ -89,17 +90,17 @@ public class impRecPenAluServlet extends HttpServlet
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir recibos pendientes" );
-               
+
         }
-        
+
         //Se cargan datos de la lista de recibos
         listaRecibos = AluEdiGestion.devRecPendAluEdi();
         numRecMes = HisRecGestion.devNumRecMes(annoAc + "/" + mesAc);
@@ -125,7 +126,7 @@ public class impRecPenAluServlet extends HttpServlet
         Phrase   frasDatNumRec = null;
         Phrase   frasLocExpedi = null;
         Phrase   frasImportCur = null;
-        
+
         String   strDatNumRec  = "";
         String   strDatLocRec  = "";
         String   strDatImpRec  = "";
@@ -135,12 +136,12 @@ public class impRecPenAluServlet extends HttpServlet
         String   strNombreBan  = "";
         String   strRecibo     = "";
         String   strDatAlu     = "";
-        
+
         tablaRecibo.setWidthPercentage(100);
-        
+
         PdfPTable tablaDatAlu = new PdfPTable(1);
         tablaDatAlu.setWidthPercentage(100);
-       
+
         PdfPTable tablaFin = new PdfPTable(3);
         tablaFin.setWidthPercentage(100);
 
@@ -158,10 +159,10 @@ public class impRecPenAluServlet extends HttpServlet
         try
         {
             sc = getServletContext();
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-            
+
             // step 3
             document.setMargins(32, 32, 16, 0);
             document.open();
@@ -171,7 +172,7 @@ public class impRecPenAluServlet extends HttpServlet
             for (int ind = 0; ind < listaRecibos.size(); ind++)
             {
                 if (! HisRecGestion.reciboGenerado( ((AluEdiVO)listaRecibos.elementAt(ind)).getIdAlu(), ((AluEdiVO)listaRecibos.elementAt(ind)).getIdEdi()) )
-                {          
+                {
                     aluVO = AlumnosGestion.devolverDatosAlumno(((AluEdiVO)listaRecibos.elementAt(ind)).getIdAlu());
                     ediVO = EdicionesGestion.devolverDatosEdi(((AluEdiVO)listaRecibos.elementAt(ind)).getIdEdi());
                     curVO = CursosGestion.devolverDatosCurso(ediVO.getIdCur());
@@ -203,7 +204,7 @@ public class impRecPenAluServlet extends HttpServlet
 
                         par14.font().setSize(8);
                         parIma = new Paragraph();
-                        parIma.setAlignment(Image.ALIGN_LEFT);
+                        parIma.setAlignment(Element.ALIGN_LEFT);
                         parIma.add(logoImage);
 
                         // step 4
@@ -214,7 +215,7 @@ public class impRecPenAluServlet extends HttpServlet
 
                         //strDatNumRec = "RECIBO NUMERO\n" + annoAc + "/" + mesAc + "-" + (numRecMes + 1);
                         strDatNumRec = "RECIBO NUMERO\n" + annoAc + "/" + mesAc + "-" + (HisRecGestion.numeroRecGenMes(annoAc, mesAc) + 1);
-                        
+
                         frasDatNumRec = new Phrase(strDatNumRec, new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
                         frasDatNumRec.font().setSize(12);
                         frasDatNumRec.font().setStyle(Font.BOLD);
@@ -304,7 +305,7 @@ public class impRecPenAluServlet extends HttpServlet
                         document.newPage();
 
                         //Se guarda el histórico de recibos
-                        
+
                         hCurVO.setIdEdi(ediVO.getIdEdi());
                         hCurVO.setIdAlu(aluVO.getIdAlu());
                         hCurVO.setNumRec(annoAc + "/" + mesAc + "-" + (numRecMes + 1));
@@ -332,8 +333,8 @@ public class impRecPenAluServlet extends HttpServlet
               ex.getCause();
         }
         // step 5: Close document
-        
-        
+
+
         document.close();
 
     }
@@ -378,7 +379,7 @@ public class impRecPenAluServlet extends HttpServlet
     public String getServletInfo() {
         return "Imprimir recibos pendientes servlet";
     }// </editor-fold>
-    
+
     private String devuelveMes(int mes)
     {
         switch (mes)
@@ -398,5 +399,5 @@ public class impRecPenAluServlet extends HttpServlet
             default: return null;
         }
     }
-    
+
 }

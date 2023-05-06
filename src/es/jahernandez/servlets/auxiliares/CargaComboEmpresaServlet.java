@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Alberto
  */
-public class CargaComboEmpresaServlet extends HttpServlet 
+public class CargaComboEmpresaServlet extends HttpServlet
 {
 
     /**
@@ -33,17 +33,17 @@ public class CargaComboEmpresaServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         // TODO Auto-generated method stub
         response.setContentType("text/html; charset=UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        PrintWriter out    = response.getWriter();        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+        PrintWriter out    = response.getWriter();
         String	    valSel = null;
         Vector      vecEmp = EmpresasGestion.devolverDatosEmpCom();
         DatosCmbEmp dceVO  = null;
@@ -53,11 +53,11 @@ public class CargaComboEmpresaServlet extends HttpServlet
                 valSel = request.getParameter("valSel").trim();
         }
 
-        try 
-        {            
+        try
+        {
                 out.printf("<option value=\"0\">Seleccione...</option>");
-                for (int ind = 0; ind<vecEmp.size(); ind ++) 
-                {                
+                for (int ind = 0; ind<vecEmp.size(); ind ++)
+                {
                     dceVO = (DatosCmbEmp) vecEmp.elementAt(ind);
 
                     if(valSel == null)
@@ -74,15 +74,15 @@ public class CargaComboEmpresaServlet extends HttpServlet
                             {
                                 out.printf("<option value='%1s'>%2s</option>",  dceVO.getIdEmp() , dceVO.getNombEmp());
                             }
-                    }            
-                }        
-        } 
-        finally 
-        {            
+                    }
+                }
+        }
+        finally
+        {
                 if (out!=null)
                 {
                         out.flush();
-                        out.close();        
+                        out.close();
                 }
         }
     }

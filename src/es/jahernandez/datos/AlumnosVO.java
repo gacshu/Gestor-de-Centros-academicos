@@ -424,7 +424,7 @@ public class AlumnosVO
     /**
      * @return the responsable
      */
-    public String getResponsable() 
+    public String getResponsable()
     {
         if(responsable != null)
         {
@@ -439,9 +439,9 @@ public class AlumnosVO
     /**
      * @param responsable the responsable to set
      */
-    public void setResponsable(String responsable) { 
+    public void setResponsable(String responsable) {
             this.responsable = responsable;
-       
+
     }
 
     /**
@@ -474,7 +474,7 @@ public class AlumnosVO
             return curso;
         }
         else
-        {    
+        {
             return "";
         }
     }

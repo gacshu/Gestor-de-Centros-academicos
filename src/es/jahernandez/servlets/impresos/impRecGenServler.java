@@ -12,6 +12,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -62,43 +63,43 @@ public class impRecGenServler extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         HttpSession    sesion    = request.getSession();
         ServletContext sc        = null;
-        
+
         AlumnosVO   aluVO        = null;
         EdicionesVO ediVO        = null;
         CursosVO    curVO        = null;
-        AluEdiVO    alEvo        = null;              
+        AluEdiVO    alEvo        = null;
 
         Date        fechaHoy     = new Date(System.currentTimeMillis());
 
         Vector      listaRecibos = new Vector();
 
         ConUsuVO    usuario      = (ConUsuVO) sesion.getAttribute("usuario");
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir recibos generados" );
-               
+
         }
-        
-        
+
+
         //Se cargan datos de la lista de recibos
         listaRecibos = HisRecGestion.devRecGenNoImp();
-        
+
         // step 1
         Document document = new Document();
-        
+
         Paragraph par14  = null;
 
         //Instrucciones para meter los datos de concepto en una tabla
@@ -120,8 +121,8 @@ public class impRecGenServler extends HttpServlet {
         Phrase    frasLocExpedi = null;
         Phrase    frasImportCur = null;
         Paragraph parIma        = new Paragraph();
-        Image     logoImage     = null; 
-        
+        Image     logoImage     = null;
+
         String    strRecibo     = "";
         String    strDatAlu     = "";
         String    strDatNumRec  = "";
@@ -131,18 +132,18 @@ public class impRecGenServler extends HttpServlet {
         String    strFecVenRec  = "";
         String    strDatCuenta  = "";
         String    strNombreBan  = "";
-        
-        tablaRecibo.setWidthPercentage(100);       
+
+        tablaRecibo.setWidthPercentage(100);
         tablaDatAlu.setWidthPercentage(100);
         tablaFin.setWidthPercentage(100);
         tablaFec.setWidthPercentage(100);
         tablaFec.setWidthPercentage(100);
-        
+
         try
         {
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
- 
+
             // step 3
             document.setMargins(32, 32, 16, 0);
             document.open();
@@ -176,7 +177,7 @@ public class impRecGenServler extends HttpServlet {
 
                     par14.font().setSize(8);
                     parIma = new Paragraph();
-                    parIma.setAlignment(Image.ALIGN_LEFT);
+                    parIma.setAlignment(Element.ALIGN_LEFT);
                     parIma.add(logoImage);
 
                     // step 4
@@ -277,14 +278,14 @@ public class impRecGenServler extends HttpServlet {
 
             //Se guarda el control de recibos
             ControlRecVO contRecVO = new ControlRecVO();
-            String mesActual   = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));   
-            String annoActual  = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));  
-            
+            String mesActual   = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));
+            String annoActual  = new SimpleDateFormat("yyyy").format(new Date(System.currentTimeMillis()));
+
             contRecVO.setFecha(annoActual + mesActual);
             contRecVO.setIdCentro(usuario.getIdCentro());
 
             ControlRecGestion.guardarControlRec(contRecVO);
-            
+
            if (listaRecibos.size() == 0)
            {
                 document.add(new Paragraph("No existen documentos que generar"));
@@ -339,7 +340,7 @@ public class impRecGenServler extends HttpServlet {
     public String getServletInfo() {
         return "Imprimir recibos generados Servlet";
     }// </editor-fold>
-    
+
      private String devuelveMes(int mes)
     {
         switch (mes)

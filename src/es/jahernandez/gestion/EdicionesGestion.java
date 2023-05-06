@@ -6,20 +6,21 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.EdicionesDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.EdicionesVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.EdicionesDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.EdicionesVO;
+
 /**
  *
  * @author Alberto
  */
-public class EdicionesGestion 
+public class EdicionesGestion
 {
     //Método que genera un nuevo código de Edición
     public static String generarNuevoCodEdi()
@@ -32,7 +33,7 @@ public class EdicionesGestion
     {
         Connection con      = null;
         Vector     listaEdi = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -51,11 +52,11 @@ public class EdicionesGestion
             {
                 Logger.getLogger(EdicionesGestion.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             return null;
         }
 
-        
+
     }
 
     //Método que guarda un nuevo registro en la base de datos
@@ -64,7 +65,7 @@ public class EdicionesGestion
     {
         Connection        con             = null;
         String            nueCodEdi       = generarNuevoCodEdi();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -120,8 +121,8 @@ public class EdicionesGestion
     public static boolean hayPlazasLibres(String codEdicion)
     {
         Connection con             = null;
-        boolean    hayPlazaslibres = false; 
-        
+        boolean    hayPlazaslibres = false;
+
         try
         {
             con = Conexion.conectar();
@@ -175,7 +176,7 @@ public class EdicionesGestion
         }
 
     }
-    
+
     //Método que devuelve los datos de edición de las ediciones disponibles de un curso determinado
     public static Vector devolverDatEdiCurDisp(String idCurso)
     {
@@ -205,13 +206,13 @@ public class EdicionesGestion
         }
 
     }
-    
+
     //Edita el registro de una edición
     public static int editaEdicion(EdicionesVO ediVO)
     {
         Connection          con             = null;
         int                 regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -298,7 +299,7 @@ public class EdicionesGestion
     {
         Connection        con         = null;
         Vector            listaEdi    = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -328,7 +329,7 @@ public class EdicionesGestion
     {
         Connection          con       = null;
         boolean             hayNivEdi = false;
-   
+
         try
         {
             con = Conexion.conectar();
@@ -352,7 +353,7 @@ public class EdicionesGestion
         }
 
     }
-    
+
     //Método que devuelve los datos de edición de todas las ediciones de un determinado tutor
     public static Vector devolverEdiTutor(String codProf)
     {

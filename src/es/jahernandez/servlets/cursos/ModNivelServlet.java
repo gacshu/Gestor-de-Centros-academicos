@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Alberto
  */
-public class ModNivelServlet extends HttpServlet 
+public class ModNivelServlet extends HttpServlet
 {
 
     /**
@@ -36,69 +36,69 @@ public class ModNivelServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         NivelesVO     nivVO        = new NivelesVO();
         int           resultadoAlt = 0;
         String        pagGesNiv    = "";
-        
-        
+
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Modificar nivel" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodNivel") != null)
         {
             nivVO.setIdNiv(request.getParameter("txtCodNivel").trim());
         }
-       
+
         if(request.getParameter("txtNombre") != null)
         {
             nivVO.setNomNiv(request.getParameter("txtNombre").trim());
         }
-        
+
         if(request.getParameter("txtContenido") != null)
         {
             nivVO.setContenidos(request.getParameter("txtContenido"));
         }
-                
+
         if(request.getParameter("txtCodCur") != null)
         {
             nivVO.setCodCur(request.getParameter("txtCodCur"));
         }
-        
+
         if(request.getParameter("valInfNiv") != null)
         {
             pagGesNiv =  request.getParameter("valInfNiv");
-        } 
-                        
+        }
+
         resultadoAlt = NivelesGestion.editaNivel(nivVO);
-        
+
         if(resultadoAlt <= 0)
         {
-            
+
             //Redireccionar a página de gestion de niveles
-            response.sendRedirect("cursos/gestionNiveles.jsp?codCurso="  + nivVO.getCodCur() 
+            response.sendRedirect("cursos/gestionNiveles.jsp?codCurso="  + nivVO.getCodCur()
                                                          + "&errorEdi="  + resultadoAlt
                                                          + "&valInfNiv=" + pagGesNiv);
         }
         else
-        {            
+        {
             //Redireccionar a página de gestión de niveles
             response.sendRedirect("cursos/gestionNiveles.jsp?codCurso="  + nivVO.getCodCur()
                                                          + "&valInfNiv=" + pagGesNiv);

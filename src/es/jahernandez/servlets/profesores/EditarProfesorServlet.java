@@ -22,9 +22,9 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class EditarProfesorServlet extends HttpServlet 
+public class EditarProfesorServlet extends HttpServlet
 {
-/** 
+/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -44,44 +44,44 @@ public class EditarProfesorServlet extends HttpServlet
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Editar profesor" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("hidCodProf") != null)
         {
             profEdi.setIdProf(request.getParameter("hidCodProf").trim());
         }
-        
+
         if(request.getParameter("txtNombre") != null)
         {
             profEdi.setNombre(request.getParameter("txtNombre").trim());
         }
-        
+
         if(request.getParameter("txtApellidos") != null)
         {
             profEdi.setApellidos(request.getParameter("txtApellidos").trim());
         }
-        
+
         if(request.getParameter("selTipDoc") != null)
         {
             profEdi.setCodDoc(new Integer(request.getParameter("selTipDoc").trim()).intValue());
         }
-        
+
         if(request.getParameter("txtNumDoc") != null)
         {
             profEdi.setNumDoc(request.getParameter("txtNumDoc").trim());
         }
-        
+
         if(request.getParameter("txtFecNac") != null &&
           !request.getParameter("txtFecNac").equals(""))
         {
@@ -90,64 +90,64 @@ public class EditarProfesorServlet extends HttpServlet
                                                      new Integer(strFechaNac.substring(3,5)).intValue() - 1,
                                                      new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-    
-        
+
+
         if(request.getParameter("txtDireccion") != null)
         {
             profEdi.setDireccion(request.getParameter("txtDireccion").trim());
         }
-        
+
         if(request.getParameter("txtLocalidad") != null)
         {
             profEdi.setLocalidad(request.getParameter("txtLocalidad").trim());
         }
-        
+
         if(request.getParameter("selProv") != null)
         {
             profEdi.setCodProv(request.getParameter("selProv").trim());
         }
-        
+
         if(request.getParameter("txtCodPostal") != null)
         {
             profEdi.setCodPos(request.getParameter("txtCodPostal").trim());
         }
-        
+
         if(request.getParameter("txtTelef") != null)
         {
             profEdi.setTelef(request.getParameter("txtTelef").trim());
         }
-        
+
         if(request.getParameter("txtMovil") != null)
         {
             profEdi.setMov(request.getParameter("txtMovil").trim());
         }
-        
+
         if(request.getParameter("txtEmail") != null)
         {
             profEdi.setEmail(request.getParameter("txtEmail").trim());
         }
-        
+
         if(request.getParameter("txtObserv") != null)
         {
             profEdi.setObserv(request.getParameter("txtObserv").trim());
         }
-        
+
         if(request.getParameter("ind") != null)
         {
             ind = request.getParameter("ind").trim();
         }
-        
+
         if(request.getParameter("chkActivo") != null &&
            request.getParameter("chkActivo").equals("true"))
         {
             profEdi.setActivo(true);
-        } 
-    
+        }
+
 
         //aluAlta.setIdAlu(AlumnosDAO.generarNuevoCodAlu()); //Genera un nuevo código de alumno
 
         resultadoEdi = ProfesoresGestion.editaProfesor(profEdi);
-        
+
         if(resultadoEdi < 0 )
         {
             //Cargamos datos de nuevo alumno en sesión para cargar páginas siguientes
@@ -163,7 +163,7 @@ public class EditarProfesorServlet extends HttpServlet
         }
 
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

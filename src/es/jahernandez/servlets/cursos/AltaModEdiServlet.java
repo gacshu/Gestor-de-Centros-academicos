@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaModEdiServlet extends HttpServlet 
+public class AltaModEdiServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -36,52 +36,52 @@ public class AltaModEdiServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion    = request.getSession();
         EdiModProfAulaVO empaVO    = new EdiModProfAulaVO();
         int              resAlt    = 0;
         String           indPrevio = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta módulo-edición" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("hidCodEdi") != null)
         {
             empaVO.setIdEdi(request.getParameter("hidCodEdi").trim());
         }
-       
+
         if(request.getParameter("lstModulos") != null)
         {
             empaVO.setIdMod(request.getParameter("lstModulos").trim());
         }
-        
+
         if(request.getParameter("lstProfesores") != null)
         {
             empaVO.setIdProf(request.getParameter("lstProfesores").trim());
         }
-        
+
         if(request.getParameter("lstAulas") != null &&
           !request.getParameter("lstAulas").equals("-1") )
-        {    
+        {
             empaVO.setIdAul(request.getParameter("lstAulas").trim());
         }
-        
-        
+
+
         if(request.getParameter("hidFecIni") != null &&
           !request.getParameter("hidFecIni").equals(""))
         {
@@ -90,8 +90,8 @@ public class AltaModEdiServlet extends HttpServlet
                                                    new Integer(strFechaIni.substring(3,5)).intValue() - 1,
                                                    new Integer(strFechaIni.substring(0,2)).intValue()).getTime());
         }
-        
-        
+
+
         if(request.getParameter("hidFecFin") != null &&
           !request.getParameter("hidFecFin").equals(""))
         {
@@ -100,74 +100,74 @@ public class AltaModEdiServlet extends HttpServlet
                                                    new Integer(strFechaFin.substring(3,5)).intValue() - 1,
                                                    new Integer(strFechaFin.substring(0,2)).intValue()).getTime());
         }
-        
+
         if(request.getParameter("txtHoraIni") != null)
         {
             empaVO.setHorIni(request.getParameter("txtHoraIni").trim());
         }
-        
+
         if(request.getParameter("txtHoraFin") != null)
         {
             empaVO.setHorFin(request.getParameter("txtHoraFin").trim());
         }
-        
+
         if(request.getParameter("chkLunes") != null &&
            request.getParameter("chkLunes").equals("true"))
         {
             empaVO.setHayLun(true);
         }
-        
-        
+
+
         if(request.getParameter("chkMartes") != null &&
            request.getParameter("chkMartes").equals("true"))
         {
             empaVO.setHayMar(true);
         }
-            
+
         if(request.getParameter("chkMierc") != null &&
            request.getParameter("chkMierc").equals("true"))
         {
             empaVO.setHayMie(true);
         }
-        
-        
+
+
         if(request.getParameter("chkJueves") != null &&
            request.getParameter("chkJueves").equals("true"))
         {
             empaVO.setHayJue(true);
         }
-        
+
         if(request.getParameter("chkViernes") != null &&
            request.getParameter("chkViernes").equals("true"))
         {
             empaVO.setHayVie(true);
         }
-        
+
         if(request.getParameter("chkSabado") != null &&
            request.getParameter("chkSabado").equals("true"))
         {
             empaVO.setHaySab(true);
         }
-        
-        
+
+
         if(request.getParameter("ind") != null)
         {
             indPrevio = request.getParameter("ind").trim();
         }
-        
-        
+
+
         resAlt = EdiModProfAulaGestion.guardarEdiMod(empaVO);
-        
+
         if(resAlt <= 0)
         {
-            
+
             //Redireccionar a gestión niveles
             response.sendRedirect("ediciones/verModEd.jsp?codEdi="    + empaVO.getIdEdi()
                                                       + "&errorCode=" + resAlt
                                                       + "&ind="       + indPrevio );
         }
         else
-        {            
+        {
             //Redireccionar a gestión niveles
             response.sendRedirect("ediciones/verModEd.jsp?codEdi="    + empaVO.getIdEdi()
                                                       + "&ind="       + indPrevio );
@@ -213,5 +213,5 @@ public class AltaModEdiServlet extends HttpServlet
     @Override
     public String getServletInfo() {
         return "Alta Módulo Edición servlet";
-    }// </editor-fold>    
+    }// </editor-fold>
 }

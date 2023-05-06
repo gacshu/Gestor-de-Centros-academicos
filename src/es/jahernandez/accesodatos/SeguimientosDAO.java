@@ -30,15 +30,15 @@ public class SeguimientosDAO
         PreparedStatement ps     = null;
         ResultSet         rs     = null;
 
-        String            sql    = "SELECT " + TablaSeguimientos.CODSEGUIMIENTO + " , " 
+        String            sql    = "SELECT " + TablaSeguimientos.CODSEGUIMIENTO + " , "
                                              + TablaSeguimientos.CODALUMNO      + " , "
                                              + TablaSeguimientos.CODCURSO       + " , "
                                              + TablaSeguimientos.INCIDENCIAS    + " , "
                                              + TablaSeguimientos.FECHA          + " , "
-                                             + TablaSeguimientos.USUARIO        + 
+                                             + TablaSeguimientos.USUARIO        +
                                    " FROM "  + TablaSeguimientos.TABLA          +
                                    " WHERE " + TablaSeguimientos.CODSEGUIMIENTO + " = ?";
-        
+
         SeguimientosVO    datSeg = null;
 
         try
@@ -64,7 +64,7 @@ public class SeguimientosDAO
 
             rs.close();
             ps.close();
-            
+
             return datSeg;
         }
         catch (Exception exc)
@@ -89,14 +89,14 @@ public class SeguimientosDAO
         PreparedStatement ps       = null;
         ResultSet         rs       = null;
 
-        String            sql    = "SELECT " + TablaSeguimientos.CODSEGUIMIENTO + " , " 
+        String            sql    = "SELECT " + TablaSeguimientos.CODSEGUIMIENTO + " , "
                                              + TablaSeguimientos.CODALUMNO      + " , "
                                              + TablaSeguimientos.CODCURSO       + " , "
                                              + TablaSeguimientos.INCIDENCIAS    + " , "
                                              + TablaSeguimientos.FECHA          + " , "
-                                             + TablaSeguimientos.USUARIO        + 
+                                             + TablaSeguimientos.USUARIO        +
                                    " FROM "  + TablaSeguimientos.TABLA;
-        
+
         Vector            listaSeg = new Vector();
 
         SeguimientosVO    datSeg   = null;
@@ -189,7 +189,7 @@ public class SeguimientosDAO
 
             avc = avc + 1;
         }
-        
+
         return codIntrod;
     }
 
@@ -197,18 +197,18 @@ public class SeguimientosDAO
     public static int guardarSeg(SeguimientosVO segVO, Connection con) throws Exception
     {
         PreparedStatement ps        = null;
-        
+
         String            nueCodSeg = generarNuevoCodSeg();
 
-        String            sql       = "INSERT INTO " + TablaSeguimientos.TABLA          + " ( " 
-                                                     + TablaSeguimientos.CODSEGUIMIENTO + " , "  
+        String            sql       = "INSERT INTO " + TablaSeguimientos.TABLA          + " ( "
+                                                     + TablaSeguimientos.CODSEGUIMIENTO + " , "
                                                      + TablaSeguimientos.CODALUMNO      + " , "
-                                                     + TablaSeguimientos.CODCURSO       + " , " 
+                                                     + TablaSeguimientos.CODCURSO       + " , "
                                                      + TablaSeguimientos.INCIDENCIAS    + " , "
-                                                     + TablaSeguimientos.FECHA          + " , " 
-                                                     + TablaSeguimientos.USUARIO        + " ) " + 
+                                                     + TablaSeguimientos.FECHA          + " , "
+                                                     + TablaSeguimientos.USUARIO        + " ) " +
                                       " VALUES(?,?,?,?,?,?)";
-        
+
         int regActualizados = 0;
 
         try
@@ -226,7 +226,7 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -249,13 +249,13 @@ public class SeguimientosDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "UPDATE " + TablaSeguimientos.TABLA          +  
-                                            " SET "   + TablaSeguimientos.CODCURSO       + " = ? ," 
-                                                      + TablaSeguimientos.INCIDENCIAS    + " = ? ," 
-                                                      + TablaSeguimientos.FECHA          + " = ? ," 
+        String            sql             = "UPDATE " + TablaSeguimientos.TABLA          +
+                                            " SET "   + TablaSeguimientos.CODCURSO       + " = ? ,"
+                                                      + TablaSeguimientos.INCIDENCIAS    + " = ? ,"
+                                                      + TablaSeguimientos.FECHA          + " = ? ,"
                                                       + TablaSeguimientos.USUARIO        + " = ? " +
                                             " WHERE " + TablaSeguimientos.CODSEGUIMIENTO + " = ? ";
-                
+
         int               regActualizados = 0;
 
         try
@@ -272,7 +272,7 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -296,16 +296,16 @@ public class SeguimientosDAO
         PreparedStatement ps        = null;
         ResultSet         rs        = null;
 
-        String            sql       = "SELECT "    + TablaSeguimientos.CODSEGUIMIENTO + " , " 
+        String            sql       = "SELECT "    + TablaSeguimientos.CODSEGUIMIENTO + " , "
                                                    + TablaSeguimientos.CODALUMNO      + " , "
                                                    + TablaSeguimientos.CODCURSO       + " , "
                                                    + TablaSeguimientos.INCIDENCIAS    + " , "
                                                    + TablaSeguimientos.FECHA          + " , "
-                                                   + TablaSeguimientos.USUARIO        + 
+                                                   + TablaSeguimientos.USUARIO        +
                                       " FROM "     + TablaSeguimientos.TABLA          +
                                       " WHERE "    + TablaSeguimientos.CODALUMNO      + " = ? " +
                                       " ORDER BY " + TablaSeguimientos.FECHA          + " DESC ";
-        
+
         Vector            listaSeg  = new Vector();
 
         SeguimientosVO    datSeg = null;
@@ -333,7 +333,7 @@ public class SeguimientosDAO
                 listaSeg.addElement(datSeg);
             }
             rs.close();
-            ps.close();                        
+            ps.close();
 
             return listaSeg;
         }
@@ -358,12 +358,12 @@ public class SeguimientosDAO
         PreparedStatement ps       = null;
         ResultSet         rs       = null;
 
-        String            sql      = "SELECT "     + TablaSeguimientos.CODSEGUIMIENTO + " , " 
+        String            sql      = "SELECT "     + TablaSeguimientos.CODSEGUIMIENTO + " , "
                                                    + TablaSeguimientos.CODALUMNO      + " , "
                                                    + TablaSeguimientos.CODCURSO       + " , "
                                                    + TablaSeguimientos.INCIDENCIAS    + " , "
                                                    + TablaSeguimientos.FECHA          + " , "
-                                                   + TablaSeguimientos.USUARIO        + 
+                                                   + TablaSeguimientos.USUARIO        +
                                      " FROM "      + TablaSeguimientos.TABLA          +
                                      " WHERE "     + TablaSeguimientos.CODCURSO       + " = ?";
 
@@ -395,7 +395,7 @@ public class SeguimientosDAO
             }
             rs.close();
             ps.close();
-            
+
             return listaSeg;
         }
         catch (Exception exc)
@@ -421,7 +421,7 @@ public class SeguimientosDAO
 
         String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA     +
                                             " WHERE "      + TablaSeguimientos.CODALUMNO + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -433,7 +433,7 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -456,7 +456,7 @@ public class SeguimientosDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA    + 
+        String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA    +
                                             " WHERE "      + TablaSeguimientos.CODCURSO + " = ?";
         int               regActualizados = 0;
 
@@ -469,7 +469,7 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -492,9 +492,9 @@ public class SeguimientosDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA          + 
+        String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA          +
                                             " WHERE "      + TablaSeguimientos.CODSEGUIMIENTO + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -506,7 +506,7 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -529,11 +529,11 @@ public class SeguimientosDAO
     {
         PreparedStatement ps     = null;
         ResultSet         rs     = null;
-        
+
         String            sql    = "SELECT COUNT(" + TablaSeguimientos.CODALUMNO + " ) " +
                                    " FROM "        + TablaSeguimientos.TABLA     +
                                    " WHERE "       + TablaSeguimientos.CODALUMNO + " = ? ";
-        
+
         int               numSeg = 0;
 
         try
@@ -549,10 +549,10 @@ public class SeguimientosDAO
             {
                 numSeg = rs.getInt(1);
             }
-            
+
             rs.close();
-            ps.close();            
-            
+            ps.close();
+
             return numSeg;
         }
 

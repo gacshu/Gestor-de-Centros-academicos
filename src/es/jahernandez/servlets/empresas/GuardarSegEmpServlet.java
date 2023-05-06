@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class GuardarSegEmpServlet extends HttpServlet 
+public class GuardarSegEmpServlet extends HttpServlet
 {
 
     /**
@@ -39,21 +39,21 @@ public class GuardarSegEmpServlet extends HttpServlet
         request.setCharacterEncoding("utf-8");
 
         HttpSession          sesion   = request.getSession();
-        
+
         SegEmpVO segVO  = new SegEmpVO();
         int      resAlt = 0;
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Guardar seguimiento empresa" );
-               
+
         }
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
@@ -61,7 +61,7 @@ public class GuardarSegEmpServlet extends HttpServlet
         {
             segVO.setIdEmp(request.getParameter("hidCodEmp").trim());
         }
-        
+
         if(request.getParameter("txtFecha") != null &&
           !request.getParameter("txtFecha").equals(""))
         {
@@ -70,13 +70,13 @@ public class GuardarSegEmpServlet extends HttpServlet
                                                     new Integer(strFechaNac.substring(3,5)).intValue() - 1,
                                                     new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-            
+
         if(request.getParameter("txtUsuario") != null)
         {
             segVO.setUsuario(request.getParameter("txtUsuario").trim());
         }
 
-        
+
 
         if(request.getParameter("txtIncidencias") != null)
         {

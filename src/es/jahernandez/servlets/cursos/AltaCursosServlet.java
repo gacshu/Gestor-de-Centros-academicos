@@ -35,28 +35,28 @@ public class AltaCursosServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         CursosVO      cursoVO      = new CursosVO();
         String        resultadoAlt = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta cursos" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtNombre") != null)
         {
@@ -66,20 +66,20 @@ public class AltaCursosServlet extends HttpServlet {
         if(request.getParameter("lstTipoCurso") != null)
         {
             cursoVO.setTipCur(new Integer(request.getParameter("lstTipoCurso").trim()).intValue());
-        }      
-        
+        }
+
         if(request.getParameter("lstCentros") != null)
         {
             cursoVO.setCenCurso(new Integer(request.getParameter("lstCentros").trim()).intValue());
         }
-        
+
         if(request.getParameter("txtContenido") != null)
         {
             cursoVO.setContenido(request.getParameter("txtContenido").trim());
         }
-        
+
         resultadoAlt = CursosGestion.guardarCurso(cursoVO);
-        
+
         if(resultadoAlt.equals("-1") || resultadoAlt.equals("-2"))
         {
             //Cargamos datos de nueva aula en sesión para cargar páginas siguientes
@@ -89,14 +89,14 @@ public class AltaCursosServlet extends HttpServlet {
             response.sendRedirect("cursos/altaCurso.jsp?errorCode=" + resultadoAlt);
         }
         else
-        {            
+        {
             //Redireccionar a página edición de aulas
             response.sendRedirect("cursos/ediCurso.jsp?codCurso="    + resultadoAlt);
         }
-        
-        
-        
-        
+
+
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

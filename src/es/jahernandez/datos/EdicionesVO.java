@@ -740,7 +740,7 @@ public class EdicionesVO
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public String devuelveDiasClase()
     {
         String strDatCur = "";
@@ -750,9 +750,9 @@ public class EdicionesVO
         if (isHayJue()) strDatCur = strDatCur + "J ";
         if (isHayVie()) strDatCur = strDatCur + "V ";
         if (isHaySab()) strDatCur = strDatCur + "S ";
-        
+
         return strDatCur;
-        
+
     }
 
     /**
@@ -768,6 +768,6 @@ public class EdicionesVO
     public void setIdProf(String idProf) {
         this.idProf = idProf;
     }
-    
-    
+
+
 }

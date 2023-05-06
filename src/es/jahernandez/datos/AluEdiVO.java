@@ -35,7 +35,7 @@ public class AluEdiVO
     }
 
 
-    
+
 
     /**
      * @return the idAlu

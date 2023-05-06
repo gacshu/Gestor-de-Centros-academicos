@@ -8,12 +8,12 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class ControlRecVO 
+public class ControlRecVO
 {
     private String fecha;
     private int    idCentro;
 
-    public ControlRecVO() 
+    public ControlRecVO()
     {
         fecha    = "";
         idCentro = -1;

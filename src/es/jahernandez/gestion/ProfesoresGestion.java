@@ -20,7 +20,7 @@ import es.jahernandez.datos.ProfesoresVO;
  *
  * @author Alberto
  */
-public class ProfesoresGestion 
+public class ProfesoresGestion
 {
     //Método que devuelve los datos de búsqueda de profesores
     public static Vector devolverDatosConsultaProf(DatosBusqProfVO datBus)
@@ -82,7 +82,7 @@ public class ProfesoresGestion
 
 
     }
-    
+
     //Método que devuelve los datos de todos los profesores
     public static Vector devolverTodosProf()
     {
@@ -111,7 +111,7 @@ public class ProfesoresGestion
             return null;
         }
     }
-                
+
     //Edita el registro de un profesor
     public static int editaProfesor(ProfesoresVO profVO)
     {
@@ -156,7 +156,7 @@ public class ProfesoresGestion
             Conexion.desconectar(con);
 
             return regActualizados;
-            
+
         }
         catch (Exception exc)
         {
@@ -172,12 +172,12 @@ public class ProfesoresGestion
             return -1;
         }
     }
-    
+
     //Da de alta un nuevo profesor
     public static String insertaProfesor(ProfesoresVO profVO)
     {
         Connection con        = null;
-        String     codNueProf = null;     
+        String     codNueProf = null;
 
         try
         {
@@ -201,7 +201,7 @@ public class ProfesoresGestion
             return "-2";
         }
     }
-    
+
     //Genera un nuevo código de Profesor
     public static String generarNuevoCodProf()
     {
@@ -248,7 +248,7 @@ public class ProfesoresGestion
             con = Conexion.conectar();
             existeDNI = ProfesoresDAO.existeDniProfesor(numDoc,con);
             Conexion.desconectar(con);
-                        
+
             return existeDNI;
         }
         catch (Exception exc)

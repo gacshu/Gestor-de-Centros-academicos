@@ -22,7 +22,7 @@ import es.jahernandez.tablas.TablaFaltas;
  *
  * @author JuanAlberto
  */
-public class FaltasDAO 
+public class FaltasDAO
 {
     //Método que devuelve los datos de una falta
     public static FaltasVO devolverDatosFalta(String codEdi, String codMod, String codAlu, java.util.Date fecha, Connection con) throws Exception
@@ -30,7 +30,7 @@ public class FaltasDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaFaltas.CODEDI + " , " 
+        String            cadenaConsulta = "SELECT " + TablaFaltas.CODEDI + " , "
                                                      + TablaFaltas.CODMOD + " , "
                                                      + TablaFaltas.CODALU + " , "
                                                      + TablaFaltas.FECHA  + " , "
@@ -38,9 +38,9 @@ public class FaltasDAO
                                            " FROM "  + TablaFaltas.TABLA  +
                                            " WHERE " + TablaFaltas.CODEDI + " = ? AND "
                                                      + TablaFaltas.CODMOD + " = ? AND "
-                                                     + TablaFaltas.CODALU + " = ? AND " 
+                                                     + TablaFaltas.CODALU + " = ? AND "
                                                      + TablaFaltas.FECHA  + " = ? ";
-        
+
         FaltasVO          faltaVO       = new FaltasVO();
 
         try
@@ -65,10 +65,10 @@ public class FaltasDAO
                 faltaVO.setFecha      (rs.getDate   (TablaFaltas.FECHA ));
                 faltaVO.setJustificada(rs.getBoolean(TablaFaltas.JUSTIF));
             }
-            
+
             rs.close();
             ps.close();
-            
+
             return faltaVO;
 
         }
@@ -94,13 +94,13 @@ public class FaltasDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaFaltas.CODEDI + " , " 
+        String            cadenaConsulta = "SELECT " + TablaFaltas.CODEDI + " , "
                                                      + TablaFaltas.CODMOD + " , "
                                                      + TablaFaltas.CODALU + " , "
                                                      + TablaFaltas.FECHA  + " , "
                                                      + TablaFaltas.JUSTIF +
                                            " FROM "  + TablaFaltas.TABLA  ;
-                                           
+
         FaltasVO          faltaVO       = null;
         Vector            listaFaltas   = new Vector();
 
@@ -119,7 +119,7 @@ public class FaltasDAO
                 faltaVO.setIdAlu      (rs.getString (TablaFaltas.CODALU));
                 faltaVO.setFecha      (rs.getDate   (TablaFaltas.FECHA ));
                 faltaVO.setJustificada(rs.getBoolean(TablaFaltas.JUSTIF));
-                
+
                 listaFaltas.add(faltaVO);
             }
 
@@ -147,16 +147,16 @@ public class FaltasDAO
     public static int guardarFalta(FaltasVO faltaVO, Connection con) throws Exception
     {
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaFaltas.TABLA  + " ( "  
-                                                          + TablaFaltas.CODEDI + " , " 
-                                                          + TablaFaltas.CODMOD + " , "  
-                                                          + TablaFaltas.CODALU + " , " 
-                                                          + TablaFaltas.FECHA  + " , " 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaFaltas.TABLA  + " ( "
+                                                          + TablaFaltas.CODEDI + " , "
+                                                          + TablaFaltas.CODMOD + " , "
+                                                          + TablaFaltas.CODALU + " , "
+                                                          + TablaFaltas.FECHA  + " , "
                                                           + TablaFaltas.JUSTIF + " ) "  +
                                            " VALUES(?,?,?,?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -169,7 +169,7 @@ public class FaltasDAO
             ps.setString (3, faltaVO.getIdAlu());
             ps.setDate   (4, new Date(faltaVO.getFecha().getTime()));
             ps.setBoolean(5, faltaVO.isJustificada());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -195,16 +195,16 @@ public class FaltasDAO
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT "    + TablaFaltas.CODEDI + " , " 
+        String            sql          = "SELECT "    + TablaFaltas.CODEDI + " , "
                                                       + TablaFaltas.CODMOD + " , "
                                                       + TablaFaltas.CODALU + " , "
                                                       + TablaFaltas.FECHA  + " , "
                                                       + TablaFaltas.JUSTIF +
                                          " FROM "     + TablaFaltas.TABLA  +
-                                         " WHERE "    + TablaFaltas.CODALU + " = ? AND "                                                   
+                                         " WHERE "    + TablaFaltas.CODALU + " = ? AND "
                                                       + TablaFaltas.CODEDI + " = ? "     +
                                          " ORDER BY " + TablaFaltas.FECHA ;
-        
+
         FaltasVO          faltaVO      = null;
         Vector            listaFaltas  = new Vector();
 
@@ -227,13 +227,13 @@ public class FaltasDAO
                 faltaVO.setIdAlu      (rs.getString (TablaFaltas.CODALU));
                 faltaVO.setFecha      (rs.getDate   (TablaFaltas.FECHA ));
                 faltaVO.setJustificada(rs.getBoolean(TablaFaltas.JUSTIF));
-                
+
                 listaFaltas.add(faltaVO);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaFaltas;
         }
         catch (Exception exc)
@@ -250,7 +250,7 @@ public class FaltasDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve el número de faltas de un alumno y una edición
     public static int devolverNumFaltasAluEdi(String codAlu , String codEdi, Connection con) throws Exception
     {
@@ -259,10 +259,10 @@ public class FaltasDAO
 
         String            sql          = "SELECT COUNT(*)" +
                                          " FROM "     + TablaFaltas.TABLA  +
-                                         " WHERE "    + TablaFaltas.CODALU + " = ? AND "                                                   
+                                         " WHERE "    + TablaFaltas.CODALU + " = ? AND "
                                                       + TablaFaltas.CODEDI + " = ? "     ;
-                                         
-        
+
+
         int               numFaltas    = 0;
 
         try
@@ -282,7 +282,7 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-            
+
             return numFaltas;
         }
         catch (Exception exc)
@@ -299,14 +299,14 @@ public class FaltasDAO
             throw exc;
         }
     }
-     
+
     //Método que devuelve los datos de falta de una edición
     public static Vector devolverFaltasEdi(String codEdi, Connection con) throws Exception
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT "    + TablaFaltas.CODEDI + " , " 
+        String            sql          = "SELECT "    + TablaFaltas.CODEDI + " , "
                                                       + TablaFaltas.CODMOD + " , "
                                                       + TablaFaltas.CODALU + " , "
                                                       + TablaFaltas.FECHA  + " , "
@@ -315,7 +315,7 @@ public class FaltasDAO
                                          " WHERE "    + TablaFaltas.CODEDI + " = ? "     +
                                          " ORDER BY " + TablaFaltas.CODALU + " , "
                                                       + TablaFaltas.FECHA ;
-        
+
         FaltasVO          faltaVO     = null;
         Vector            listaFaltas = new Vector();
 
@@ -337,13 +337,13 @@ public class FaltasDAO
                 faltaVO.setIdAlu      (rs.getString (TablaFaltas.CODALU));
                 faltaVO.setFecha      (rs.getDate   (TablaFaltas.FECHA ));
                 faltaVO.setJustificada(rs.getBoolean(TablaFaltas.JUSTIF));
-                
+
                 listaFaltas.add(faltaVO);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaFaltas;
         }
         catch (Exception exc)
@@ -360,19 +360,19 @@ public class FaltasDAO
             throw exc;
         }
     }
-   
-    
+
+
     //Edita el registro de una falta
     public static int editarFalta(FaltasVO faltaVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
         String            sql             = "UPDATE " + TablaFaltas.TABLA   +
-                                            " SET "   + TablaFaltas.JUSTIF  + " = ?  " +  
-                                            " WHERE " + TablaFaltas.CODEDI  + " = ? AND " 
-                                                      + TablaFaltas.CODMOD  + " = ? AND " 
-                                                      + TablaFaltas.CODALU  + " = ? AND " 
-                                                      + TablaFaltas.FECHA   + " = ? " ;    
+                                            " SET "   + TablaFaltas.JUSTIF  + " = ?  " +
+                                            " WHERE " + TablaFaltas.CODEDI  + " = ? AND "
+                                                      + TablaFaltas.CODMOD  + " = ? AND "
+                                                      + TablaFaltas.CODALU  + " = ? AND "
+                                                      + TablaFaltas.FECHA   + " = ? " ;
         int               regActualizados = 0;
 
         try
@@ -389,7 +389,7 @@ public class FaltasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -411,15 +411,15 @@ public class FaltasDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaFaltas.TABLA              + 
-                                            " WHERE "      + TablaFaltas.CODEDI + " = ? AND " 
-                                                           + TablaFaltas.CODMOD + " = ? AND " 
-                                                           + TablaFaltas.CODALU + " = ? AND " 
-                                                           + TablaFaltas.FECHA  + " = ? " ;    
-        
+        String            sql             = "DELETE FROM " + TablaFaltas.TABLA              +
+                                            " WHERE "      + TablaFaltas.CODEDI + " = ? AND "
+                                                           + TablaFaltas.CODMOD + " = ? AND "
+                                                           + TablaFaltas.CODALU + " = ? AND "
+                                                           + TablaFaltas.FECHA  + " = ? " ;
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -429,11 +429,11 @@ public class FaltasDAO
             ps.setString (2, codMod);
             ps.setString (3, codAlu);
             ps.setDate   (4, new Date(fecha.getTime()));
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -448,26 +448,26 @@ public class FaltasDAO
             }
             throw exc;
         }
-    }     
-    
+    }
+
     //Borra las faltas de un alumno
     public static int eliminarFaltasAlumno(String codAlu, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaFaltas.TABLA            + 
-                                            " WHERE "      + TablaFaltas.CODALU + " = ? " ;  
-                                                            
+        String            sql             = "DELETE FROM " + TablaFaltas.TABLA            +
+                                            " WHERE "      + TablaFaltas.CODALU + " = ? " ;
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString (1, codAlu);
-           
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -486,20 +486,20 @@ public class FaltasDAO
             }
             throw exc;
         }
-    } 
-    
+    }
+
     //Método que devuelve si un alumno tiene faltas
     public static boolean tieneAluFaltas(String codAlu, Connection con) throws Exception
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            sql            = "SELECT "  + TablaFaltas.CODALU +  
+        String            sql            = "SELECT "  + TablaFaltas.CODALU +
                                            " FROM "   + TablaFaltas.TABLA  +
                                            " WHERE "  + TablaFaltas.CODALU + " = ?";
-     
-       boolean            aluTieneFaltas = false; 
-     
+
+       boolean            aluTieneFaltas = false;
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -516,7 +516,7 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-           
+
             return aluTieneFaltas;
         }
         catch (Exception exc)
@@ -533,6 +533,6 @@ public class FaltasDAO
             throw exc;
         }
     }
-    
+
 }
 

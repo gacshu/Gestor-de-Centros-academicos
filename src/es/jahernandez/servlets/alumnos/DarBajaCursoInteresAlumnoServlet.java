@@ -23,8 +23,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class DarBajaCursoInteresAlumnoServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -38,28 +38,28 @@ public class DarBajaCursoInteresAlumnoServlet extends HttpServlet
         request.setCharacterEncoding("utf-8");
 
         HttpSession sesion   = request.getSession();
-        
+
         int         resultadoBor = 0;
 
         String      idNivel      = "";
         String      idAlu        = "";
         String      idCur        = "";
-        String      indPrev      = ""; 
-        
+        String      indPrev      = "";
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Dar Baja curso interés alumno" );
-               
+
         }
 
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codInteresado") != null)
         {
@@ -77,7 +77,7 @@ public class DarBajaCursoInteresAlumnoServlet extends HttpServlet
             idNivel = request.getParameter("codNiv");
 
         }
-        
+
         if(request.getParameter("ind") != null)
         {
 
@@ -102,7 +102,7 @@ public class DarBajaCursoInteresAlumnoServlet extends HttpServlet
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -113,9 +113,9 @@ public class DarBajaCursoInteresAlumnoServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -128,7 +128,7 @@ public class DarBajaCursoInteresAlumnoServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

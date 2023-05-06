@@ -6,19 +6,20 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.CursosAluDAO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.CursosAluDAO;
+import es.jahernandez.datos.Conexion;
+
 /**
  *
  * @author Alberto
  */
-public class CursosAluGestion 
+public class CursosAluGestion
 {
      //Método que guarda los cursos de interes de alumnos y su nivel
     public static int guardarCursosInteres(String codAlumno, String codCurso, String codNiv)
@@ -54,7 +55,7 @@ public class CursosAluGestion
     {
         Connection        con            = null;
         Vector            listaCursosAlu = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -207,7 +208,7 @@ public class CursosAluGestion
         {
             con = Conexion.conectar();
             exiCurAlu = CursosAluDAO.compruebaAltaCurNivAlu(codAlumno, codCurso, codNiv,con);
-           
+
             Conexion.desconectar(con);
 
             return exiCurAlu;
@@ -233,7 +234,7 @@ public class CursosAluGestion
     {
         Connection        con             = null;
         int               regActualizados = 0;
- 
+
         try
         {
             con = Conexion.conectar();

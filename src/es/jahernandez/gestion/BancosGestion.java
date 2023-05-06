@@ -6,28 +6,28 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.BancosDAO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.BancosDAO;
+import es.jahernandez.datos.Conexion;
 
 
 /**
  *
  * @author JuanAlberto
  */
-public class BancosGestion 
+public class BancosGestion
 {
-    
-    
+
+
      public static String devolverNombreBanco(String codBan)
      {
         Connection        con    = null;
         String            nomBan = "";
-       
+
         try
         {
             con = Conexion.conectar();
@@ -48,6 +48,6 @@ public class BancosGestion
             }
             return null;
         }
-    
+
      }
 }

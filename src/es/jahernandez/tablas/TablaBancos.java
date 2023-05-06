@@ -8,9 +8,9 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaBancos 
+public class TablaBancos
 {
-    public static final String TABLA    = "tbbancos"; 
-    public static final String CODBANCO = "IdBanco"; 
-    public static final String NOMBRE   = "Nombre"; 
+    public static final String TABLA    = "tbbancos";
+    public static final String CODBANCO = "IdBanco";
+    public static final String NOMBRE   = "Nombre";
 }

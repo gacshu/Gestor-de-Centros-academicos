@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BajaTrastornoServlet extends HttpServlet 
+public class BajaTrastornoServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -34,52 +34,52 @@ public class BajaTrastornoServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession  sesion       = request.getSession();
         TrastornosVO trastVO      = new TrastornosVO();
         int          resultadoBor = -99;
         String       pagAdapTrast = "0";
-        
+
         Logger       log          = null;
         ConUsuVO     conUsoVO     = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Borrar trastorno" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codTrast") != null)
         {
             trastVO.setCodTrastorno(request.getParameter("codTrast").trim());
         }
-        
+
         if(request.getParameter("codInt") != null)
         {
             trastVO.setIdAlu(request.getParameter("codInt").trim());
         }
-        
+
         if(request.getParameter("valInfTrast") != null)
         {
             pagAdapTrast =  request.getParameter("valInfTrast");
-        } 
-        
+        }
+
         resultadoBor = TrastornosGestion.eliminaTrastorno(trastVO.getCodTrastorno());
-        
+
         //Redireccionar a trastornos
         response.sendRedirect("interesados/trastornosFichaAlumno.jsp?codInt="      + trastVO.getIdAlu()
-                                                                 + "&valInfTrast=" + pagAdapTrast 
+                                                                 + "&valInfTrast=" + pagAdapTrast
                                                                  + "&resultBor="   + resultadoBor );
-      
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

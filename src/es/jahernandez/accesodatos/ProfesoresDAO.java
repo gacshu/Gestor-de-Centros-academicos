@@ -24,7 +24,7 @@ import es.jahernandez.tablas.TablaProvincias;
  *
  * @author JuanAlberto
  */
-public class ProfesoresDAO 
+public class ProfesoresDAO
 {
     //Método que devuelve los datos de búsqueda de profesores
     public static Vector devolverDatosConsultaProf(DatosBusqProfVO datBus, Connection con) throws Exception
@@ -35,25 +35,25 @@ public class ProfesoresDAO
         Vector            listaProf      = new Vector();
 
         ProfesoresVO      datResBus      = null;
-        
-        String            cadenaConsulta =  "SELECT " + TablaProfesores.CODPROFESOR   + " , "      
-                                                      + TablaProfesores.NOMBRE        + " , "     
+
+        String            cadenaConsulta =  "SELECT " + TablaProfesores.CODPROFESOR   + " , "
+                                                      + TablaProfesores.NOMBRE        + " , "
                                                       + TablaProfesores.APELLIDOS     + " , "
                                                       + TablaProfesores.CODTIPDOC     + " , "
-                                                      + TablaProfesores.NUMDOC        + " , " 
+                                                      + TablaProfesores.NUMDOC        + " , "
                                                       + TablaProfesores.FECHANAC      + " , "
                                                       + TablaProfesores.FECHAALTA     + " , "
                                                       + TablaProfesores.DIRECCION     + " , "
                                                       + TablaProfesores.LOCALIDAD     + " , "
-                                                      + TablaProfesores.CODPROV       + " , " 
+                                                      + TablaProfesores.CODPROV       + " , "
                                                       + TablaProfesores.CODPOSTAL     + " , "
                                                       + TablaProfesores.OBSERVACIONES + " , "
-                                                      + TablaProfesores.TELEFONO      + " , " 
+                                                      + TablaProfesores.TELEFONO      + " , "
                                                       + TablaProfesores.MOVIL         + " , "
                                                       + TablaProfesores.MAIL          + " , "
-                                                      + TablaProfesores.ACTIVO        + 
+                                                      + TablaProfesores.ACTIVO        +
                                             " FROM  " + TablaProfesores.TABLA ;
-        
+
         //Se construye la cadena de búsqueda
         if (datBus.getNombre().equals("") && datBus.getApellidos().equals("")  &&
             datBus.getNumDoc().equals("") && datBus.getCodArea().equals("-1") && ! datBus.isActivo())
@@ -74,33 +74,33 @@ public class ProfesoresDAO
             if (! datBus.getApellidos().equals(""))
             {
                 cadenaConsulta = cadenaConsulta + TablaProfesores.APELLIDOS + " LIKE '%" + datBus.getApellidos().toUpperCase() + "%' AND ";
-            }    
-            
+            }
+
             if (! datBus.getNumDoc().equals(""))
             {
                 cadenaConsulta = cadenaConsulta + TablaProfesores.NUMDOC + " LIKE '%" + datBus.getNumDoc().toUpperCase() + "%' AND ";
             }
-            
+
             if (datBus.isActivo())
             {
                 cadenaConsulta = cadenaConsulta + TablaProfesores.ACTIVO + " = 1  AND ";
             }
-            
+
             if (! datBus.getCodArea().equals("-1"))
             {
-                cadenaConsulta = cadenaConsulta + TablaProfesores.CODPROFESOR + " IN ( " + 
-                                            " SELECT " + TablaProfArea.CODPROF + 
+                cadenaConsulta = cadenaConsulta + TablaProfesores.CODPROFESOR + " IN ( " +
+                                            " SELECT " + TablaProfArea.CODPROF +
                                             " FROM "   + TablaProfArea.TABLA   +
                                             " WHERE "  + TablaProfArea.CODAREA + " = '" + datBus.getCodArea() + "') AND" ;
             }
-            
+
 
             cadenaConsulta = cadenaConsulta.substring(0, cadenaConsulta.length()- 4);
         }
-           
+
         cadenaConsulta = cadenaConsulta + " ORDER BY "  + TablaProfesores.APELLIDOS;
-        
-               
+
+
         try
         {
             ps  = con.prepareStatement(cadenaConsulta);
@@ -127,13 +127,13 @@ public class ProfesoresDAO
                 datResBus.setMov      (rs.getString (TablaProfesores.MOVIL));
                 datResBus.setEmail    (rs.getString (TablaProfesores.MAIL));
                 datResBus.setActivo   (rs.getBoolean(TablaProfesores.ACTIVO));
-             
+
                 listaProf.addElement(datResBus);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaProf;
         }
         catch (Exception exc)
@@ -160,25 +160,25 @@ public class ProfesoresDAO
 
         ProfesoresVO      datProf      = null;
 
-        String            sql          = "SELECT " + TablaProfesores.CODPROFESOR   + " , "      
-                                                   + TablaProfesores.NOMBRE        + " , "     
+        String            sql          = "SELECT " + TablaProfesores.CODPROFESOR   + " , "
+                                                   + TablaProfesores.NOMBRE        + " , "
                                                    + TablaProfesores.APELLIDOS     + " , "
                                                    + TablaProfesores.CODTIPDOC     + " , "
-                                                   + TablaProfesores.NUMDOC        + " , " 
+                                                   + TablaProfesores.NUMDOC        + " , "
                                                    + TablaProfesores.FECHANAC      + " , "
                                                    + TablaProfesores.FECHAALTA     + " , "
                                                    + TablaProfesores.DIRECCION     + " , "
                                                    + TablaProfesores.LOCALIDAD     + " , "
-                                                   + TablaProfesores.CODPROV       + " , " 
+                                                   + TablaProfesores.CODPROV       + " , "
                                                    + TablaProfesores.CODPOSTAL     + " , "
                                                    + TablaProfesores.OBSERVACIONES + " , "
-                                                   + TablaProfesores.TELEFONO      + " , " 
+                                                   + TablaProfesores.TELEFONO      + " , "
                                                    + TablaProfesores.MOVIL         + " , "
-                                                   + TablaProfesores.MAIL          + " , "      
-                                                   + TablaProfesores.ACTIVO        +      
+                                                   + TablaProfesores.MAIL          + " , "
+                                                   + TablaProfesores.ACTIVO        +
                                          " FROM  " + TablaProfesores.TABLA         +
                                          " WHERE " + TablaProfesores.CODPROFESOR   + " = ?";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -208,7 +208,7 @@ public class ProfesoresDAO
                 datProf.setTelef    (rs.getString (TablaProfesores.TELEFONO));
                 datProf.setMov      (rs.getString (TablaProfesores.MOVIL));
                 datProf.setEmail    (rs.getString (TablaProfesores.MAIL));
-                datProf.setActivo   (rs.getBoolean(TablaProfesores.ACTIVO));                
+                datProf.setActivo   (rs.getBoolean(TablaProfesores.ACTIVO));
             }
 
             rs.close();
@@ -231,31 +231,31 @@ public class ProfesoresDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de todos los profesores
     public static Vector devolverTodosProf(Connection con) throws Exception
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
-        
-        String            sql          = "SELECT " + TablaProfesores.CODPROFESOR   + " , "      
-                                                   + TablaProfesores.NOMBRE        + " , "     
+
+        String            sql          = "SELECT " + TablaProfesores.CODPROFESOR   + " , "
+                                                   + TablaProfesores.NOMBRE        + " , "
                                                    + TablaProfesores.APELLIDOS     + " , "
                                                    + TablaProfesores.CODTIPDOC     + " , "
-                                                   + TablaProfesores.NUMDOC        + " , " 
+                                                   + TablaProfesores.NUMDOC        + " , "
                                                    + TablaProfesores.FECHANAC      + " , "
                                                    + TablaProfesores.FECHAALTA     + " , "
                                                    + TablaProfesores.DIRECCION     + " , "
                                                    + TablaProfesores.LOCALIDAD     + " , "
-                                                   + TablaProfesores.CODPROV       + " , " 
+                                                   + TablaProfesores.CODPROV       + " , "
                                                    + TablaProfesores.CODPOSTAL     + " , "
                                                    + TablaProfesores.OBSERVACIONES + " , "
-                                                   + TablaProfesores.TELEFONO      + " , " 
+                                                   + TablaProfesores.TELEFONO      + " , "
                                                    + TablaProfesores.MOVIL         + " , "
                                                    + TablaProfesores.MAIL          + " , "
                                                    + TablaProfesores.ACTIVO        +
                                          " FROM  " + TablaProfesores.TABLA         ;
-        
+
         ProfesoresVO      datProf      = null;
         Vector            listaProf    = new Vector();
 
@@ -285,8 +285,8 @@ public class ProfesoresDAO
                 datProf.setMov      (rs.getString (TablaProfesores.MOVIL));
                 datProf.setEmail    (rs.getString (TablaProfesores.MAIL));
                 datProf.setActivo   (rs.getBoolean(TablaProfesores.ACTIVO));
-                
-                
+
+
                 listaProf.addElement(datProf);
             }
 
@@ -310,13 +310,13 @@ public class ProfesoresDAO
             throw exc;
         }
     }
-                
+
     //Edita el registro de un profesor
     public static int editaProfesor(ProfesoresVO profVO,Connection con) throws Exception
     {
         PreparedStatement   ps       = null;
-        ProfesoresVO        profPrev = new ProfesoresVO(); 
-        
+        ProfesoresVO        profPrev = new ProfesoresVO();
+
         int                 regActualizados = 0;
 
         String              sql = "UPDATE " + TablaProfesores.TABLA + " SET "     +
@@ -336,7 +336,7 @@ public class ProfesoresDAO
                                               TablaProfesores.MAIL          + " = ? , "   +
                                               TablaProfesores.ACTIVO        + " = ?   "   +
                                   " WHERE " + TablaProfesores.CODPROFESOR   + " = ?";
-        
+
         profPrev = ProfesoresGestion.devolverDatosProfesor(profVO.getIdProf());
 
         if (!profPrev.getNumDoc().trim().equals(profVO.getNumDoc().trim()) && existeDniProfesor(profVO.getNumDoc(),con))
@@ -365,11 +365,11 @@ public class ProfesoresDAO
             ps.setString (14, profVO.getEmail());
             ps.setBoolean(15, profVO.isActivo());
             ps.setString (16, profVO.getIdProf());
-       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -395,10 +395,10 @@ public class ProfesoresDAO
 
         int               regActualizados = 0;
 
-        String            sql             = "DELETE FROM " + TablaProfesores.TABLA + 
+        String            sql             = "DELETE FROM " + TablaProfesores.TABLA +
                                             " WHERE "      + TablaProfesores.CODPROFESOR + " = ?";
-        
-        
+
+
         //Se comprueba que el profesor no esté asociado a ningún módulo
         /*if (AluEdiDAO.devNumMat(codAlu) > 0)
         {
@@ -423,7 +423,7 @@ public class ProfesoresDAO
             //eliminar datos areas de profesor
             //if (AreaProgDAO.borraAreasProf(codProf) >= 0)
             //{
-                
+
                 return regActualizados; //Todo borrado correctamente
 
             //}
@@ -447,32 +447,32 @@ public class ProfesoresDAO
             throw exc;
         }
     }
-    
+
     //Da de alta un nuevo profesor
     public static String insertaProfesor(ProfesoresVO profVO,Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "INSERT INTO " + TablaProfesores.TABLA + " ("   
-                                                           + TablaProfesores.CODPROFESOR   + " , "      
-                                                           + TablaProfesores.NOMBRE        + " , "     
+        String            sql             = "INSERT INTO " + TablaProfesores.TABLA + " ("
+                                                           + TablaProfesores.CODPROFESOR   + " , "
+                                                           + TablaProfesores.NOMBRE        + " , "
                                                            + TablaProfesores.APELLIDOS     + " , "
                                                            + TablaProfesores.CODTIPDOC     + " , "
-                                                           + TablaProfesores.NUMDOC        + " , " 
+                                                           + TablaProfesores.NUMDOC        + " , "
                                                            + TablaProfesores.FECHANAC      + " , "
                                                            + TablaProfesores.FECHAALTA     + " , "
                                                            + TablaProfesores.DIRECCION     + " , "
                                                            + TablaProfesores.LOCALIDAD     + " , "
-                                                           + TablaProfesores.CODPROV       + " , " 
+                                                           + TablaProfesores.CODPROV       + " , "
                                                            + TablaProfesores.CODPOSTAL     + " , "
                                                            + TablaProfesores.OBSERVACIONES + " , "
-                                                           + TablaProfesores.TELEFONO      + " , " 
+                                                           + TablaProfesores.TELEFONO      + " , "
                                                            + TablaProfesores.MOVIL         + " , "
-                                                           + TablaProfesores.MAIL          + " , " 
+                                                           + TablaProfesores.MAIL          + " , "
                                                            + TablaProfesores.ACTIVO        + " ) "+
-                
+
                                             " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         int               regActualizados = 0;
 
         //Se comprueba que no exista el número de documento del profesor en la base de datos
@@ -488,7 +488,7 @@ public class ProfesoresDAO
             profVO.setIdProf(generarNuevoCodProf());
             profVO.setFecAlt(new Date(System.currentTimeMillis()));
             profVO.setActivo(true); //Profesor activo por defecto cuando se da de alta
-           
+
             //Se pasan los parámetros de la consulta sql
             ps.setString ( 1, profVO.getIdProf());
             ps.setString ( 2, profVO.getNombre());
@@ -506,7 +506,7 @@ public class ProfesoresDAO
             ps.setString (14, profVO.getMov());
             ps.setString (15, profVO.getEmail());
             ps.setBoolean(16, profVO.isActivo());
-            
+
 
             regActualizados = ps.executeUpdate();
 
@@ -535,7 +535,7 @@ public class ProfesoresDAO
             throw exc;
         }
     }
-    
+
     //Genera un nuevo código de Profesor
     public static String generarNuevoCodProf()
     {
@@ -592,10 +592,10 @@ public class ProfesoresDAO
         PreparedStatement ps              = null;
         ResultSet         rs              = null;
 
-        String            sql             = "SELECT " + TablaProvincias.NOMBRE  + 
-                                            " FROM  " + TablaProvincias.TABLA   + 
+        String            sql             = "SELECT " + TablaProvincias.NOMBRE  +
+                                            " FROM  " + TablaProvincias.TABLA   +
                                             " WHERE " + TablaProvincias.CODPROV + " = ? ";
-                        
+
         String            nombreProvincia = "";
 
         try
@@ -614,7 +614,7 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-            
+
             return nombreProvincia;
         }
         catch (Exception exc)
@@ -639,10 +639,10 @@ public class ProfesoresDAO
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT " + TablaProfesores.CODPROFESOR + 
-                                         " FROM  " + TablaProfesores.TABLA       + 
+        String            sql          = "SELECT " + TablaProfesores.CODPROFESOR +
+                                         " FROM  " + TablaProfesores.TABLA       +
                                          " WHERE " + TablaProfesores.NUMDOC      + " = ? ";
-                
+
         boolean          existeDNI     = false;
 
         //Se comprueba que el número de documento no sea una cadena vacía
@@ -671,7 +671,7 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-                        
+
             return existeDNI;
 
         }

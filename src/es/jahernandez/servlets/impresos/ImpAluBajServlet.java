@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -44,7 +45,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpAluBajServlet extends HttpServlet 
+public class ImpAluBajServlet extends HttpServlet
 {
 
     /**
@@ -58,11 +59,11 @@ public class ImpAluBajServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         ServletContext sc     = null;
         HttpSession    sesion = request.getSession();
-        
+
         Vector alumnosBusqueda = null;
 
         AlumnosVO aluVO  = null;
@@ -77,30 +78,30 @@ public class ImpAluBajServlet extends HttpServlet
         String strMail   = "";
         String strEmp    = "";
         String ND        = "";
-        
-        
+
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir alumnos baja curso" );
-               
+
         }
 
         if(request.getParameter("codEdi") != null)
         {
             codEdi = request.getParameter("codEdi");
         }
-        
+
         EdicionesVO ediVO = EdicionesGestion.devolverDatosEdi(codEdi);
 
         String muestraCond = "Alumnos baja curso " + CursosGestion.devolverDatosCurso(ediVO.getIdCur()).getNomCur();
-        
+
         int cuentaLineas = 0;  //Cuenta lineas impresas para saber cuando hacer el salto de página
 
         PdfPTable tablaDatos = new PdfPTable(1);
@@ -109,7 +110,7 @@ public class ImpAluBajServlet extends HttpServlet
         PdfPCell celda = new PdfPCell();
         Font fuenteDoc = null;
 
-        
+
         celda.setMinimumHeight(20);
 
         alumnosBusqueda = AluEdiGestion.devAluBajGruMatEdi(ediVO);
@@ -117,26 +118,26 @@ public class ImpAluBajServlet extends HttpServlet
         // step 1
         Document document = new Document(PageSize.A4.rotate(), 16, 16, 16, 16);
 
-        Image logoImage   = null; 
+        Image logoImage   = null;
         try
         {
             sc = getServletContext();
-            fuenteDoc = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)); 
+            fuenteDoc = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
             fuenteDoc.setSize(8);
-            
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
-            
+
             // step 2: we set the ContentType and create an instance of t Response.ContentType = "application/pdf";he Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-        
+
             // step 3
             document.open();
 
             // step 4
 
             //Mostramos cabecera
-            logoImage.setAlignment(Image.ALIGN_LEFT);
+            logoImage.setAlignment(Element.ALIGN_LEFT);
 
             document.add(new Paragraph(""));
             document.add(logoImage);

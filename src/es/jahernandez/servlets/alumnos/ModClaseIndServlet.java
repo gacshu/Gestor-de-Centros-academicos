@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ModClaseIndServlet extends HttpServlet 
+public class ModClaseIndServlet extends HttpServlet
 {
      /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,38 +36,38 @@ public class ModClaseIndServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion    = request.getSession();
-        
+
         ClasesIndivVO clasIndVO = new ClasesIndivVO();
         int           resEdi    = 0;
 
         Logger        log       = null;
         ConUsuVO      conUsoVO  = null;
-        String        indPag    = "";   
+        String        indPag    = "";
         String        strFecha  = "";
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Edición clase individual" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodClasInd") != null)
         {
             clasIndVO.setIdClaseInd(request.getParameter("txtCodClasInd").trim());
         }
-        
+
         if(request.getParameter("codInt") != null)
         {
             clasIndVO.setIdAlu(request.getParameter("codInt").trim());
         }
-        
+
         if(request.getParameter("txtFecha" + clasIndVO.getIdClaseInd()) != null &&
           !request.getParameter("txtFecha" + clasIndVO.getIdClaseInd()).equals(""))
         {
@@ -76,41 +76,41 @@ public class ModClaseIndServlet extends HttpServlet
                                                         new Integer(strFechaCla.substring(3,5)).intValue() - 1,
                                                         new Integer(strFechaCla.substring(0,2)).intValue()).getTime());
         }
-        
-        
+
+
         if(request.getParameter("lstProf" + clasIndVO.getIdClaseInd()) != null)
         {
             clasIndVO.setIdProf(request.getParameter("lstProf" + clasIndVO.getIdClaseInd()).trim());
         }
-        
+
         if(request.getParameter("txtTarifa" + clasIndVO.getIdClaseInd()) != null)
         {
             clasIndVO.setTarifa(new Float(request.getParameter("txtTarifa" + clasIndVO.getIdClaseInd()).trim()).floatValue());
         }
-        
+
         if(request.getParameter("valInfClasInd") != null)
         {
             indPag = request.getParameter("valInfClasInd").trim();
         }
-        
+
         if(request.getParameter("strFecha") != null)
         {
             strFecha = request.getParameter("strFecha").trim();
         }
-        
+
         resEdi = ClasesIndivGestion.editarClaseInd(clasIndVO);
 
         if(resEdi > 0)
         {
             //Redireccionar a página de clases individuales
-            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu() 
+            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu()
                                                                   + "&valInfClasInd=" + indPag
                                                                   + "&strFecha="      + strFecha);
         }
         else
         {
             //Redireccionar a página de clases individuales
-            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu() 
+            response.sendRedirect("interesados/clasIndFichaAlumno.jsp?codInt="        + clasIndVO.getIdAlu()
                                                                   + "&valInfClasInd=" + indPag
                                                                   + "&errorEdi="      + resEdi
                                                                   + "&strFecha="      + strFecha);
@@ -154,7 +154,7 @@ public class ModClaseIndServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Edición clase individual Servlet";
     }// </editor-fold>

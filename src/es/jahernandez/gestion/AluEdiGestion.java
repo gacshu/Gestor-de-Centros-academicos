@@ -6,24 +6,24 @@
 
 package es.jahernandez.gestion;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import es.jahernandez.accesodatos.AluEdiDAO;
 import es.jahernandez.datos.AluEdiVO;
 import es.jahernandez.datos.Conexion;
 import es.jahernandez.datos.EdicionesVO;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Vector;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
  *
  * @author JuanAlberto
  */
-public class AluEdiGestion 
-{    
+public class AluEdiGestion
+{
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarMatAlu(AluEdiVO aluEdiVO)
     {
@@ -63,9 +63,9 @@ public class AluEdiGestion
         try
         {
             con = Conexion.conectar();
-           
+
             listaAluEdi = AluEdiDAO.devAluEdi(codAlu, con);
-            
+
             Conexion.desconectar(con);
 
             return listaAluEdi;
@@ -96,7 +96,7 @@ public class AluEdiGestion
 
         try
         {
-            con = Conexion.conectar();            
+            con = Conexion.conectar();
             datAluEdi = AluEdiDAO.devDatAluEdi(codAlu, codEdi, con);
             Conexion.desconectar(con);
 
@@ -120,12 +120,12 @@ public class AluEdiGestion
     //Método que da de baja/alta congela/descongela a un alumno en una edición
     public static int bajaMatAlu(AluEdiVO aluEdiVO)
     {
-        Connection        con             = null;                       
+        Connection        con             = null;
         int               regActualizados = 0;
 
         try
         {
-            con = Conexion.conectar();            
+            con = Conexion.conectar();
             regActualizados = AluEdiDAO.bajaMatAlu(aluEdiVO , con);
             Conexion.desconectar(con);
 
@@ -152,7 +152,7 @@ public class AluEdiGestion
     {
         Connection       con         = null;
         boolean          respuesta   = false;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -184,7 +184,7 @@ public class AluEdiGestion
     {
         Connection       con            = null;
         Vector           listaAluEdi    = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -275,7 +275,7 @@ public class AluEdiGestion
     {
         Connection        con         = null;
         Vector            listaAluEdi = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -418,7 +418,7 @@ public class AluEdiGestion
             return null;
         }
 
-        
+
     }
 
     //Método que devuelve los alumnos de baja en un grupo
@@ -450,7 +450,7 @@ public class AluEdiGestion
             return null;
         }
      }
-    
+
     //Método que devuelve si una edición tiene alumunos
     public static boolean edicionTieneAlumnos(String codEdi)
     {

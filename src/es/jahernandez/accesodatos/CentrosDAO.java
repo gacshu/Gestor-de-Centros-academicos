@@ -24,7 +24,7 @@ import es.jahernandez.tablas.TablaCentros;
  * @author Alberto
  */
 public class CentrosDAO
-{       
+{
     //Método que devuelve los datos a mostrar en los combos de centros
     public static Vector datComCentros(Connection con) throws Exception
     {
@@ -32,9 +32,9 @@ public class CentrosDAO
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
 
-        String            sql        = "SELECT "    + TablaCentros.CODCENTRO + "," 
+        String            sql        = "SELECT "    + TablaCentros.CODCENTRO + ","
                                                     + TablaCentros.NOMBRE    +
-                                       " FROM  "    + TablaCentros.TABLA     + 
+                                       " FROM  "    + TablaCentros.TABLA     +
                                        " ORDER BY " + TablaCentros.NOMBRE;
         CentrosVO         centroVO   = null;
 
@@ -82,10 +82,10 @@ public class CentrosDAO
         PreparedStatement ps      = null;
         ResultSet         rs      = null;
 
-        String            sql     = "SELECT " + TablaCentros.NOMBRE    + 
-                                    " FROM  " + TablaCentros.TABLA     + 
+        String            sql     = "SELECT " + TablaCentros.NOMBRE    +
+                                    " FROM  " + TablaCentros.TABLA     +
                                     " WHERE " + TablaCentros.CODCENTRO + " = ? ";
-        
+
         String            strCen  = "";
 
         try
@@ -124,18 +124,18 @@ public class CentrosDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de un centro
     public static CentrosVO datCentro(int idCen, Connection con) throws Exception
     {
         PreparedStatement ps      = null;
         ResultSet         rs      = null;
 
-        String            sql     = "SELECT " + TablaCentros.CODCENTRO + " ," 
-                                              + TablaCentros.NOMBRE    + 
-                                    " FROM  " + TablaCentros.TABLA     + 
+        String            sql     = "SELECT " + TablaCentros.CODCENTRO + " ,"
+                                              + TablaCentros.NOMBRE    +
+                                    " FROM  " + TablaCentros.TABLA     +
                                     " WHERE " + TablaCentros.CODCENTRO + " = ? ";
-        
+
         CentrosVO        cenVO    = null;
 
         try
@@ -151,7 +151,7 @@ public class CentrosDAO
             if (rs.next())
             {
                 cenVO    = new CentrosVO();
-                
+
                 cenVO.setIdCentro    (rs.getInt   (TablaCentros.CODCENTRO));
                 cenVO.setNombreCentro(rs.getString(TablaCentros.NOMBRE));
             }
@@ -177,17 +177,17 @@ public class CentrosDAO
             throw exc;
         }
     }
-    
-    
+
+
     //Devuelve el nuevo código de centro generado
     public static int generarNuevoCodCentro(Connection con) throws Exception
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT MAX(" + TablaCentros.CODCENTRO + ") AS " + TablaCentros.CODCENTRO +  
+        String            cadenaConsulta = "SELECT MAX(" + TablaCentros.CODCENTRO + ") AS " + TablaCentros.CODCENTRO +
                                            " FROM "      + TablaCentros.TABLA;
-        
+
         int               nuevoCod       = -1;
 
         try
@@ -202,7 +202,7 @@ public class CentrosDAO
 
             rs.close();
             ps.close();
-          
+
             return nuevoCod;
 
         }
@@ -222,22 +222,22 @@ public class CentrosDAO
         }
 
     }
-    
+
     //Método que guarda un Centro
     public static int guardarCentro(CentrosVO cenVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         int               regActualizados = 0;
-        
-        
+
+
         int               nueCodCentro    = CentrosGestion.generarNuevoCodCentro();
 
-        String            sql             = "INSERT INTO " + TablaCentros.TABLA     + " ( " 
+        String            sql             = "INSERT INTO " + TablaCentros.TABLA     + " ( "
                                                            + TablaCentros.CODCENTRO + " , "
                                                            + TablaCentros.NOMBRE    + " ) " +
                                             " VALUES (?,?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -245,7 +245,7 @@ public class CentrosDAO
             //Se introducen los parámetros a la consulta sql
             ps.setInt   (1, nueCodCentro);
             ps.setString(2, cenVO.getNombreCentro());
-           
+
            regActualizados = ps.executeUpdate();
 
            ps.close();
@@ -266,12 +266,12 @@ public class CentrosDAO
             throw exc;
         }
     }
-    
+
     //Edita el registro de un Centro
     public static int editarCentro(CentrosVO cenVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         int               regActualizados = -1;
 
         String            sql             = "UPDATE " + TablaCentros.TABLA     +

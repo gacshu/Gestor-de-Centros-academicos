@@ -22,7 +22,7 @@ import es.jahernandez.tablas.TablaAulas;
  * @author Alberto
  */
 public class AulasDAO
-{              
+{
     //Método que genera un nuevo código de Aula
     public static String generarNuevoCodAula()
     {
@@ -81,7 +81,7 @@ public class AulasDAO
     {
         PreparedStatement ps         = null;
         ResultSet         rs         = null;
-        
+
         String            sql        = "SELECT " + TablaAulas.CODAULA   + ","
                                                  + TablaAulas.NOMBRE    + ","
                                                  + TablaAulas.CODCENTRO + ","
@@ -94,7 +94,7 @@ public class AulasDAO
                                                  + TablaAulas.TIENEIMP  + ","
                                                  + TablaAulas.TIENEINT  +
                                         " FROM " + TablaAulas.TABLA ;
-        
+
         AulasVO           datAul     = null;
         Vector            listaAulas = new Vector();
 
@@ -162,7 +162,7 @@ public class AulasDAO
                                                  + TablaAulas.TIENEINT  +
                                        " FROM "  + TablaAulas.TABLA     +
                                        " WHERE " + TablaAulas.CODAULA   + " = ?";
-        
+
         AulasVO           datAul     = null;
 
         try
@@ -221,8 +221,8 @@ public class AulasDAO
         String            nueCodAul       = generarNuevoCodAula();
 
         String            sql             = "INSERT INTO " + TablaAulas.TABLA + " (" + TablaAulas.CODAULA   + ", "
-                                                                                     + TablaAulas.NOMBRE    + ", " 
-                                                                                     + TablaAulas.CODCENTRO + ", " 
+                                                                                     + TablaAulas.NOMBRE    + ", "
+                                                                                     + TablaAulas.CODCENTRO + ", "
                                                                                      + TablaAulas.PLAZAS    + ", "
                                                                                      + TablaAulas.DESCRIP   + ", "
                                                                                      + TablaAulas.ESAULAINF + ", "
@@ -232,8 +232,8 @@ public class AulasDAO
                                                                                      + TablaAulas.TIENEIMP  + ", "
                                                                                      + TablaAulas.TIENEINT  + ")" +
                                             " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -287,18 +287,18 @@ public class AulasDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "UPDATE " + TablaAulas.TABLA     + 
-                                            " SET   " + TablaAulas.NOMBRE    + " = ? ," 
-                                                      + TablaAulas.PLAZAS    + " = ? ," 
-                                                      + TablaAulas.DESCRIP   + " = ? ," 
-                                                      + TablaAulas.ESAULAINF + " = ? ," 
-                                                      + TablaAulas.TIENEPROY + " = ? ," 
-                                                      + TablaAulas.TIENETV   + " = ? ," 
-                                                      + TablaAulas.TIENEAC   + " = ? ," 
-                                                      + TablaAulas.TIENEIMP  + " = ? ," 
+        String            sql             = "UPDATE " + TablaAulas.TABLA     +
+                                            " SET   " + TablaAulas.NOMBRE    + " = ? ,"
+                                                      + TablaAulas.PLAZAS    + " = ? ,"
+                                                      + TablaAulas.DESCRIP   + " = ? ,"
+                                                      + TablaAulas.ESAULAINF + " = ? ,"
+                                                      + TablaAulas.TIENEPROY + " = ? ,"
+                                                      + TablaAulas.TIENETV   + " = ? ,"
+                                                      + TablaAulas.TIENEAC   + " = ? ,"
+                                                      + TablaAulas.TIENEIMP  + " = ? ,"
                                                       + TablaAulas.TIENEINT  + " = ? "  +
                                             " WHERE " + TablaAulas.CODAULA   + " = ?";
-                        
+
         int               regActualizados = 0;
 
         try
@@ -320,7 +320,7 @@ public class AulasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -357,8 +357,8 @@ public class AulasDAO
                                                   + TablaAulas.TIENEINT   +
                                         " FROM "  + TablaAulas.TABLA      +
                                         " WHERE " + TablaAulas.CODCENTRO  + " = ?";
-        
-        
+
+
         AulasVO           datAul     = null;
         Vector            listaAulas = new Vector();
 
@@ -390,7 +390,7 @@ public class AulasDAO
             }
             rs.close();
             ps.close();
-            
+
             return listaAulas;
         }
         catch (Exception exc)

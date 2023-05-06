@@ -8,13 +8,13 @@ import java.awt.Color;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 //Paquetes de manejo de pdf
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -39,10 +39,10 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpLisProfServlet extends HttpServlet 
+public class ImpLisProfServlet extends HttpServlet
 {
-       
-    
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
@@ -51,7 +51,7 @@ public class ImpLisProfServlet extends HttpServlet
 
         HttpSession      sesion  = request.getSession();
         ServletContext   sc      = null;
-        Calendar         cal     = GregorianCalendar.getInstance();
+        Calendar         cal     = Calendar.getInstance();
         SimpleDateFormat forFec  = new SimpleDateFormat("dd/MM/yyyy");
         String           txtFec  = forFec.format(cal.getTime());
 
@@ -72,22 +72,22 @@ public class ImpLisProfServlet extends HttpServlet
         Font      fuenteCab    = null;
         ProfBus = (Vector) sesion.getAttribute("busProf");
 
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir lista profesores" );
-               
+
         }
-        
-        
-        
+
+
+
         // step 1
         Document document = new Document(PageSize.A4.rotate(),16,16,16,16);
         //iTextSharp.text.Image logoImage = iTextSharp.text.Image.GetInstance(System.web.HttpContext.Current.Server.MapPath());
@@ -98,10 +98,10 @@ public class ImpLisProfServlet extends HttpServlet
         {
             sc = getServletContext();
             fuenteDoc = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
-            fuenteCab = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));                        
-            
+            fuenteCab = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+
             //logoImage = Image.getInstance("~/imagenes/logoEnS.jpg");
-                                                           
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
 
@@ -110,9 +110,9 @@ public class ImpLisProfServlet extends HttpServlet
 
             celda.setMinimumHeight(20);
             fuenteDoc.setSize(8);
-            
+
             fuenteCab.setColor(Color.WHITE);
-            fuenteCab.setSize(8);  
+            fuenteCab.setSize(8);
 
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
@@ -123,7 +123,7 @@ public class ImpLisProfServlet extends HttpServlet
             // step 4
 
             //Mostramos cabecera
-            logoImage.setAlignment(Image.ALIGN_LEFT);
+            logoImage.setAlignment(Element.ALIGN_LEFT);
 
 
             document.add(new Paragraph(""));
@@ -132,12 +132,12 @@ public class ImpLisProfServlet extends HttpServlet
             document.add(new Paragraph(""));
             document.add(new Paragraph(""));
 
-            
+
             celda.addElement(new Paragraph("       NOMBRE                 APELLIDOS                MOVIL    FIJO        AREAS", fuenteCab));
-                        
+
             celda.setBackgroundColor(Color.BLUE);
-            
-            
+
+
             tablaDatos.addCell(celda);
 
             for (int ind = 0; ind < ProfBus.size() ; ind++)
@@ -149,7 +149,7 @@ public class ImpLisProfServlet extends HttpServlet
                 strMov    = profVO.getMov().trim();
                 strFij    = profVO.getTelef().trim();
                 strAreas  = ProfAreaGestion.devolverNombresAreasProf(profVO.getIdProf());
-                
+
 
                 if (cuentaLineas > 21)
                 {
@@ -169,12 +169,12 @@ public class ImpLisProfServlet extends HttpServlet
                     document.add(new Paragraph("FECHA " + txtFec + " LISTADO PROFESORES " ));
                     document.add(new Paragraph(""));
                     document.add(new Paragraph(""));
-                    
+
                     celda = new PdfPCell();
                     celda.setMinimumHeight(20);
 
                     celda.setBackgroundColor(Color.BLUE);
-                    
+
                     celda.addElement(new Paragraph("       NOMBRE                 APELLIDOS                MOVIL    FIJO        AREAS", fuenteCab));
                     //document.Add(new Paragraph("       NOMBRE                 APELLIDOS          POBLACION                       MOVIL       FIJO     " , new Font(BaseFont.CreateFont("c:\\windows\\fonts\\cour.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
                     //document.Add(new Paragraph("------------------------------------------------------------------------------------------------------", new Font(BaseFont.CreateFont("c:\\windows\\fonts\\cour.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
@@ -193,17 +193,17 @@ public class ImpLisProfServlet extends HttpServlet
 
                 strAreas  = strAreas  + "                                                                                                                                        ";
 
-                
+
 
                 strNombre = strNombre.substring(0, 15);
                 strApe1   = strApe1.  substring(0, 30);
                 strMov    = strMov.   substring(0,  9);
                 strFij    = strFij.   substring(0,  9);
                 strAreas  = strAreas. substring(0, 70);
-              
+
                 celda = new PdfPCell();
                 celda.setMinimumHeight(20);
-                
+
                 if(ind%2 != 0)
                 {
                     celda.setBackgroundColor(Color.LIGHT_GRAY);
@@ -227,11 +227,11 @@ public class ImpLisProfServlet extends HttpServlet
         }
         // step 5: Close document
         document.close();
-        
-    } 
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -242,9 +242,9 @@ public class ImpLisProfServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response

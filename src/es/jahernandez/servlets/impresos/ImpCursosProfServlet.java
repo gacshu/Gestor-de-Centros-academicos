@@ -8,12 +8,12 @@ import java.awt.Color;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -44,10 +44,10 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpCursosProfServlet extends HttpServlet 
+public class ImpCursosProfServlet extends HttpServlet
 {
-   
-    
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
@@ -56,7 +56,7 @@ public class ImpCursosProfServlet extends HttpServlet
 
         HttpSession      sesion       = request.getSession();
         ServletContext   sc           = null;
-        Calendar         cal          = GregorianCalendar.getInstance();
+        Calendar         cal          = Calendar.getInstance();
         SimpleDateFormat forFec       = new SimpleDateFormat("dd/MM/yyyy");
         String           txtFec       = forFec.format(cal.getTime());
 
@@ -64,8 +64,8 @@ public class ImpCursosProfServlet extends HttpServlet
         Vector           listaModProf = new Vector();
         EdiModProfAulaVO empaVO       = new EdiModProfAulaVO();
         String           codProf      = "";
-        int              tipBus       = -99;         
-      
+        int              tipBus       = -99;
+
         String           strMod       = "";
         String           strCursEdi   = "";
         String           strDias      = "";
@@ -80,39 +80,39 @@ public class ImpCursosProfServlet extends HttpServlet
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir cursos profesor" );
-               
+
         }
-      
+
         if(request.getParameter("codProf") != null)
         {
             codProf =  request.getParameter("codProf");
-        
+
             if(request.getParameter("tipBus") != null)
             {
                 tipBus = new Integer(request.getParameter("tipBus")).intValue();
             }
-        
-            switch (tipBus) 
+
+            switch (tipBus)
             {
-                case 1:  listaModProf = EdiModProfAulaGestion.devolverModProf(codProf); 
+                case 1:  listaModProf = EdiModProfAulaGestion.devolverModProf(codProf);
                          muestraCond  = "HISTORICO CURSOS DE " + ProfesoresGestion.devolverDatosProfesor(codProf).getNombre() + " " + ProfesoresGestion.devolverDatosProfesor(codProf).getApellidos();
                          break;
-                case 2:  listaModProf = EdiModProfAulaGestion.devolverModProfPend(codProf); 
+                case 2:  listaModProf = EdiModProfAulaGestion.devolverModProfPend(codProf);
                          muestraCond  = "CURSOS PENDIENTES DE " + ProfesoresGestion.devolverDatosProfesor(codProf).getNombre() + " " + ProfesoresGestion.devolverDatosProfesor(codProf).getApellidos();
                          break;
                 default: listaModProf = new Vector(); break;
             }
         }
-        
-        
+
+
         int       cuentaLineas = 0;  //Cuenta lineas impresas para saber cuando hacer el salto de página
 
         PdfPTable tablaDatos   = new PdfPTable(1);
@@ -130,10 +130,10 @@ public class ImpCursosProfServlet extends HttpServlet
         {
             sc = getServletContext();
             fuenteDoc = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
-            fuenteCab = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));                        
-            
+            fuenteCab = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+
             //logoImage = Image.getInstance("~/imagenes/logoEnS.jpg");
-                                                           
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
 
@@ -142,9 +142,9 @@ public class ImpCursosProfServlet extends HttpServlet
 
             celda.setMinimumHeight(20);
             fuenteDoc.setSize(8);
-            
+
             fuenteCab.setColor(Color.WHITE);
-            fuenteCab.setSize(8);  
+            fuenteCab.setSize(8);
 
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
@@ -155,7 +155,7 @@ public class ImpCursosProfServlet extends HttpServlet
             // step 4
 
             //Mostramos cabecera
-            logoImage.setAlignment(Image.ALIGN_LEFT);
+            logoImage.setAlignment(Element.ALIGN_LEFT);
 
 
             document.add(new Paragraph(""));
@@ -163,13 +163,13 @@ public class ImpCursosProfServlet extends HttpServlet
             document.add(new Paragraph("FECHA " + txtFec + " " + muestraCond));
             document.add(new Paragraph(""));
             document.add(new Paragraph(""));
-                
+
             celda.addElement(new Paragraph("       MODULO                                                        CURSO Y EDICION                      DIAS        AREAS       FECHA INIC   FECHA FIN     HORARIO          ", fuenteCab));
-            
-            
+
+
             celda.setBackgroundColor(Color.BLUE);
-            
-            
+
+
             tablaDatos.addCell(celda);
 
             for (int ind = 0; ind < listaModProf.size() ; ind++)
@@ -179,10 +179,10 @@ public class ImpCursosProfServlet extends HttpServlet
                 strMod     = ModulosGestion.devolverDatosModulo(empaVO.getIdMod()).getNombre();
                 strCursEdi = CursosGestion.devolverDatosCurso(EdicionesGestion.devolverDatosEdi(empaVO.getIdEdi()).getIdCur()).getNomCur()+ " --- "  +   EdicionesGestion.devolverDatosEdi(empaVO.getIdEdi()).getDescripcion();
                 strDias    = EdicionesGestion.devolverDatosEdi(empaVO.getIdEdi()).devuelveDiasClase();
-                strArea    = empaVO.getIdAul().trim().equals("") ? "" : AulasGestion.devolverDatosAula(empaVO.getIdAul()).getNombre(); 
+                strArea    = empaVO.getIdAul().trim().equals("") ? "" : AulasGestion.devolverDatosAula(empaVO.getIdAul()).getNombre();
                 strArea    = AreasGestion.devuelveNombreArea(ModulosGestion.devolverDatosModulo(empaVO.getIdMod()).getCodArea());
                 strFecIni  = forFec.format(empaVO.getFecIni());
-                strFecFin  = forFec.format(empaVO.getFecFin());    
+                strFecFin  = forFec.format(empaVO.getFecFin());
                 strHoraIni = empaVO.getHorIni();
                 strHoraFin = empaVO.getHorFin();
 
@@ -209,10 +209,10 @@ public class ImpCursosProfServlet extends HttpServlet
                     celda.setMinimumHeight(20);
 
                     celda.setBackgroundColor(Color.BLUE);
-                                                   
+
                     celda.addElement(new Paragraph("       MODULO                                                        CURSO Y EDICION                      DIAS        AREAS       FECHA INIC   FECHA FIN     HORARIO          ", fuenteCab));
-                    
-                    
+
+
                     tablaDatos.addCell(celda);
                 }
 
@@ -235,8 +235,8 @@ public class ImpCursosProfServlet extends HttpServlet
                 strHoraIni = strHoraIni  + "                                                          ";
 
                 strHoraFin = strHoraFin  + "                                                          ";
-                
-                
+
+
                 strMod     = strMod.    substring(0,35);
                 strCursEdi = strCursEdi.substring(0,60);
                 strDias    = strDias.   substring(0,11);
@@ -246,10 +246,10 @@ public class ImpCursosProfServlet extends HttpServlet
                 strFecFin  = strFecFin .substring(0,10);
                 strHoraIni = strHoraIni.substring(0, 5);
                 strHoraFin = strHoraFin.substring(0, 5);
-                
+
                 celda = new PdfPCell();
                 celda.setMinimumHeight(20);
-                
+
                 if(ind%2 != 0)
                 {
                     celda.setBackgroundColor(Color.LIGHT_GRAY);
@@ -273,11 +273,11 @@ public class ImpCursosProfServlet extends HttpServlet
         }
         // step 5: Close document
         document.close();
-        
-    } 
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -288,9 +288,9 @@ public class ImpCursosProfServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response

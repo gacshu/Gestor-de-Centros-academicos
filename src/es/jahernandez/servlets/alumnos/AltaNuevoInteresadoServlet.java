@@ -27,8 +27,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class AltaNuevoInteresadoServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -48,17 +48,17 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta interesado" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("selValTipDoc") != null)
         {
@@ -75,14 +75,14 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
         {
             aluAlta.setDesemp(true);
         }
-        
+
 
         if(request.getParameter("chkNoDeseado") != null &&
            request.getParameter("chkNoDeseado").equals("true"))
         {
             aluAlta.setAlND(true);
         }
-        
+
 
         if(request.getParameter("txtNombre") != null)
         {
@@ -145,7 +145,7 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
         }
 
         aluAlta.setIdCen(1);  //Valor fijo para los nuevos interesados
-        
+
         if(request.getParameter("hidFecNac") != null &&
            ! request.getParameter("hidFecNac").equals(""))
         {
@@ -166,24 +166,24 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
         {
             aluAlta.setAutComCom(true);
         }
-        
-        
+
+
         if(request.getParameter("txtResponsable") != null)
         {
             aluAlta.setResponsable(request.getParameter("txtResponsable").trim().toUpperCase());
         }
-        
+
         if(request.getParameter("txtColegio") != null)
         {
             aluAlta.setColegio(request.getParameter("txtColegio").trim().toUpperCase());
         }
-        
+
         if(request.getParameter("txtCurso") != null)
         {
             aluAlta.setCurso(request.getParameter("txtCurso").trim().toUpperCase());
         }
-        
-        
+
+
 
         //Opciones de carga de pestaña
         if(request.getParameter("pestana") != null)
@@ -195,7 +195,7 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
         //aluAlta.setIdAlu(AlumnosDAO.generarNuevoCodAlu()); //Genera un nuevo código de alumno
 
         resultadoAlt = AlumnosGestion.insertaAlumno(aluAlta);
-        
+
         if(resultadoAlt.equals("0") || resultadoAlt.equals("-1") || resultadoAlt.equals("-2"))
         {
             //Cargamos datos de nuevo alumno en sesión para cargar páginas siguientes
@@ -215,10 +215,10 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
         }
 
     }
-    
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -230,9 +230,9 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
     throws ServletException, IOException
     {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -246,7 +246,7 @@ public class AltaNuevoInteresadoServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

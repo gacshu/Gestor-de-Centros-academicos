@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaProvincias 
+public class TablaProvincias
 {
     public static final String TABLA     = "tbcpo";
     public static final String CODPROV   = "NCodigo";

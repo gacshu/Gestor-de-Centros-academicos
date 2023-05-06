@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author JuanAlberto
  */
-public class CargaComboCursosServlet extends HttpServlet 
+public class CargaComboCursosServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -33,54 +33,54 @@ public class CargaComboCursosServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         // TODO Auto-generated method stub
         response.setContentType("text/html; charset=UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        PrintWriter out        = response.getWriter();        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+        PrintWriter out        = response.getWriter();
         String	    valSel     = null;
-        Vector      vecCursos  = null; 
+        Vector      vecCursos  = null;
         CursosVO    curVO      = null;
         boolean     mostrarSel = false;
- 
+
         if(request.getParameter("codTipo") != null )
         {
             if(request.getParameter("codCentro") != null )
             {
                 vecCursos = CursosGestion.devolverDatCurTipCen( new Integer(request.getParameter("codTipo")).intValue()  ,  new Integer(request.getParameter("codCentro")).intValue());
-            }    
+            }
             else
             {
                 vecCursos = CursosGestion.devolverDatCurTip(new Integer(request.getParameter("codTipo")).intValue());
             }
-                
+
         }
-        
+
         if(request.getParameter("valSel") != null)
         {
                 valSel = request.getParameter("valSel");
         }
-        
+
         if(request.getParameter("muestraSelec") != null &&
            request.getParameter("muestraSelec").trim().equals("s"))
         {
             mostrarSel = true;
         }
-        
-        try 
-        {            
+
+        try
+        {
                 if(mostrarSel)
                 {
                     out.printf("<option value=\"-1\">Seleccione...</option>");
                 }
-                for (int ind = 0; ind<vecCursos.size(); ind ++) 
-                {                
+                for (int ind = 0; ind<vecCursos.size(); ind ++)
+                {
                     curVO = (CursosVO) vecCursos.elementAt(ind);
 
                     if(valSel == null)
@@ -97,15 +97,15 @@ public class CargaComboCursosServlet extends HttpServlet
                             {
                                 out.printf("<option value='%1s'>%2s</option>", curVO.getIdCur(), curVO.getNomCur());
                             }
-                    }            
-                }        
-        } 
-        finally 
-        {            
+                    }
+                }
+        }
+        finally
+        {
                 if (out!=null)
                 {
                         out.flush();
-                        out.close();        
+                        out.close();
                 }
         }
     }

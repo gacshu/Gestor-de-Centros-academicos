@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BajaModuloServlet extends HttpServlet 
+public class BajaModuloServlet extends HttpServlet
 {
 
     /**
@@ -35,50 +35,50 @@ public class BajaModuloServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession   sesion       = request.getSession();
         String        codMod       = "";
         String        codCurso     = "";
         int           resultadoBor = 0;
         String        pagGesMod    = "";
-         
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Baja módulo" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codMod") != null)
         {
             codMod = request.getParameter("codMod").trim();
         }
-       
+
         if(request.getParameter("codCurso") != null)
         {
             codCurso = request.getParameter("codCurso").trim();
         }
-        
+
         if(request.getParameter("valInfMod") != null)
         {
             pagGesMod = request.getParameter("valInfMod").trim();
         }
-          
+
         resultadoBor = ModulosGestion.eliminaModulo(codMod);
-               
+
         //Redireccionar a gestión niveles
-        response.sendRedirect("cursos/gestionModulos.jsp?codCurso="  + codCurso 
+        response.sendRedirect("cursos/gestionModulos.jsp?codCurso="  + codCurso
                                                      + "&resultBor=" + resultadoBor
                                                      + "&valInfMod=" + pagGesMod);
     }
@@ -120,7 +120,7 @@ public class BajaModuloServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Baja Modulo Servlet";
     }// </editor-fold>

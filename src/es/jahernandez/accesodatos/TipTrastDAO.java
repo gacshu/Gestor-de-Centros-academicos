@@ -20,7 +20,7 @@ import es.jahernandez.tablas.TablaTipTrast;
  *
  * @author JuanAlberto
  */
-public class TipTrastDAO 
+public class TipTrastDAO
 {
      //Método que devuelve los datos de tipo Trastorno
     public static Vector devolverTodTipTrast(Connection con) throws Exception
@@ -28,10 +28,10 @@ public class TipTrastDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaTipTrast.CODTIPTRAS + " , " 
-                                                     + TablaTipTrast.DESCRIP    +   
+        String            cadenaConsulta = "SELECT " + TablaTipTrast.CODTIPTRAS + " , "
+                                                     + TablaTipTrast.DESCRIP    +
                                            " FROM "  + TablaTipTrast.TABLA;
-        
+
         TipTrastVO        tipTrasVO      = null;
         Vector            listaTipTras   = new Vector();
 
@@ -47,13 +47,13 @@ public class TipTrastDAO
 
                 tipTrasVO.setCodTipTrast(rs.getString(TablaTipTrast.CODTIPTRAS));
                 tipTrasVO.setDescrip    (rs.getString(TablaTipTrast.DESCRIP));
-                
+
                 listaTipTras.add(tipTrasVO);
             }
-            
+
             rs.close();
             ps.close();
-            
+
             return listaTipTras;
         }
         catch (Exception exc)
@@ -70,17 +70,17 @@ public class TipTrastDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve el nombre de un tipo de trastorno
     public static String devuelveNombreTipoTrastorno(String codTrast,Connection con) throws Exception
     {
         PreparedStatement ps        = null;
         ResultSet         rs        = null;
 
-        String            sql       = "SELECT " + TablaTipTrast.DESCRIP +  
+        String            sql       = "SELECT " + TablaTipTrast.DESCRIP +
                                       " FROM "  + TablaTipTrast.TABLA   +
                                       " WHERE " + TablaTipTrast.CODTIPTRAS + " = ?";
-        
+
         String            nomTrast  = "";
 
         try
@@ -115,7 +115,7 @@ public class TipTrastDAO
             throw exc;
         }
     }
-    
+
     //Genera un nuevo código de tipo trastorno
     public static String generarNuevoCodTipTrast()
     {
@@ -169,15 +169,15 @@ public class TipTrastDAO
     //Método que guarda un tipo trastorno
     public static int guardarTipTrast(TipTrastVO tipTrasVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;   
+        PreparedStatement ps              = null;
         int               regActualizados = 0;
         String            nueCodTipTrast  = generarNuevoCodTipTrast();
 
-        String            sql             = "INSERT INTO " + TablaTipTrast.TABLA      + " ( " 
+        String            sql             = "INSERT INTO " + TablaTipTrast.TABLA      + " ( "
                                                            + TablaTipTrast.CODTIPTRAS + " , "
                                                            + TablaTipTrast.DESCRIP    + " ) " +
                                             " VALUES (?,?)";
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -185,11 +185,11 @@ public class TipTrastDAO
             //Se introducen los parámetros a la consulta sql
             ps.setString(1, nueCodTipTrast);
             ps.setString(2, tipTrasVO.getDescrip());
-           
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-           
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -206,12 +206,12 @@ public class TipTrastDAO
             throw exc;
         }
     }
-    
+
     //Edita el registro de un tipo de trastorno
     public static int editarTipTrast(TipTrastVO tipTrastVO,Connection con) throws Exception
     {
         PreparedStatement ps              = null;
-        
+
         int               regActualizados = 0;
 
         String            sql             = "UPDATE " + TablaTipTrast.TABLA      +
@@ -228,8 +228,8 @@ public class TipTrastDAO
 
             regActualizados = ps.executeUpdate();
 
-            ps.close();;
-            
+            ps.close();
+
             return regActualizados;
         }
         catch (Exception exc)

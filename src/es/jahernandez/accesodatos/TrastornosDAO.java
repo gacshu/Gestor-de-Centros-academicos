@@ -20,7 +20,7 @@ import es.jahernandez.tablas.TablaTrastornos;
  *
  * @author JuanAlberto
  */
-public class TrastornosDAO 
+public class TrastornosDAO
 {
     //Método que devuelve los datos de un trastorno
     public static TrastornosVO devolverDatosTrastorno(String codTrastorno, Connection con) throws Exception
@@ -28,14 +28,14 @@ public class TrastornosDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaTrastornos.CODTRAST   + " , " 
+        String            cadenaConsulta = "SELECT " + TablaTrastornos.CODTRAST   + " , "
                                                      + TablaTrastornos.CODALU     + " , "
                                                      + TablaTrastornos.CODTIPTRAS + " , "
                                                      + TablaTrastornos.MEDICADO   + " , "
-                                                     + TablaTrastornos.MEDICACION +                 
+                                                     + TablaTrastornos.MEDICACION +
                                            " FROM "  + TablaTrastornos.TABLA      +
                                            " WHERE " + TablaTrastornos.CODTRAST   + " = ?";
-        
+
         TrastornosVO      trastVO        = new TrastornosVO();
 
         try
@@ -57,10 +57,10 @@ public class TrastornosDAO
                 trastVO.setMedicado        (rs.getBoolean(TablaTrastornos.MEDICADO));
                 trastVO.setMedicacion      (rs.getString (TablaTrastornos.MEDICACION));
             }
-            
+
             rs.close();
             ps.close();
-            
+
             return trastVO;
         }
         catch (Exception exc)
@@ -84,13 +84,13 @@ public class TrastornosDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaTrastornos.CODTRAST   + " , " 
+        String            cadenaConsulta = "SELECT " + TablaTrastornos.CODTRAST   + " , "
                                                      + TablaTrastornos.CODALU     + " , "
                                                      + TablaTrastornos.CODTIPTRAS + " , "
                                                      + TablaTrastornos.MEDICADO   + " , "
-                                                     + TablaTrastornos.MEDICACION +                 
-                                           " FROM "  + TablaTrastornos.TABLA;      
-        
+                                                     + TablaTrastornos.MEDICACION +
+                                           " FROM "  + TablaTrastornos.TABLA;
+
         TrastornosVO      trastVO      = null;
         Vector            listaTrast   = new Vector();
 
@@ -109,13 +109,13 @@ public class TrastornosDAO
                 trastVO.setCodTipoTrastorno(rs.getString (TablaTrastornos.CODTIPTRAS));
                 trastVO.setMedicado        (rs.getBoolean(TablaTrastornos.MEDICADO));
                 trastVO.setMedicacion      (rs.getString (TablaTrastornos.MEDICACION));
-                
+
                 listaTrast.add(trastVO);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaTrast;
         }
         catch (Exception exc)
@@ -137,16 +137,16 @@ public class TrastornosDAO
     public static int guardarTrastorno(TrastornosVO trastVO, Connection con) throws Exception
     {
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaTrastornos.TABLA      + " ( "  
-                                                          + TablaTrastornos.CODTRAST   + " , " 
-                                                          + TablaTrastornos.CODALU     + " , "  
-                                                          + TablaTrastornos.CODTIPTRAS + " , " 
-                                                          + TablaTrastornos.MEDICADO   + " , " 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaTrastornos.TABLA      + " ( "
+                                                          + TablaTrastornos.CODTRAST   + " , "
+                                                          + TablaTrastornos.CODALU     + " , "
+                                                          + TablaTrastornos.CODTIPTRAS + " , "
+                                                          + TablaTrastornos.MEDICADO   + " , "
                                                           + TablaTrastornos.MEDICACION + " ) " +
                                            " VALUES(?,?,?,?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -159,11 +159,11 @@ public class TrastornosDAO
             ps.setString (3, trastVO.getCodTipoTrastorno());
             ps.setBoolean(4, trastVO.isMedicado());
             ps.setString (5, trastVO.getMedicacion());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -236,14 +236,14 @@ public class TrastornosDAO
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT "  + TablaTrastornos.CODTRAST   + " , " 
+        String            sql          = "SELECT "  + TablaTrastornos.CODTRAST   + " , "
                                                     + TablaTrastornos.CODALU     + " , "
                                                     + TablaTrastornos.CODTIPTRAS + " , "
                                                     + TablaTrastornos.MEDICADO   + " , "
-                                                    + TablaTrastornos.MEDICACION +                 
+                                                    + TablaTrastornos.MEDICACION +
                                          " FROM "   + TablaTrastornos.TABLA      +
                                          " WHERE "  + TablaTrastornos.CODALU     + " = ?";
-        
+
         TrastornosVO      trastVO      = null;
         Vector            listaTrast   = new Vector();
 
@@ -265,13 +265,13 @@ public class TrastornosDAO
                 trastVO.setCodTipoTrastorno(rs.getString (TablaTrastornos.CODTIPTRAS));
                 trastVO.setMedicado        (rs.getBoolean(TablaTrastornos.MEDICADO));
                 trastVO.setMedicacion      (rs.getString (TablaTrastornos.MEDICACION));
-                
+
                 listaTrast.add(trastVO);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaTrast;
         }
         catch (Exception exc)
@@ -288,18 +288,18 @@ public class TrastornosDAO
             throw exc;
         }
     }
-    
+
      //Edita el registro de un trastorno
     public static int editaTrastorno(TrastornosVO trastVO, Connection con) throws Exception
     {
         PreparedStatement ps  = null;
 
         String            sql = "UPDATE " + TablaTrastornos.TABLA      +
-                                " SET "   + TablaTrastornos.CODTIPTRAS + " = ? , "  
-                                          + TablaTrastornos.MEDICADO   + " = ? , " 
+                                " SET "   + TablaTrastornos.CODTIPTRAS + " = ? , "
+                                          + TablaTrastornos.MEDICADO   + " = ? , "
                                           + TablaTrastornos.MEDICACION + " = ?   " +
                                 " WHERE " + TablaTrastornos.CODTRAST   + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -311,11 +311,11 @@ public class TrastornosDAO
             ps.setBoolean(2, trastVO.isMedicado());
             ps.setString (3, trastVO.getMedicacion());
             ps.setString (4, trastVO.getCodTrastorno());
-           
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -328,7 +328,7 @@ public class TrastornosDAO
             {
                 Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             throw exc;
         }
     }
@@ -338,23 +338,23 @@ public class TrastornosDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaTrastornos.TABLA    + 
+        String            sql             = "DELETE FROM " + TablaTrastornos.TABLA    +
                                             " WHERE "      + TablaTrastornos.CODTRAST + " = ?";
-        
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codTrastorno);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -369,29 +369,29 @@ public class TrastornosDAO
             }
             throw exc;
         }
-    }     
-    
+    }
+
     //Borra los trastornos de un alumno
     public static int eliminaTrastornosAlumno(String codAlu, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaTrastornos.TABLA    + 
+        String            sql             = "DELETE FROM " + TablaTrastornos.TABLA    +
                                             " WHERE "      + TablaTrastornos.CODALU   + " = ?";
-        
+
         int               regActualizados = 0;
-   
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAlu);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -406,5 +406,5 @@ public class TrastornosDAO
             }
             throw exc;
         }
-    }     
+    }
 }

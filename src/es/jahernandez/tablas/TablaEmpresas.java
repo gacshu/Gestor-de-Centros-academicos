@@ -8,9 +8,9 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaEmpresas 
+public class TablaEmpresas
 {
-    public static final String TABLA         = "tbemp"; 
+    public static final String TABLA         = "tbemp";
     public static final String CODEMPRESA    = "IdEmp";
     public static final String NOMBRE        = "NomEmp";
     public static final String CIF           = "CifEmp";
@@ -18,8 +18,8 @@ public class TablaEmpresas
     public static final String CODPOSTAL     = "codPost";
     public static final String POBLACION     = "Poblacion";
     public static final String CODPROVINCIA  = "codProv";
-    public static final String TELEFONO      = "TelEmp"; 
-    public static final String FAX           = "FaxEmp"; 
+    public static final String TELEFONO      = "TelEmp";
+    public static final String FAX           = "FaxEmp";
     public static final String MAIL          = "mail";
     public static final String RESPONSABLE   = "ResEmp";
     public static final String CODSEC        = "IdSec";
@@ -40,8 +40,8 @@ public class TablaEmpresas
     public static final String POBLACIONCOM  = "pobCom";
     public static final String CODPROVINCOM  = "proCom";
     public static final String CODPOSTCOM    = "codPosCom";
-    public static final String AUTORIZCESDAT = "autCesDat"; 
-    public static final String ACCESOARCO    = "accArco";    
+    public static final String AUTORIZCESDAT = "autCesDat";
+    public static final String ACCESOARCO    = "accArco";
     public static final String FECACCCARCO   = "fecAccArc";
     public static final String RECHAZOARCO   = "recArco";
     public static final String FECRECARCO    = "fecRecArc";

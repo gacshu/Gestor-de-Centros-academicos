@@ -5,20 +5,18 @@
 
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.ActividadesVO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.gestion.ActividadesGestion;
-
-import es.jahernandez.tablas.TablaActividades; 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Vector;
+
+import es.jahernandez.datos.ActividadesVO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.gestion.ActividadesGestion;
+import es.jahernandez.tablas.TablaActividades;
 
 /**
  *
@@ -30,20 +28,23 @@ public class ActividadesDAO
     public static int devuelveMaxAct(Connection con) throws Exception
     {
         //Connection        con            = null;
-        PreparedStatement ps             = null;
+        //PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT MAX(CONVERT(INT,idAct)) FROM TbAct";
-        String            cadenaConsulta = "SELECT MAX(" + TablaActividades.CODIGO + ") AS " + TablaActividades.CODIGO +  
+        String            cadenaConsulta = "SELECT MAX(" + TablaActividades.CODIGO + ") AS " + TablaActividades.CODIGO +
                                            " FROM "      + TablaActividades.TABLA;
-        
+
         int               valorMax       = 0;
 
         try
         {
             //con = Conexion.conectar();
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
+
             rs = ps.executeQuery();
+            //ps.close();
+        	}
 
             if(rs.next())
             {
@@ -51,29 +52,19 @@ public class ActividadesDAO
             }
 
             rs.close();
-            ps.close();
+
             //Conexion.desconectar(con);
+
 
             return valorMax;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-                
-                
-                //Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ActividadesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
 
             throw  exc;
-            
+
         }
 
     }
@@ -82,13 +73,13 @@ public class ActividadesDAO
     public static int nuevoCodigo()
     {
         int nueCodActividad = 0;
-        
+
         try
         {
             nueCodActividad = ActividadesGestion.devuelveMaxAct();
-            
+
             return nueCodActividad + 1;
-            
+
         }
         catch(Exception exc)
         {
@@ -102,11 +93,11 @@ public class ActividadesDAO
     {
         PreparedStatement ps              = null;
 
-        String            cadenaConsulta  = "INSERT INTO " + TablaActividades.TABLA + " (" 
-                                                           + TablaActividades.CODIGO + " , " 
-                                                           + TablaActividades.NOMBRE + " ) " + 
+        String            cadenaConsulta  = "INSERT INTO " + TablaActividades.TABLA + " ("
+                                                           + TablaActividades.CODIGO + " , "
+                                                           + TablaActividades.NOMBRE + " ) " +
                                             " VALUES(?,?)";
-        
+
         int               regActualizados = 0;
 
         try
@@ -120,7 +111,7 @@ public class ActividadesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-           
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -144,10 +135,10 @@ public class ActividadesDAO
         PreparedStatement ps              = null;
 
         //String            cadenaConsulta  = "UPDATE TbAct SET  NOMACT = ? WHERE IDACT = ?";
-        String            cadenaConsulta  = "UPDATE " + TablaActividades.TABLA  + 
-                                            " SET "   + TablaActividades.NOMBRE + " = ? " + 
+        String            cadenaConsulta  = "UPDATE " + TablaActividades.TABLA  +
+                                            " SET "   + TablaActividades.NOMBRE + " = ? " +
                                             " WHERE " + TablaActividades.CODIGO + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -185,9 +176,9 @@ public class ActividadesDAO
         PreparedStatement ps              = null;
 
         //String            cadenaConsulta  = "DELETE FROM TbAct WHERE idAct = ?";
-        String            cadenaConsulta  = "DELETE FROM " + TablaActividades.TABLA  + 
+        String            cadenaConsulta  = "DELETE FROM " + TablaActividades.TABLA  +
                                             " WHERE "      + TablaActividades.CODIGO + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -226,10 +217,10 @@ public class ActividadesDAO
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT NomAct FROM TbAct WHERE IdAct = ? ";
-        String            cadenaConsulta = "SELECT " + TablaActividades.NOMBRE + 
-                                           " FROM "  + TablaActividades.TABLA  + 
+        String            cadenaConsulta = "SELECT " + TablaActividades.NOMBRE +
+                                           " FROM "  + TablaActividades.TABLA  +
                                            " WHERE " + TablaActividades.CODIGO + " = ? ";
-        
+
         String            nombAct        = "";
 
        try
@@ -248,7 +239,7 @@ public class ActividadesDAO
 
             rs.close();
             ps.close();
-           
+
             return nombAct;
 
         }
@@ -277,9 +268,9 @@ public class ActividadesDAO
         ResultSet         rs            = null;
 
         //String            sql           = "SELECT NomAct, IdAct FROM TbACt ORDER BY NomAct";
-        String            sql           = "SELECT "    + TablaActividades.NOMBRE + "," 
-                                                       + TablaActividades.CODIGO + 
-                                          " FROM "     + TablaActividades.TABLA  + 
+        String            sql           = "SELECT "    + TablaActividades.NOMBRE + ","
+                                                       + TablaActividades.CODIGO +
+                                          " FROM "     + TablaActividades.TABLA  +
                                           " ORDER BY " + TablaActividades.NOMBRE;
         Vector            listaAct      = new Vector();
         ActividadesVO     actVO         = null;

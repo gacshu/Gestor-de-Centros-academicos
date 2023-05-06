@@ -6,22 +6,22 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.CentrosDAO;
-import es.jahernandez.datos.CentrosVO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.accesodatos.CentrosDAO;
+import es.jahernandez.datos.CentrosVO;
+import es.jahernandez.datos.Conexion;
 
 
 /**
  *
  * @author JuanAlberto
  */
-public class CentrosGestion 
+public class CentrosGestion
 {
     //Método que devuelve los datos a mostrar en los combos de centros
     public static Vector datComCentros()
@@ -33,7 +33,7 @@ public class CentrosGestion
         try
         {
             con = Conexion.conectar();
-            
+
             listCentros = CentrosDAO.datComCentros(con);
 
             Conexion.desconectar(con);
@@ -61,7 +61,7 @@ public class CentrosGestion
     {
 
         Connection        con     = null;
-        
+
         String            strCen  = "";
 
         try
@@ -87,7 +87,7 @@ public class CentrosGestion
             return "";
         }
     }
-    
+
     //Método que devuelve los datos de un centro
     public static CentrosVO datCentro(int idCen)
     {
@@ -98,9 +98,9 @@ public class CentrosGestion
         try
         {
             con = Conexion.conectar();
-            
+
             cenVO = CentrosDAO.datCentro(idCen, con);
-            
+
             Conexion.desconectar(con);
 
             return cenVO;
@@ -120,21 +120,21 @@ public class CentrosGestion
             return null;
         }
     }
-    
-    
+
+
     //Devuelve el nuevo código de centtro generado
     public static int generarNuevoCodCentro()
     {
         Connection        con            = null;
-    
+
         int               nuevoCod       = -1;
 
         try
         {
             con = Conexion.conectar();
-            
+
             nuevoCod = CentrosDAO.generarNuevoCodCentro(con);
-            
+
             Conexion.desconectar(con);
 
             return nuevoCod;
@@ -154,20 +154,20 @@ public class CentrosGestion
         }
 
     }
-    
+
     //Método que guarda un Centro
     public static int guardarCentro(CentrosVO cenVO)
     {
         Connection        con             = null;
-        
+
         int               regActualizados = 0;
-        
+
         try
         {
            con = Conexion.conectar();
-           
+
            regActualizados = CentrosDAO.guardarCentro(cenVO, con);
-           
+
            Conexion.desconectar(con);
 
            return regActualizados;
@@ -186,22 +186,22 @@ public class CentrosGestion
             return -1;
         }
     }
-    
+
     //Edita el registro de un Centro
     public static int editarCentro(CentrosVO cenVO)
     {
 
         Connection        con             = null;
-   
+
         int               regActualizados = -1;
 
         try
         {
 
             con = Conexion.conectar();
-            
+
             regActualizados = CentrosDAO.editarCentro(cenVO, con);
-            
+
             Conexion.desconectar(con);
 
             return regActualizados;

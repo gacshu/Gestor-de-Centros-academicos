@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaTrastornoServlet extends HttpServlet 
+public class AltaTrastornoServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -35,35 +35,35 @@ public class AltaTrastornoServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession  sesion       = request.getSession();
         TrastornosVO trastVO      = new TrastornosVO();
         int          resultadoAlt = 0;
         String       pagAdapTrast = "0";
-        
+
         Logger       log          = null;
         ConUsuVO     conUsoVO     = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta trastorno" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtCodAlu") != null)
         {
             trastVO.setIdAlu(request.getParameter("txtCodAlu").trim());
         }
-       
+
         if(request.getParameter("lstNuevoTipTrast") != null)
         {
             trastVO.setCodTipoTrastorno(request.getParameter("lstNuevoTipTrast").trim());
@@ -74,34 +74,34 @@ public class AltaTrastornoServlet extends HttpServlet
         {
             trastVO.setMedicado(true);
         }
-                  
+
         if(request.getParameter("txtNuevaMedicacion") != null)
         {
             trastVO.setMedicacion(request.getParameter("txtNuevaMedicacion").trim());
-        }  
-        
+        }
+
         if(request.getParameter("valInfTrast") != null)
         {
             pagAdapTrast =  request.getParameter("valInfTrast");
-        } 
-        
-        
-        
+        }
+
+
+
         resultadoAlt = TrastornosGestion.guardarTrastorno(trastVO);
-        
+
         if(resultadoAlt <= 0)
         {
-            
+
             //Redireccionar a trastornos
             response.sendRedirect("interesados/trastornosFichaAlumno.jsp?codInt="      + trastVO.getIdAlu()
-                                                                     + "&valInfTrast=" + pagAdapTrast 
+                                                                     + "&valInfTrast=" + pagAdapTrast
                                                                      + "&errorCode="   + resultadoAlt);
         }
         else
-        {            
+        {
             //Redireccionar a gestión niveles
             response.sendRedirect("interesados/trastornosFichaAlumno.jsp?codInt="       + trastVO.getIdAlu()
-                                                                     + "&valInfTrast="  + pagAdapTrast);                                                                   
+                                                                     + "&valInfTrast="  + pagAdapTrast);
         }
     }
 

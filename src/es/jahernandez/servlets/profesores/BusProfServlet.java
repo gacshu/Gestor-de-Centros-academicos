@@ -22,10 +22,10 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BusProfServlet extends HttpServlet   
+public class BusProfServlet extends HttpServlet
 {
-      
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -39,25 +39,25 @@ public class BusProfServlet extends HttpServlet
         request.setCharacterEncoding("utf-8");
 
         HttpSession sesion = request.getSession();
-             
+
         Vector               listBusq = new Vector();
-        
+
         DatosBusqProfVO      datBP    = new DatosBusqProfVO();
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Búsqueda profesor" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtNombre") != null)
         {
@@ -68,24 +68,24 @@ public class BusProfServlet extends HttpServlet
         {
             datBP.setApellidos(request.getParameter("txtApellidos").trim());
         }
-        
+
         if(request.getParameter("txtNumDoc") != null)
         {
             datBP.setNumDoc(request.getParameter("txtNumDoc").trim());
         }
-        
+
         if(request.getParameter("lstAreas") != null)
         {
             datBP.setCodArea(request.getParameter("lstAreas").trim());
         }
-        
+
         if(request.getParameter("chkActivo") != null &&
            request.getParameter("chkActivo").equals("true"))
         {
             datBP.setActivo(true);
-        } 
-    
-           
+        }
+
+
       listBusq = ProfesoresGestion.devolverDatosConsultaProf(datBP);
 
       sesion.setAttribute("busProf", listBusq);
@@ -96,8 +96,8 @@ public class BusProfServlet extends HttpServlet
             response.sendRedirect("profesores/altaProfesor.jsp?txtNombre="    + datBP.getNombre()    +
                                                              "&txtApellidos=" + datBP.getApellidos() +
                                                              "&txtNumDoc="    + datBP.getNumDoc())   ;
-                                                             
-                                                            
+
+
         }
         else
         {
@@ -107,7 +107,7 @@ public class BusProfServlet extends HttpServlet
    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -118,9 +118,9 @@ public class BusProfServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -134,7 +134,7 @@ public class BusProfServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author JuanAlberto
  */
-public class CargaComboNivelesServlet extends HttpServlet 
+public class CargaComboNivelesServlet extends HttpServlet
 {
      /**
      * Processes requests for both HTTP
@@ -32,28 +32,28 @@ public class CargaComboNivelesServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         // TODO Auto-generated method stub
         response.setContentType("text/html; charset=UTF-8");
         //Control de caché
-        response.setDateHeader ("Expires", -1); 
-        response.setHeader("Pragma","no-cache"); 
-        if(request.getProtocol().equals("HTTP/1.1")) 
-            response.setHeader("Cache-Control","no-cache"); 
-        
-        PrintWriter out        = response.getWriter();        
+        response.setDateHeader ("Expires", -1);
+        response.setHeader("Pragma","no-cache");
+        if(request.getProtocol().equals("HTTP/1.1"))
+            response.setHeader("Cache-Control","no-cache");
+
+        PrintWriter out        = response.getWriter();
         String	    valSel     = null;
-        Vector      vecNiveles = null; 
+        Vector      vecNiveles = null;
         NivelesVO   nivVO      = null;
         boolean     mostrarSel = false;
-        
- 
+
+
         if(request.getParameter("codCur") != null)
         {
             vecNiveles = NivelesGestion.devolverNivCur(request.getParameter("codCur").trim());
         }
-        
+
         if(request.getParameter("valSel") != null)
         {
             valSel = request.getParameter("valSel");
@@ -64,17 +64,17 @@ public class CargaComboNivelesServlet extends HttpServlet
         {
             mostrarSel = true;
         }
-    
-        
-        try 
-        {            
+
+
+        try
+        {
             if(mostrarSel)
             {
                 out.printf("<option value=\"-1\">Seleccione...</option>");
             }
-            
-            for (int ind = 0; ind<vecNiveles.size(); ind ++) 
-            {                
+
+            for (int ind = 0; ind<vecNiveles.size(); ind ++)
+            {
                 nivVO = (NivelesVO) vecNiveles.elementAt(ind);
 
                 if(valSel == null)
@@ -91,15 +91,15 @@ public class CargaComboNivelesServlet extends HttpServlet
                         {
                             out.printf("<option value='%1s'>%2s</option>", nivVO.getIdNiv(), nivVO.getNomNiv());
                         }
-                }            
-            }        
-        } 
-        finally 
-        {            
+                }
+            }
+        }
+        finally
+        {
                 if (out!=null)
                 {
                         out.flush();
-                        out.close();        
+                        out.close();
                 }
         }
     }

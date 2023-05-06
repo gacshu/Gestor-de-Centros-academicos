@@ -22,8 +22,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class BorrarAlumnoServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -31,7 +31,7 @@ public class BorrarAlumnoServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException  
+    throws ServletException, IOException
     {
 
         response.setCharacterEncoding("utf-8");
@@ -44,18 +44,18 @@ public class BorrarAlumnoServlet extends HttpServlet
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Borrar alumno" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codInt") != null)
         {
@@ -76,10 +76,10 @@ public class BorrarAlumnoServlet extends HttpServlet
             response.sendRedirect("interesados/datPerFichaAlumno.jsp?codInt=" +  codInt + "&errorBorCode=" + resultadoBor);
         }
 
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -90,9 +90,9 @@ public class BorrarAlumnoServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -105,7 +105,7 @@ public class BorrarAlumnoServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

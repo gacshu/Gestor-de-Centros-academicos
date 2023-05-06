@@ -24,8 +24,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class CargaAltaEmpresasServlet extends HttpServlet
 {
-   
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -42,18 +42,18 @@ public class CargaAltaEmpresasServlet extends HttpServlet
         AlumnosVO   aluAlta = new AlumnosVO();
 
         String      urlDest = "empresas/altaEmp.jsp";
-        
+
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Carga alta empresas" );
-               
+
         }
 
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
@@ -72,14 +72,14 @@ public class CargaAltaEmpresasServlet extends HttpServlet
         {
             aluAlta.setDesemp(true);
         }
-    
+
 
         if(request.getParameter("chkNoDeseado") != null &&
            request.getParameter("chkNoDeseado").equals("true"))
         {
             aluAlta.setAlND(true);
         }
-    
+
         if(request.getParameter("txtNombre") != null)
         {
             aluAlta.setNombre(request.getParameter("txtNombre").trim().toUpperCase());
@@ -150,34 +150,34 @@ public class CargaAltaEmpresasServlet extends HttpServlet
                                                     new Integer(strFechaNac.substring(3,5)).intValue() - 1,
                                                     new Integer(strFechaNac.substring(0,2)).intValue()).getTime());
         }
-    
+
         if(request.getParameter("chkAutCesDat") != null &&
            request.getParameter("chkAutCesDat").equals("true"))
         {
             aluAlta.setAutCesDat(true);
         }
-        
+
         if(request.getParameter("chkAutComCom") != null &&
            request.getParameter("chkAutComCom").equals("true"))
         {
             aluAlta.setAutComCom(true);
         }
-        
+
         //Se compruba si se llama desde la ficha de alumnos
         if(request.getParameter("fichaAlumno") != null &&
            request.getParameter("fichaAlumno").equals("1"))
         {
             urlDest = "empresas/altaEmp.jsp?fichaAlumno=1";
         }
-        
+
         //Se introducen los datos del alumno en sesión y se carga la página de alta de empresa
         sesion.setAttribute("datAluAltEmp", aluAlta);
         response.sendRedirect(urlDest);
 
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -188,9 +188,9 @@ public class CargaAltaEmpresasServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -203,7 +203,7 @@ public class CargaAltaEmpresasServlet extends HttpServlet
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

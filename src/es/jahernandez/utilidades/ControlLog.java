@@ -8,13 +8,13 @@ package es.jahernandez.utilidades;
  *
  * @author JuanAlberto
  */
-public class ControlLog  
+public class ControlLog
 {
 /*
       private Date   fecha = new Date();
       private Logger log;
 
-      public ControlLog(String workspace) throws IOException 
+      public ControlLog(String workspace) throws IOException
       {
           log = Logger.getLogger(ControlLog.class);
 
@@ -35,12 +35,12 @@ public class ControlLog
           log.addAppender(rollingFileAppender);
           log.setAdditivity(false);
       }
-      
-      public Logger getLog() 
+
+      public Logger getLog()
       {
           return log;
       }
-      public void setLog(Logger log) 
+      public void setLog(Logger log)
       {
           this.log = log;
       }*/

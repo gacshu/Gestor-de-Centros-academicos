@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class EditaTipoCursoServlet extends HttpServlet 
+public class EditaTipoCursoServlet extends HttpServlet
 {
 
    /**
@@ -37,31 +37,31 @@ public class EditaTipoCursoServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession sesion   = request.getSession();
-        
+
         TipoCursoVO tipCurVO = new TipoCursoVO();
         int         resEdi   = 0;
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Edición tipo curso" );
-               
+
         }
-        
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("lstTipCurso") != null)
         {
             tipCurVO.setIdTipoCurso(new Integer(request.getParameter("lstTipCurso").trim()).intValue());
         }
-        
+
         if(request.getParameter("txtNombre") != null)
         {
             tipCurVO.setNomTipCurso(request.getParameter("txtNombre").trim());

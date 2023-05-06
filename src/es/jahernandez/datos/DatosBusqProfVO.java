@@ -8,7 +8,7 @@ package es.jahernandez.datos;
  *
  * @author JuanAlberto
  */
-public class DatosBusqProfVO 
+public class DatosBusqProfVO
 {
     private String  nombre;
     private String  apellidos;
@@ -79,7 +79,7 @@ public class DatosBusqProfVO
      */
     public void setCodArea(String codArea) {
         this.codArea = codArea;
-    } 
+    }
 
     /**
      * @return the activo

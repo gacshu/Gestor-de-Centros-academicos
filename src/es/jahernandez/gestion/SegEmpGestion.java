@@ -5,20 +5,21 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.SegEmpDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.SegEmpVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.SegEmpDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.SegEmpVO;
+
 /**
  *
  * @author Alberto
  */
-public class SegEmpGestion 
+public class SegEmpGestion
 {
     //Método que devuelve los datos de un seguimiento
     public static SegEmpVO devolverDatosSeg(String codSeg)
@@ -90,7 +91,7 @@ public class SegEmpGestion
     {
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -178,7 +179,7 @@ public class SegEmpGestion
 
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -208,7 +209,7 @@ public class SegEmpGestion
 
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();

@@ -21,23 +21,23 @@ import es.jahernandez.tablas.TablaModulos;
  *
  * @author Alberto
  */
-public class ModulosDAO 
+public class ModulosDAO
 {
     //Método que devuelve los datos de un módulo
     public static ModulosVO devolverDatosModulo(String codMod,Connection con) throws Exception
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
-        
-        String            cadenaConsulta = "SELECT " + TablaModulos.CODMODULO   + " , " 
+
+        String            cadenaConsulta = "SELECT " + TablaModulos.CODMODULO   + " , "
                                                      + TablaModulos.NOMBRE      + " , "
                                                      + TablaModulos.DESCRIPCION + " , "
                                                      + TablaModulos.HORAS       + " , "
-                                                     + TablaModulos.CODCURSO    + " , "  
-                                                     + TablaModulos.CODAREA     +      
+                                                     + TablaModulos.CODCURSO    + " , "
+                                                     + TablaModulos.CODAREA     +
                                            " FROM "  + TablaModulos.TABLA       +
                                            " WHERE " + TablaModulos.CODMODULO   + " = ?";
-        
+
         ModulosVO         datMod         = null;
 
         try
@@ -87,15 +87,15 @@ public class ModulosDAO
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
-        
-        String            cadenaConsulta = "SELECT " + TablaModulos.CODMODULO   + " , " 
+
+        String            cadenaConsulta = "SELECT " + TablaModulos.CODMODULO   + " , "
                                                      + TablaModulos.NOMBRE      + " , "
                                                      + TablaModulos.DESCRIPCION + " , "
                                                      + TablaModulos.HORAS       + " , "
                                                      + TablaModulos.CODCURSO    + " , "
-                                                     + TablaModulos.CODAREA     + 
+                                                     + TablaModulos.CODAREA     +
                                            " FROM "  + TablaModulos.TABLA;
-        
+
         ModulosVO         datMod         = null;
         Vector            listaModulos   = new Vector();
 
@@ -115,13 +115,13 @@ public class ModulosDAO
                 datMod.setNumHoras   (rs.getInt   (TablaModulos.HORAS));
                 datMod.setCodCur     (rs.getString(TablaModulos.CODCURSO));
                 datMod.setCodArea    (rs.getString(TablaModulos.CODAREA));
-                
+
                 listaModulos.add(datMod);
             }
 
             rs.close();
             ps.close();
-            
+
             return listaModulos;
         }
         catch (Exception exc)
@@ -144,16 +144,16 @@ public class ModulosDAO
     {
         String            nueCodMod      = generarNuevoCodMod();
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaModulos.TABLA       + " ( "  
-                                                          + TablaModulos.CODMODULO   + " , " 
-                                                          + TablaModulos.NOMBRE      + " , "  
-                                                          + TablaModulos.DESCRIPCION + " , " 
-                                                          + TablaModulos.HORAS       + " , "  
-                                                          + TablaModulos.CODCURSO    + " , " 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaModulos.TABLA       + " ( "
+                                                          + TablaModulos.CODMODULO   + " , "
+                                                          + TablaModulos.NOMBRE      + " , "
+                                                          + TablaModulos.DESCRIPCION + " , "
+                                                          + TablaModulos.HORAS       + " , "
+                                                          + TablaModulos.CODCURSO    + " , "
                                                           + TablaModulos.CODAREA     + " ) " +
                                            " VALUES(?,?,?,?,?,?)";
-        
+
         int               regActualizados = 0;
 
         try
@@ -167,7 +167,7 @@ public class ModulosDAO
             ps.setInt   (4, modVO.getNumHoras());
             ps.setString(5, modVO.getCodCur());
             ps.setString(6, modVO.getCodArea());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -244,8 +244,8 @@ public class ModulosDAO
     {
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
-        
-        String            sql            = "SELECT " + TablaModulos.CODMODULO   + " , " 
+
+        String            sql            = "SELECT " + TablaModulos.CODMODULO   + " , "
                                                      + TablaModulos.NOMBRE      + " , "
                                                      + TablaModulos.DESCRIPCION + " , "
                                                      + TablaModulos.HORAS       + " , "
@@ -253,7 +253,7 @@ public class ModulosDAO
                                                      + TablaModulos.CODAREA     +
                                            " FROM "  + TablaModulos.TABLA       +
                                            " WHERE " + TablaModulos.CODCURSO    + " = ?";
-        
+
         ModulosVO         datMod       = null;
         Vector            listaModulos = new Vector();
 
@@ -282,7 +282,7 @@ public class ModulosDAO
 
             rs.close();
             ps.close();
-            
+
             return listaModulos;
         }
         catch (Exception exc)
@@ -299,7 +299,7 @@ public class ModulosDAO
             throw exc;
         }
     }
-    
+
      //Edita el registro de un módulo
     public static int editaModulo(ModulosVO modVO,Connection con) throws Exception
     {
@@ -307,12 +307,12 @@ public class ModulosDAO
         PreparedStatement ps  = null;
 
         String            sql = "UPDATE " + TablaModulos.TABLA       +
-                                " SET "   + TablaModulos.NOMBRE      + " = ? , " 
-                                          + TablaModulos.DESCRIPCION + " = ? , " 
-                                          + TablaModulos.HORAS       + " = ? , " 
+                                " SET "   + TablaModulos.NOMBRE      + " = ? , "
+                                          + TablaModulos.DESCRIPCION + " = ? , "
+                                          + TablaModulos.HORAS       + " = ? , "
                                           + TablaModulos.CODAREA     + " = ?   " +
                                 " WHERE " + TablaModulos.CODMODULO   + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -325,11 +325,11 @@ public class ModulosDAO
             ps.setInt   (3, modVO.getNumHoras());
             ps.setString(4, modVO.getCodArea());
             ps.setString(5, modVO.getCodMod());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
-            
+
             return regActualizados;
         }
         catch (Exception exc)
@@ -351,20 +351,20 @@ public class ModulosDAO
     {
         PreparedStatement ps  = null;
 
-        String            sql = "DELETE FROM " + TablaModulos.TABLA     + 
+        String            sql = "DELETE FROM " + TablaModulos.TABLA     +
                                 " WHERE "      + TablaModulos.CODMODULO + " = ?";
-        
+
         int               regActualizados = 0;
 
         //Comprobar si existe alguna edición con este módulo
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codMod);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -383,6 +383,6 @@ public class ModulosDAO
             }
             throw exc;
         }
-    }        
-    
+    }
+
 }

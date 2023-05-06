@@ -9,12 +9,12 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
@@ -43,10 +43,10 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpClasesIndProfServlet extends HttpServlet 
+public class ImpClasesIndProfServlet extends HttpServlet
 {
-   
-    
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
@@ -55,45 +55,45 @@ public class ImpClasesIndProfServlet extends HttpServlet
 
         HttpSession      sesion       = request.getSession();
         ServletContext   sc           = null;
-        Calendar         cal          = GregorianCalendar.getInstance();
+        Calendar         cal          = Calendar.getInstance();
         SimpleDateFormat forFec       = new SimpleDateFormat("dd/MM/yyyy");
-               
+
 
         Vector           listaClaProf = new Vector();
         ClasesIndivVO    clasIndVO    = new ClasesIndivVO();
         String           codProf      = "";
         String           fecFilt      = "";
-        
-             
+
+
         String           strCurso     = "";
         String           strFecha     = "";
         String           strAlumno    = "";
         String           strTarifa    = "";
-        
+
         String           muestrames   = "";
 
         Logger          log           = null;
         ConUsuVO        conUsoVO      = null;
-        
-        String          tablaMeses[]  = {"Enero"     , "Febrero" , "Marzo"     , "Abril", 
-                                         "Mayo"      , "Junio"   , "Julio"     , "Agosto" , 
+
+        String          tablaMeses[]  = {"Enero"     , "Febrero" , "Marzo"     , "Abril",
+                                         "Mayo"      , "Junio"   , "Julio"     , "Agosto" ,
                                          "Septiembre", "Octubre" , "Noviembre" , "Diciembre" };
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir clases individuales profesor" );
-               
+
         }
-      
+
         if(request.getParameter("codProf") != null)
         {
             codProf =  request.getParameter("codProf");
         }
-        
+
         if(request.getParameter("strFecha") != null)
         {
            fecFilt = request.getParameter("strFecha").trim();
@@ -102,7 +102,7 @@ public class ImpClasesIndProfServlet extends HttpServlet
         if(request.getParameter("codProf") != null)
         {
             codProf     =  request.getParameter("codProf").trim();
-            
+
             if(fecFilt.equals(""))
             {
                 listaClaProf =  ClasesIndivGestion.devolverClasesIndProf(codProf);
@@ -113,7 +113,7 @@ public class ImpClasesIndProfServlet extends HttpServlet
                 muestrames     = "Clases del mes de " + tablaMeses[new Integer(fecFilt.substring(0,2)).intValue() - 1] + " " + fecFilt.substring(2,6);
             }
         }
-        
+
         int       cuentaLineas = 0;  //Cuenta lineas impresas para saber cuando hacer el salto de página
 
         PdfPTable tablaDatos   = new PdfPTable(1);
@@ -132,10 +132,10 @@ public class ImpClasesIndProfServlet extends HttpServlet
         {
             sc = getServletContext();
             fuenteDoc = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
-            fuenteCab = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));                        
-            
+            fuenteCab = new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+
             //logoImage = Image.getInstance("~/imagenes/logoEnS.jpg");
-                                                           
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
 
@@ -144,9 +144,9 @@ public class ImpClasesIndProfServlet extends HttpServlet
 
             celda.setMinimumHeight(20);
             fuenteDoc.setSize(8);
-            
+
             fuenteCab.setColor(Color.WHITE);
-            fuenteCab.setSize(8);  
+            fuenteCab.setSize(8);
 
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
@@ -157,7 +157,7 @@ public class ImpClasesIndProfServlet extends HttpServlet
             // step 4
 
             //Mostramos cabecera
-            logoImage.setAlignment(Image.ALIGN_LEFT);
+            logoImage.setAlignment(Element.ALIGN_LEFT);
 
 
             document.add(new Paragraph(""));
@@ -165,16 +165,16 @@ public class ImpClasesIndProfServlet extends HttpServlet
             document.add(new Paragraph("Profesor: " + ProfesoresGestion.devolverDatosProfesor(codProf).getNombre() + " " + ProfesoresGestion.devolverDatosProfesor(codProf).getApellidos() + " " + muestrames));
             document.add(new Paragraph(""));
             document.add(new Paragraph(""));
-                
-            
+
+
             //celda.addElement(new Paragraph("       CURSO                                              FECHA           ALUMNO                                       TARIFA ", fuenteCab));
             celda.addElement(new Paragraph("       CURSO                                         FECHA           ALUMNO                              TARIFA ", fuenteCab));
-            
-            
-            
+
+
+
             celda.setBackgroundColor(Color.BLUE);
-            
-            
+
+
             tablaDatos.addCell(celda);
 
             for (int ind = 0; ind < listaClaProf.size() ; ind++)
@@ -185,7 +185,7 @@ public class ImpClasesIndProfServlet extends HttpServlet
                 strFecha   = forFec.format(clasIndVO.getFecClase());
                 strAlumno  = AlumnosGestion.devolverDatosAlumno(clasIndVO.getIdAlu()).getNombre() + " " + AlumnosGestion.devolverDatosAlumno(clasIndVO.getIdAlu()).getAp1Alu();
                 strTarifa  = new DecimalFormat("##########0.00").format(clasIndVO.getTarifa());
-                
+
                 if (cuentaLineas > 24)
                 {
                     cuentaLineas = 0;
@@ -200,7 +200,7 @@ public class ImpClasesIndProfServlet extends HttpServlet
                     tablaDatos.setSpacingBefore(10);
 
                     //Mostramos cabecera
-                    logoImage.setAlignment(Image.ALIGN_LEFT);
+                    logoImage.setAlignment(Element.ALIGN_LEFT);
 
 
                     document.add(new Paragraph(""));
@@ -211,10 +211,10 @@ public class ImpClasesIndProfServlet extends HttpServlet
 
                     //celda.addElement(new Paragraph("       CURSO                                              FECHA           ALUMNO                                       TARIFA ", fuenteCab));
                     celda.addElement(new Paragraph("       CURSO                                         FECHA           ALUMNO                              TARIFA ", fuenteCab));
-            
-            
+
+
                    celda.setBackgroundColor(Color.BLUE);
-                   
+
                    tablaDatos.addCell(celda);
                 }
 
@@ -228,16 +228,16 @@ public class ImpClasesIndProfServlet extends HttpServlet
 
                 strTarifa = strTarifa + "                                                          ";
 
-                
-                
+
+
                 strCurso  = strCurso. substring(0,45); //50
                 strFecha  = strFecha. substring(0,12);
                 strAlumno = strAlumno.substring(0,40); //50
                 strTarifa = strTarifa.substring(0,10);
-                
+
                 celda = new PdfPCell();
                 celda.setMinimumHeight(20);
-                
+
                 if(ind%2 != 0)
                 {
                     celda.setBackgroundColor(Color.LIGHT_GRAY);
@@ -248,7 +248,7 @@ public class ImpClasesIndProfServlet extends HttpServlet
                 tablaDatos.addCell(celda);
 
                 celda = new PdfPCell();
-                
+
                 cuentaLineas++;
             }
             //if (alumnosBusqueda.size() > 0 && alumnosBusqueda.size() <= 21)
@@ -263,11 +263,11 @@ public class ImpClasesIndProfServlet extends HttpServlet
         }
         // step 5: Close document
         document.close();
-        
-    } 
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -278,9 +278,9 @@ public class ImpClasesIndProfServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response

@@ -16,8 +16,8 @@ public class ConUsuVO
     private int     nivelAcceso;
     private String  nombre;
     private int     idCentro;
-    private boolean activo; 
-    private String  idProf;  
+    private boolean activo;
+    private String  idProf;
 
 
 
@@ -32,7 +32,7 @@ public class ConUsuVO
         activo      = false;
         idProf      = "";
     }
-           
+
     /**
      * @return the usuario
      */

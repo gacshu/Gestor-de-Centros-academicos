@@ -4,27 +4,26 @@
  */
 package es.jahernandez.accesodatos;
 
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.ClasesIndivVO;
-import es.jahernandez.gestion.ClasesIndivGestion;
-import es.jahernandez.tablas.TablaClasesIndiv;
-
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.GregorianCalendar;
-
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.jahernandez.datos.ClasesIndivVO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.gestion.ClasesIndivGestion;
+import es.jahernandez.tablas.TablaClasesIndiv;
 
 /**
  *
  * @author JuanAlberto
  */
-public class ClasesIndivDAO 
+public class ClasesIndivDAO
 {
     //Método que devuelve los datos de una clase individual
     public static ClasesIndivVO devolverDatosClaseIndiv(String codClasInd, Connection con) throws Exception
@@ -32,7 +31,7 @@ public class ClasesIndivDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaClasesIndiv.CODCLASEIND + " , " 
+        String            cadenaConsulta = "SELECT " + TablaClasesIndiv.CODCLASEIND + " , "
                                                      + TablaClasesIndiv.CODCURSO    + " , "
                                                      + TablaClasesIndiv.CODALU      + " , "
                                                      + TablaClasesIndiv.FECHACLASE  + " , "
@@ -40,7 +39,7 @@ public class ClasesIndivDAO
                                                      + TablaClasesIndiv.TARIFA      +
                                            " FROM "  + TablaClasesIndiv.TABLA       +
                                            " WHERE " + TablaClasesIndiv.CODCLASEIND + " = ?";
-        
+
         ClasesIndivVO     claIndVO       = new ClasesIndivVO();
 
         try
@@ -63,7 +62,7 @@ public class ClasesIndivDAO
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
             }
-            
+
             rs.close();
             ps.close();
 
@@ -92,15 +91,15 @@ public class ClasesIndivDAO
         PreparedStatement ps             = null;
         ResultSet         rs             = null;
 
-        String            cadenaConsulta = "SELECT " + TablaClasesIndiv.CODCLASEIND + " , " 
+        String            cadenaConsulta = "SELECT " + TablaClasesIndiv.CODCLASEIND + " , "
                                                      + TablaClasesIndiv.CODCURSO    + " , "
                                                      + TablaClasesIndiv.CODALU      + " , "
                                                      + TablaClasesIndiv.FECHACLASE  + " , "
                                                      + TablaClasesIndiv.CODPROF     + " , "
                                                      + TablaClasesIndiv.TARIFA      +
                                            " FROM "  + TablaClasesIndiv.TABLA       ;
-                                           
-        
+
+
         ClasesIndivVO     claIndVO       = null;
         Vector            listaClaInd    = new Vector();
 
@@ -120,13 +119,13 @@ public class ClasesIndivDAO
                 claIndVO.setFecClase  (rs.getDate   (TablaClasesIndiv.FECHACLASE));
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
-                
+
                 listaClaInd.add(claIndVO);
             }
 
             rs.close();
             ps.close();
-          
+
             return listaClaInd;
         }
         catch (Exception exc)
@@ -148,17 +147,17 @@ public class ClasesIndivDAO
     public static int guardarClasInd(ClasesIndivVO claIndVO, Connection con) throws Exception
     {
         PreparedStatement ps             = null;
-        
-        String            cadenaConsulta = "INSERT INTO " + TablaClasesIndiv.TABLA       + " ( "  
-                                                          + TablaClasesIndiv.CODCLASEIND + " , " 
-                                                          + TablaClasesIndiv.CODCURSO    + " , "  
-                                                          + TablaClasesIndiv.CODALU      + " , " 
-                                                          + TablaClasesIndiv.FECHACLASE  + " , " 
-                                                          + TablaClasesIndiv.CODPROF     + " , " 
+
+        String            cadenaConsulta = "INSERT INTO " + TablaClasesIndiv.TABLA       + " ( "
+                                                          + TablaClasesIndiv.CODCLASEIND + " , "
+                                                          + TablaClasesIndiv.CODCURSO    + " , "
+                                                          + TablaClasesIndiv.CODALU      + " , "
+                                                          + TablaClasesIndiv.FECHACLASE  + " , "
+                                                          + TablaClasesIndiv.CODPROF     + " , "
                                                           + TablaClasesIndiv.TARIFA      + " ) " +
                                            " VALUES(?,?,?,?,?,?)";
-        
-        
+
+
         int               regActualizados = 0;
 
         try
@@ -172,7 +171,7 @@ public class ClasesIndivDAO
             ps.setDate   (4, new Date(claIndVO.getFecClase().getTime()));
             ps.setString (5, claIndVO.getIdProf());
             ps.setDouble (6, claIndVO.getTarifa());
-            
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -250,7 +249,7 @@ public class ClasesIndivDAO
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT "  + TablaClasesIndiv.CODCLASEIND + " , " 
+        String            sql          = "SELECT "  + TablaClasesIndiv.CODCLASEIND + " , "
                                                     + TablaClasesIndiv.CODCURSO    + " , "
                                                     + TablaClasesIndiv.CODALU      + " , "
                                                     + TablaClasesIndiv.FECHACLASE  + " , "
@@ -258,7 +257,7 @@ public class ClasesIndivDAO
                                                     + TablaClasesIndiv.TARIFA      +
                                           " FROM "  + TablaClasesIndiv.TABLA       +
                                           " WHERE " + TablaClasesIndiv.CODALU      + " = ?";
-        
+
         ClasesIndivVO     claIndVO     = null;
         Vector            listaClaInd  = new Vector();
 
@@ -281,7 +280,7 @@ public class ClasesIndivDAO
                 claIndVO.setFecClase  (rs.getDate   (TablaClasesIndiv.FECHACLASE));
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
-                
+
                 listaClaInd.add(claIndVO);
             }
 
@@ -304,18 +303,18 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
      //Edita el registro de una clase individual
     public static int editarClaseInd(ClasesIndivVO claIndVO, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
         String            sql             = "UPDATE " + TablaClasesIndiv.TABLA       +
-                                            " SET "   + TablaClasesIndiv.FECHACLASE  + " = ? , "  
-                                                      + TablaClasesIndiv.CODPROF     + " = ? , " 
+                                            " SET "   + TablaClasesIndiv.FECHACLASE  + " = ? , "
+                                                      + TablaClasesIndiv.CODPROF     + " = ? , "
                                                       + TablaClasesIndiv.TARIFA      + " = ?   " +
                                             " WHERE " + TablaClasesIndiv.CODCLASEIND + " = ?";
-        
+
         int               regActualizados = 0;
 
         try
@@ -327,7 +326,7 @@ public class ClasesIndivDAO
             ps.setString (2, claIndVO.getIdProf());
             ps.setDouble (3, claIndVO.getTarifa());
             ps.setString (4, claIndVO.getIdClaseInd());
-           
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -353,19 +352,19 @@ public class ClasesIndivDAO
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaClasesIndiv.TABLA       + 
+        String            sql             = "DELETE FROM " + TablaClasesIndiv.TABLA       +
                                             " WHERE "      + TablaClasesIndiv.CODCLASEIND + " = ?";
-        
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             ps  = con.prepareStatement(sql);
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codClaInd);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -384,19 +383,19 @@ public class ClasesIndivDAO
             }
             throw exc;
         }
-    }     
-    
+    }
+
     //Borra las clases individuales de un alumno
     public static int eliminarClasIndAlumno(String codAlu, Connection con) throws Exception
     {
         PreparedStatement ps              = null;
 
-        String            sql             = "DELETE FROM " + TablaClasesIndiv.TABLA    + 
+        String            sql             = "DELETE FROM " + TablaClasesIndiv.TABLA    +
                                             " WHERE "      + TablaClasesIndiv.CODALU   + " = ?";
-        
+
         int               regActualizados = 0;
 
-        
+
         try
         {
             con = Conexion.conectar();
@@ -404,7 +403,7 @@ public class ClasesIndivDAO
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAlu);
-                       
+
             regActualizados = ps.executeUpdate();
 
             ps.close();
@@ -423,20 +422,20 @@ public class ClasesIndivDAO
             }
             throw exc;
         }
-    } 
-    
+    }
+
     //Método que devuelve si un alumno tiene clases individuales
     public static boolean tieneAluClasesInd(String codAlu, Connection con) throws Exception
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT "  + TablaClasesIndiv.CODCLASEIND +  
+        String            sql          = "SELECT "  + TablaClasesIndiv.CODCLASEIND +
                                           " FROM "  + TablaClasesIndiv.TABLA       +
                                           " WHERE " + TablaClasesIndiv.CODALU      + " = ?";
-     
-       boolean          aluTienClases  = false; 
-     
+
+       boolean          aluTienClases  = false;
+
         try
         {
             ps  = con.prepareStatement(sql);
@@ -470,7 +469,7 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un alumno y un mes y año concreto ordenados for fecha
     public static Vector devolverClasesIndAluMes(String codAlu, String strFecMesAnno, Connection con) throws Exception
     {
@@ -479,19 +478,19 @@ public class ClasesIndivDAO
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
         int               annoFi       = annoIn ;
-        int               mesFi        = mesIn + 1; 
-        
+        int               mesFi        = mesIn + 1;
+
         if(mesFi > 12 )
         {
             mesFi = 1;
             annoFi++;
         }
-        
+
         Date              fechaIni     = new Date( new GregorianCalendar(annoIn,mesIn-1,1).getTimeInMillis() ) ;
-        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;                                                    
-        
-        
-        String            sql          = "SELECT "     + TablaClasesIndiv.CODCLASEIND + " , " 
+        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;
+
+
+        String            sql          = "SELECT "     + TablaClasesIndiv.CODCLASEIND + " , "
                                                        + TablaClasesIndiv.CODCURSO    + " , "
                                                        + TablaClasesIndiv.CODALU      + " , "
                                                        + TablaClasesIndiv.FECHACLASE  + " , "
@@ -502,7 +501,7 @@ public class ClasesIndivDAO
                                                        + TablaClasesIndiv.FECHACLASE  + " >= ? AND "
                                                        + TablaClasesIndiv.FECHACLASE  + " <  ? "     +
                                           " ORDER BY " + TablaClasesIndiv.FECHACLASE  ;
-        
+
         ClasesIndivVO     claIndVO     = null;
         Vector            listaClaInd  = new Vector();
 
@@ -526,7 +525,7 @@ public class ClasesIndivDAO
                 claIndVO.setFecClase  (rs.getDate   (TablaClasesIndiv.FECHACLASE));
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
-                
+
                 listaClaInd.add(claIndVO);
             }
 
@@ -548,7 +547,7 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un mes y año concreto ordenados por alumno y fecha
     public static Vector devolverClasesIndMes(String strFecMesAnno, Connection con) throws Exception
     {
@@ -557,19 +556,19 @@ public class ClasesIndivDAO
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
         int               annoFi       = annoIn ;
-        int               mesFi        = mesIn + 1; 
-        
+        int               mesFi        = mesIn + 1;
+
         if(mesFi > 12 )
         {
             mesFi = 1;
             annoFi++;
         }
-        
+
         Date              fechaIni     = new Date( new GregorianCalendar(annoIn,mesIn-1,1).getTimeInMillis() ) ;
-        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;                                                    
-        
-        
-        String            sql          = "SELECT "    + TablaClasesIndiv.CODCLASEIND + " , " 
+        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;
+
+
+        String            sql          = "SELECT "    + TablaClasesIndiv.CODCLASEIND + " , "
                                                       + TablaClasesIndiv.CODCURSO    + " , "
                                                       + TablaClasesIndiv.CODALU      + " , "
                                                       + TablaClasesIndiv.FECHACLASE  + " , "
@@ -578,9 +577,9 @@ public class ClasesIndivDAO
                                          " FROM "     + TablaClasesIndiv.TABLA       +
                                          " WHERE "    + TablaClasesIndiv.FECHACLASE  + " >= ? AND "
                                                       + TablaClasesIndiv.FECHACLASE  + " <  ?  "    +
-                                         " ORDER BY " + TablaClasesIndiv.CODALU      + " , " 
+                                         " ORDER BY " + TablaClasesIndiv.CODALU      + " , "
                                                       + TablaClasesIndiv.FECHACLASE;
-        
+
         ClasesIndivVO     claIndVO     = null;
         Vector            listaClaInd  = new Vector();
 
@@ -603,7 +602,7 @@ public class ClasesIndivDAO
                 claIndVO.setFecClase  (rs.getDate   (TablaClasesIndiv.FECHACLASE));
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
-                
+
                 listaClaInd.add(claIndVO);
             }
 
@@ -626,7 +625,7 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve el importe total de las clases de un alumno en un mes
     public static float devolverImporteClaseAluMes(String codAlu, String strFecMesAnno, Connection con) throws Exception
     {
@@ -635,26 +634,26 @@ public class ClasesIndivDAO
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
         int               annoFi       = annoIn ;
-        int               mesFi        = mesIn + 1; 
-        
+        int               mesFi        = mesIn + 1;
+
         if(mesFi > 12 )
         {
             mesFi = 1;
             annoFi++;
         }
-        
+
         Date              fechaIni     = new Date( new GregorianCalendar(annoIn,mesIn-1,1).getTimeInMillis() ) ;
-        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;                                                    
-        
-        
+        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;
+
+
         String            sql          = "SELECT SUM(" + TablaClasesIndiv.TARIFA      + ")" +
                                           " FROM "     + TablaClasesIndiv.TABLA       +
                                           " WHERE "    + TablaClasesIndiv.CODALU      + "  = ? AND "
                                                        + TablaClasesIndiv.FECHACLASE  + " >= ? AND "
                                                        + TablaClasesIndiv.FECHACLASE  + " <  ? "   ;
-                                          
-        
-        float            impTotal      = 0; 
+
+
+        float            impTotal      = 0;
 
         try
         {
@@ -690,14 +689,14 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un profesor
     public static Vector devolverClasesIndProf(String codProf , Connection con) throws Exception
     {
         PreparedStatement ps           = null;
         ResultSet         rs           = null;
 
-        String            sql          = "SELECT "      + TablaClasesIndiv.CODCLASEIND + " , " 
+        String            sql          = "SELECT "      + TablaClasesIndiv.CODCLASEIND + " , "
                                                         + TablaClasesIndiv.CODCURSO    + " , "
                                                         + TablaClasesIndiv.CODALU      + " , "
                                                         + TablaClasesIndiv.FECHACLASE  + " , "
@@ -706,7 +705,7 @@ public class ClasesIndivDAO
                                           " FROM "      + TablaClasesIndiv.TABLA       +
                                           " WHERE "     + TablaClasesIndiv.CODPROF     + " = ? " +
                                           " ORDER BY "  + TablaClasesIndiv.FECHACLASE;
-        
+
         ClasesIndivVO     claIndVO     = null;
         Vector            listaClaInd  = new Vector();
 
@@ -729,7 +728,7 @@ public class ClasesIndivDAO
                 claIndVO.setFecClase  (rs.getDate   (TablaClasesIndiv.FECHACLASE));
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
-                
+
                 listaClaInd.add(claIndVO);
             }
 
@@ -752,7 +751,7 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
     //Método que devuelve los datos de clases individuales de un profesor y un mes y año concreto ordenados for fecha
     public static Vector devolverClasesIndProfMes(String codProf, String strFecMesAnno, Connection con) throws Exception
     {
@@ -761,19 +760,19 @@ public class ClasesIndivDAO
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
         int               annoFi       = annoIn ;
-        int               mesFi        = mesIn + 1; 
-        
+        int               mesFi        = mesIn + 1;
+
         if(mesFi > 12 )
         {
             mesFi = 1;
             annoFi++;
         }
-        
+
         Date              fechaIni     = new Date( new GregorianCalendar(annoIn,mesIn-1,1).getTimeInMillis() ) ;
-        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;                                                    
-        
-        
-        String            sql          = "SELECT "     + TablaClasesIndiv.CODCLASEIND + " , " 
+        Date              fechaFin     = new Date( new GregorianCalendar(annoFi,mesFi-1,1).getTimeInMillis() ) ;
+
+
+        String            sql          = "SELECT "     + TablaClasesIndiv.CODCLASEIND + " , "
                                                        + TablaClasesIndiv.CODCURSO    + " , "
                                                        + TablaClasesIndiv.CODALU      + " , "
                                                        + TablaClasesIndiv.FECHACLASE  + " , "
@@ -784,7 +783,7 @@ public class ClasesIndivDAO
                                                        + TablaClasesIndiv.FECHACLASE  + " >= ? AND "
                                                        + TablaClasesIndiv.FECHACLASE  + " <  ? "     +
                                           " ORDER BY " + TablaClasesIndiv.FECHACLASE  ;
-        
+
         ClasesIndivVO     claIndVO     = null;
         Vector            listaClaInd  = new Vector();
 
@@ -808,13 +807,13 @@ public class ClasesIndivDAO
                 claIndVO.setFecClase  (rs.getDate   (TablaClasesIndiv.FECHACLASE));
                 claIndVO.setIdProf    (rs.getString (TablaClasesIndiv.CODPROF));
                 claIndVO.setTarifa    (rs.getFloat  (TablaClasesIndiv.TARIFA));
-                
+
                 listaClaInd.add(claIndVO);
             }
 
             rs.close();
             ps.close();
-           
+
             return listaClaInd;
         }
         catch (Exception exc)
@@ -831,5 +830,5 @@ public class ClasesIndivDAO
             throw exc;
         }
     }
-    
+
 }

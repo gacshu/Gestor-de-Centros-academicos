@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class BorrarModEdiServlet extends HttpServlet 
+public class BorrarModEdiServlet extends HttpServlet
 {
     /**
      * Processes requests for both HTTP
@@ -34,50 +34,50 @@ public class BorrarModEdiServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession      sesion    = request.getSession();
-        String           codEdi    = "";  
+        String           codEdi    = "";
         String           codMod    = "";
-        
+
         int              resBor    = 0;
         String           indPrevio = "";
-        
+
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Borrar módulo-edición" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("codEdi") != null)
         {
             codEdi = request.getParameter("codEdi").trim();
         }
-       
+
         if(request.getParameter("codMod") != null)
         {
             codMod = request.getParameter("codMod").trim();
         }
-        
+
         if(request.getParameter("ind") != null)
         {
             indPrevio = request.getParameter("ind").trim();
         }
-         
+
         resBor = EdiModProfAulaGestion.borrarEdiMod(codMod, codEdi);
-        
+
         if(resBor <= 0)
         {
             //Redireccionar a gestión niveles
@@ -86,7 +86,7 @@ public class BorrarModEdiServlet extends HttpServlet
                                                       + "&ind="       + indPrevio );
         }
         else
-        {            
+        {
             //Redireccionar a gestión niveles
             response.sendRedirect("ediciones/verModEd.jsp?codEdi="    + codEdi
                                                       + "&ind="       + indPrevio );

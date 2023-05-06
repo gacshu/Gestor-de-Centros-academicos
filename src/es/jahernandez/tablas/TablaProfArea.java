@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author JuanAlberto
  */
-public class TablaProfArea 
+public class TablaProfArea
 {
     public static final String TABLA   = "tbProfArea";
     public static final String CODPROF = "IdProf";

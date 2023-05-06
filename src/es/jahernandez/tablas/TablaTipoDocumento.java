@@ -8,7 +8,7 @@ package es.jahernandez.tablas;
  *
  * @author Alberto
  */
-public class TablaTipoDocumento 
+public class TablaTipoDocumento
 {
     public static final String TABLA     = "tbtipdoc";
     public static final String CODTIPDOC = "Id";

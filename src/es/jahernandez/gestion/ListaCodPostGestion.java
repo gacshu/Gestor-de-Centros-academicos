@@ -5,26 +5,27 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.ListaCodPostDAO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.ListaCodPostDAO;
+import es.jahernandez.datos.Conexion;
+
 /**
  *
  * @author Alberto
  */
-public class ListaCodPostGestion 
+public class ListaCodPostGestion
 {
     //Método que devuelve los datos a mostrar en los combos de Provincia
     public static Vector devolverDatProv()
     {
         Connection        con           = null;
         Vector            listaCP       = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -46,7 +47,7 @@ public class ListaCodPostGestion
             return null;
         }
     }
-    
+
     //Devuelve el nombre de la provincia
     public static String devuelveNombreProv(String idProv)
     {

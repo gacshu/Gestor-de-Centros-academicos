@@ -5,19 +5,20 @@
  */
 
 package es.jahernandez.gestion;
-import es.jahernandez.accesodatos.TipoDocDAO;
-import es.jahernandez.datos.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.TipoDocDAO;
+import es.jahernandez.datos.Conexion;
+
 /**
  *
  * @author Alberto
  */
-public class TipoDocGestion 
+public class TipoDocGestion
 {
 
     //Método que devuelve los datos a mostrar en los combos de Tipo de Documento
@@ -25,7 +26,7 @@ public class TipoDocGestion
     {
         Connection        con           = null;
         Vector            listaTipDoc   = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -47,7 +48,7 @@ public class TipoDocGestion
             return null;
         }
     }
-    
+
     //Devuelve el tipo de Dni de un documento
     public static String devuelveNombreTipoDoc(int idDoc)
     {
@@ -76,5 +77,5 @@ public class TipoDocGestion
 
             return "";
         }
-    }    
+    }
 }

@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class AltaTipoCursoServlet extends HttpServlet 
+public class AltaTipoCursoServlet extends HttpServlet
 {
 
      /**
@@ -36,26 +36,26 @@ public class AltaTipoCursoServlet extends HttpServlet
     {
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
-        
+
         HttpSession sesion   = request.getSession();
-        
+
         TipoCursoVO tipCurVO = new TipoCursoVO();
         int         resAlt   = 0;
 
         Logger               log      = null;
         ConUsuVO             conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Alta tipo curso" );
-               
+
         }
-        
-        
+
+
         // Se comprueba que se hayan pasado los parámetros y se inicializan valores
         if(request.getParameter("txtNombre") != null)
         {
@@ -115,7 +115,7 @@ public class AltaTipoCursoServlet extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() 
+    public String getServletInfo()
     {
         return "Alta tipo curso Servlet";
     }// </editor-fold>

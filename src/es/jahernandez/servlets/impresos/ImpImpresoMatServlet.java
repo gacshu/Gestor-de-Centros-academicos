@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 //Paquetes de manejo de pdf
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -44,7 +45,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author JuanAlberto
  */
-public class ImpImpresoMatServlet extends HttpServlet 
+public class ImpImpresoMatServlet extends HttpServlet
 {
 
     /**
@@ -58,36 +59,36 @@ public class ImpImpresoMatServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
-        
+
         ServletContext   sc       = null;
         HttpSession      sesion   = request.getSession();
-        
-        
+
+
         AlumnosVO        aluVO    = null;
         EdicionesVO      ediVO    = null;
         CursosVO         curVO    = null;
         AluEdiVO         alEdiVO  = null;
-       
+
 
         //Se cargan datos de alumno y edición
         aluVO   = AlumnosGestion.devolverDatosAlumno(request.getParameter("codAlu"));
-        ediVO   = EdicionesGestion.devolverDatosEdi(request.getParameter("codEdi"));             
+        ediVO   = EdicionesGestion.devolverDatosEdi(request.getParameter("codEdi"));
         curVO   = CursosGestion.devolverDatosCurso(ediVO.getIdCur());
         alEdiVO = AluEdiGestion.devDatAluEdi(request.getParameter("codAlu"),request.getParameter("codEdi"));
 
         Logger      log      = null;
         ConUsuVO    conUsoVO = null;
-        
+
         //Cargamos atributos de log
         if(sesion.getAttribute("logControl") != null && sesion.getAttribute("usuario") != null)
         {
             log = (Logger) sesion.getAttribute("logControl");
             conUsoVO = (ConUsuVO) sesion.getAttribute("usuario");
-            
+
             log.info((conUsoVO.getUsuario() + "               " ).substring(0,10) + "Imprimir impreso matrícula" );
-               
+
         }
 
         String formaPago = "";// "Contado";
@@ -112,13 +113,13 @@ public class ImpImpresoMatServlet extends HttpServlet
         try
         {
             sc = getServletContext();
-            
+
             logoImage = Image.getInstance(sc.getRealPath("/" + "imagenes" + "/" + InformacionConf.logo));
             logoImage.scaleAbsolute(150, 38);
-            
-            parIma.setAlignment(Image.ALIGN_LEFT);
+
+            parIma.setAlignment(Element.ALIGN_LEFT);
             parIma.add(logoImage);
-            
+
             // step 2: we set the ContentType and create an instance of the Writer
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
 
@@ -179,7 +180,7 @@ public class ImpImpresoMatServlet extends HttpServlet
                             "PRECIO MATRICULA     " + ediVO.getPrecioM() + " Euros   PRECIO CURSO    " + ediVO.getPrecioT() + "\n\n" +
                             "PRECIO MES           " + ediVO.getPrecioR() + " Euros    Nº MESES        " + getMonthsDifference(ediVO.getFecFi() , ediVO.getFecIn()) + "\n\n" +
                             "FORMA DE PAGO        " + formaPago;
- 
+
             }
 
             if (ediVO.isPlazos())
@@ -224,15 +225,15 @@ public class ImpImpresoMatServlet extends HttpServlet
             //Datos alumnos
             Paragraph par01 = new Paragraph("      MATRICULA               FECHA:           " + new SimpleDateFormat("dd/MM/yyy").format(alEdiVO.getFecAlta()), new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "JAi.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
             Paragraph par02 = new Paragraph("                              Nº Matrícula:    " + aluVO.getIdAlu() + "/" + ediVO.getIdEdi(), new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "JAi.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
-           
+
             //Datos Curso
-            
-            
+
+
 
             //Datos firma
             Paragraph par18 = new Paragraph("El alumno                                               El Centro" , new Font(BaseFont.createFont("c:\\windows\\fonts\\cour.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
 
-         
+
             Paragraph parrafoFinal = new Paragraph("El afectado queda informado de que los datos recogidos, conforme  a lo previsto en la Ley Orgánica " +
                                                    "15/1999 de Protección de Datos de Carácter personal y del Real Decreto 1720/2007 del Reglamento " +
                                                    "de desarrollo de la LOPD, serán incluidos en un fichero denominado CLIENTES inscrito en el Registro " +
@@ -242,17 +243,17 @@ public class ImpImpresoMatServlet extends HttpServlet
                                                    "datos a entidades de grupo y asociadas, con la única finalidad de proporcionar información sobre " +
                                                    "distintas actividades formativas. Asimismo , el afectado presta su pleno consentimiento a " + InformacionConf.nombEmp + " " +
                                                    "para que pueda proceder al envío al afectado de comunicaciones comerciales, publicitarias y promocionales por correo electrónico, " +
-                                                   "fax o por otros medios de comunicación electrónica equivalentes. No obstante, le informamos que podrá revocar el consentimiento, en cada comunicado comercial o publicitario " + 
+                                                   "fax o por otros medios de comunicación electrónica equivalentes. No obstante, le informamos que podrá revocar el consentimiento, en cada comunicado comercial o publicitario " +
                                                    "que se le haga llegar.\n\n",new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
 
 
             Chunk cuadro = new Chunk("0", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "WINGDNG2.TTF"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
             Chunk cesDat1 = new Chunk(" Autorizo la Cesión de mis datos                    ", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
             Chunk cesDat2 = new Chunk(" NO autorizo la Cesión de mis datos\n ", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
-                   
+
             Chunk cesCom1 = new Chunk(" Autorizo las comunicaciones comerciales            ", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
             Chunk cesCom2 = new Chunk(" NO autorizo las comunicaciones comerciales ", new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
-            
+
 
 
             Phrase   fraseCons1 = new Phrase();
@@ -261,16 +262,16 @@ public class ImpImpresoMatServlet extends HttpServlet
             fraseCons1.add(cesDat1);
             fraseCons1.add(cuadro);
             fraseCons1.add(cesDat2);
-            
-            
-            
+
+
+
             Phrase   fraseCons2 = new Phrase();
             fraseCons2.add("        ");
             fraseCons2.add(cuadro);
             fraseCons2.add(cesCom1);
             fraseCons2.add(cuadro);
             fraseCons2.add(cesCom2);
-             
+
             Paragraph parrafoFinal2 = new Paragraph("En cualquier momento e igualmente, podrá ejercitar sus derechos de acceso, rectificación, cancelación y oposición dirigiéndose a " +
                                                     InformacionConf.dirEmp + " o a través de correo electrónico a " +InformacionConf.mailInfo + " junto con una " +
                                                    "prueba válida en derecho, como fotocopia del D.N.I. e indicando en el asunto \"PROTECCIÓN DE DATOS\".\n",new Font(BaseFont.createFont(sc.getRealPath("/" + "fonts" + "/" + "cour.ttf"), BaseFont.IDENTITY_H, BaseFont.EMBEDDED)));
@@ -279,10 +280,10 @@ public class ImpImpresoMatServlet extends HttpServlet
             //Paragraph parFinal = new Paragraph();
             //parFinal.Add(parFinal);
 
-            
+
             par01.font().setSize(10);
             par02.font().setSize(10);
-            
+
 
             par18.font().setSize(10);
 
@@ -295,12 +296,12 @@ public class ImpImpresoMatServlet extends HttpServlet
             cesDat2.font().setSize(7);
             cesCom1.font().setSize(7);
             cesCom2.font().setSize(7);
-            
-            parrafoFinal.setAlignment(Image.ALIGN_JUSTIFIED);
-            parrafoFinal2.setAlignment(Image.ALIGN_JUSTIFIED);
+
+            parrafoFinal.setAlignment(Element.ALIGN_JUSTIFIED);
+            parrafoFinal2.setAlignment(Element.ALIGN_JUSTIFIED);
             parrafoFinal.setIndentationLeft(10);
             parrafoFinal.setIndentationRight(10);
-            
+
             parrafoFinal2.setIndentationLeft(10);
             parrafoFinal2.setIndentationRight(10);
 
@@ -317,26 +318,26 @@ public class ImpImpresoMatServlet extends HttpServlet
             document.add(par01);
             document.add(par02);
             document.add(new Paragraph(" "));
-         
+
             document.add(tablaDatAlu);
             document.add(new Paragraph(" "));
             document.add(tablaDatCur);
             document.add(new Paragraph(" "));
             document.add(tablaDatEco);
-            
+
             //document.Add(new Paragraph(" "));
             document.add(par18);
             //document.Add(new Paragraph(" "));
             document.add(new Paragraph(" "));
             document.add(new Paragraph(" "));
-            document.add(new Paragraph(" "));           
+            document.add(new Paragraph(" "));
             document.add(parrafoFinal);
             document.add(parrafoFinal2);
             document.add(new Paragraph(" "));
             document.add(fraseCons1);
             //document.Add(new Paragraph(" "));
             document.add(fraseCons2);
-            
+
             //DateTime diaHoy = DateTime.Now;
 
             //document.Add(new Paragraph("Salamanca a " + Convert.ToString(diaHoy.Day) + " de " + devuelveMes(diaHoy.Month) + " de " + Convert.ToString(diaHoy.Year), new Font(BaseFont.CreateFont("c:\\windows\\fonts\\cour.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED))));
@@ -344,7 +345,7 @@ public class ImpImpresoMatServlet extends HttpServlet
             Font fuenteCond = new Font();
 
             fuenteCond.setSize(9);
-            
+
             document.newPage();
 
             document.add(new Paragraph("     "));
@@ -373,16 +374,16 @@ public class ImpImpresoMatServlet extends HttpServlet
             document.add(new Paragraph("        9." + InformacionConf.nombEmp + ", se reserva el derecho a dar de BAJA como alumno, a aquel que no abone sus cuotas en los plazos establecidos, dificulte el desarrollo de su formación o realice cualquier acto de ofensa a otros alumnos o personal del centro, así como si realiza actos que deterioren las instalaciones del Centro.", fuenteCond));
             //document.Add(new Paragraph("     "));
             document.add(new Paragraph("       10." + InformacionConf.nombEmp + " entregará al alumno que finaliza correctamente el curso un DIPLOMA que acredite los conocimientos adquiridos por el alumno. Dicho diploma carece de validez académica.", fuenteCond));
-            
-            
+
+
         }
         catch (Exception ex)
         {
             ex.getClass();
         }
         // step 5: Close document
-        document.close(); 
-        
+        document.close();
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -425,17 +426,17 @@ public class ImpImpresoMatServlet extends HttpServlet
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
-    private int getMonthsDifference(Date dateFi, Date dateIn) 
-    { 
-        //int m1 = date1.getYear() * 12 + (date1.getMonth()+1); 
-        //int m2 = date2.getYear() * 12 + (date2.getMonth()+1); 
-       
+
+
+    private int getMonthsDifference(Date dateFi, Date dateIn)
+    {
+        //int m1 = date1.getYear() * 12 + (date1.getMonth()+1);
+        //int m2 = date2.getYear() * 12 + (date2.getMonth()+1);
+
         int m1 = Integer.parseInt(new SimpleDateFormat("yyyy").format(dateFi)) * 12 + (Integer.parseInt(new SimpleDateFormat("MM").format(dateFi)) + 1);
         int m2 = Integer.parseInt(new SimpleDateFormat("yyyy").format(dateIn)) * 12 + (Integer.parseInt(new SimpleDateFormat("MM").format(dateIn)) + 1);
-        
-        return m1 - m2 ; 
+
+        return m1 - m2 ;
     }
-    
+
 }

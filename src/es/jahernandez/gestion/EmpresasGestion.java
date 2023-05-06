@@ -6,27 +6,28 @@
 
 package es.jahernandez.gestion;
 
-import es.jahernandez.accesodatos.EmpresasDAO;
-import es.jahernandez.datos.Conexion;
-import es.jahernandez.datos.EmpresasVO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import es.jahernandez.accesodatos.EmpresasDAO;
+import es.jahernandez.datos.Conexion;
+import es.jahernandez.datos.EmpresasVO;
+
 /**
  *
  * @author Alberto
  */
-public class EmpresasGestion 
+public class EmpresasGestion
 {
     //Método que devuelve los datos de todas las empresas
     public static Vector devolverTodosEmp()
     {
         Connection        con            = null;
         Vector            listaEmpresas  = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -46,7 +47,7 @@ public class EmpresasGestion
                 Logger.getLogger(EmpresasGestion.class.getName()).log(Level.SEVERE, null, ex);
             }
             return null;
-        }       
+        }
 }
 
     //Devuelve el VALOR MAXIMO de codigo EMPRESA
@@ -54,7 +55,7 @@ public class EmpresasGestion
     {
         Connection        con          = null;
         String            strMaxCodEmp = "";
-        
+
         try
         {
             con = Conexion.conectar();
@@ -82,14 +83,14 @@ public class EmpresasGestion
     public static String guardaEmp(EmpresasVO empVO)
     {
         Connection con       = null;
-        String     codNueEmp = "";            
-                
+        String     codNueEmp = "";
+
         try
         {
             con = Conexion.conectar();
             codNueEmp = EmpresasDAO.guardaEmp(empVO,con);
             Conexion.desconectar(con);
-            
+
             return codNueEmp;
         }
         catch (Exception exc)
@@ -125,7 +126,7 @@ public class EmpresasGestion
             con = Conexion.conectar();
             nuevoCod = EmpresasDAO.generarNuevoCodEmp(con);
             Conexion.desconectar(con);
-            
+
             return nuevoCod;
         }
         catch (Exception exc)
@@ -205,7 +206,7 @@ public class EmpresasGestion
     {
         Connection        con       = null;
         Vector            listBusq  = new Vector();
-        
+
         try
         {
             con = Conexion.conectar();
@@ -233,7 +234,7 @@ public class EmpresasGestion
     {
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -319,7 +320,7 @@ public class EmpresasGestion
     {
         Connection        con             = null;
         int               regActualizados = 0;
-        
+
         try
         {
             con = Conexion.conectar();
@@ -348,13 +349,13 @@ public class EmpresasGestion
     {
         Connection        con       = null;
         boolean           empTieAlu = true;
-        
+
         try
         {
             con = Conexion.conectar();
             empTieAlu = EmpresasDAO.devolverEmpresaTieneAlu(codEmp,con);
             Conexion.desconectar(con);
-            
+
             return empTieAlu;
 
         }
@@ -372,7 +373,7 @@ public class EmpresasGestion
             return true;
         }
     }
-    
+
     //Devuelve el nombre de la empresa
     public static String devuelveNombreEmpresa(String idEmpresa)
     {
