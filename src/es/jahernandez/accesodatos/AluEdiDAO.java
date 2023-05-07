@@ -35,7 +35,7 @@ public class AluEdiDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarMatAlu(AluEdiVO aluEdiVO, Connection con) throws Exception
     {
-        PreparedStatement   ps  = null;
+       
 
         int                 regActualizados = 0;
 
@@ -59,7 +59,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la sql
             ps.setString (1, aluEdiVO.getIdAlu());
@@ -73,21 +73,12 @@ public class AluEdiDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
             throw exc;
         }
     }
@@ -95,7 +86,7 @@ public class AluEdiDAO
     //Método que devuelve los datos de alumno-edición de un alumno dado
     public static Vector devAluEdi(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+        
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    + ","
@@ -115,7 +106,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codAlu);
@@ -139,22 +130,13 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -162,7 +144,7 @@ public class AluEdiDAO
     //Método que devuelve los datos de alumno-edición de una edicion y alumno dados
     public static AluEdiVO devDatAluEdi(String codAlu, String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+        
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    + ","
@@ -180,8 +162,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
-
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codAlu);
             ps.setString(2, codEdi);
@@ -204,20 +185,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return datAluEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -226,7 +199,7 @@ public class AluEdiDAO
     //Método que da de baja/alta congela/descongela a un alumno en una edición
     public static int bajaMatAlu(AluEdiVO aluEdiVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+       
 
         String            sql             = "UPDATE " + TablaAlumnosEdiciones.TABLA     +
                                             " SET "   + TablaAlumnosEdiciones.ESBAJA    + " = ? , "
@@ -240,7 +213,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setBoolean(1, aluEdiVO.isEsBaja());
@@ -253,21 +226,13 @@ public class AluEdiDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -276,7 +241,7 @@ public class AluEdiDAO
     //Método que devuelve si un alumno esta matriculado en una edición de un determinado curso
     public static boolean estaAluMatCur(String codCur, String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+        
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " +
@@ -293,7 +258,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consutla sql
             ps.setString(1, codCur );
@@ -314,22 +279,14 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return respuesta;
 
         }
 
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -338,7 +295,7 @@ public class AluEdiDAO
     //Método que devuelve los datos de alumno-edición de los alumnos que tienen que pagar recibo
     public static Vector devRecAluEdi(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql            = "SELECT "    + TablaAlumnosEdiciones.CODALU   + ","
@@ -361,7 +318,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -403,20 +360,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -425,7 +374,7 @@ public class AluEdiDAO
     //Método que devuelve los alumnos inscritos en una edición
     public static Vector devAluMatEdi(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+        
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "      + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU    + ","
@@ -447,7 +396,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la conulsta sql
             ps.setString(1, codEdi);
@@ -470,20 +419,12 @@ public class AluEdiDAO
             }
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -492,7 +433,7 @@ public class AluEdiDAO
     //Método que devuelve el número de matriculas que ha tenido un alumno
     public static int devNumMat(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps               = null;
+   
         ResultSet         rs               = null;
 
         String            sql              = "SELECT COUNT(" + TablaAlumnosEdiciones.CODALU + ") AS MATRICULAS " +
@@ -504,7 +445,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codAlu);
@@ -518,29 +459,17 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return numeroMatriculas;
         }
         catch (Exception exc)
-        {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            throw exc;
+        {            throw exc;
         }
     }
 
     //Método que devuelve los datos de alumno-edición de los alumnos que tienen recibo pendiente
     public static Vector devRecPendAluEdi(Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "    + TablaAlumnosEdiciones.CODALU   + ","
@@ -580,8 +509,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
-
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
             //Se pasan los parámetros de la sentencia sql
             ps.setDate(1, new Date(df.parse(mesAct).getTime()));
             ps.setDate(2, new Date(df.parse(mesSig).getTime()));
@@ -627,21 +555,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
         }
        catch (Exception exc)
        {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -649,7 +568,7 @@ public class AluEdiDAO
     //Método que devuelve los alumnos inscritos en un grupo
     public static Vector devAluGruMatEdi(EdicionesVO ediVO, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+         
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU          + ","
@@ -689,7 +608,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la sentencia sql
             ps.setString ( 1, ediVO.getIdCur());
@@ -731,20 +650,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -753,7 +664,7 @@ public class AluEdiDAO
     //Método que elimina los datos de alumno de una edición
     public static int eliminarDatosMatEdi(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+         
 
         String            sql    = "DELETE FROM " + TablaAlumnosEdiciones.TABLA  +
                                    " WHERE "      + TablaAlumnosEdiciones.CODEDI + " = ? ";
@@ -762,7 +673,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -771,19 +682,12 @@ public class AluEdiDAO
 
             ps.close();
             Conexion.desconectar(con);
-
+        	}
             return devRes;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
 
             throw exc;
         }
@@ -792,7 +696,7 @@ public class AluEdiDAO
     //Método que devuelve el número de alumnos inscritos en una edición
     public static int devNumAluEdi(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+         
         ResultSet         rs         = null;
 
         String            sql        = "SELECT COUNT(" + TablaAlumnosEdiciones.CODEDI + ")" +
@@ -803,7 +707,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la conuslta sql
             ps.setString(1, codEdi);
@@ -817,20 +721,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return numAlumnos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
 
             throw exc;
         }
@@ -839,7 +735,7 @@ public class AluEdiDAO
     //Método que devuelve los alumnos inscritos en una edición dados de baja
     public static Vector devAluMatBajEdi(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+         
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "     + TablaAlumnosEdiciones.TABLA + "." + TablaAlumnosEdiciones.CODALU      + ","
@@ -863,7 +759,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -886,20 +782,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
         }
        catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -908,7 +796,7 @@ public class AluEdiDAO
     //Método que devuelve los alumnos de baja en un grupo
     public static Vector devAluBajGruMatEdi(EdicionesVO ediVO , Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+         
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU      + ","
@@ -949,8 +837,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
-
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
             //Se pasan los parámetros de la consulta sql
             ps.setString ( 1, ediVO.getIdCur());
             ps.setString ( 2, ediVO.getIdNiv());
@@ -991,22 +878,13 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAluEdi;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
      }
@@ -1014,7 +892,7 @@ public class AluEdiDAO
     //Método que devuelve si una edición tiene alumunos
     public static boolean edicionTieneAlumnos(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+        
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaAlumnosEdiciones.CODALU    +
@@ -1025,7 +903,7 @@ public class AluEdiDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -1043,20 +921,12 @@ public class AluEdiDAO
 
             rs.close();
             ps.close();
-
+        	}
             return hayAlumnos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AluEdiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
 
             return true;
         }

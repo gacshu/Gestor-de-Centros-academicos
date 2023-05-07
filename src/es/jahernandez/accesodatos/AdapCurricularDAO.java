@@ -25,7 +25,7 @@ public class AdapCurricularDAO
     //Método que devuelve los datos de una adaptación curricular
     public static AdapCurricularVO devolverDatosAdapCur(String codAdapCurricular, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+        
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaAdapCurricular.CODADAPCUR + " , "
@@ -39,7 +39,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAdapCurricular);
@@ -58,21 +58,13 @@ public class AdapCurricularDAO
 
             rs.close();
             ps.close();
-
+        	}
             return adapCurVO;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -81,7 +73,7 @@ public class AdapCurricularDAO
     //Método que devuelve todos los registro de adaptación curricular
     public static Vector devolverTodosAdapCur(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+        
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT * FROM TbNiv";
@@ -96,7 +88,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -114,20 +106,11 @@ public class AdapCurricularDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAdapCur;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
             throw exc;
         }
     }
@@ -135,7 +118,7 @@ public class AdapCurricularDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarAdapCur(AdapCurricularVO adapCurVO, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+        
 
         //String            cadenaConsulta = "INSERT INTO TbNiv (IdNiv , NomNiv,ContNiv,idCur) VALUES(?,?,?,?) ";
         String            cadenaConsulta = "INSERT INTO " + TablaAdapCurricular.TABLA      + " ( "
@@ -150,7 +133,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, nueCodAdapCur());
@@ -161,18 +144,12 @@ public class AdapCurricularDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw  exc;
         }
     }
@@ -233,7 +210,7 @@ public class AdapCurricularDAO
     //Método que devuelve los datos de adaptación curricular de un alumno
     public static Vector devolverAdapCurAlu(String codAlu, Connection con ) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT " + TablaAdapCurricular.CODADAPCUR + " , "
@@ -248,7 +225,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -269,20 +246,12 @@ public class AdapCurricularDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAdapCur;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+       
             throw exc;
         }
     }
@@ -290,7 +259,7 @@ public class AdapCurricularDAO
      //Edita el registro de una adaptación curricular
     public static int editaAdapCur(AdapCurricularVO adapCurVO, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "UPDATE " + TablaAdapCurricular.TABLA      +
                                 " SET "   + TablaAdapCurricular.MATERIA    + " = ? , "
@@ -301,7 +270,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, adapCurVO.getMateria());
@@ -311,19 +280,12 @@ public class AdapCurricularDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -332,7 +294,7 @@ public class AdapCurricularDAO
     public static int eliminaAdapCur(String codAdapCur, Connection con) throws Exception
     {
 
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaAdapCurricular.TABLA      +
                                             " WHERE "      + TablaAdapCurricular.CODADAPCUR + " = ?";
@@ -342,7 +304,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAdapCur);
@@ -350,19 +312,12 @@ public class AdapCurricularDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -371,7 +326,7 @@ public class AdapCurricularDAO
     public static int eliminaAdapCurAlumno(String codAlu , Connection con) throws Exception
     {
 
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaAdapCurricular.TABLA  +
                                             " WHERE "      + TablaAdapCurricular.CODALU + " = ?";
@@ -381,7 +336,7 @@ public class AdapCurricularDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAlu);
@@ -389,19 +344,12 @@ public class AdapCurricularDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapCurricularDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
