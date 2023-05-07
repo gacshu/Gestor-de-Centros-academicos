@@ -336,7 +336,7 @@ public class ModulosDAO
         }
         catch (Exception exc)
         {
-            t
+            
             throw exc;
         }
     }
