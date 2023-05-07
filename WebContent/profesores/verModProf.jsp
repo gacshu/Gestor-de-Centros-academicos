@@ -13,7 +13,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Resultado Búsqueda Interesados</title>
@@ -86,27 +86,27 @@ function bajaMod(codEdi, codMod, ind)
 </script>
 <table style="width: 100%; font-size: 10pt; font-family: tahoma;">
             <tr>
-               <td height="66" style="width: 374px"><img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('../ImpCursosProfServlet?codProf=<%=codProf%>&tipBus=<%=tipBus%>','_listaAlu','');"/></td>
+               <td height="66" style="width: 374px"><img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('../ImpCursosProfServlet?codProf=<%=codProf%>&tipBus=<%=tipBus%>','_listaAlu','');"/></td>
                <td style="text-align: right; margin-left: 80px">&nbsp;</td>
                <td style="text-align: right; margin-left: 80px">&nbsp;
               </td>
             </tr>
             </table>                        
-<table width="100%" class="tablaListadoExtensa"> 
+<table style="width:100%" class="tablaListadoExtensa"> 
             <tr>
-                <td width="184"><span class="tablaListadoExtensaCabecera">
+                <td style="width:184"><span class="tablaListadoExtensaCabecera">
                   M&oacute;dulo</span></td>
-                <td width="275"><span class="tablaListadoExtensaCabecera">
+                <td style="width:275"><span class="tablaListadoExtensaCabecera">
                  Curso y Edici&oacute;n</span></td>
-                <td width="117"><span class="tablaListadoExtensaCabecera">
+                <td style="width:117"><span class="tablaListadoExtensaCabecera">
                  D&iacute;as</span></td>
-                <td width="217"><span class="tablaListadoExtensaCabecera">
+                <td style="width:217"><span class="tablaListadoExtensaCabecera">
                   Aula</span></td>
-                <td width="180"><span class="tablaListadoExtensaCabecera">&Aacute;rea</span></td>
-                <td width="117"><span class="tablaListadoExtensaCabecera"> Fecha Inicio</span></td>
-                <td width="133"><span class="tablaListadoExtensaCabecera"> Fecha Fin</span></td>
-                <td width="76"><span class="tablaListadoExtensaCabecera"> Hora Inicio</span></td>
-                <td width="90"><span class="tablaListadoExtensaCabecera">Hora Fin</span></td>
+                <td style="width:180"><span class="tablaListadoExtensaCabecera">&Aacute;rea</span></td>
+                <td style="width:117"><span class="tablaListadoExtensaCabecera"> Fecha Inicio</span></td>
+                <td style="width:133"><span class="tablaListadoExtensaCabecera"> Fecha Fin</span></td>
+                <td style="width:76"><span class="tablaListadoExtensaCabecera"> Hora Inicio</span></td>
+                <td style="width:90"><span class="tablaListadoExtensaCabecera">Hora Fin</span></td>
                 
   </tr>
       <%for (int ind = valInf; ind < valSup; ind++)
@@ -129,10 +129,10 @@ function bajaMod(codEdi, codMod, ind)
             </tr>
 <%} %>
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-        <td width="55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verModProf.jsp?codProf=<%=codProf%>&ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-        <td width="45%" class="cellBtnSub" scope="col"><%if(valSup < listaModProf.size()){%><a href="./verModProf.jsp?codProf=<%=codProf%>&ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verModProf.jsp?codProf=<%=codProf%>&ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+        <td style="width:45%" class="cellBtnSub" scope="col"><%if(valSup < listaModProf.size()){%><a href="./verModProf.jsp?codProf=<%=codProf%>&ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
       </tr>
 </table>
     <p>&nbsp;</p>

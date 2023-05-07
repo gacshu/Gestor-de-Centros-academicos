@@ -11,7 +11,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -66,14 +66,14 @@ if(valSup > listSeg.size()) valSup = listSeg.size();
 <%}%>
 <body class="colorFondoPrincipalPestana" >
 <form action="altaSeguimiento.jsp?codInt=<%=aluVO.getIdAlu()%>&ind=<%=valInf%>" method="post" name="frmSeguimientosInteresado" target="_self" id="frmSeguimientosInteresado">
-  <table width="90%" border="0" class="tablaCursos">
+  <table style="width:90%" border="0" class="tablaCursos">
     <tr>
     <td height="41"><strong>Fecha</strong></td>
     <td><strong>Usuario</strong></td>
     <td><strong>Incidencias</strong></td>
     <td><strong>Curso</strong></td>
     <td>
-      <img src="../imagenes/newhab.png" width="30" height="30" onclick="frmSeguimientosInteresado.submit();" style="cursor:pointer"/>
+      <img src="../imagenes/newhab.png" style="width:30" height="30" onclick="frmSeguimientosInteresado.submit();" style="cursor:pointer"/>
     </td>
   </tr>
     <%for(int ind = valInf; ind < valSup; ind++){
@@ -84,15 +84,15 @@ if(valSup > listSeg.size()) valSup = listSeg.size();
             <td><%=segVO.getUsuario()%></td>
             <td><%=segVO.getIncidencias()%></td>
             <td><%=CursosGestion.devolverDatosCurso(segVO.getIdCur()).getNomCur()%></td>
-            <td><img src="../imagenes/papelera.png" width="30" height="30" onclick="window.open('../BorrarSeguimientoServlet?codSeg=<%=segVO.getCodSeg()%>&codInt=<%=segVO.getIdAlu()%>&ind=<%=valInf%>','_self','');" style="cursor:pointer"/></td>
+            <td><img src="../imagenes/papelera.png" style="width:30" height="30" onclick="window.open('../BorrarSeguimientoServlet?codSeg=<%=segVO.getCodSeg()%>&codInt=<%=segVO.getIdAlu()%>&ind=<%=valInf%>','_self','');" style="cursor:pointer"/></td>
         </tr>
     <%}%>
  
 </table>
-<table width="90%" border="0">
+<table style="width:90%" border="0">
 <tr>
-    <td width="54%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verSegAlu.jsp?ind=<%=valAnt%>&codInt=<%=aluVO.getIdAlu()%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-    <td width="46%" class="cellBtnSub" scope="col"><%if(valSup < listSeg.size()){%><a href="./verSegAlu.jsp?ind=<%=valSup%>&codInt=<%=aluVO.getIdAlu()%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+    <td style="width:54%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verSegAlu.jsp?ind=<%=valAnt%>&codInt=<%=aluVO.getIdAlu()%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+    <td style="width:46%" class="cellBtnSub" scope="col"><%if(valSup < listSeg.size()){%><a href="./verSegAlu.jsp?ind=<%=valSup%>&codInt=<%=aluVO.getIdAlu()%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
 </tr>
 </table>
   	

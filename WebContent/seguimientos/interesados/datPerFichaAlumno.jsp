@@ -288,15 +288,15 @@ function confirmarBaja()
 <input type="hidden" name="hidFecNac" id="hidFecNac" />
 <input name="hidCodInt" type="hidden" id="hidCodInt" value="<%=aluVO.getIdAlu()%>" />
 
-  <table width="90%" border="0" align="center">
+  <table style="width:90%" border="0" align="center">
     <tr>
-      <td width="14%" class="tdDef" scope="col">Tipo Documento</td>
-      <td width="19%" class="tdDef" scope="col"><span id="spryselect1">
+      <td style="width:14%" class="tdDef" scope="col">Tipo Documento</td>
+      <td style="width:19%" class="tdDef" scope="col"><span id="spryselect1">
         <select name="selValTipDoc" id="selValTipDoc"></select>
         <script>frmDatosPersonales.selValTipDoc.value="<%=aluVO.getTipDocAlu()%>";</script>
         <span class="selectRequiredMsg">*</span></span></td>
-      <td width="10%" class="tdDef" scope="col">Número</td>
-      <td width="35%" class="tdDef" scope="col"><span id="txtValNumDoc">
+      <td style="width:10%" class="tdDef" scope="col">Número</td>
+      <td style="width:35%" class="tdDef" scope="col"><span id="txtValNumDoc">
         <input name="txtNumDoc" type="text" id="txtNumDoc" value="<%=aluVO.getNumDocAlu()%>" size="25" maxlength="20" />
         <span class="textfieldRequiredMsg">*</span></span></td>
       <td colspan="2" class="tdDef" scope="col"><label>
@@ -320,22 +320,22 @@ function confirmarBaja()
         <select name="selEmpresa" id="selEmpresa"></select>
         <script>frmDatosPersonales.selEmpresa.value="<%=aluVO.getEmpAlu()%>";</script>
         <span class="selectRequiredMsg">*</span></span></td>
-      <td width="10%" class="tdDef"><input class="cellBtnSub" type="button" onclick= "window.parent.cargaPaginaAltaEmpresa();" value="Añadir" /></td>
+      <td style="width:10%" class="tdDef"><input class="cellBtnSub" type="button" onclick= "window.parent.cargaPaginaAltaEmpresa();" value="Añadir" /></td>
     </tr>
 </table>
   <br />
-  <table width="90%" border="0" align="center" class="colorFondoBlancoTablaPest" cellspacing="0">
+  <table style="width:90%" border="0" align="center" class="colorFondoBlancoTablaPest" cellspacing="0">
     <tr>
       <th class="tdDef" scope="col">Datos de Contacto</th>
       <th colspan="3" class="colorFondoPrincipalPestana" scope="col">&nbsp;</th>
     </tr>
     <tr>
-      <td width="17%" height="28" class="colorFondoBlanco">Fijo</td>
-      <td width="50%"><span id="txtValTelf">
+      <td style="width:17%" height="28" class="colorFondoBlanco">Fijo</td>
+      <td style="width:50%"><span id="txtValTelf">
         <input name="txtTelf" type="text" id="txtTelf" value="<%=aluVO.getFijAlu()%>" maxlength="9" />
         <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
-      <td width="12%">Móvil</td>
-      <td width="21%"><span id="txtValMovil">
+      <td style="width:12%">Móvil</td>
+      <td style="width:21%"><span id="txtValMovil">
         <input name="txtMovil" type="text" id="txtMovil" value="<%=aluVO.getMovAlu()%>" maxlength="9" />
         <span class="textfieldInvalidFormatMsg">*</span></span></td>
 </tr>
@@ -377,23 +377,23 @@ function confirmarBaja()
     </tr>
   </table>
   <br />
-  <table width="90%" border="0" align="center">
+  <table style="width:90%" border="0" align="center">
     <tr>
-        <td width="14%" class="tdDef" scope="col">Colegio</td>
-          <td width="48%" class="tdDef" scope="col"><span id="valColegio">
+        <td style="width:14%" class="tdDef" scope="col">Colegio</td>
+          <td style="width:48%" class="tdDef" scope="col"><span id="valColegio">
             <input name="txtColegio" type="text" id="txtColegio" value="<%=aluVO.getColegio() %>" size="75" maxlength="100" />
 </span></td>
-          <td width="11%" class="tdDef" scope="col">Curso</td>
-          <td width="27%" class="tdDef" scope="col"><span id="valCurso">
+          <td style="width:11%" class="tdDef" scope="col">Curso</td>
+          <td style="width:27%" class="tdDef" scope="col"><span id="valCurso">
             <input name="txtCurso" type="text" id="txtCurso" value="<%=aluVO.getCurso() %>" size="25" maxlength="35" />
 </span></td>
     </tr>
   </table>
   <br />
-  <table width="90%" align="center" border="0">
+  <table style="width:90%" align="center" border="0">
     <tr class="tdDef">
-      <td width="48%">Observaciones</td>
-      <td width="52%">LOPD</td>
+      <td style="width:48%">Observaciones</td>
+      <td style="width:52%">LOPD</td>
     </tr>
     <tr>
       <td rowspan="2"><span id="txtValObs">
@@ -407,14 +407,14 @@ function confirmarBaja()
         Autoriza Comunicaciones Comerciales</td>
     </tr>
   </table>
-  <table width="90%" border="0">
+  <table style="width:90%" border="0">
     <tr>
       <th scope="col"><input name="btnEditar" type="button" class="cellBtnSub" id="btnEditar" value="Editar" onclick="validaForm();" />  
           <input name="btnBorrar" type="button" class="cellBtnSub" id="btnBorrar" value="Dar de baja" onclick="confirmarBaja();"/></th>
     </tr>
   </table>
   <br />
-  <table width="90%" align="center" border="0">
+  <table style="width:90%" align="center" border="0">
     <tr> </tr>
   </table>
 </form>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Busqueda Interesados</title>
@@ -146,7 +146,7 @@ function cargaCombos()
 
 
 <form action="../ImpHistRecServlet" method="post" name="frmBusRec" target="new" id="frmBusRec">
-<table width="100%" border="0">
+<table style="width:100%" border="0">
   <tr>
     <th colspan="2" class="thDef" scope="col">Búsqueda Recibos</th>
   </tr>
@@ -154,7 +154,7 @@ function cargaCombos()
     <td colspan="2">&nbsp;</td>
     </tr>
   <tr>
-    <td width="18%" height="21"><span class="tdDef">Tipo Curso</span></td>
+    <td style="width:18%" height="21"><span class="tdDef">Tipo Curso</span></td>
     <td><select name="lstTipCurso" id="lstTipCurso" onchange="cargarComboCursos();" style="width:250px">
     </select></td>
     </tr>

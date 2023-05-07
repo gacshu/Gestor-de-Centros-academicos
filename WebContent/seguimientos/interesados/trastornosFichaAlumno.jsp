@@ -9,7 +9,7 @@
 <%@page import  = "java.util.Vector"%>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -178,12 +178,12 @@ function cargarCombosTipoTrast(idTipTrast)
 <%}}%>
 
 <form action="" method="post" name="frmTrastornos" id="frmTrastornos">
-<table width="82%" border="0" align="center" class="tablaListados">
+<table style="width:82%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
-    <td width="28%" class="tdDef"><strong>Tipo Trastorno</strong></td>
-    <td width="11%" class="tdDef"><strong>Medicado</strong></td>
+    <td style="width:28%" class="tdDef"><strong>Tipo Trastorno</strong></td>
+    <td style="width:11%" class="tdDef"><strong>Medicado</strong></td>
     <td colspan="3"             class="tdDef"><strong>Medicaci&oacute;n</strong></td>
-    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" width="30" height="30" onclick="lstNuevoTipTrast.style.visibility='visible';chkNuevoMedicado.style.visibility='visible';txtNuevaMedicacion.style.visibility='visible'; btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
+    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="lstNuevoTipTrast.style.visibility='visible';chkNuevoMedicado.style.visibility='visible';txtNuevaMedicacion.style.visibility='visible'; btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       trastVO = (TrastornosVO) vecTras.elementAt(ind);
@@ -195,14 +195,14 @@ function cargarCombosTipoTrast(idTipTrast)
     <td>
     	<input name="chkMedicado<%=trastVO.getCodTrastorno()%>" type="checkbox" id="chkMedicado<%=trastVO.getCodTrastorno()%>" value="true" <%if(trastVO.isMedicado()){%>checked="checked"<%}%>  disabled="disabled"/>
     </td>
-    <td width="45%">
+    <td style="width:45%">
     	<textarea name="txtMedicacion<%=trastVO.getCodTrastorno()%>" cols="50" rows="3" disabled="disabled" id="txtMedicacion<%=trastVO.getCodTrastorno()%>"><%=trastVO.getMedicacion()%></textarea>
      </td>
-     <td width="2%" class="center"><input name="btnEdiMod<%=trastVO.getCodTrastorno()%>" type="button" id="btnEdiMod<%=trastVO.getCodTrastorno()%>" value="E" onclick="editaTrast('<%=trastVO.getCodTrastorno()%>')" disabled="disabled"/></td>
-      <td width="6%"><img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=trastVO.getCodTrastorno()%>');" style="cursor:pointer"/></td>
-      <td width="8%" class="center">
+     <td style="width:2%" class="center"><input name="btnEdiMod<%=trastVO.getCodTrastorno()%>" type="button" id="btnEdiMod<%=trastVO.getCodTrastorno()%>" value="E" onclick="editaTrast('<%=trastVO.getCodTrastorno()%>')" disabled="disabled"/></td>
+      <td style="width:6%"><img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=trastVO.getCodTrastorno()%>');" style="cursor:pointer"/></td>
+      <td style="width:8%" class="center">
           <%//if(! EdicionesGestion.estaNivelenEdicion(nivVO.getIdNiv())){%>
-            <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaModulo('<%=trastVO.getCodTrastorno()%>','<%=indInf%>','<%=trastVO.getIdAlu()%>');" style="cursor:pointer"/>
+            <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaModulo('<%=trastVO.getCodTrastorno()%>','<%=indInf%>','<%=trastVO.getIdAlu()%>');" style="cursor:pointer"/>
           <%//}%>
       </td>
   </tr>
@@ -231,12 +231,12 @@ function cargarCombosTipoTrast(idTipTrast)
   <tr>
     <td colspan="2" class="center">
       <%if( indInf >= 5){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('trastornosFichaAlumno.jsp?codInt=<%=codInt%>&valInfTrast=<%=(indInf - 5)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('trastornosFichaAlumno.jsp?codInt=<%=codInt%>&valInfTrast=<%=(indInf - 5)%>','_self','');">
       <%}%>
       </td>
     <td colspan="2" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecTras.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('trastornosFichaAlumno.jsp?codInt=<%=codInt%>&valInfTrast=<%=(indInf + 5)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('trastornosFichaAlumno.jsp?codInt=<%=codInt%>&valInfTrast=<%=(indInf + 5)%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login Aplicación</title>
@@ -47,14 +47,14 @@ function valForm()
 </script>
 
 <form action="./ControlAccesoServlet" method="post" name="frmLogin" target="_self" id="frmLogin">
-<table width="817" border="0" align="center">
+<table style="width:817" border="0" align="center">
   <tr>
     <th colspan="4" class="thDef"> Introduzca su Usuario y Password</th>
   </tr>
   <tr>
-    <td width="247" rowspan="15"><img src="imagenes/login_lat1.jpg" width="233" height="320" alt="loginImg1" /></td>
+    <td style="width:247" rowspan="15"><img src="imagenes/login_lat1.jpg" style="width:233" height="320" alt="loginImg1" /></td>
     <td height="20" colspan="2">&nbsp;</td>
-    <td width="270" rowspan="15"><img src="imagenes/login_lat2.jpg" width="233" height="320" alt="logImg2" /></td>
+    <td style="width:270" rowspan="15"><img src="imagenes/login_lat2.jpg" style="width:233" height="320" alt="logImg2" /></td>
   </tr>
   <tr>
     <td colspan="2">&nbsp;</td>
@@ -69,8 +69,8 @@ function valForm()
     <td colspan="2">&nbsp;</td>
     </tr>
   <tr>
-    <td width="101" class="tdDef">Usuario</td>
-    <td width="181"><span id="valUser">
+    <td style="width:101" class="tdDef">Usuario</td>
+    <td style="width:181"><span id="valUser">
       <input name="txtUser" type="text" id="txtUser" tabindex="1" size="15" maxlength="8" />
       <span class="textfieldRequiredMsg">*</span></span></td>
     </tr>

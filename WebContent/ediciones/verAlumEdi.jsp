@@ -12,7 +12,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Resultado Búsqueda Interesados</title>
@@ -158,43 +158,43 @@ function cargaFaltas(codAlu)
 
 <body class="fondoFormularios">
 <div id="mailing" title="Mailing">
-    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" width="100%" height="700" scrolling="no"> </iframe>
+    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
 <div id="calif" title="Calificaciones">
-    <iframe name="fraCalif"     id="fraCalif"     frameborder="0" src="" width="100%" height="700" scrolling="no"> </iframe>
+    <iframe name="fraCalif"     id="fraCalif"     frameborder="0" src="" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
 <div id="faltas" title="Faltas">
-    <iframe name="fraFaltas"     id="fraFaltas"     frameborder="0" src="" width="100%" height="700" scrolling="no"> </iframe>
+    <iframe name="fraFaltas"     id="fraFaltas"     frameborder="0" src="" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
 
 
 <table style="width: 100%; font-size: 10pt; font-family: tahoma;">
             <tr>
-               <td height="69" style="width: 374px"><img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     width="64" height="64" onclick="cargaMailing();"/>
-               <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('./impLisAlu.jsp?codEdi=<%=ediVO.getIdEdi()%>','_self','');"/></td>
+               <td height="69" style="width: 374px"><img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     style="width:64" height="64" onclick="cargaMailing();"/>
+               <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('./impLisAlu.jsp?codEdi=<%=ediVO.getIdEdi()%>','_self','');"/></td>
                <td style="text-align: right; margin-left: 80px">&nbsp;</td>
                <td style="text-align: right; margin-left: 80px">&nbsp;
               </td>
             </tr>
             </table>
                                                  
-<table width="100%" class="tablaCursos"> 
+<table style="width:100%" class="tablaCursos"> 
             <tr>
-              <td width="7%" class="tdDef"><strong>Curso</strong></td>
-              <td width="27%"><%=nombCur%></td>
-              <td width="6%"><span class="tdDef"><strong>Fechas</strong></span></td>
-              <td width="60%"><%=fechas%></td>
+              <td style="width:7%" class="tdDef"><strong>Curso</strong></td>
+              <td style="width:27%"><%=nombCur%></td>
+              <td style="width:6%"><span class="tdDef"><strong>Fechas</strong></span></td>
+              <td style="width:60%"><%=fechas%></td>
   </tr>
 </table>
-<table width="100%" class="tablaCursos"> 
+<table style="width:100%" class="tablaCursos"> 
             <tr>
-                <td width="102"><strong>DNI</strong></td>
-                <td width="287"><strong>
+                <td style="width:102"><strong>DNI</strong></td>
+                <td style="width:287"><strong>
                 Apellidos</strong></td>
-                <td width="283"><strong>
+                <td style="width:283"><strong>
                 Nombre</strong></td>
-                <td width="177">&nbsp;</td>
-                <td width="539">&nbsp;</td>
+                <td style="width:177">&nbsp;</td>
+                <td style="width:539">&nbsp;</td>
   </tr>
             <%for (int ind = valInf; ind < valSup; ind++)
                   {
@@ -213,10 +213,10 @@ function cargaFaltas(codAlu)
             </tr>
 <%} %>
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-        <td width="55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verAlumEdi.jsp?codEdi=<%=ediVO.getIdEdi()%>&ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-        <td width="45%" class="cellBtnSub" scope="col"><%if(valSup < lisAluMat.size()){%><a href="./verAlumEdi.jsp?codEdi=<%=ediVO.getIdEdi()%>&ind=<%=valAnt%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verAlumEdi.jsp?codEdi=<%=ediVO.getIdEdi()%>&ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+        <td style="width:45%" class="cellBtnSub" scope="col"><%if(valSup < lisAluMat.size()){%><a href="./verAlumEdi.jsp?codEdi=<%=ediVO.getIdEdi()%>&ind=<%=valAnt%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
       </tr>
 </table>
 </body>

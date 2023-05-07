@@ -10,7 +10,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <title>Ficha Profesor</title>
@@ -248,16 +248,16 @@ function verClasesProf(tipBus)
 <%}%>
 
 <div id="gestionAreas" title="Áreas Profesor">
-   <iframe name="fraAreaProf"     id="fraAreaProf"     frameborder="0" src="./gestionAreas.jsp?codProf=<%=profVO.getIdProf()%>" width="100%" height="300" scrolling="no"> </iframe>
+   <iframe name="fraAreaProf"     id="fraAreaProf"     frameborder="0" src="./gestionAreas.jsp?codProf=<%=profVO.getIdProf()%>" style="width:100%" height="300" scrolling="no"> </iframe>
 </div>   
 <div id="lstMod" title="Listado Módulos">
-   <iframe name="fraMod"     id="fraMod"     frameborder="0" src="" width="100%" height="500" scrolling="no"> </iframe>
+   <iframe name="fraMod"     id="fraMod"     frameborder="0" src="" style="width:100%" height="500" scrolling="no"> </iframe>
 </div>
 
 
 
 <form action="../EditarProfesorServlet?ind=<%=indLista%>" method="post" name="frmFichaProfesor" target="_self" id="frmFichaProfesor">
-  <table width="100%" border="0" class="tdDef">
+  <table style="width:100%" border="0" class="tdDef">
   <tr class="thDef">
     <th height="33" colspan="6" scope="col">Ficha Profesor</th>
   </tr>
@@ -268,14 +268,14 @@ function verClasesProf(tipBus)
     <td colspan="6" bgcolor="#FFFFFF"><span class="colorTextoBotPest"><strong>Datos Personales</strong></span></td>
   </tr>
   <tr>
-    <td width="2%" rowspan="8" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="11%">Nombre</td>
-    <td width="31%"><span id="valNombre">
+    <td style="width:2%" rowspan="8" bgcolor="#FFFFFF">&nbsp;</td>
+    <td style="width:11%">Nombre</td>
+    <td style="width:31%"><span id="valNombre">
       <input name="txtNombre" type="text" id="txtNombre" value="<%=profVO.getNombre()%>" size="25" maxlength="15" />
       <span class="textfieldRequiredMsg">*</span></span></td>
-    <td width="2%">&nbsp;</td>
-    <td width="11%">Apellidos</td>
-    <td width="43%"><span id="valApellidos">
+    <td style="width:2%">&nbsp;</td>
+    <td style="width:11%">Apellidos</td>
+    <td style="width:43%"><span id="valApellidos">
       <input name="txtApellidos" type="text" id="txtApellidos" value="<%=profVO.getApellidos()%>" size="40" maxlength="31" />
       <span class="textfieldRequiredMsg">*</span></span></td>
   </tr>

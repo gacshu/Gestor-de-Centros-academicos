@@ -5,7 +5,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir aula</title>
@@ -151,13 +151,13 @@ function cargarCombos()
 
 <body class="fondoFormularios" onload="cargarCombos();">
 <form id="frmAnaModEdi" name="frmAnaModEdi" method="post" action="">
-<table width="63%" border="0">
+<table style="width:63%" border="0">
   <tr>
     <td colspan="5" class="thDef">Añadir M&oacute;dulo
       <input name="hidCodEdi" type="hidden" id="hidCodEdi" value="<%=codEdi%>" /></td>
   </tr>
   <tr class="tdDef">
-    <td width="14%" class="tdDef">M&oacute;dulos</td>
+    <td style="width:14%" class="tdDef">M&oacute;dulos</td>
     <td colspan="4" class="tdDef"><span id="valMod">
       <select name="lstModulos" id="lstModulos" onchange="cargarComboProfesores($('#lstModulos').val());" tabindex="1">
       </select>
@@ -177,12 +177,12 @@ function cargarCombos()
     </tr>
   <tr>
     <td class="tdDef">Fecha Inicio</td>
-    <td width="18%" class="tdDef"><span id="valFecIni">
+    <td style="width:18%" class="tdDef"><span id="valFecIni">
     <input class="claseForFecha" name="txtFecIni" type="text" id="txtFecIni" size="15" maxlength="10" onchange="document.getElementById('hidFecIni').value = document.getElementById('txtFecIni').value;"/>
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span>      
       <input type="hidden" name="hidFecIni" id="hidFecIni"/></td>
-    <td width="14%" class="tdDef">Fecha Fin</td>
-    <td width="54%" colspan="2" class="tdDef"><span id="valFecFin">
+    <td style="width:14%" class="tdDef">Fecha Fin</td>
+    <td style="width:54%" colspan="2" class="tdDef"><span id="valFecFin">
     <input class="claseForFecha" name="txtFecFin" type="text" id="txtFecFin" size="15" maxlength="10" onchange="document.getElementById('hidFecFin').value = document.getElementById('txtFecFin').value;"/>
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span>      
       <input type="hidden" name="hidFecFin" id="hidFecFin" /></td>

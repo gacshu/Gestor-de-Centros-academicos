@@ -6,7 +6,7 @@
 <%@ page import = "java.util.Vector"%>
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
@@ -99,36 +99,36 @@ function cargaMailing()
 
 <body class="fondoFormularios">
 <div id="mailing" title="Mailing">
-    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" width="100%" height="700" scrolling="no"> </iframe>
+    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
-<table width="100%"> 
+<table style="width:100%"> 
     	<tr>
              <td colspan="2" class="thDef" >
              Alumnos por Curso
              </td>
         </tr>
         <tr>
-        	<td width="172" style="height: 19px">
+        	<td style="width:172" style="height: 19px">
              Curso:
           </td>
-            <td width="934" style="height: 19px"><%=(CursosGestion.devolverDatosCurso(codCur)).getNomCur()%></td>
+            <td style="width:934" style="height: 19px"><%=(CursosGestion.devolverDatosCurso(codCur)).getNomCur()%></td>
         </tr>
         <tr>
           <td height="70" colspan="2" style="height: 19px">
-                    <img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     width="64" height="64" onclick="cargaMailing();" />
-                    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('../impVisAluCurServlet','_listaAlu','');"/>
+                    <img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     style="width:64" height="64" onclick="cargaMailing();" />
+                    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('../impVisAluCurServlet','_listaAlu','');"/>
           </td>
         </tr>
         </table>
-     <table width="100%" class="tablaListadoExtensa">   
+     <table style="width:100%" class="tablaListadoExtensa">   
    <tr>
          <td colspan="2" style="width: 225px; height: 7px; text-align: left;">
              Nombre</td>
-         <td width="69" style="width: 68px; height: 7px; text-align: left;">
+         <td style="width:69" style="width: 68px; height: 7px; text-align: left;">
              Móvil</td>
-         <td width="79" style="width: 78px; height: 7px; text-align: left;">
+         <td style="width:79" style="width: 78px; height: 7px; text-align: left;">
              Teléfono</td>
-         <td width="214" style="width: 207px; height: 7px; text-align: left;">
+         <td style="width:214" style="width: 207px; height: 7px; text-align: left;">
              Correo Electrónico</td>
      </tr>
      <%
@@ -175,9 +175,9 @@ function cargaMailing()
            <td colspan="2" style="text-align: right"></td>
          </tr>
          <tr>
-           <td width="168" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./lisIntCur.jsp?ind=<%=valAnt%>&codCurso=<%=codCur%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-           <td width="858" class="cellBtnSub" scope="col"><%=listAluCur.size()%> &nbsp;registros</td>
-           <td colspan="3" class="cellBtnSub" scope="col"><%if(valSup < listAluCur.size()){%><a href="./lisIntCur.jsp?ind=<%=valSup%>&codCurso=<%=codCur%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+           <td style="width:168" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./lisIntCur.jsp?ind=<%=valAnt%>&codCurso=<%=codCur%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+           <td style="width:858" class="cellBtnSub" scope="col"><%=listAluCur.size()%> &nbsp;registros</td>
+           <td colspan="3" class="cellBtnSub" scope="col"><%if(valSup < listAluCur.size()){%><a href="./lisIntCur.jsp?ind=<%=valSup%>&codCurso=<%=codCur%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
          </table>
 </body>
 </html>

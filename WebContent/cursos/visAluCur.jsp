@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
@@ -120,14 +120,14 @@ function buscaAlumnosCurso()
 
 <body class="fondoFormularios" onload="cargarComboTipoCurso();cargarComboCentros('-99');">
 <form action="" method="post" name="frmAluCur" target="_self" id="frmAluCur">
-<table width="100%" border="0" class="tdDef">
+<table style="width:100%" border="0" class="tdDef">
   <tr>
     <td colspan="5" class="thDef">Alumnos por curso</td>
   </tr>
   <tr>
-    <td width="9%">&nbsp;</td>
-    <td width="40%">&nbsp;</td>
-    <td width="2%">&nbsp;</td>
+    <td style="width:9%">&nbsp;</td>
+    <td style="width:40%">&nbsp;</td>
+    <td style="width:2%">&nbsp;</td>
     <td colspan="2">&nbsp;</td>
   </tr>
   <tr>
@@ -137,8 +137,8 @@ function buscaAlumnosCurso()
       </select>
       <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">Please select an item.</span></span>
       <input name="btnVerAluTipCur" type="button" class="cellBtnSub" id="btnVerAluTipCur" onclick="buscaAlumnosTipoCurso();"  value="Ver Alumnos" /></td>
-    <td width="5%">Centro</td>
-    <td width="44%"><span id="lstValCentros">
+    <td style="width:5%">Centro</td>
+    <td style="width:44%"><span id="lstValCentros">
       <select name="lstCentros" id="lstCentros"  onchange="cargarComboCursos();">
       </select>
       <span class="selectRequiredMsg">*</span></span></td>

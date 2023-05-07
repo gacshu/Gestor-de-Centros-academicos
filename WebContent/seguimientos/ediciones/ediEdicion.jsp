@@ -12,7 +12,7 @@
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.Vector"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir Curso</title>
@@ -265,13 +265,13 @@ function cargarCombos()
 
 <body class="colorFondoPrincipalPestana" onload="cargarCombos()">
 <form  method="post" name="frmDatEdicion" id="frmDatEdicion">
-<table width="90%" border="0" class="tdDef">
+<table style="width:90%" border="0" class="tdDef">
   <tr>
     <td colspan="9" class="thDef">      <input name="codEdi" type="hidden" id="codEdi" value="<%=ediVO.getIdEdi()%>" />
       Datos Edici&oacute;n</td>
   </tr>
   <tr>
-    <td width="10%" class="tdDef">Curso</td>
+    <td style="width:10%" class="tdDef">Curso</td>
     <td colspan="3" class="tdDef">
       <input name="txtCurso" type="text" id="txtCurso" tabindex="1" size="55" value="<%=curVO.getNomCur()%>" readonly="readonly" />
       <input name="datCodCur" type="hidden" id="datCodCur" value="<%=ediVO.getIdCur()%>" /></td>
@@ -320,8 +320,8 @@ function cargarCombos()
     <td colspan="3" rowspan="2"><span id="valPlazas">
       <input name="txtPlazas" type="text" id="txtPlazas" tabindex="8" size="8" maxlength="4" <%if(ediVO != null){%> value="<%=ediVO.getNumPla()%>" <%}%>/>
       <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
-    <td width="5%" rowspan="2" class="tdDef">Horas</td>
-    <td width="9%" class="tdDef">Presenciales</td>
+    <td style="width:5%" rowspan="2" class="tdDef">Horas</td>
+    <td style="width:9%" class="tdDef">Presenciales</td>
     <td colspan="3" class="tdDef"><span id="valHorPres">
     <input name="txtHorPresen" type="text" id="txtHorPresen" tabindex="9" size="8" maxlength="4"  <%if(ediVO != null){%> value="<%=ediVO.getNumHor()%>"<%}%> />
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
@@ -445,19 +445,19 @@ function cargarCombos()
     </tr>
   <tr>
     <td rowspan="2" class="tdDef">Precios</td>
-    <td width="7%" class="tdDef">Matricula</td>
-    <td width="10%"><span id="valPreMat">
+    <td style="width:7%" class="tdDef">Matricula</td>
+    <td style="width:10%"><span id="valPreMat">
             <input name="txtPrecioMat" type="text" id="txtPrecioMat" tabindex="17" size="10" maxlength="10" <%if(ediVO != null){%> value="<%=df.format(ediVO.getPrecioM()).replace('.','.')%>" <%}%>/>
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span>&#8364;</td>
-    <td width="22%" class="tdDef"><input name="chkContado" type="checkbox" id="chkContado" tabindex="17" onchange="cambiaCheckPago('0');" value="true" <%if(ediVO != null){if(! ediVO.isPlazos()){%>checked="checked"<%}}%>/>
+    <td style="width:22%" class="tdDef"><input name="chkContado" type="checkbox" id="chkContado" tabindex="17" onchange="cambiaCheckPago('0');" value="true" <%if(ediVO != null){if(! ediVO.isPlazos()){%>checked="checked"<%}}%>/>
       Contado o Mensual</td>
     <td colspan="2" bgcolor="#FFFFFF" class="tdDef"  style="cursor:pointer"><input name="chkLunes" type="checkbox" id="chkLunes" tabindex="21"  value="true" <%if(ediVO != null){if(ediVO.isHayLun()){%>checked="checked"<%}}%> />
       Lunes</td>
-    <td width="10%" bgcolor="#FFFFFF" class="tdDef"  style="cursor:pointer"><input name="chkMartes" type="checkbox" id="chkMartes" tabindex="22" value="true" <%if(ediVO != null){if(ediVO.isHayMar()){%>checked="checked"<%}}%>/>
+    <td style="width:10%" bgcolor="#FFFFFF" class="tdDef"  style="cursor:pointer"><input name="chkMartes" type="checkbox" id="chkMartes" tabindex="22" value="true" <%if(ediVO != null){if(ediVO.isHayMar()){%>checked="checked"<%}}%>/>
       Martes</td>
-    <td width="13%" bgcolor="#FFFFFF" class="tdDef"  style="cursor:pointer"><input name="chkMiercoles" type="checkbox" id="chkMiercoles" tabindex="23"  value="true" <%if(ediVO != null){if(ediVO.isHayMie()){%>checked="checked"<%}}%> />
+    <td style="width:13%" bgcolor="#FFFFFF" class="tdDef"  style="cursor:pointer"><input name="chkMiercoles" type="checkbox" id="chkMiercoles" tabindex="23"  value="true" <%if(ediVO != null){if(ediVO.isHayMie()){%>checked="checked"<%}}%> />
       Mi&eacute;rcoles</td>
-    <td width="14%" class="tdDef">&nbsp;</td>
+    <td style="width:14%" class="tdDef">&nbsp;</td>
   </tr>
   <tr>
     <td class="tdDef">Recibo</td>
@@ -481,20 +481,20 @@ function cargarCombos()
     </tr>
   <tr>
     <td colspan="9" class="tdDef"><div id="divMeses" style="visibility:hidden">
-        <table width="1105" border="0">
+        <table style="width:1105" border="0">
           <tr>
-            <td width="120" rowspan="2" bgcolor="#FFFFFF">Plazos</td>
-            <td width="179" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkEnero" type="checkbox" id="chkEnero" tabindex="26"  value="true"  <%if(ediVO != null){if(ediVO.isEne()){%>checked="checked"<%}}%>/>
+            <td style="width:120" rowspan="2" bgcolor="#FFFFFF">Plazos</td>
+            <td style="width:179" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkEnero" type="checkbox" id="chkEnero" tabindex="26"  value="true"  <%if(ediVO != null){if(ediVO.isEne()){%>checked="checked"<%}}%>/>
               Enero</td>
-            <td width="152" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkFebrero" type="checkbox" id="chkFebrero" tabindex="28"  value="true" <%if(ediVO != null){if(ediVO.isFeb()){%>checked="checked"<%}}%> />
+            <td style="width:152" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkFebrero" type="checkbox" id="chkFebrero" tabindex="28"  value="true" <%if(ediVO != null){if(ediVO.isFeb()){%>checked="checked"<%}}%> />
               Febrero</td>
-            <td width="158" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkMarzo" type="checkbox" id="chkMarzo" tabindex="29"  value="true" <%if(ediVO != null){if(ediVO.isMar()){%>checked="checked"<%}}%>/>
+            <td style="width:158" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkMarzo" type="checkbox" id="chkMarzo" tabindex="29"  value="true" <%if(ediVO != null){if(ediVO.isMar()){%>checked="checked"<%}}%>/>
               Marzo</td>
-            <td width="152" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkAbril" type="checkbox" id="chkAbril" tabindex="30"  value="true" <%if(ediVO != null){if(ediVO.isAbr()){%>checked="checked"<%}}%>/>
+            <td style="width:152" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkAbril" type="checkbox" id="chkAbril" tabindex="30"  value="true" <%if(ediVO != null){if(ediVO.isAbr()){%>checked="checked"<%}}%>/>
               Abril</td>
-            <td width="156" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkMayo" type="checkbox" id="chkMayo" tabindex="31" value="true" <%if(ediVO != null){if(ediVO.isMay()){%>checked="checked"<%}}%>/>
+            <td style="width:156" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkMayo" type="checkbox" id="chkMayo" tabindex="31" value="true" <%if(ediVO != null){if(ediVO.isMay()){%>checked="checked"<%}}%>/>
               Mayo</td>
-            <td width="158" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkJunio" type="checkbox" id="chkJunio" tabindex="32"  value="true" <%if(ediVO != null){if(ediVO.isJun()){%>checked="checked"<%}}%>/>
+            <td style="width:158" bgcolor="#FFFFFF"  style="cursor:pointer"><input name="chkJunio" type="checkbox" id="chkJunio" tabindex="32"  value="true" <%if(ediVO != null){if(ediVO.isJun()){%>checked="checked"<%}}%>/>
               Junio</td>
             </tr>
           <tr>

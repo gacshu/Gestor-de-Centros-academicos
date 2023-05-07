@@ -5,7 +5,7 @@
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir Curso</title>
@@ -121,13 +121,13 @@ function cargarComboCentros(idCentro)
 
 <body class="fondoFormularios" onload="cargarComboTipoCurso();cargarComboCentros('-99');">
 <form  method="post" name="frmAltaCurso" id="frmAltaCurso">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="2" class="thDef">Alta Curso</td>
   </tr>
   <tr>
-    <td width="21%" class="tdDef">Nombre</td>
-    <td width="79%" class="tdDef"><span id="txtValNombre">
+    <td style="width:21%" class="tdDef">Nombre</td>
+    <td style="width:79%" class="tdDef"><span id="txtValNombre">
       <input name="txtNombre" type="text" id="txtNombre" tabindex="1" value="<%=cursoVO.getNomCur()%>" size="75" maxlength="150" />
       <span class="textfieldRequiredMsg">*</span></span></td>
   </tr>

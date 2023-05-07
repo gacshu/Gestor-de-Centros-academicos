@@ -12,7 +12,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -194,15 +194,15 @@ if(errAltaCurso == -1){%>
   </div>
 </div>
 <form action="./cursosFichaAlumno.jsp" method="post" name="frmGestionaCursos" target="_self" id="frmGestionaCursos">
-  <table width="90%" border="0" align="center">
+  <table style="width:90%" border="0" align="center">
   <tr>
-  	<td width="68%" valign="top"><div>
-  	  <table width="90%" border="0" class="tablaCursos">
+  	<td style="width:68%" valign="top"><div>
+  	  <table style="width:90%" border="0" class="tablaCursos">
   	    <tr>
-  	      <td width="36%"><strong>Curso</strong></td>
-  	      <td width="37%"><strong>Nombre Nivel</strong></td>
-  	      <td width="18%">&nbsp;</td>
-  	      <td width="9%">&nbsp;</td>
+  	      <td style="width:36%"><strong>Curso</strong></td>
+  	      <td style="width:37%"><strong>Nombre Nivel</strong></td>
+  	      <td style="width:18%">&nbsp;</td>
+  	      <td style="width:9%">&nbsp;</td>
 	      </tr>
 
               <%for(int ind = 0; ind<listCurAlu.size();ind++)
@@ -210,22 +210,22 @@ if(errAltaCurso == -1){%>
                   curAluVO = (CursosAluVO) listCurAlu.elementAt(ind);
               %>
               <tr>
-                  <td width="36%"><%=CursosGestion.devolverDatosCurso(curAluVO.getIdCur()).getNomCur()%></td>
-                  <td width="37%"><%=NivelesGestion.devolverDatosNivel(curAluVO.getIdNiv()).getNomNiv()%></td>
-  	          <td width="18%"><input type="button" name="btnMat<%=ind%>" id="btnMat<%=ind%>" value="Matricular" onclick="parent.cargaPaginaMat('<%=aluVO.getIdAlu()%>','<%=curAluVO.getIdCur()%>');" /></td>
-  	          <td width="9%">
+                  <td style="width:36%"><%=CursosGestion.devolverDatosCurso(curAluVO.getIdCur()).getNomCur()%></td>
+                  <td style="width:37%"><%=NivelesGestion.devolverDatosNivel(curAluVO.getIdNiv()).getNomNiv()%></td>
+  	          <td style="width:18%"><input type="button" name="btnMat<%=ind%>" id="btnMat<%=ind%>" value="Matricular" onclick="parent.cargaPaginaMat('<%=aluVO.getIdAlu()%>','<%=curAluVO.getIdCur()%>');" /></td>
+  	          <td style="width:9%">
   	            <input type="button" name="btnEli<%=ind%>" id="btnEli<%=ind%>2" value="Eliminar" onclick="window.open('../DarBajaCursoInteresAlumnoServlet?codInteresado=<%=aluVO.getIdAlu()%>&codCurso=<%=curAluVO.getIdCur()%>&codNiv=<%=curAluVO.getIdNiv()%>','_self','')"/>
   	            </td>
 	      </tr>
               <%}%>
 	    </table>
   	</div></td>    
-  	<td width="32%"><div><table width="90%" border="0">
+  	<td style="width:32%"><div><table style="width:90%" border="0">
   <tr>
     <td colspan="3" class="thDef">Cursos Disponibles</td>
     </tr>
   <tr>
-    <td width="35%">Tipo Curso</td>
+    <td style="width:35%">Tipo Curso</td>
     <td colspan="2"><select name="lstTipCurso" id="lstTipCurso" onchange="cargarComboCursos();" style="width:250px">
     </select></td>
   </tr>
@@ -242,7 +242,7 @@ if(errAltaCurso == -1){%>
   </tr>
   <tr>
     <td colspan="2" class="cellBtnSub"><input type="button" name="btnVerDatCur" id="btnVerDatCur" value="Ver Datos Curso" onclick="mostrarDatosCurso();"/></td>
-    <td width="46%" class="cellBtnSub"><input type="button" name="btnAnadir" id="btnAnadir" value="Añadir" onclick="insertarCurso();" /></td>
+    <td style="width:46%" class="cellBtnSub"><input type="button" name="btnAnadir" id="btnAnadir" value="Añadir" onclick="insertarCurso();" /></td>
   </tr>
     </table>
 </div></td>

@@ -11,7 +11,7 @@
 <%@page import  = "java.util.Vector"%>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -200,13 +200,13 @@ function cargarCombosAreas(idArea)
 <%}}%>
 
 <form action="" method="post" name="frmModulos" id="frmModulos">
-<table width="82%" border="0" align="center" class="tablaListados">
+<table style="width:82%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
-    <td width="26%" class="tdDef"><strong>Nombre</strong></td>
-    <td width="33%" class="tdDef"><strong>Descripci&oacute;n</strong></td>
+    <td style="width:26%" class="tdDef"><strong>Nombre</strong></td>
+    <td style="width:33%" class="tdDef"><strong>Descripci&oacute;n</strong></td>
     <td             class="tdDef"><strong>&Aacute;rea</strong></td>
     <td colspan="3" class="tdDef"><strong>Horas</strong></td>
-    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" width="30" height="30" onclick="txtNuevoNombre.style.visibility='visible';txtNuevoDescrip.style.visibility='visible';lstNuevoArea.style.visibility='visible'; txtNuevoHoras.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
+    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="txtNuevoNombre.style.visibility='visible';txtNuevoDescrip.style.visibility='visible';lstNuevoArea.style.visibility='visible'; txtNuevoHoras.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       modVO = (ModulosVO) vecMod.elementAt(ind);
@@ -214,14 +214,14 @@ function cargarCombosAreas(idArea)
   <tr class="tdDef">
     <td class="tdDef"><input name="txtNombre<%=modVO.getCodMod()%>" type="text" disabled="disabled" id="txtNombre<%=modVO.getCodMod()%>" value="<%=modVO.getNombre()%>" size="45" maxlength="100" /></td>
       <td><textarea name="txtDescrip<%=modVO.getCodMod()%>" cols="50" rows="2" disabled="disabled" id="txtDescrip<%=modVO.getCodMod()%>"><%=modVO.getDescripcion()%></textarea></td>
-      <td width="16%">
+      <td style="width:16%">
         <select name="lstAreas<%=modVO.getCodMod()%>" id="lstArea<%=modVO.getCodMod()%>" disabled="disabled"></select></td>
-      <td width="8%"><input name="txtHoras<%=modVO.getCodMod()%>" type="text" disabled="disabled" id="txtHoras<%=modVO.getCodMod()%>" value="<%=modVO.getNumHoras()%>" size="5" maxlength="4" /></td>
-      <td width="4%" class="center"><input name="btnEdiMod<%=modVO.getCodMod()%>" type="button" id="btnEdiMod<%=modVO.getCodMod()%>" value="E" onclick="editaMod('<%=modVO.getCodMod()%>')" disabled="disabled"/></td>
-      <td width="4%"><img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=modVO.getCodMod()%>');" style="cursor:pointer"/></td>
-      <td width="9%" class="center">
+      <td style="width:8%"><input name="txtHoras<%=modVO.getCodMod()%>" type="text" disabled="disabled" id="txtHoras<%=modVO.getCodMod()%>" value="<%=modVO.getNumHoras()%>" size="5" maxlength="4" /></td>
+      <td style="width:4%" class="center"><input name="btnEdiMod<%=modVO.getCodMod()%>" type="button" id="btnEdiMod<%=modVO.getCodMod()%>" value="E" onclick="editaMod('<%=modVO.getCodMod()%>')" disabled="disabled"/></td>
+      <td style="width:4%"><img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=modVO.getCodMod()%>');" style="cursor:pointer"/></td>
+      <td style="width:9%" class="center">
           <%//if(! EdicionesGestion.estaNivelenEdicion(nivVO.getIdNiv())){%>
-            <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaModulo('<%=modVO.getCodMod()%>','<%=indInf%>','<%=modVO.getCodCur()%>');" style="cursor:pointer"/>
+            <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaModulo('<%=modVO.getCodMod()%>','<%=indInf%>','<%=modVO.getCodCur()%>');" style="cursor:pointer"/>
           <%//}%>
       </td>
   </tr>
@@ -246,12 +246,12 @@ function cargarCombosAreas(idArea)
   <tr>
     <td colspan="2" class="center">
       <%if( indInf >= 5){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('gestionModulos.jsp?codCurso=<%=codCur%>&valInfMod=<%=(indInf - 5)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('gestionModulos.jsp?codCurso=<%=codCur%>&valInfMod=<%=(indInf - 5)%>','_self','');">
       <%}%>
       </td>
     <td colspan="3" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecMod.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('gestionModulos.jsp?codCurso=<%=codCur%>&valInfMod=<%=(indInf + 5)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('gestionModulos.jsp?codCurso=<%=codCur%>&valInfMod=<%=(indInf + 5)%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>

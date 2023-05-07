@@ -10,7 +10,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -165,18 +165,18 @@ function cerrarListadoAluEdi()
 
 <body class="fondoFormularios">
 <div id="lstAlumnos" title="Listado Alumnos">
-   <iframe name="fraList"     id="fraList"     frameborder="0" src="" width="100%" height="500" scrolling="no"> </iframe>
+   <iframe name="fraList"     id="fraList"     frameborder="0" src="" style="width:100%" height="500" scrolling="no"> </iframe>
 </div>
 <form action="" method="post" name="frmlistEdiCur" target="_self" class="fondoFormularios" id="frmlistEdiCur">
-  <table width="90%" border="0">
+  <table style="width:90%" border="0">
     <tr>
-      <td width="21%" rowspan="2" class="tdDef"><strong>Descripci&oacute;n</strong></td>
-    <td width="8%" rowspan="2" class="tdDef"><strong>Fecha Inicio</strong></td>
-    <td width="7%" rowspan="2" class="tdDef"><strong>Fecha Fin</strong></td>
-    <td width="5%" rowspan="2" class="tdDef"><strong>Plazas</strong></td>
+      <td style="width:21%" rowspan="2" class="tdDef"><strong>Descripci&oacute;n</strong></td>
+    <td style="width:8%" rowspan="2" class="tdDef"><strong>Fecha Inicio</strong></td>
+    <td style="width:7%" rowspan="2" class="tdDef"><strong>Fecha Fin</strong></td>
+    <td style="width:5%" rowspan="2" class="tdDef"><strong>Plazas</strong></td>
     <td colspan="2" class="cellBtnSub"><strong class="tdDef">Precio</strong></td>
-    <td width="6%" rowspan="2" class="tdDef"><strong>M&oacute;dulos</strong></td>
-    <td width="30%" rowspan="2" class="tdDef"><strong>N&uacute;m Alumnos</strong></td>
+    <td style="width:6%" rowspan="2" class="tdDef"><strong>M&oacute;dulos</strong></td>
+    <td style="width:30%" rowspan="2" class="tdDef"><strong>N&uacute;m Alumnos</strong></td>
     </tr>
     <tr>
       <td class="cellBtnSub"><strong>Matricula</strong></td>
@@ -194,10 +194,10 @@ function cerrarListadoAluEdi()
             <td><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecIn())%></td>
             <td><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecFi())%></td>
             <td><%=ediVO.getNumPla()%></td>
-            <td width="8%">
+            <td style="width:8%">
                                 <%if(ediVO.getPrecioM()>0){ %><%=new DecimalFormat("0.00").format(ediVO.getPrecioM())%>
               <%}else{%>Sin Coste<%}%></td>
-            <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer" width="10%">
+            <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer" style="width:10%">
                                 <%if(ediVO.getPrecioR()>0){ %><%=new DecimalFormat("0.00").format(ediVO.getPrecioR())%><%}else{%>Sin Coste<%}%></td>
             <td>&nbsp;</td>
             <td><input name="btnAlu<%=ind%>" type="button" value="<%=AluEdiGestion.devNumAluEdi(ediVO.getIdEdi())%>" onClick="abrirListadoAluEdi('<%=ediVO.getIdEdi()%>');" />
@@ -206,10 +206,10 @@ function cerrarListadoAluEdi()
         </tr>
       <%}%>
 </table>
-<table width="90%" border="0">
+<table style="width:90%" border="0">
 <tr>
-        <td width="55%" height="40" class="cellBtnSub" scope="col"><%if(indInf > 0){%><a href="./listEdiCursoProf.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf-10%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="35" height="35" border="0" /></a><%}%></td>
-      <td class="cellBtnSub" scope="col"><%if(indSup < vecEdi.size()){%><a href="./listEdiCursoProf.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf+10%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="35" height="35" border="0" /></a><%}%></td>
+        <td style="width:55%" height="40" class="cellBtnSub" scope="col"><%if(indInf > 0){%><a href="./listEdiCursoProf.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf-10%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:35" height="35" border="0" /></a><%}%></td>
+      <td class="cellBtnSub" scope="col"><%if(indSup < vecEdi.size()){%><a href="./listEdiCursoProf.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf+10%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:35" height="35" border="0" /></a><%}%></td>
     </tr>
 </table>
 

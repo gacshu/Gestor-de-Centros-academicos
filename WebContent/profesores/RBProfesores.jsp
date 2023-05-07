@@ -7,7 +7,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Resultado Búsqueda Interesados</title>
@@ -95,7 +95,7 @@ function cargaMailing()
 
 <body class="fondoFormularios">
 <div id="mailing" title="Mailing">
-    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" width="100%" height="700" scrolling="no"> </iframe>
+    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
 <table style="width: 100%; font-size: 10pt; font-family: tahoma;">
             <tr>
@@ -104,25 +104,25 @@ function cargaMailing()
             </tr>
              <tr>
                 <td height="69" style="width: 374px">
-                    <img  onmouseover="this.src='../imagenes/anadeusrGr.png'" onmouseout="this.src='../imagenes/anadeusrPe.png'" src="../imagenes/anadeusrPe.png" width="64" height="64" onclick="window.open('./altaProfesor.jsp','_self','');"/>
-                    <img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     width="64" height="64" onclick="cargaMailing();" />
-                    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('../ImpLisProfServlet','_listaAlu','');"/></td>
+                    <img  onmouseover="this.src='../imagenes/anadeusrGr.png'" onmouseout="this.src='../imagenes/anadeusrPe.png'" src="../imagenes/anadeusrPe.png" style="width:64" height="64" onclick="window.open('./altaProfesor.jsp','_self','');"/>
+                    <img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     style="width:64" height="64" onclick="cargaMailing();" />
+                    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('../ImpLisProfServlet','_listaAlu','');"/></td>
                 <td style="text-align: right; margin-left: 80px">&nbsp;</td>
                 <td style="text-align: right; margin-left: 80px">&nbsp;
               </td>
             </tr>
             </table>
                                                  
-<table width="100%" class="tablaListadoExtensa"> 
+<table style="width:100%" class="tablaListadoExtensa"> 
             <tr>
-                <td width="280"><span class="tablaListadoExtensaCabecera">
+                <td style="width:280"><span class="tablaListadoExtensaCabecera">
                   Nombre</span></td>
-                <td width="169"><span class="tablaListadoExtensaCabecera">
+                <td style="width:169"><span class="tablaListadoExtensaCabecera">
                   Móvil</span></td>
-                <td width="177"><span class="tablaListadoExtensaCabecera">
+                <td style="width:177"><span class="tablaListadoExtensaCabecera">
                   Teléfono</span></td>
-                <td width="408"><span class="tablaListadoExtensaCabecera">&Aacute;reas.</span></td>
-                <td width="371"><span class="tablaListadoExtensaCabecera">
+                <td style="width:408"><span class="tablaListadoExtensaCabecera">&Aacute;reas.</span></td>
+                <td style="width:371"><span class="tablaListadoExtensaCabecera">
                   Cursos</span></td>
   </tr>
       <%for (int ind = valInf; ind < valSup; ind++)
@@ -141,11 +141,11 @@ function cargaMailing()
             </tr>
 <%} %>
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-        <td width="27%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./RBProfesores.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-        <td width="46%" class="cellBtnSub" scope="col"><%=profBusq.size()%> &nbsp;registros</td>
-        <td width="27%" class="cellBtnSub" scope="col"><%if(valSup < profBusq.size()){%><a href="./RBProfesores.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:27%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./RBProfesores.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+        <td style="width:46%" class="cellBtnSub" scope="col"><%=profBusq.size()%> &nbsp;registros</td>
+        <td style="width:27%" class="cellBtnSub" scope="col"><%if(valSup < profBusq.size()){%><a href="./RBProfesores.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
       </tr>
 </table>
     <p>&nbsp;</p>

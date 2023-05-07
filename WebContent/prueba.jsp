@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es" xml:lang="es" lang="en">
 <head>
     <meta charset="utf-8" />
     <title>jQuery UI Dialog - Modal form</title>

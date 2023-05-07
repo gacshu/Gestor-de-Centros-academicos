@@ -10,7 +10,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -203,13 +203,13 @@ if(errAltaCurso == -1){%>
   </div>
 </div>
 <form action="./cursosFichaAlumno.jsp" method="post" name="frmGestionaCursos" target="_self" id="frmGestionaCursos">
-  <table width="33%" border="0" align="center">
+  <table style="width:33%" border="0" align="center">
   		<tr>
   			<td colspan="3" class="thDef">Cursos Disponibles</td>
   		</tr>
   		<tr>
-          	<td width="41%" class="tdDef">Tipo</td>
-          	<td width="59%" colspan="2">
+          	<td style="width:41%" class="tdDef">Tipo</td>
+          	<td style="width:59%" colspan="2">
   				<select name="lstTipCurso" class="tdDef" id="lstTipCurso" style="width:250px" onchange="cargarComboCursos();"></select>
   		  	</td>
   		</tr>

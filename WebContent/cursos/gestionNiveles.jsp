@@ -12,7 +12,7 @@
 <%@page import  = "java.util.Vector"%>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -170,11 +170,11 @@ function bajaNivel(codNivel,valInfNivel,codCurso)
 <%}}%>
 
 <form action="" method="post" name="frmNiveles" id="frmNiveles">
-<table width="82%" border="0" align="center" class="tablaListados">
+<table style="width:82%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
-    <td width="41%" class="tdDef"><strong>Nombre</strong></td>
+    <td style="width:41%" class="tdDef"><strong>Nombre</strong></td>
     <td colspan="3" class="tdDef"><strong>Contenidos</strong></td>
-    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" width="30" height="30" onclick="txtNuevoNombre.style.visibility='visible';txtNuevoCont.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
+    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="txtNuevoNombre.style.visibility='visible';txtNuevoCont.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       nivVO = (NivelesVO) vecNiv.elementAt(ind);
@@ -182,11 +182,11 @@ function bajaNivel(codNivel,valInfNivel,codCurso)
   <tr class="tdDef">
     <td class="tdDef"><input name="txtNombre<%=nivVO.getIdNiv()%>" type="text" disabled="disabled" id="txtNombre<%=nivVO.getIdNiv()%>" value="<%=nivVO.getNomNiv()%>" size="45" maxlength="100" /></td>
       <td colspan="2"><textarea name="txtContenidos<%=nivVO.getIdNiv()%>" cols="50" rows="2" disabled="disabled" id="txtContenidos<%=nivVO.getIdNiv()%>"><%=nivVO.getContenidos()%></textarea></td>
-      <td width="2%" class="center"><input name="btnEdiNivel<%=nivVO.getIdNiv()%>" type="button" id="btnEdiNivel<%=nivVO.getIdNiv()%>" value="E" onclick="editaNivel('<%=nivVO.getIdNiv()%>')" disabled="disabled"/></td>
-      <td width="5%"><img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=nivVO.getIdNiv()%>');" style="cursor:pointer"/></td>
-      <td width="12%" class="center">
+      <td style="width:2%" class="center"><input name="btnEdiNivel<%=nivVO.getIdNiv()%>" type="button" id="btnEdiNivel<%=nivVO.getIdNiv()%>" value="E" onclick="editaNivel('<%=nivVO.getIdNiv()%>')" disabled="disabled"/></td>
+      <td style="width:5%"><img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=nivVO.getIdNiv()%>');" style="cursor:pointer"/></td>
+      <td style="width:12%" class="center">
           <%if(! EdicionesGestion.estaNivelenEdicion(nivVO.getIdNiv())){%>
-            <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaNivel('<%=nivVO.getIdNiv()%>','<%=indInf%>','<%=nivVO.getCodCur()%>');" style="cursor:pointer"/>
+            <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaNivel('<%=nivVO.getIdNiv()%>','<%=indInf%>','<%=nivVO.getCodCur()%>');" style="cursor:pointer"/>
           <%}%>
       </td>
   </tr>
@@ -205,12 +205,12 @@ function bajaNivel(codNivel,valInfNivel,codCurso)
   <tr>
     <td height="30" colspan="2" class="center">
       <%if( indInf >= 5){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('gestionNiveles.jsp?codCurso=<%=codCur%>&valInfNiv=<%=(indInf - 5)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('gestionNiveles.jsp?codCurso=<%=codCur%>&valInfNiv=<%=(indInf - 5)%>','_self','');">
       <%}%>
       </td>
     <td colspan="2" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecNiv.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('gestionNiveles.jsp?codCurso=<%=codCur%>&valInfNiv=<%=(indInf + 5)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('gestionNiveles.jsp?codCurso=<%=codCur%>&valInfNiv=<%=(indInf + 5)%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>

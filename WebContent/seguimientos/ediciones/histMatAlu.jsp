@@ -8,7 +8,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Resultado Búsqueda Interesados</title>
@@ -79,7 +79,7 @@
             </tr>
              <tr>
                 <td height="69" style="width: 374px">
-                    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('../ImpHistMatServlet','_listaAlu','');"/>
+                    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('../ImpHistMatServlet','_listaAlu','');"/>
                 </td>
                 <td style="text-align: right; margin-left: 80px">&nbsp;</td>
                 <td style="text-align: right; margin-left: 80px">&nbsp;
@@ -87,15 +87,15 @@
             </tr>
             </table>
                                                  
-<table width="100%" class="tablaListadoExtensa"> 
+<table style="width:100%" class="tablaListadoExtensa"> 
             <tr>
-                <td width="235"><span class="tablaCursos">
+                <td style="width:235"><span class="tablaCursos">
                 Nombre</span></td>
-                <td width="120"><span class="tablaCursos">
+                <td style="width:120"><span class="tablaCursos">
                 Móvil</span></td>
-                <td width="120"><span class="tablaCursos">
+                <td style="width:120"><span class="tablaCursos">
                 Teléfono</span></td>
-                <td width="285"><span class="tablaCursos">
+                <td style="width:285"><span class="tablaCursos">
                 Correo Elect.</span></td>
   </tr>
       <%
@@ -130,10 +130,10 @@
             </tr>
 <%}}%>
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-        <td width="55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./histMatAlu.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-        <td width="45%" class="cellBtnSub" scope="col"><%if(valSup < listBusq.size()){%><a href="./histMatAlu.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./histMatAlu.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+        <td style="width:45%" class="cellBtnSub" scope="col"><%if(valSup < listBusq.size()){%><a href="./histMatAlu.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
       </tr>
 </table>
     <p>&nbsp;</p>

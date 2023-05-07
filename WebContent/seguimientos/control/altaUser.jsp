@@ -4,7 +4,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir aula</title>
@@ -133,12 +133,12 @@ function cargarCombosProfesores(idProf)
 
 <body class="fondoFormularios" onload="cargarComboCentros('-99');">
 <form id="frmAltaUser" name="frmAltaUser" method="post" action="">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="4" class="thDef">Añadir Usuario</td>
   </tr>
   <tr class="tdDef">
-    <td width="13%" class="tdDef">Usuario</td>
+    <td style="width:13%" class="tdDef">Usuario</td>
     <td colspan="3" class="tdDef"><label for="txtUser"></label>
       <span id="valUser">
         <input name="txtUser" type="text" id="txtUser" size="15" maxlength="8" />
@@ -146,7 +146,7 @@ function cargarCombosProfesores(idProf)
     </tr>
   <tr class="tdDef">
     <td>Password</td>
-    <td width="17%">
+    <td style="width:17%">
       <label for="txtPass"></label>
       <span id="valPass">
       <label for="txtPass"></label>
@@ -154,8 +154,8 @@ function cargarCombosProfesores(idProf)
       <span class="passwordRequiredMsg">*</span>
       <span class="passwordMinCharsMsg">*</span>
       <span class="passwordMaxCharsMsg">*</span></span></td>
-    <td width="17%">Confirmar Password</td>
-    <td width="53%"><span id="valConfPass">
+    <td style="width:17%">Confirmar Password</td>
+    <td style="width:53%"><span id="valConfPass">
       <label for="txtConfPass"></label>
       <input name="txtConfPass" type="password" id="txtConfPass" size="15" maxlength="8" />
       <span class="confirmRequiredMsg">*</span><span class="confirmInvalidMsg">*</span></span></td>

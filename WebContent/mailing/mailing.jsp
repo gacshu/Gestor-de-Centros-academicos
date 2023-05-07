@@ -9,7 +9,7 @@
 
 <%@page import="java.util.Vector"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Mailing</title>
@@ -295,9 +295,9 @@ function quitarFichero()
  
 <body class="fondoFormularios">
 <form action="" method="post" name="frmMail" id="frmMail">
-<table width="100%" border="0">
+<table style="width:100%" border="0">
   <tr class="tdDef">
-    <td width="15%" height="88" valign="top" class="tdDef">Destinatarios</td>
+    <td style="width:15%" height="88" valign="top" class="tdDef">Destinatarios</td>
     <td colspan="2" class="tdDef"><textarea name="txtDest" cols="100" rows="8" readonly="readonly" id="txtDest"><%=listDestFor%></textarea></td>
   </tr>
   <tr class="tdDef">
@@ -318,8 +318,8 @@ function quitarFichero()
   </tr>
   <tr>
     <td class="tdDef">Adjuntar Archivo</td>
-    <td width="49%" class="tdDef"><iframe src="./subirFic.jsp" width="600px" height="48px" frameborder="0"></iframe></td>
-    <td width="36%"  class="tdDef">
+    <td style="width:49%" class="tdDef"><iframe src="./subirFic.jsp" style="width:600px" height="48px" frameborder="0"></iframe></td>
+    <td style="width:36%"  class="tdDef">
       <select name="lstArchivos" size="4" id="lstArchivos" style="width:150px"></select>
       <br>	
         <input class="cellBtnSub" type="button" name="btnEliArc" id="btnEliArc" value="Elimina Archivo" onclick="quitarFichero();" />

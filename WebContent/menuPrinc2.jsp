@@ -6,7 +6,7 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <%@ include file="controlAcceso/includeComAut.jsp"%>
 <%
@@ -32,7 +32,7 @@
 
 <body class="fondoFormularios">
 
-<table width="" border="0">
+<table style="width:" border="0">
   <tr>
    <td>
        <%//if (! mostrarPendientes){%>
@@ -47,20 +47,20 @@
 <div id="menuAlumnos" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Alumnos</div>
   <div class="CollapsiblePanelContent">
-    <table width="90%" border="0" style="font-size:large">
+    <table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./interesados/busquedaInter.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Buscar</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Buscar</td>
       </tr>
     </table>
   </div>
 </div>
 <div id="menuAulas" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Aulas</div>
-  <div class="CollapsiblePanelContent"><table width="90%" border="0" style="font-size:large">
+  <div class="CollapsiblePanelContent"><table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./aulas/anaAula.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Añadir</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Añadir</td>
       </tr>
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./aulas/busAula.jsp' , 'fraPrincipal' , '')">
         <td>&nbsp;</td>
@@ -72,7 +72,7 @@
 <div id="menuCursos" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Cursos</div>
   <div class="CollapsiblePanelContent">
-    <table width="90%" border="0" style="font-size:large">
+    <table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/altaCurso.jsp' , 'fraPrincipal' , '')">
         <td>&nbsp;</td>
         <td>Añadir</td>
@@ -88,8 +88,8 @@
       </tr>
       -->
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/visAluCur.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Interesados</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Interesados</td>
       </tr>
        <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./ResumenEdicionesServlet' , '_rescur' , '')">
         <td>&nbsp;</td>
@@ -103,10 +103,10 @@
         <td>&nbsp;</td>
         <td><div id="menuTipoCurso" class="CollapsiblePanel">
           <div class="CollapsiblePanelTab" tabindex="0">Tipo Curso</div>
-          <div class="CollapsiblePanelContent"><table width="90%" border="0">
+          <div class="CollapsiblePanelContent"><table style="width:90%" border="0">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/altaTipCur.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Añadir</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Añadir</td>
       </tr>
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/ediTipCur.jsp' , 'fraPrincipal' , '')">
         <td>&nbsp;</td>
@@ -130,10 +130,10 @@
 <div id="menuModulos" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">&Aacute;reas</div>
   <div class="CollapsiblePanelContent">
-    <table width="90%" border="0" style="font-size:large">
+    <table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/altaArea.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Añadir</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Añadir</td>
       </tr>
        <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/ediArea.jsp' , 'fraPrincipal' , '')">
         <td>&nbsp;</td>
@@ -145,10 +145,10 @@
 <div id="menuProfesores" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Profesores</div>
   <div class="CollapsiblePanelContent">
-    <table width="90%" border="0" style="font-size:large">
+    <table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./profesores/altaProfesor.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Añadir</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Añadir</td>
       </tr>
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./profesores/busqProf.jsp' , 'fraPrincipal' , '')">
         <td>&nbsp;</td>
@@ -160,10 +160,10 @@
 <div id="menuEmpresas" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Empresas</div>
   <div class="CollapsiblePanelContent">
-    <table width="90%" border="0" style="font-size:large">
+    <table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./empresas/altaEmp.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Alta</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Alta</td>
       </tr>
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./empresas/busqEmp.jsp' , 'fraPrincipal' , '')">
         <td>&nbsp;</td>
@@ -175,10 +175,10 @@
 <div id="menuRecibos" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Recibos</div>
   <div class="CollapsiblePanelContent">
-    <table width="90%" border="0" style="font-size:large">
+    <table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./ediciones/busRec.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Histórico Recibos</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Histórico Recibos</td>
       </tr>
     </table>
   </div>
@@ -188,14 +188,14 @@
 <div id="menCentros" class="CollapsiblePanel">
   <div class="CollapsiblePanelTab" tabindex="0">Centros</div>
   <div class="CollapsiblePanelContent">
-  	<table width="90%" border="0" style="font-size:large">
+  	<table style="width:90%" border="0" style="font-size:large">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./centros/altaCentro.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Añadir</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Añadir</td>
       </tr>
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./centros/ediCentro.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Editar</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Editar</td>
       </tr>
     </table>
   </div>

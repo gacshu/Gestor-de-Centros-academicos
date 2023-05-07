@@ -9,7 +9,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <title>Alta Profesor</title>
@@ -173,7 +173,7 @@ function cargaCombos()
 
 
 <form action="../AltaProfesorServlet" method="post" name="frmAltaProfesor" target="_self" id="frmAltaProfesor">
-  <table width="100%" border="0" class="tdDef">
+  <table style="width:100%" border="0" class="tdDef">
   <tr class="thDef">
     <th height="33" colspan="6" scope="col">Alta Profesor</th>
   </tr>
@@ -184,14 +184,14 @@ function cargaCombos()
     <td colspan="6" bgcolor="#FFFFFF"><span class="colorTextoBotPest"><strong>Datos Personales</strong></span></td>
   </tr>
   <tr>
-    <td width="2%" rowspan="7" bgcolor="#FFFFFF">&nbsp;</td>
-    <td width="11%">Nombre</td>
-    <td width="31%"><span id="valNombre">
+    <td style="width:2%" rowspan="7" bgcolor="#FFFFFF">&nbsp;</td>
+    <td style="width:11%">Nombre</td>
+    <td style="width:31%"><span id="valNombre">
       <input name="txtNombre" type="text" id="txtNombre" value="<%=profVO.getNombre()%>" size="25" maxlength="15" />
       <span class="textfieldRequiredMsg">*</span></span></td>
-    <td width="2%">&nbsp;</td>
-    <td width="11%">Apellidos</td>
-    <td width="43%"><span id="valApellidos">
+    <td style="width:2%">&nbsp;</td>
+    <td style="width:11%">Apellidos</td>
+    <td style="width:43%"><span id="valApellidos">
       <input name="txtApellidos" type="text" id="txtApellidos" value="<%=profVO.getApellidos()%>" size="40" maxlength="31" />
       <span class="textfieldRequiredMsg">*</span></span></td>
   </tr>

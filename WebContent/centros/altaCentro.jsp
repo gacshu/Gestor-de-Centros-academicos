@@ -3,7 +3,7 @@
 
 <%@page import="es.jahernandez.datos.CentrosVO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir tipo curso</title>
@@ -70,12 +70,12 @@ function validaForm()
 
 <body class="fondoFormularios">
 <form id="frmAltaCentro" name="frmAltaCentro" method="post" action="">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="2" class="thDef">A&ntilde;adir Centro</td>
   </tr>
   <tr class="tdDef">
-    <td width="8%" class="tdDef">Nombre</td>
+    <td style="width:8%" class="tdDef">Nombre</td>
     <td class="tdDef">
       <span id="txtValNombre">
         <input name="txtNombre" type="text" id="txtNombre" value="<%=cenVO.getNombreCentro()%>" size="50" maxlength="30" />

@@ -6,7 +6,7 @@
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 <%@ page import = "java.util.Vector"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir Curso</title>
@@ -245,22 +245,22 @@ function nuevaEdicion()
 
 <body class="fondoFormularios"  onload="cargarComboTipoCurso('<%=cursoVO.getTipCur()%>');cargarComboCentros('<%=cursoVO.getCenCurso()%>');">
 <div id="lstAlumnos" title="Listado Alumnos">
-   <iframe name="fraList"     id="fraList"     frameborder="0" src="" width="100%" height="500" scrolling="no"> </iframe>
+   <iframe name="fraList"     id="fraList"     frameborder="0" src="" style="width:100%" height="500" scrolling="no"> </iframe>
 </div>
 <div id="lstMod" title="Listado Módulos">
-   <iframe name="fraMod"     id="fraMod"     frameborder="0" src="" width="100%" height="500" scrolling="no"> </iframe>
+   <iframe name="fraMod"     id="fraMod"     frameborder="0" src="" style="width:100%" height="500" scrolling="no"> </iframe>
 </div>
 
 
 
 <form  method="post" name="frmAltaCurso" id="frmAltaCurso">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="2" class="thDef">Datos Curso</td>
   </tr>
   <tr>
-    <td width="13%" class="tdDef">Nombre</td>
-    <td width="87%" class="tdDef"><span id="txtValNombre">
+    <td style="width:13%" class="tdDef">Nombre</td>
+    <td style="width:87%" class="tdDef"><span id="txtValNombre">
       <input name="txtNombre" type="text" id="txtNombre" tabindex="1" value="<%=cursoVO.getNomCur()%>" size="75" maxlength="150" />
       <span class="textfieldRequiredMsg">*</span></span>
       <input name="hidCodCurso" type="hidden" id="hidCodCurso" value="<%=cursoVO.getIdCur()%>" /></td>
@@ -296,12 +296,12 @@ function nuevaEdicion()
       <li class="TabbedPanelsTab" tabindex="0"><span class="colorTextoBotPest">Ediciones</span></li>
     </ul>
     <div class="TabbedPanelsContentGroup">
-      <div class="TabbedPanelsContent"><iframe id="fraPestNiv" frameborder="0" src="gestionNiveles.jsp?codCurso=<%=cursoVO.getIdCur()%>" width="100%" height="500" > </iframe></div>
+      <div class="TabbedPanelsContent"><iframe id="fraPestNiv" frameborder="0" src="gestionNiveles.jsp?codCurso=<%=cursoVO.getIdCur()%>" style="width:100%" height="500" > </iframe></div>
       <div class="TabbedPanelsContent">
-        <iframe id="fraPestMod" frameborder="0" src="gestionModulos.jsp?codCurso=<%=cursoVO.getIdCur()%>" width="100%" height="500" > </iframe>
+        <iframe id="fraPestMod" frameborder="0" src="gestionModulos.jsp?codCurso=<%=cursoVO.getIdCur()%>" style="width:100%" height="500" > </iframe>
       </div>
       <div class="TabbedPanelsContent">
-		<iframe id="fraPestMod" frameborder="0" src="../ediciones/listEdiCurso.jsp?codCur=<%=cursoVO.getIdCur()%>&urlDes=1" width="100%" height="500" > </iframe>     
+		<iframe id="fraPestMod" frameborder="0" src="../ediciones/listEdiCurso.jsp?codCur=<%=cursoVO.getIdCur()%>&urlDes=1" style="width:100%" height="500" > </iframe>     
       </div>
     </div>
   </div>

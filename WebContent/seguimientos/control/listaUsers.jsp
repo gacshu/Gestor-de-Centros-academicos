@@ -8,7 +8,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Resultado Búsqueda Interesados</title>
@@ -94,23 +94,23 @@
             </tr>
              <tr>
                 <td height="69" style="width: 374px">
-               	<img  onmouseover="this.src='../imagenes/anadeusrGr.png'" onmouseout="this.src='../imagenes/anadeusrPe.png'" src="../imagenes/anadeusrPe.png" width="64" height="64" onclick="window.open('./altaUser.jsp?ind=<%=valInf%>','_self','');"/></td>
+               	<img  onmouseover="this.src='../imagenes/anadeusrGr.png'" onmouseout="this.src='../imagenes/anadeusrPe.png'" src="../imagenes/anadeusrPe.png" style="width:64" height="64" onclick="window.open('./altaUser.jsp?ind=<%=valInf%>','_self','');"/></td>
                 <td style="text-align: right; margin-left: 80px">&nbsp;</td>
                 <td style="text-align: right; margin-left: 80px">&nbsp;
               </td>
             </tr>
             </table>
                                                  
-<table width="100%" class="tablaListadoExtensa"> 
+<table style="width:100%" class="tablaListadoExtensa"> 
             <tr>
-                <td width="328"><span class="tablaListadoExtensaCabecera">
+                <td style="width:328"><span class="tablaListadoExtensaCabecera">
                   Nombre</span></td>
-                <td width="168"><span class="tablaListadoExtensaCabecera">
+                <td style="width:168"><span class="tablaListadoExtensaCabecera">
                   Usuario</span></td>
-                <td width="168"><span class="tablaListadoExtensaCabecera">
+                <td style="width:168"><span class="tablaListadoExtensaCabecera">
                   Nivel Acceso</span></td>
-                <td width="231"><span class="tablaListadoExtensaCabecera">Centro</span></td>
-                <td width="83"><span class="tablaListadoExtensaCabecera">
+                <td style="width:231"><span class="tablaListadoExtensaCabecera">Centro</span></td>
+                <td style="width:83"><span class="tablaListadoExtensaCabecera">
                   Activo</span></td>
   </tr>
       <%for (int ind = valInf; ind < valSup; ind++)
@@ -125,15 +125,15 @@
                 <td><%=userVO.getNivelAcceso()%></td>
                 <td><%=CentrosGestion.nomCentro(String.valueOf(userVO.getIdCentro()))%></td>
                 <td><%if (userVO.isActivo()){%>
-                  <img src="../imagenes/si.png" width="16" height="16" alt="X" />
+                  <img src="../imagenes/si.png" style="width:16" height="16" alt="X" />
                 <%}%></td>
             </tr>
 <%} %>
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-        <td width="55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./listaUsers.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-        <td width="45%" class="cellBtnSub" scope="col"><%if(valSup < listaUsers.size()){%><a href="./listaUsers.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./listaUsers.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+        <td style="width:45%" class="cellBtnSub" scope="col"><%if(valSup < listaUsers.size()){%><a href="./listaUsers.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
       </tr>
 </table>
     <p>&nbsp;</p>

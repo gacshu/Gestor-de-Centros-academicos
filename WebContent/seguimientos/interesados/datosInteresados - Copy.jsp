@@ -10,7 +10,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <title>Alta Interesados</title>
@@ -111,20 +111,20 @@ function cargaPaginaAltaEmpresa()
 
 
 <form action="./datosInteresados.jsp" method="post" name="frmFichaInteresado" target="_self" id="frmFichaInteresado">
-  <table width="100%" border="0">
+  <table style="width:100%" border="0">
   <tr class="thDef">
     <th height="50" colspan="3" scope="col">Ficha Interesado</th>
   </tr>
   <tr>
-    <td width="38%">
+    <td style="width:38%">
       <span id="txtValNombre">
       <input name="txtNombre" type="text" class="tdDef" id="txtNombre" value="<%=aluVO.getNombre()%>" size="50" maxlength="50" />
       <span class="textfieldRequiredMsg">*.</span><span class="textfieldInvalidFormatMsg">*</span></span>
     </td>
-    <td width="41%"><span id="txtValApe">
+    <td style="width:41%"><span id="txtValApe">
     <input name="txtApe" type="text" class="tdDef" id="txtApe" value="<%=aluVO.getAp1Alu()%>" size="50" maxlength="50" />
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
-    <td width="21%" class="tdDef"><span id="txtValFecNac">
+    <td style="width:21%" class="tdDef"><span id="txtValFecNac">
     <label>Fecha Nac.
         <input name="txtFecNac" type="text" id="txtFecNac" value="<%=new SimpleDateFormat("dd/MM/yyyy").format(aluVO.getFecNac())%>" />
     </label>
@@ -132,13 +132,13 @@ function cargaPaginaAltaEmpresa()
   </tr>
 </table>
 <br><br>
-<table width="100%" border="0" cellspacing="0">
+<table style="width:100%" border="0" cellspacing="0">
   <tr>
     <th class="tdDef" scope="col"><input name="btnDatPer" type="button" class="colorFondoPrincipalPestana" id="btnDatPer" value="Datos Personales" onclick="gestionPestana(1);" />
       <input name="btnCursos" type="button" class="colorFondoBtnDesactivado" id="btnCursos" value="Cursos" onclick="gestionPestana(2);"/> <input name="btnMatriculas" type="button" class="colorFondoBtnDesactivado" id="btnMatriculas" value="Matrículas" onclick="gestionPestana(3);"/></th>
   </tr>
   <tr>
-    <th align="left" scope="col"><iframe class="colorFondoPrincipalPestana" id="fraPestanas" frameborder="0" src="datPerFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" >
+    <th align="left" scope="col"><iframe class="colorFondoPrincipalPestana" id="fraPestanas" frameborder="0" src="datPerFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" >
     </iframe>&nbsp;</th>
   </tr>
   <tr>

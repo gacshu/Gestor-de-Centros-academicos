@@ -10,7 +10,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <title>Alta Interesados</title>
@@ -304,40 +304,40 @@ function desactBotRec()
 </script>
 
 <div id="nuevaEmpresa" title="Crear Nueva Empresa">
-   <iframe name="fraLogos"     id="fraLogos"     frameborder="0" src="../empresas/altaEmpInter.jsp?urlProc=2" width="100%" height="700" scrolling="no"> </iframe>
+   <iframe name="fraLogos"     id="fraLogos"     frameborder="0" src="../empresas/altaEmpInter.jsp?urlProc=2" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
 
 <div id="matAlumno" title="Matricular Alumno">
-   <iframe name="fraMat"     id="fraMat"     frameborder="0" src="" width="100%" height="300" scrolling="no"> </iframe>
+   <iframe name="fraMat"     id="fraMat"     frameborder="0" src="" style="width:100%" height="300" scrolling="no"> </iframe>
 </div>
 
 <div id="bajMatAlumno" title="Baja Alumno Edición">
-   <iframe name="fraBajMat"     id="fraBajMat"     frameborder="0" src="" width="100%" height="275" scrolling="no"> </iframe>
+   <iframe name="fraBajMat"     id="fraBajMat"     frameborder="0" src="" style="width:100%" height="275" scrolling="no"> </iframe>
 </div>
 
 <div id="liqRec" title="Liquidar Recibos">
-   <iframe name="fraLiqRec"     id="fraLiqRec"     frameborder="0" src="" width="100%" height="275" scrolling="no"> </iframe>
+   <iframe name="fraLiqRec"     id="fraLiqRec"     frameborder="0" src="" style="width:100%" height="275" scrolling="no"> </iframe>
 </div>
 
 <div id="altaCurso" title="Añadir curso interes alumno">
-   <iframe name="fraAnaCur"     id="fraAnaCur"     frameborder="0" src="" width="100%" height="600" scrolling="no"> </iframe>
+   <iframe name="fraAnaCur"     id="fraAnaCur"     frameborder="0" src="" style="width:100%" height="600" scrolling="no"> </iframe>
 </div>
 
 <form action="datosInteresados.jsp" method="post" name="frmFichaInteresado" target="_self" id="frmFichaInteresado">
-  <table width="100%" border="0">
+  <table style="width:100%" border="0">
   <tr class="thDef">
     <th height="50" colspan="3" scope="col">Ficha Interesado</th>
   </tr>
   <tr>
-    <td width="38%">
+    <td style="width:38%">
       <span id="txtValNombre">
       <input name="txtNombre" type="text" class="tdDef" id="txtNombre" value="<%=aluVO.getNombre()%>" size="50" maxlength="50" />
       <span class="textfieldRequiredMsg">*.</span><span class="textfieldInvalidFormatMsg">*</span></span>
     </td>
-    <td width="41%"><span id="txtValApe">
+    <td style="width:41%"><span id="txtValApe">
     <input name="txtApe" type="text" class="tdDef" id="txtApe" value="<%=aluVO.getAp1Alu()%>" size="50" maxlength="50" />
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
-    <td width="21%" class="tdDef"><span id="txtValFecNac">
+    <td style="width:21%" class="tdDef"><span id="txtValFecNac">
     <label>Fecha Nac.
         <input name="txtFecNac" type="text" id="txtFecNac" value="<%=new SimpleDateFormat("dd/MM/yyyy").format(aluVO.getFecNac())%>" />
     </label>
@@ -345,7 +345,7 @@ function desactBotRec()
   </tr>
 </table>
 <br><br>
-<table width="100%" border="0" cellspacing="0">
+<table style="width:100%" border="0" cellspacing="0">
   <tr>
     <th class="tdDef" scope="col"><div id="panelFichasAlu" class="TabbedPanels">
       <ul class="TabbedPanelsTabGroup">
@@ -361,31 +361,31 @@ function desactBotRec()
 </ul>
       <div class="TabbedPanelsContentGroup">
         <div class="TabbedPanelsContent">
-          <iframe class="colorFondoPrincipalPestana" id="fraDatPer" frameborder="0" src="datPerFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+          <iframe class="colorFondoPrincipalPestana" id="fraDatPer" frameborder="0" src="datPerFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
         <div class="TabbedPanelsContent">
-          <iframe class="colorFondoPrincipalPestana" id="fraDatCursos" frameborder="0" src="cursosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+          <iframe class="colorFondoPrincipalPestana" id="fraDatCursos" frameborder="0" src="cursosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
         <div class="TabbedPanelsContent">
-          <iframe class="colorFondoPrincipalPestana" id="fraDatMat" frameborder="0" src="matriculasFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+          <iframe class="colorFondoPrincipalPestana" id="fraDatMat" frameborder="0" src="matriculasFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
         <div class="TabbedPanelsContent">
-          <iframe class="colorFondoPrincipalPestana" id="fraDatMat" frameborder="0" src="califFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+          <iframe class="colorFondoPrincipalPestana" id="fraDatMat" frameborder="0" src="califFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
         <div class="TabbedPanelsContent">
-          <iframe class="colorFondoPrincipalPestana" id="fraClaInd" frameborder="0" src="clasIndFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+          <iframe class="colorFondoPrincipalPestana" id="fraClaInd" frameborder="0" src="clasIndFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
         <div class="TabbedPanelsContent">
-        <iframe class="colorFondoPrincipalPestana" id="fraClaInd" frameborder="0" src="faltasFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+        <iframe class="colorFondoPrincipalPestana" id="fraClaInd" frameborder="0" src="faltasFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
 <div class="TabbedPanelsContent">
-  <iframe class="colorFondoPrincipalPestana" id="fraDatAdapCur" frameborder="0" src="adapCurFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+  <iframe class="colorFondoPrincipalPestana" id="fraDatAdapCur" frameborder="0" src="adapCurFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
       </div>
 <div class="TabbedPanelsContent">
-  <iframe class="colorFondoPrincipalPestana" id="fraDatTrastornos" frameborder="0" src="trastornosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+  <iframe class="colorFondoPrincipalPestana" id="fraDatTrastornos" frameborder="0" src="trastornosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
     </div>
         <div class="TabbedPanelsContent">
-          <iframe class="colorFondoPrincipalPestana" id="fraDatSeg" frameborder="0" src="../seguimientos/verSegAlu.jsp?codInt=<%=aluVO.getIdAlu()%>" width="1400" height="600" > </iframe>
+          <iframe class="colorFondoPrincipalPestana" id="fraDatSeg" frameborder="0" src="../seguimientos/verSegAlu.jsp?codInt=<%=aluVO.getIdAlu()%>" style="width:1400" height="600" > </iframe>
         </div>
 </div>
 </div>

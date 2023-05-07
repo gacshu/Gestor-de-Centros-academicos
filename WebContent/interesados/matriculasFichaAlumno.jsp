@@ -14,7 +14,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 <%@page import="es.jahernandez.gestion.AluEdiGestion"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -40,16 +40,16 @@ if(request.getParameter("codInt") != null)
 
 <body class="colorFondoPrincipalPestana" >
 <form action="./matriculasFichaAlumno.jsp" method="post" name="frmMatriculasInteresado" target="_self" id="frmMatriculasInteresado">
-    <table width="90%" border="0" class="tablaCursos">
+    <table style="width:90%" border="0" class="tablaCursos">
       <tr>
-    <td width="15%" height="41"><strong>Curso</strong></td>
-    <td width="11%"><strong>Nivel</strong></td>
-    <td width="5%"><strong>Inicio</strong></td>
-    <td width="5%"><strong>Fin</strong></td>
-    <td width="6%"><strong>Alta</strong></td>
-    <td width="5%"><strong>Baja</strong></td>
-    <td width="9%"><strong>Pago Susp.</strong></td>
-    <td width="23%"><strong>Observaciones</strong></td>
+    <td style="width:15%" height="41"><strong>Curso</strong></td>
+    <td style="width:11%"><strong>Nivel</strong></td>
+    <td style="width:5%"><strong>Inicio</strong></td>
+    <td style="width:5%"><strong>Fin</strong></td>
+    <td style="width:6%"><strong>Alta</strong></td>
+    <td style="width:5%"><strong>Baja</strong></td>
+    <td style="width:9%"><strong>Pago Susp.</strong></td>
+    <td style="width:23%"><strong>Observaciones</strong></td>
     <td colspan="2"><strong>
      <input type="button" name="btnVerRec" id="btnVerRec" value="Ver Recibos" onclick="window.open('../ImpHistRecServlet?lstAlum=<%=aluVO.getIdAlu()%>','ra','');"/>
      <input type="button" name="btnLiqRec" id="btnLiqRec" value="Liquidar Recibos" onclick="parent.cargaPagRec('<%=aluVO.getIdAlu()%>')"/>
@@ -66,13 +66,13 @@ if(request.getParameter("codInt") != null)
             <td><%=new SimpleDateFormat("dd/MM/yyyy").format(EdicionesGestion.devolverDatosEdi(aluEdiVO.getIdEdi()).getFecIn())%></td>
             <td><%=new SimpleDateFormat("dd/MM/yyyy").format(EdicionesGestion.devolverDatosEdi(aluEdiVO.getIdEdi()).getFecFi())%></td>
             <td><%=new SimpleDateFormat("dd/MM/yyyy").format(aluEdiVO.getFecAlta())%></td>
-            <td><%if(aluEdiVO.isEsBaja()){%><img src="../imagenes/si.png" width="16" height="16" alt="X" /><%}%></td>
-            <td><%if(aluEdiVO.isEsCong()){%><img src="../imagenes/si.png" width="16" height="16" alt="X" /><%}%></td>
+            <td><%if(aluEdiVO.isEsBaja()){%><img src="../imagenes/si.png" style="width:16" height="16" alt="X" /><%}%></td>
+            <td><%if(aluEdiVO.isEsCong()){%><img src="../imagenes/si.png" style="width:16" height="16" alt="X" /><%}%></td>
             <td><%=aluEdiVO.getObserv()%></td>
-            <td width="10%" align="center">
+            <td style="width:10%" align="center">
             <input type="button" name="btnImpMat<%=ind%>" id="btnImpMat<%=ind%>" value="Imprimir" onclick="window.open('../ImpImpresoMatServlet?codAlu=<%=aluEdiVO.getIdAlu()%>&codEdi=<%=aluEdiVO.getIdEdi()%>','_impresoMat','');  " />
             </td>
-            <td width="11%" align="center">
+            <td style="width:11%" align="center">
               <input type="button" name="btnMat<%=ind%>" id="btnMat<%=ind%>" value="Baja" onclick="parent.cargaPaginaBajMat('<%=aluEdiVO.getIdAlu()%>','<%=aluEdiVO.getIdEdi()%>')"/>
             </td>
         </tr>

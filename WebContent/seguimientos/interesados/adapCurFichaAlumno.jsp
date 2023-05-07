@@ -7,7 +7,7 @@
 <%@ page import  = "java.util.Vector"%>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -155,11 +155,11 @@ function bajaAdapCur(codAdapCur,valInfAdapCur ,codAlu)
 <%}}%>
 
 <form action="" method="post" name="frmAdapCur" id="frmAdapCur">
-<table width="82%" border="0" align="center" class="tablaListados">
+<table style="width:82%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
-    <td width="41%" class="tdDef"><strong>Materia</strong></td>
+    <td style="width:41%" class="tdDef"><strong>Materia</strong></td>
     <td colspan="3" class="tdDef"><strong>Curso</strong></td>
-    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" width="30" height="30" onclick="txtNuevaMateria.style.visibility='visible';txtNuevoCurso.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
+    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="txtNuevaMateria.style.visibility='visible';txtNuevoCurso.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       adapCurVO = (AdapCurricularVO) vecAdapCur.elementAt(ind);
@@ -167,10 +167,10 @@ function bajaAdapCur(codAdapCur,valInfAdapCur ,codAlu)
   <tr class="tdDef">
     <td class="tdDef"><input name="txtMateria<%=adapCurVO.getCodAdapCur()%>" type="text" disabled="disabled" id="txtMateria<%=adapCurVO.getCodAdapCur()%>" value="<%=adapCurVO.getMateria()%>" size="45" maxlength="30" /></td>
       <td colspan="2"><input name="txtCurso<%=adapCurVO.getCodAdapCur()%>"   type="text" disabled="disabled" id="txtCurso<%=adapCurVO.getIdAlu()%>"        value="<%=adapCurVO.getCurso()%>" size="45" maxlength="100" /></td>
-      <td width="2%" class="center"><input name="btnEdiAdapCur<%=adapCurVO.getCodAdapCur()%>" type="button"  id="btnEdiAdapCur<%=adapCurVO.getCodAdapCur()%>" value="E" onclick="editaAdapCur('<%=adapCurVO.getCodAdapCur()%>')" disabled="disabled"/></td>
-      <td width="5%"><img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=adapCurVO.getCodAdapCur()%>');" style="cursor:pointer"/></td>
-      <td width="12%" class="center">
-        <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaAdapCur('<%=adapCurVO.getCodAdapCur()%>','<%=indInf%>','<%=adapCurVO.getIdAlu()%>');" style="cursor:pointer"/> 
+      <td style="width:2%" class="center"><input name="btnEdiAdapCur<%=adapCurVO.getCodAdapCur()%>" type="button"  id="btnEdiAdapCur<%=adapCurVO.getCodAdapCur()%>" value="E" onclick="editaAdapCur('<%=adapCurVO.getCodAdapCur()%>')" disabled="disabled"/></td>
+      <td style="width:5%"><img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=adapCurVO.getCodAdapCur()%>');" style="cursor:pointer"/></td>
+      <td style="width:12%" class="center">
+        <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaAdapCur('<%=adapCurVO.getCodAdapCur()%>','<%=indInf%>','<%=adapCurVO.getIdAlu()%>');" style="cursor:pointer"/> 
       </td>
   </tr>
   <%}%>
@@ -188,12 +188,12 @@ function bajaAdapCur(codAdapCur,valInfAdapCur ,codAlu)
   <tr>
     <td height="30" colspan="2" class="center">
       <%if( indInf >= 5){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('adapCurFichaAlumno.jsp?codInt=<%=codAlu%>&valInfAC=<%=(indInf - 10)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('adapCurFichaAlumno.jsp?codInt=<%=codAlu%>&valInfAC=<%=(indInf - 10)%>','_self','');">
       <%}%>
       </td>
     <td colspan="2" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecAdapCur.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('adapCurFichaAlumno.jsp?codInt=<%=codAlu%>&valInfAC=<%=(indInf + 10)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('adapCurFichaAlumno.jsp?codInt=<%=codAlu%>&valInfAC=<%=(indInf + 10)%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>

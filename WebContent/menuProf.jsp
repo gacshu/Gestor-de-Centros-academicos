@@ -6,7 +6,7 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <%@ include file="controlAcceso/includeComAutProf.jsp"%>
 <%
@@ -45,16 +45,16 @@
 <div id="menuPrincipal">
 	<span class="tdDef">Tutor&iacute;a</span>
 	<div>
-  		<table width="90%" border="0" class="formatoMenu">
+  		<table style="width:90%" border="0" class="formatoMenu">
           <tr onmouseover="this.className='filaresaltada';" onmouseout="this.className='';" onclick="window.open('./ediciones/listEdiCursoProf.jsp' , 'fraPrincipal' , '')">
-            <td width="5%">&nbsp;</td>
-            <td width="95%">Gestión Cursos</td>
+            <td style="width:5%">&nbsp;</td>
+            <td style="width:95%">Gestión Cursos</td>
           </tr>
       </table>
   </div>  
     <span class="tdDef">Clases</span>
     <div>
-    	<table width="90%" border="0" class="formatoMenu">
+    	<table style="width:90%" border="0" class="formatoMenu">
             <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./profesores/verModProf.jsp?codProf=<%=usuario.getIdProf()%>&tipBus=1' , 'fraPrincipal' , '')">
         		<td>&nbsp;</td>
         		<td>Histórico de Clases</td>
@@ -64,8 +64,8 @@
         		<td>Clases Pendientes</td>
       		</tr>
  			<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./profesores/clasIndProf.jsp?codProf=<%=usuario.getIdProf()%>' , 'fraPrincipal' , '')">
-                <td width="5%">&nbsp;</td>
-                <td width="95%">Clases individuales</td>
+                <td style="width:5%">&nbsp;</td>
+                <td style="width:95%">Clases individuales</td>
  	        </tr>
       </table>
     </div>

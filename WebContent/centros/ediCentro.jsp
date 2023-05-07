@@ -5,7 +5,7 @@
 <%@ page import = "es.jahernandez.datos.CentrosVO"%>
 <%@ page import = "es.jahernandez.accesodatos.CentrosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir tipo curso</title>
@@ -93,7 +93,7 @@ function cargaDatosCentro()
 
 <body class="fondoFormularios" onload="cargarComboCentros('-99');">
 <form id="frmEdiCentro" name="frmEdiCentro" method="post" action="">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="2" class="thDef">Editar Centro</td>
   </tr>
@@ -105,7 +105,7 @@ function cargaDatosCentro()
       <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span></td>
   </tr>
   <tr class="tdDef">
-    <td width="8%" class="tdDef">Nombre</td>
+    <td style="width:8%" class="tdDef">Nombre</td>
     <td class="tdDef">
       <span id="txtValNombre">
         <input name="txtNombre" type="text" id="txtNombre" size="50" maxlength="30" />

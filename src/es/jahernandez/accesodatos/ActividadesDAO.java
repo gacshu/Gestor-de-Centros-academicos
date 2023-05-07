@@ -91,7 +91,7 @@ public class ActividadesDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarTipoAct(ActividadesVO actVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+
 
         String            cadenaConsulta  = "INSERT INTO " + TablaActividades.TABLA + " ("
                                                            + TablaActividades.CODIGO + " , "
@@ -102,7 +102,7 @@ public class ActividadesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setInt(1,nuevoCodigo());
@@ -111,20 +111,11 @@ public class ActividadesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ActividadesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
             throw  exc;
         }
     }
@@ -132,8 +123,7 @@ public class ActividadesDAO
     //Edita el registro de una actividad
     public static int editaTipoAct(ActividadesVO actVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
-
+        
         //String            cadenaConsulta  = "UPDATE TbAct SET  NOMACT = ? WHERE IDACT = ?";
         String            cadenaConsulta  = "UPDATE " + TablaActividades.TABLA  +
                                             " SET "   + TablaActividades.NOMBRE + " = ? " +
@@ -143,7 +133,7 @@ public class ActividadesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, actVO.getNombreActividad());
@@ -152,19 +142,12 @@ public class ActividadesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ActividadesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -173,7 +156,7 @@ public class ActividadesDAO
     //Borra el registro de una actividad
     public static int borraActividad(int idAct, Connection con ) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         //String            cadenaConsulta  = "DELETE FROM TbAct WHERE idAct = ?";
         String            cadenaConsulta  = "DELETE FROM " + TablaActividades.TABLA  +
@@ -183,7 +166,7 @@ public class ActividadesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+        	try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setInt(1,idAct);
@@ -191,20 +174,12 @@ public class ActividadesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+        	}
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ActividadesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -213,7 +188,7 @@ public class ActividadesDAO
     //Devuelve el nombre de tipo de actividad
     public static String devuelveNombreActividad(int idActividad, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+        
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT NomAct FROM TbAct WHERE IdAct = ? ";
@@ -225,7 +200,7 @@ public class ActividadesDAO
 
        try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+    	   try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se le pasan los parámetros a la consulta
             ps.setInt(1, idActividad);
@@ -239,21 +214,13 @@ public class ActividadesDAO
 
             rs.close();
             ps.close();
-
+    	   }
             return nombAct;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ActividadesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -264,7 +231,7 @@ public class ActividadesDAO
     //Método que devuelve los datos a mostrar en los combos de Actividades
     public static Vector devolverDatActividades(Connection con) throws Exception
     {
-        PreparedStatement ps            = null;
+       
         ResultSet         rs            = null;
 
         //String            sql           = "SELECT NomAct, IdAct FROM TbACt ORDER BY NomAct";
@@ -277,7 +244,7 @@ public class ActividadesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+        	try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -293,20 +260,12 @@ public class ActividadesDAO
 
             rs.close();
             ps.close();
-
+        	}
             return listaAct;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ActividadesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }

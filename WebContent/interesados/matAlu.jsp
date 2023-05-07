@@ -9,7 +9,7 @@
 <%@page import="es.jahernandez.accesodatos.EdicionesDAO"%>
 <%@page import="es.jahernandez.accesodatos.CursosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Matricular Alumno</title>
@@ -123,7 +123,7 @@ function mostrarDatosEdi()
 
 
 <div id="datEdicion" name="datEdicion" title="Edición">
-  <table name="tabDatEdi" id="tabDatEdi"  width="200" border="1" class="tdDef" border="0">
+  <table name="tabDatEdi" id="tabDatEdi"  style="width:200" border="1" class="tdDef" border="0">
   <tr>
     <td>Fecha Inicio</td>
     <td>&nbsp;</td>
@@ -167,13 +167,13 @@ function mostrarDatosEdi()
 
 <body class="fondoFormularios" onload="cargarComboEdiciones();">
 <form action="../MatricularAlumnoServlet" method="post" name="frmMatAlu" target="_self" id="frmMatAlu">
-  <table width="477" border="0" class="tdDef">
+  <table style="width:477" border="0" class="tdDef">
     <tr>
       <td colspan="2"><%=aluVO.getNombre() + " " + aluVO.getAp1Alu() + " --- " + curVO.getNomCur()%></td>
     </tr>
     <tr>
-      <td width="30%">Elegir Edici&oacute;n</td>
-      <td width="70%"><span id="valEdiciones">
+      <td style="width:30%">Elegir Edici&oacute;n</td>
+      <td style="width:70%"><span id="valEdiciones">
         <select name="lstEdiciones" id="lstEdiciones" tabindex="1">
         </select>
       <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*.</span></span>

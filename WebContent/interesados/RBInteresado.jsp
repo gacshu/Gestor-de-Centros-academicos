@@ -7,7 +7,7 @@
 
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Resultado Búsqueda Interesados</title>
@@ -102,7 +102,7 @@ function cargaMailing()
 
 <body class="fondoFormularios">
 <div id="mailing" title="Mailing">
-    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" width="100%" height="700" scrolling="no"> </iframe>
+    <iframe name="fraMailing"     id="fraMailing"     frameborder="0" src="" style="width:100%" height="700" scrolling="no"> </iframe>
 </div>
 <table style="width: 100%; font-size: 10pt; font-family: tahoma;">
             <tr>
@@ -110,31 +110,31 @@ function cargaMailing()
                     Lista Alumnos</th>
             </tr>
              <tr>
-                <td width="374" height="69" style="width: 374px">
-                	<img  onmouseover="this.src='../imagenes/anadeusrGr.png'" onmouseout="this.src='../imagenes/anadeusrPe.png'" src="../imagenes/anadeusrPe.png" width="64" height="64" onclick="window.open('./altaInteresados.jsp','_self','');"/>
-                    <img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     width="64" height="64" onclick="cargaMailing();"/>
-                <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('../ImpLisAluServlet','_listaAlu','');"/></td>
-                <td width="477" class="tdDef"></td>
-                <td width="545" style="text-align: right; margin-left: 80px">&nbsp;
+                <td style="width:374" height="69" style="width: 374px">
+                	<img  onmouseover="this.src='../imagenes/anadeusrGr.png'" onmouseout="this.src='../imagenes/anadeusrPe.png'" src="../imagenes/anadeusrPe.png" style="width:64" height="64" onclick="window.open('./altaInteresados.jsp','_self','');"/>
+                    <img  onmouseover="this.src='../imagenes/mailGr.png'"     onmouseout="this.src='../imagenes/mailPe.png'"     src="../imagenes/mailPe.png"     style="width:64" height="64" onclick="cargaMailing();"/>
+                <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('../ImpLisAluServlet','_listaAlu','');"/></td>
+                <td style="width:477" class="tdDef"></td>
+                <td style="width:545" style="text-align: right; margin-left: 80px">&nbsp;
               </td>
             </tr>
             </table>
                                                  
-<table width="100%" class="tablaListadoExtensa"> 
+<table style="width:100%" class="tablaListadoExtensa"> 
             <tr>
-                <td width="235"><span class="tablaListadoExtensaCabecera">
+                <td style="width:235"><span class="tablaListadoExtensaCabecera">
                   Nombre</span></td>
-                <td width="120"><span class="tablaListadoExtensaCabecera">
+                <td style="width:120"><span class="tablaListadoExtensaCabecera">
                   Móvil</span></td>
-                <td width="120"><span class="tablaListadoExtensaCabecera">
+                <td style="width:120"><span class="tablaListadoExtensaCabecera">
                   Teléfono</span></td>
-                <td width="285"><span class="tablaListadoExtensaCabecera">
+                <td style="width:285"><span class="tablaListadoExtensaCabecera">
                   Correo Elect.</span></td>
-                <td width="183"><span class="tablaListadoExtensaCabecera">
+                <td style="width:183"><span class="tablaListadoExtensaCabecera">
                   Población</span></td>
-                <td width="391"><span class="tablaListadoExtensaCabecera">
+                <td style="width:391"><span class="tablaListadoExtensaCabecera">
                   Empresa</span></td>
-                <td width="29"><span class="tablaListadoExtensaCabecera">
+                <td style="width:29"><span class="tablaListadoExtensaCabecera">
                   ND</span></td>
   </tr>
       <%for (int ind = valInf; ind < valSup; ind++)
@@ -158,16 +158,16 @@ function cargaMailing()
                 <td><%=empVO.getNombreEmpresa()%>
                   &nbsp;</td>
                 <td><%if (aluVO.isAlND()){%>
-                  <img src="../imagenes/si.png" width="16" height="16" alt="X" />
+                  <img src="../imagenes/si.png" style="width:16" height="16" alt="X" />
                 <%}%></td>
             </tr>
 <%} %>
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-        <td width="27%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./RBInteresado.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:27%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./RBInteresado.jsp?ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
         <td class="cellBtnSub" scope="col"><%=alumnosBusqueda.size()%> &nbsp;registros</td>
-        <td width="22%" class="cellBtnSub" scope="col"><%if(valSup < alumnosBusqueda.size()){%><a href="./RBInteresado.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        <td style="width:22%" class="cellBtnSub" scope="col"><%if(valSup < alumnosBusqueda.size()){%><a href="./RBInteresado.jsp?ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
         
       </tr>
 </table>

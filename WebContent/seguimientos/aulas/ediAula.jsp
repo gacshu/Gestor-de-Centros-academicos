@@ -6,7 +6,7 @@
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 <%@ page import = "java.util.Vector"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Datos aula</title>
@@ -120,20 +120,20 @@ function cargarComboCentros(idCentro)
 <body class="fondoFormularios" onload="cargarComboCentros('<%=aulasVO.getIdCen()%>');">
 <form id="frmEdiAula" name="frmEdiAula" method="post" action="">
 <input name="hidIdAula" type="hidden" value="<%=aulasVO.getIdAula()%>" />
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="5" class="thDef">Datos Aula</td>
   </tr>
   <tr class="tdDef">
-    <td width="8%" class="tdDef">Nombre</td>
-    <td width="41%" class="tdDef">
+    <td style="width:8%" class="tdDef">Nombre</td>
+    <td style="width:41%" class="tdDef">
       <span id="txtValNombre">
           <input name="txtNombre" type="text" id="txtNombre" value="<%=aulasVO.getNombre()%>" size="75" maxlength="100" />
         <span class="textfieldRequiredMsg">*</span></span>
     </td>
-    <td width="3%">&nbsp;</td>
-    <td width="9%">Centro</td>
-    <td width="39%"><span id="lstValCentros">
+    <td style="width:3%">&nbsp;</td>
+    <td style="width:9%">Centro</td>
+    <td style="width:39%"><span id="lstValCentros">
       <label for="lstCentros"></label>
       <select name="lstCentros" id="lstCentros" disabled="disabled"></select>
 </span></td>

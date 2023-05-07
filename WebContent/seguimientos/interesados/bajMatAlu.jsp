@@ -18,7 +18,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Matricular Alumno</title>
@@ -65,9 +65,9 @@ function validarForm()
 
 <body class="fondoFormularios" onload="cargarComboEdiciones();">
 <form action="../bajaMatriculaServlet" method="post" name="frmBajMat" target="_self" id="frmBajMat">
-  <table width="100%" border="0" class="tdDef">
+  <table style="width:100%" border="0" class="tdDef">
     <tr>
-      <td width="13%">Alumno</td>
+      <td style="width:13%">Alumno</td>
       <td colspan="3"><%=aluVO.getNombre().trim() + " " + aluVO.getAp1Alu().trim()%></td>
     </tr>
     <tr>
@@ -76,9 +76,9 @@ function validarForm()
     </tr>
     <tr>
       <td>Inicio</td>
-      <td width="24%"><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecIn())%></td>
-      <td width="10%">Fin</td>
-      <td width="53%"><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecFi())%></td>
+      <td style="width:24%"><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecIn())%></td>
+      <td style="width:10%">Fin</td>
+      <td style="width:53%"><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecFi())%></td>
     </tr>
     <tr>
       <td>Baja</td>

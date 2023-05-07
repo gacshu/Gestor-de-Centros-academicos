@@ -9,7 +9,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <title>Búsqueda Profesor</title>
@@ -63,7 +63,7 @@ function cargaComboActividades()
 </script>
 
 <form action="../BusEmpServlet" method="post" name="frmBusqEmp" target="_self" id="frmBusqEmp">
-  <table width="66%" border="0" class="tdDef">
+  <table style="width:66%" border="0" class="tdDef">
   <tr class="thDef">
     <th height="33" colspan="4" scope="col">B&uacute;squeda Empresas</th>
   </tr>
@@ -71,12 +71,12 @@ function cargaComboActividades()
     <td colspan="4">&nbsp;</td>
   </tr>
   <tr>
-    <td width="17%">Razón social</td>
-    <td width="42%">
+    <td style="width:17%">Razón social</td>
+    <td style="width:42%">
       <input name="txtRazSoc" type="text" id="txtRazSoc" size="60" maxlength="50" />
     </td>
-    <td width="14%">CNAE</td>
-    <td width="27%"><span id="valCnae">
+    <td style="width:14%">CNAE</td>
+    <td style="width:27%"><span id="valCnae">
     <input name="txtCNAE" type="text" id="txtCNAE" size="8" maxlength="5" />
 <span class="textfieldInvalidFormatMsg">*</span></span></td>
     </tr>

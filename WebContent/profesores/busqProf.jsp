@@ -9,7 +9,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <title>Búsqueda Profesor</title>
@@ -66,7 +66,7 @@ function cargarCombosAreas(idArea)
 </script>
 
 <form action="../BusProfServlet" method="post" name="frmBusqProf" target="_self" id="frmBusqProf">
-  <table width="66%" border="0" class="tdDef">
+  <table style="width:66%" border="0" class="tdDef">
   <tr class="thDef">
     <th height="33" colspan="2" scope="col">B&uacute;squeda Profesores</th>
   </tr>
@@ -74,8 +74,8 @@ function cargarCombosAreas(idArea)
     <td colspan="2">&nbsp;</td>
   </tr>
   <tr>
-    <td width="18%">Nombre</td>
-    <td width="82%">
+    <td style="width:18%">Nombre</td>
+    <td style="width:82%">
       <input name="txtNombre" type="text" id="txtNombre" size="25" maxlength="15" />
     </td>
     </tr>

@@ -5,7 +5,7 @@
 <%@ page import = "es.jahernandez.datos.AreasVO"%>
 <%@ page import = "es.jahernandez.accesodatos.AreasDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir tipo curso</title>
@@ -154,20 +154,20 @@ function cargarComboCentros(idCentro)
 
 <body class="fondoFormularios" onload="cargarComboCentros('-99');">
 <form id="frmImpAlu" name="frmImpAlu" method="post" action="">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="2" class="thDef">Introduzca los datos para generar el Listado</td>
   </tr>
   <tr class="tdDef">
     <td height="24" class="tdDef">N&uacute;mero de Curso</td>
-    <td width="77%" class="tdDef"><label for="txtNumCurso"></label>
+    <td style="width:77%" class="tdDef"><label for="txtNumCurso"></label>
       <input name="txtNumCurso" type="text" id="txtNumCurso" size="30" maxlength="25" />
       <label for="textfield"></label>
       <input name="textfield" type="text" id="textfield" size="3" readonly="readonly" style="background-color:gray" />
       <input name="textfield2" type="text" id="textfield2" size="3" readonly="readonly" style="background-color:red" /></td>
   </tr>
   <tr class="tdDef">
-    <td width="23%" class="tdDef">D&iacute;a Inicio Semana</td>
+    <td style="width:23%" class="tdDef">D&iacute;a Inicio Semana</td>
     <td class="tdDef"><input name="txtNumDiaIni" type="text" id="txtNumDiaIni" size="10" maxlength="5" />
       <input name="textfield4" type="text" id="textfield4" size="3" readonly="readonly" style="background-color:gray" />
       <input name="textfield3" type="text" id="textfield3" size="3" readonly="readonly" style="background-color:red" /></td>

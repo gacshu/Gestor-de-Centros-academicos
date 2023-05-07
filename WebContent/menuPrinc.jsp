@@ -7,7 +7,7 @@
 <%@page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <%@ include file="controlAcceso/includeComAutProf.jsp"%>
 <%
@@ -67,7 +67,7 @@
 
 <body class="fondoFormularios">
 
-<table width="" border="0">
+<table style="width:" border="0">
   <tr>
    <td>
 	<input name="btnImpRec" type="button" onClick="window.open('./ImpRecAluServlet', 'rg','');window.open('./ImpRecMenClasInd?strFecha=<%=fechaCalReInMA%>', 'rgci','');" value="Imprimir Recibos" /></td>
@@ -76,16 +76,16 @@
 <div id="menuPrincipal">
 	<span class="tdDef">Alumnos</span>
 	<div>
-  		<table width="90%" border="0" class="formatoMenu">
+  		<table style="width:90%" border="0" class="formatoMenu">
           <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./interesados/busquedaInter.jsp' , 'fraPrincipal' , '')">
-            <td width="5%">&nbsp;</td>
-            <td width="95%">Buscar</td>
+            <td style="width:5%">&nbsp;</td>
+            <td style="width:95%">Buscar</td>
           </tr>
       </table>
 	</div>  
     <span class="tdDef">Cursos</span>
   <div>
-    	<table width="90%" border="0" class="formatoMenu">
+    	<table style="width:90%" border="0" class="formatoMenu">
             <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/altaCurso.jsp' , 'fraPrincipal' , '')">
         		<td>&nbsp;</td>
         		<td>Añadir</td>
@@ -95,8 +95,8 @@
         		<td>Editar</td>
       		</tr>
  			<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/visAluCur.jsp' , 'fraPrincipal' , '')">
-                <td width="5%">&nbsp;</td>
-                <td width="95%">Interesados</td>
+                <td style="width:5%">&nbsp;</td>
+                <td style="width:95%">Interesados</td>
  	        </tr>
             <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./ResumenEdicionesServlet' , '_rescur' , '')">
                 <td>&nbsp;</td>
@@ -110,10 +110,10 @@
     </div>
     <span class="tdDef">Profesores</span>
     <div>
-    	<table width="90%" border="0" class="formatoMenu">
+    	<table style="width:90%" border="0" class="formatoMenu">
       		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./profesores/altaProfesor.jsp' , 'fraPrincipal' , '')">
-        		<td width="5%">&nbsp;</td>
-        		<td width="95%">Añadir</td>
+        		<td style="width:5%">&nbsp;</td>
+        		<td style="width:95%">Añadir</td>
       		</tr>
       		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./profesores/busqProf.jsp' , 'fraPrincipal' , '')">
         		<td>&nbsp;</td>
@@ -123,10 +123,10 @@
     </div>
     <span class="tdDef">Empresas</span>
     <div>
-    	<table width="90%" border="0" class="formatoMenu">
+    	<table style="width:90%" border="0" class="formatoMenu">
       		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./empresas/altaEmp.jsp' , 'fraPrincipal' , '')">
-        		<td width="5%">&nbsp;</td>
-        		<td width="95%">Alta</td>
+        		<td style="width:5%">&nbsp;</td>
+        		<td style="width:95%">Alta</td>
       		</tr>
       		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./empresas/busqEmp.jsp' , 'fraPrincipal' , '')">
         		<td>&nbsp;</td>
@@ -136,26 +136,26 @@
     </div>
     <span class="tdDef">Recibos</span>
     <div>
-    	<table width="90%" border="0" class="formatoMenu">
+    	<table style="width:90%" border="0" class="formatoMenu">
       		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./ediciones/busRec.jsp' , 'fraPrincipal' , '')">
-        		<td width="5%">&nbsp;</td>
-        		<td width="95%">Histórico Recibos</td>
+        		<td style="width:5%">&nbsp;</td>
+        		<td style="width:95%">Histórico Recibos</td>
       		</tr>
     	</table>
     </div>
      <%if(conUsVO.getNivelAcceso() >= 5){%> 
   <span class="tdDef">Mantenimiento Tablas</span>
     <div>
-    <table width="90%" border="0" class="formatoMenu">
+    <table style="width:90%" border="0" class="formatoMenu">
     	<tr>
           <td>&nbsp;</td>
           <td><div id="menuArea" class="CollapsiblePanel">
             <div class="CollapsiblePanelTab" tabindex="0"><span class="colorTextoBotPest">&Aacute;reas</span></div>
             <div class="CollapsiblePanelContent">
-            <table width="90%" border="0" class="formatoMenu">
+            <table style="width:90%" border="0" class="formatoMenu">
       			<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/altaArea.jsp' , 'fraPrincipal' , '')">
-        			<td width="5%">&nbsp;</td>
-        			<td width="95%">Añadir</td>
+        			<td style="width:5%">&nbsp;</td>
+        			<td style="width:95%">Añadir</td>
       			</tr>
        			<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/ediArea.jsp' , 'fraPrincipal' , '')">
         			<td>&nbsp;</td>
@@ -167,14 +167,14 @@
         </td>
         </tr>
       	<tr>
-        	<td width="5%">&nbsp;</td>
-        	<td width="95%"><div id="menuAulas" class="CollapsiblePanel">
+        	<td style="width:5%">&nbsp;</td>
+        	<td style="width:95%"><div id="menuAulas" class="CollapsiblePanel">
         	  <div class="CollapsiblePanelTab" tabindex="0"><span class="colorTextoBotPest">Aulas</span></div>
         	  <div class="CollapsiblePanelContent">
-              <table width="90%" border="0" class="formatoMenu">
+              <table style="width:90%" border="0" class="formatoMenu">
           		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./aulas/anaAula.jsp' , 'fraPrincipal' , '')">
-            		<td width="5%">&nbsp;</td>
-            		<td width="95%">Añadir</td>
+            		<td style="width:5%">&nbsp;</td>
+            		<td style="width:95%">Añadir</td>
           		</tr>
           		<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./aulas/busAula.jsp' , 'fraPrincipal' , '')">
             		<td>&nbsp;</td>
@@ -190,14 +190,14 @@
          <td><div id="menuCentros" class="CollapsiblePanel">
             <div class="CollapsiblePanelTab" tabindex="0"><span class="colorTextoBotPest">Centros</span></div>
             <div class="CollapsiblePanelContent">
-           	  <table width="90%" border="0" class="formatoMenu">
+           	  <table style="width:90%" border="0" class="formatoMenu">
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./centros/altaCentro.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Añadir</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Añadir</td>
       </tr>
       <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./centros/ediCentro.jsp' , 'fraPrincipal' , '')">
-        <td width="5%">&nbsp;</td>
-        <td width="95%">Editar</td>
+        <td style="width:5%">&nbsp;</td>
+        <td style="width:95%">Editar</td>
       </tr>
     </table>
             </div>
@@ -209,10 +209,10 @@
                 <div id="menuTipoCurso1" class="CollapsiblePanel">
           				<div class="CollapsiblePanelTab" tabindex="0"><span class="colorTextoBotPest">Tipo Curso</span></div>
           				<div class="CollapsiblePanelContent">
-                        	<table width="90%" border="0" class="formatoMenu">
+                        	<table style="width:90%" border="0" class="formatoMenu">
                                 <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/altaTipCur.jsp' , 'fraPrincipal' , '')">
-                                    <td width="5%">&nbsp;</td>
-                                    <td width="95%">Añadir</td>
+                                    <td style="width:5%">&nbsp;</td>
+                                    <td style="width:95%">Añadir</td>
                                 </tr>
                                 <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./cursos/ediTipCur.jsp' , 'fraPrincipal' , '')">
                                     <td>&nbsp;</td>
@@ -225,15 +225,15 @@
               </td>
       </tr>
         <tr>
-        	<td width="5%">&nbsp;</td>
-            <td width="95%">
+        	<td style="width:5%">&nbsp;</td>
+            <td style="width:95%">
             	<div id="menuTipTrast" class="CollapsiblePanel">
               	<div class="CollapsiblePanelTab" tabindex="0"><span class="colorTextoBotPest">Tipo Trastorno</span></div>
               	<div class="CollapsiblePanelContent">
-              		<table width="90%" border="0" class="formatoMenu">
+              		<table style="width:90%" border="0" class="formatoMenu">
                     	<tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./interesados/altaTipTrast.jsp' , 'fraPrincipal' , '')">
-                        	<td width="5%">&nbsp;</td>
-                            <td width="95%">Añadir</td>
+                        	<td style="width:5%">&nbsp;</td>
+                            <td style="width:95%">Añadir</td>
                         </tr>
                         <tr onmouseover="this.className='filaresaltada';"  onmouseout="this.className='';" onclick="window.open('./interesados/ediTipTrast.jsp' , 'fraPrincipal' , '')">
                         	<td>&nbsp;</td>

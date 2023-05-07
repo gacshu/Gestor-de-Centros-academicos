@@ -11,7 +11,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="es.jahernandez.accesodatos.CursosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAutProf.jsp"%>
     
@@ -110,17 +110,17 @@ function cargaFiltro()
 <body class="fondoFormularios">
 
 <form action="" method="post" name="frmClasesInd" id="frmClasesInd">
-<table width="100%" border="0" align="center" class="tablaListados">
+<table style="width:100%" border="0" align="center" class="tablaListados">
             <tr>
-               <td height="66" style="width: 374px"><img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="64" height="64" onclick="window.open('../ImpClasesIndProfServlet?codProf=<%=codProf%>&strFecha=<%=fecFilt%>','_listaAlu','');"/></td>
+               <td height="66" style="width: 374px"><img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:64" height="64" onclick="window.open('../ImpClasesIndProfServlet?codProf=<%=codProf%>&strFecha=<%=fecFilt%>','_listaAlu','');"/></td>
                <td style="text-align: right; margin-left: 80px">&nbsp;</td>
                <td style="text-align: right; margin-left: 80px">&nbsp;
               </td>
             </tr>
             </table>    
-<table width="100%" border="0" align="center" class="tablaListados">
+<table style="width:100%" border="0" align="center" class="tablaListados">
   <tr>
-  	<td width="36%" class="tdDef"><select name="lstMesFilt" id="lstMesFilt" on onchange="lstAnnoFilt.value=<%=annoAct%>">
+  	<td style="width:36%" class="tdDef"><select name="lstMesFilt" id="lstMesFilt" on onchange="lstAnnoFilt.value=<%=annoAct%>">
   	  <option value="-1">Seleccione...</option>
   	  <option value="01">Enero</option>
   	  <option value="02">Febrero</option>
@@ -141,17 +141,17 @@ function cargaFiltro()
             <option value="<%=ind%>"><%=ind%></option>
             <%}%>
       </select></td>
-    <td width="9%" class="tdDef">
+    <td style="width:9%" class="tdDef">
     	<input type="button" name="btnVerRecibos" id="btnVerRecibos" value="Ver Clases Mes" onclick="cargaFiltro();"/>
     </td>
-    <td width="20%" class="tdDef"></td>
+    <td style="width:20%" class="tdDef"></td>
     <td colspan="3" class="tdDef"><%if(mostrarTotal){%>
       <strong>Clases del mes de <%=tablaMeses[mesFiltro-1] + " de " + annoAct%></strong><%}%>
     </td>
     </tr>
   <tr class="tablaListados">
-    <td width="36%" class="tdDef"><strong>Curso</strong></td>
-    <td width="9%" class="tdDef"><strong>Fecha</strong></td>
+    <td style="width:36%" class="tdDef"><strong>Curso</strong></td>
+    <td style="width:9%" class="tdDef"><strong>Fecha</strong></td>
     <td colspan="2" class="tdDef"><strong>Alumno</strong></td>
     <td colspan="2" class="tdDef"><strong>Tarifa</strong></td>
     </tr>
@@ -168,12 +168,12 @@ function cargaFiltro()
   <tr>
     <td height="30" colspan="5" class="center">
       <%if( indInf >= 10){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('clasIndProf.jsp?codProf=<%=codProf%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf - 10)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('clasIndProf.jsp?codProf=<%=codProf%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf - 10)%>','_self','');">
       <%}%>
       </td>
-    <td width="27%" class="center">
+    <td style="width:27%" class="center">
     	<%if( indSup < vecClasInd.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('clasIndProf.jsp?codInt=<%=codProf%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf + 10)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('clasIndProf.jsp?codInt=<%=codProf%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf + 10)%>','_self','');"/>
       <%}%>
     </td>
     </tr>

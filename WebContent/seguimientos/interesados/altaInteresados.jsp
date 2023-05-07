@@ -8,7 +8,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html>
+<html lang="es" xml:lang="es">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -346,24 +346,24 @@ function cargaCombos()
 
 
 <div id="nuevaEmpresa" title="Crear Nueva Empresa">
-   <iframe name="fraLogos"     id="fraLogos"     frameborder="0" src="../empresas/altaEmpInter.jsp?urlProc=1" width="100%" height="400" scrolling="no"> </iframe>
+   <iframe name="fraLogos"     id="fraLogos"     frameborder="0" src="../empresas/altaEmpInter.jsp?urlProc=1" style="width:100%" height="400" scrolling="no"> </iframe>
 </div>
 
 <form action="../AltaNuevoInteresadoServlet?pestana=1" method="post" name="frmAltaInteresado" target="_self" id="frmAltaInteresado">
-  <table width="100%" border="0">
+  <table style="width:100%" border="0">
   <tr class="thDef">
     <th height="50" colspan="3" scope="col">Alta Interesado</th>
   </tr>
   <tr>
-    <td width="38%">
+    <td style="width:38%">
       <span id="txtValNombre">
       <input name="txtNombre" type="text" class="tdDef" id="txtNombre" value="<%=aluVO.getNombre()%>" size="50" maxlength="50" />
       <span class="textfieldRequiredMsg">*.</span><span class="textfieldInvalidFormatMsg">*</span></span>
     </td>
-    <td width="41%"><span id="txtValApe">
+    <td style="width:41%"><span id="txtValApe">
     <input name="txtApe" type="text" class="tdDef" id="txtApe" value="<%=aluVO.getAp1Alu()%>" size="50" maxlength="50" />
     <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
-    <td width="21%" class="tdDef"><span id="txtValFecNac">
+    <td style="width:21%" class="tdDef"><span id="txtValFecNac">
     <label>Fecha Nac.
         <input name="txtFecNac" type="text" class="tdDef" id="txtFecNac" <%if(aluVO.getFecNac().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(aluVO.getFecNac())%>"<%}%> onchange="document.getElementById('hidFecNac').value = document.getElementById('txtFecNac').value;" />
     </label>
@@ -372,7 +372,7 @@ function cargaCombos()
   </tr>
 </table>
 <br><br>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
   <tr>
     <th class="tdDef" scope="col"><div id="TabbedPanels1" class="TabbedPanels">
       <ul class="TabbedPanelsTabGroup">
@@ -380,16 +380,16 @@ function cargaCombos()
 </ul>
       <div class="TabbedPanelsContentGroup">
         <div class="TabbedPanelsContent">
-        	<div class="colorFondoPrincipalPestana" id="fraPestanas" width="1024" height="800">
-      <table width="90%" border="0" align="center" class="colorTextoBotPest">
+        	<div class="colorFondoPrincipalPestana" id="fraPestanas" style="width:1024" height="800">
+      <table style="width:90%" border="0" align="center" class="colorTextoBotPest">
         <tr>
-          <td width="14%" class="tdDef" scope="col">Tipo Documento</td>
-          <td width="19%" class="tdDef" scope="col"><span id="spryselect1">
+          <td style="width:14%" class="tdDef" scope="col">Tipo Documento</td>
+          <td style="width:19%" class="tdDef" scope="col"><span id="spryselect1">
             <select name="selValTipDoc" id="selValTipDoc"></select>
             <script>frmAltaInteresado.selValTipDoc.value="<%=aluVO.getTipDocAlu()%>";</script>
             <span class="selectRequiredMsg">*</span></span></td>
-          <td width="10%" class="tdDef" scope="col">Número</td>
-          <td width="35%" class="tdDef" scope="col"><span id="txtValNumDoc">
+          <td style="width:10%" class="tdDef" scope="col">Número</td>
+          <td style="width:35%" class="tdDef" scope="col"><span id="txtValNumDoc">
             <input name="txtNumDoc" type="text" id="txtNumDoc" value="<%=aluVO.getNumDocAlu()%>" size="25" maxlength="20" />
             <span class="textfieldRequiredMsg">*</span></span></td>
           <td colspan="2" class="tdDef" scope="col"><label>
@@ -411,22 +411,22 @@ function cargaCombos()
           <td colspan="2" class="tdDef"><span id="selValEmp">
             <select name="selEmpresa" id="selEmpresa"></select>
             <span class="selectRequiredMsg">*</span></span></td>
-          <td width="10%" class="tdDef"><input class="cellBtnSub" type="button" onclick= "cargaPaginaAltaEmpresa();" value="Añadir" /></td></td>
+          <td style="width:10%" class="tdDef"><input class="cellBtnSub" type="button" onclick= "cargaPaginaAltaEmpresa();" value="Añadir" /></td></td>
           </tr>
       </table>
       <br>
-      <table width="90%" border="0" align="center" class="colorFondoBlancoTablaPest" cellspacing="0">
+      <table style="width:90%" border="0" align="center" class="colorFondoBlancoTablaPest" cellspacing="0">
         <tr>
           <th class="tdDef" scope="col">Datos de Contacto</th>
           <th colspan="3" class="colorFondoPrincipalPestana" scope="col">&nbsp;</th>
           </tr>
         <tr>
-          <td width="17%" height="28" class="colorFondoBlancoTablaPest">Fijo</td>
-          <td width="50%"><span id="txtValTelf">
+          <td style="width:17%" height="28" class="colorFondoBlancoTablaPest">Fijo</td>
+          <td style="width:50%"><span id="txtValTelf">
           <input name="txtTelf" type="text" id="txtTelf" value="<%=aluVO.getFijAlu()%>" maxlength="9" />
           <span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span></td>
-          <td width="12%">Móvil</td>
-          <td width="21%"><span id="txtValMovil">
+          <td style="width:12%">Móvil</td>
+          <td style="width:21%"><span id="txtValMovil">
           <input name="txtMovil" type="text" id="txtMovil" value="<%=aluVO.getMovAlu()%>" maxlength="9" />
 <span class="textfieldInvalidFormatMsg">*</span></span></td>
         </tr>
@@ -466,23 +466,23 @@ function cargaCombos()
         </tr>
       </table>
       <br>
-      <table width="90%" border="0" align="center" class="colorTextoBotPest">>
+      <table style="width:90%" border="0" align="center" class="colorTextoBotPest">>
         <tr>
-          <th width="14%" class="tdDef" scope="col">Colegio</th>
-          <th width="48%" class="tdDef" scope="col"><span id="valColegio">
+          <th style="width:14%" class="tdDef" scope="col">Colegio</th>
+          <th style="width:48%" class="tdDef" scope="col"><span id="valColegio">
             <input name="txtColegio" type="text" id="txtColegio" value="<%=aluVO.getColegio() %>" size="75" maxlength="100" />
 </span></th>
-          <th width="11%" class="tdDef" scope="col">Curso</th>
-          <th width="27%" class="tdDef" scope="col"><span id="valCurso">
+          <th style="width:11%" class="tdDef" scope="col">Curso</th>
+          <th style="width:27%" class="tdDef" scope="col"><span id="valCurso">
             <input name="txtCurso" type="text" id="txtCurso" value="<%=aluVO.getCurso() %>" size="25" maxlength="35" />
 </span></th>
         </tr>
       </table>
       <br>
-      <table width="90%" align="center" border="0" class="colorTextoBotPest">
+      <table style="width:90%" align="center" border="0" class="colorTextoBotPest">
         <tr>
-          <td width="48%">Observaciones</td>
-          <td width="52%">LOPD</td>
+          <td style="width:48%">Observaciones</td>
+          <td style="width:52%">LOPD</td>
         </tr>
         <tr>
           <td rowspan="2"><span id="txtValObs">
@@ -496,7 +496,7 @@ function cargaCombos()
             Autoriza Comunicaciones Comerciales</td>
         </tr>
       </table>
-      <table width="90%" border="0">
+      <table style="width:90%" border="0">
         <tr>
           <td class="cellBtnSub"><input name="btnGuardar" type="button" class="cellBtnSub" id="btnGuardar" value="Guardar" onclick="validaForm(1);" /></td>
         </tr>

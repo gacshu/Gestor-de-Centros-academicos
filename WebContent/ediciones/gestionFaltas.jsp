@@ -15,7 +15,7 @@
 <%@page import="es.jahernandez.accesodatos.AlumnosDAO"%>
 <%@page import="es.jahernandez.accesodatos.ModulosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAutProf.jsp"%>
     
@@ -229,7 +229,7 @@ function cargarCombos()
 <%}}%>
 
 <form action="" method="post" name="frmFaltas" id="frmFaltas">
-<table width="85%" border="0" align="center" class="tablaListados">
+<table style="width:85%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
       <td colspan="10" class="tdDef"><strong>
               <%="Faltas de " + AlumnosGestion.devolverDatosAlumno(codAlu).getNombre() + " " + AlumnosGestion.devolverDatosAlumno(codAlu).getAp1Alu() 
@@ -239,11 +239,11 @@ function cargarCombos()
           <input name="txtCodEdi" type="hidden" id="txtCodEdi" value="<%=codEdi%>" /></strong></td>
     </tr>
   <tr class="tablaListados">
-    <td width="326" class="tdDef"><strong>M&oacute;dulos</strong></td>
+    <td style="width:326" class="tdDef"><strong>M&oacute;dulos</strong></td>
     <td colspan="2" class="tdDef"><strong>Fecha</strong></td>
     <td colspan="5" class="tdDef"><strong>Justificada</strong></td>
     <td colspan="2" class="tdDef">
-    	<img src="../imagenes/newhab.png" width="30" height="30" onclick="habilitaAlta();" style="cursor:pointer"/></td>
+    	<img src="../imagenes/newhab.png" style="width:30" height="30" onclick="habilitaAlta();" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       faltaVO = (FaltasVO) vecFaltas.elementAt(ind);
@@ -258,13 +258,13 @@ function cargarCombos()
       <td colspan="4">
           <input name="chkJust<%=faltaVO.devolverClave()%>" type="checkbox" disabled="disabled" id="chkJust<%=faltaVO.devolverClave()%>" value="true" <%if(faltaVO.isJustificada()){%>checked="checked"<%}%>/>
       </td>
-      <td width="24" class="center">
+      <td style="width:24" class="center">
           <input name="btnEdiFalta<%=faltaVO.devolverClave()%>" type="button"  id="btnEdiFalta<%=faltaVO.devolverClave()%>" value="E" onclick="editaFalta('<%=faltaVO.devolverClave()%>')" disabled="disabled"/>
       </td>
-      <td width="32">
-          <img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=faltaVO.devolverClave()%>');" style="cursor:pointer"/></td>
-      <td width="95" class="center">
-        <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaFalta('<%=faltaVO.devolverClave()%>');" style="cursor:pointer"/> 
+      <td style="width:32">
+          <img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=faltaVO.devolverClave()%>');" style="cursor:pointer"/></td>
+      <td style="width:95" class="center">
+        <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaFalta('<%=faltaVO.devolverClave()%>');" style="cursor:pointer"/> 
       </td>
   </tr>
   <%}%>
@@ -287,12 +287,12 @@ function cargarCombos()
   <tr>
     <td height="30" colspan="6" class="center">
       <%if( indInf >= 8){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('gestionFaltas.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfFalta=<%=(indInf - 8)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('gestionFaltas.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfFalta=<%=(indInf - 8)%>','_self','');">
       <%}%>
       </td>
     <td colspan="2" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecFaltas.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('gestionFaltas.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfFalta=<%=(indInf + 8)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('gestionFaltas.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfFalta=<%=(indInf + 8)%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>

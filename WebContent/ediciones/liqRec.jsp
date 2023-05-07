@@ -8,7 +8,7 @@
 <%@page import="es.jahernandez.accesodatos.EdicionesDAO"%>
 <%@page import="es.jahernandez.accesodatos.CursosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Matricular Alumno</title>
@@ -98,13 +98,13 @@ function mostrarDatosRec(codAlu,numRec)
 
 <body class="fondoFormularios" onload="cargarComboRecibos();">
 <form action="../LiquidarReciboServlet" method="post" name="frmLiqRec" target="_self" id="frmLiqRec">
-  <table width="477" border="0" class="tdDef">
+  <table style="width:477" border="0" class="tdDef">
     <tr>
       <td colspan="2">&nbsp;</td>
     </tr>
     <tr>
-      <td width="30%">N&uacute;mero recibo</td>
-      <td width="70%"><span id="ValRecPenAlu">
+      <td style="width:30%">N&uacute;mero recibo</td>
+      <td style="width:70%"><span id="ValRecPenAlu">
         <select name="lstRecPenAlu" id="lstRecPenAlu" tabindex="1" onchange="mostrarDatosRec($('#lstRecPenAlu').val(),'<%=aluVO.getIdAlu()%>');">
         </select>
       <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*.</span></span></td>
@@ -115,10 +115,10 @@ function mostrarDatosRec(codAlu,numRec)
     </tr>
     </table>
    
-    <table  name="tabDatRec" id="tabDatRec" width="477" border="0" class="tdDef">
+    <table  name="tabDatRec" id="tabDatRec" style="width:477" border="0" class="tdDef">
     <tr>
-      <td width="30%">Alumno</td>
-      <td width="328"><%=aluVO.getNombre() + " " + aluVO.getAp1Alu()%></td>
+      <td style="width:30%">Alumno</td>
+      <td style="width:328"><%=aluVO.getNombre() + " " + aluVO.getAp1Alu()%></td>
     </tr>
     <tr>
       <td>Fecha</td>

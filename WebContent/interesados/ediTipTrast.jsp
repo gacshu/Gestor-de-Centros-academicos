@@ -5,7 +5,7 @@
 <%@page import="es.jahernandez.datos.TipTrastVO"%>
 <%@page import= "es.jahernandez.accesodatos.AreasDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir tipo curso</title>
@@ -94,19 +94,19 @@ function cargaDatosTipTrast()
 
 <body class="fondoFormularios" onload="cargarComboTipoTrast();">
 <form id="frmEdiTipTrast" name="frmEdiTipTrast" method="post" action="">
-<table width="90%" border="0">
+<table style="width:90%" border="0">
   <tr>
     <td colspan="2" class="thDef">Editar Tipo Trastorno</td>
   </tr>
   <tr class="tdDef">
     <td height="24" class="tdDef">Tipos Trastornos</td>
-    <td width="86%" class="tdDef"><span id="valTipTrast">
+    <td style="width:86%" class="tdDef"><span id="valTipTrast">
       <select name="lstTipTrast" id="lstTipTrast" onchange="cargaDatosTipTrast()" style="width:250px">
       </select>
       <span class="selectInvalidMsg">*</span><span class="selectRequiredMsg">*</span></span></td>
   </tr>
   <tr class="tdDef">
-    <td width="14%" class="tdDef">Nombre</td>
+    <td style="width:14%" class="tdDef">Nombre</td>
     <td class="tdDef">
       <span id="txtValNombre">
         <input name="txtNombre" type="text" id="txtNombre" size="75" maxlength="100" />

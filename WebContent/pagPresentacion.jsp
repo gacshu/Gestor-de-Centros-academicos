@@ -4,7 +4,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Gestión Integral de Centros académicos</title>
@@ -20,9 +20,9 @@
 
 <body class="fondoFormularios" style="alignment-adjust:central">
 
-<table width="300" border="0" align="center" class="center">
+<table style="width:300" border="0" align="center" class="center">
   <tr>
-    <td><img src="imagenes/laptop.png" width="800" height="615" alt="imgPresent" /></td>
+    <td><img src="imagenes/laptop.png" style="width:800" height="615" alt="imgPresent" /></td>
   </tr>
 </table>
 </body>

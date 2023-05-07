@@ -4,7 +4,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Subir fichero</title>
@@ -31,10 +31,10 @@
 
 <body class="fondoFormularios" <%if(! nomFich.trim().equals("")){%> onload="parent.subirFichero('<%=nomFich%>');"<%}%> >
 <form action="../SubirArchivoServlet" method="post" enctype="multipart/form-data" name="frmSubir" id="frmSubir">
-<table width="401" border="0">
+<table style="width:401" border="0">
   <tr>
-    <td width="49%" class="tdDef"><input class="cellBtnSub" type="file" name="txtFile" id="txtFile" /></td>
-    <td width="51%" class="tdDef"><input class="cellBtnSub" type="submit" name="btnSubir" id="btnSubir" value="Subir" /></td>
+    <td style="width:49%" class="tdDef"><input class="cellBtnSub" type="file" name="txtFile" id="txtFile" /></td>
+    <td style="width:51%" class="tdDef"><input class="cellBtnSub" type="submit" name="btnSubir" id="btnSubir" value="Subir" /></td>
   </tr>
 </table>
 </form>

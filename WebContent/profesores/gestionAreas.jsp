@@ -12,7 +12,7 @@
 <%@page import  = "java.util.Vector"%>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -149,10 +149,10 @@ function cargarCombosAreas(idArea)
 <%}}%>
 
 <form action="" method="post" name="frmAreasProf" id="frmAreasProf">
-<table width="63%" border="0" align="center" class="tablaListados">
+<table style="width:63%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
     <td colspan="2"             class="tdDef"><strong>&Aacute;rea</strong></td>
-    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" width="30" height="30" onclick="lstNuevoArea.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
+    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="lstNuevoArea.style.visibility='visible';btnAnadir.style.visibility='visible'" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       profAreaVO = (ProfAreaVO)   vecProfArea.elementAt(ind);
@@ -160,13 +160,13 @@ function cargarCombosAreas(idArea)
   <tr class="tdDef">
     <td colspan="2">
         <select name="lstAreas<%=profAreaVO.getCodProf() + profAreaVO.getCodArea()%>" id="lstArea<%=profAreaVO.getCodProf() + profAreaVO.getCodArea()%>" disabled="disabled"></select></td>
-      <td width="56%" class="center">
-        <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaArea('<%=profAreaVO.getCodProf()%>','<%=profAreaVO.getCodArea()%>', '<%=indInf%>');" style="cursor:pointer"/>
+      <td style="width:56%" class="center">
+        <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaArea('<%=profAreaVO.getCodProf()%>','<%=profAreaVO.getCodArea()%>', '<%=indInf%>');" style="cursor:pointer"/>
       </td>
   </tr>
   <%}%>
   <tr class="tdDef">
-    <td width="16%" height="26"><span id="valNuevoArea">
+    <td style="width:16%" height="26"><span id="valNuevoArea">
       <select name="lstNuevoArea" id="lstNuevoArea" style="visibility:hidden"></select>
       <span class="selectInvalidMsg">*.</span><span class="selectRequiredMsg">*</span></span></td>
     <td colspan="2"><span class="center">
@@ -176,9 +176,9 @@ function cargarCombosAreas(idArea)
   <tr>
     <td colspan="2" class="center"><input type="hidden" name="hidCodProf" id="hidCodProf" value="<%=codProf%>" />
         <%if( indInf > 0){%>
-        <a href="gestionAreas.jsp?codProf=<%=codProf%>&valInfProfArea=<%=(indInf - 5)%>"><img src="../imagenes/btnprev.png" alt="" width="25" height="25" /></a><%}%></td>
+        <a href="gestionAreas.jsp?codProf=<%=codProf%>&valInfProfArea=<%=(indInf - 5)%>"><img src="../imagenes/btnprev.png" alt="" style="width:25" height="25" /></a><%}%></td>
     <td class="center"><%if( indSup < vecProfArea.size()){%>
-      <a href="gestionAreas.jsp?codProf=<%=codProf%>&valInfProfArea=<%=(indInf + 5)%>"><img src="../imagenes/btnsig.jpg" width="25" height="25" /></a>
+      <a href="gestionAreas.jsp?codProf=<%=codProf%>&valInfProfArea=<%=(indInf + 5)%>"><img src="../imagenes/btnsig.jpg" style="width:25" height="25" /></a>
       <%}%></td>
   </tr>
   <tr>

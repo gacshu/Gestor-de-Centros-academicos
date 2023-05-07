@@ -12,7 +12,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -83,10 +83,10 @@ if(valSup > listCurAlu.size()) valSup = listCurAlu.size();
 <body onload="cargarComboTipoCurso();" class="colorFondoPrincipalPestana" >
 
 <form action="./cursosFichaAlumno.jsp" method="post" name="frmGestionaCursos" target="_self" id="frmGestionaCursos">
-  	  <table width="90%" border="0" class="tablaCursos">
+  	  <table style="width:90%" border="0" class="tablaCursos">
   	    <tr>
-  	      <td width="35%"><strong>Curso</strong></td>
-  	      <td width="37%"><strong>Nombre Nivel</strong></td>
+  	      <td style="width:35%"><strong>Curso</strong></td>
+  	      <td style="width:37%"><strong>Nombre Nivel</strong></td>
   	      <td colspan="2" align="center"><input type="button" name="btnAnaCur" id="btnAnaCur" value="Añadir Curso" onclick="parent.cargaAltaCur('<%=aluVO.getIdAlu()%>')"/></td>
   	      </tr>
   	    
@@ -97,19 +97,19 @@ if(valSup > listCurAlu.size()) valSup = listCurAlu.size();
 				  cssFI = ind%2 == 0 ? "tablaListadoExtensa" : "colorFondoFilaImparListadoPestana";
               %>
   	    <tr class="<%=cssFI%>">
-                <td width="35%"><%=CursosGestion.devolverDatosCurso(curAluVO.getIdCur()).getNomCur()%></td>
-                <td width="37%"><%=NivelesGestion.devolverDatosNivel(curAluVO.getIdNiv()).getNomNiv()%></td>
-  	      <td width="14%" align="center"><input type="button" name="btnMat<%=ind%>" id="btnMat<%=ind%>" value="Matricular" onclick="parent.cargaPaginaMat('<%=aluVO.getIdAlu()%>','<%=curAluVO.getIdCur()%>');" /></td>
-  	      <td width="14%" align="center">
+                <td style="width:35%"><%=CursosGestion.devolverDatosCurso(curAluVO.getIdCur()).getNomCur()%></td>
+                <td style="width:37%"><%=NivelesGestion.devolverDatosNivel(curAluVO.getIdNiv()).getNomNiv()%></td>
+  	      <td style="width:14%" align="center"><input type="button" name="btnMat<%=ind%>" id="btnMat<%=ind%>" value="Matricular" onclick="parent.cargaPaginaMat('<%=aluVO.getIdAlu()%>','<%=curAluVO.getIdCur()%>');" /></td>
+  	      <td style="width:14%" align="center">
   	        <input type="button" name="btnEli<%=ind%>" id="btnEli<%=ind%>2" value="Eliminar" onclick="window.open('../DarBajaCursoInteresAlumnoServlet?codInteresado=<%=aluVO.getIdAlu()%>&codCurso=<%=curAluVO.getIdCur()%>&codNiv=<%=curAluVO.getIdNiv()%>&ind=<%=valInf%>','_self','')"/>
   	        </td>
   	      </tr>
   	    <%}%>
   	    </table>
-        <table width="100%" border="0">
+        <table style="width:100%" border="0">
 		<tr>
-        	<td width="55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./cursosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>&ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-        	<td width="45%" class="cellBtnSub" scope="col"><%if(valSup < listCurAlu.size()){%><a href="./cursosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>&ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+        	<td style="width:55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./cursosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>&ind=<%=valAnt%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+        	<td style="width:45%" class="cellBtnSub" scope="col"><%if(valSup < listCurAlu.size()){%><a href="./cursosFichaAlumno.jsp?codInt=<%=aluVO.getIdAlu()%>&ind=<%=valSup%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
       </tr>
 </table>
 </form>

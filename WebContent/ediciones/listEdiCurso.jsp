@@ -12,7 +12,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -112,16 +112,16 @@
 
 <body class="colorFondoPrincipalPestana">
 <form action="" method="post" name="frmlistEdiCur" target="_self" class="colorFondoPrincipalPestana" id="frmlistEdiCur">
-  <table width="90%" border="0">
+  <table style="width:90%" border="0">
     <tr>
-      <td width="21%" rowspan="2" class="tdDef"><strong>Descripci&oacute;n</strong></td>
-    <td width="8%" rowspan="2" class="tdDef"><strong>Fecha Inicio</strong></td>
-    <td width="7%" rowspan="2" class="tdDef"><strong>Fecha Fin</strong></td>
-    <td width="5%" rowspan="2" class="tdDef"><strong>Plazas</strong></td>
+      <td style="width:21%" rowspan="2" class="tdDef"><strong>Descripci&oacute;n</strong></td>
+    <td style="width:8%" rowspan="2" class="tdDef"><strong>Fecha Inicio</strong></td>
+    <td style="width:7%" rowspan="2" class="tdDef"><strong>Fecha Fin</strong></td>
+    <td style="width:5%" rowspan="2" class="tdDef"><strong>Plazas</strong></td>
     <td colspan="2" class="cellBtnSub"><strong class="tdDef">Precio</strong></td>
-    <td width="6%" rowspan="2" class="tdDef"><strong>M&oacute;dulos</strong></td>
-    <td width="30%" rowspan="2" class="tdDef"><strong>N&uacute;m Alumnos</strong></td>
-    <td width="5%" rowspan="2"><img src="../imagenes/newhab.png" width="30" height="30" onclick="window.open('altaEdicion.jsp?codCurso=<%=curVO.getIdCur()%>&urlDes=1','_self');" style="cursor:pointer"/></td>
+    <td style="width:6%" rowspan="2" class="tdDef"><strong>M&oacute;dulos</strong></td>
+    <td style="width:30%" rowspan="2" class="tdDef"><strong>N&uacute;m Alumnos</strong></td>
+    <td style="width:5%" rowspan="2"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="window.open('altaEdicion.jsp?codCurso=<%=curVO.getIdCur()%>&urlDes=1','_self');" style="cursor:pointer"/></td>
   </tr>
     <tr>
       <td class="cellBtnSub"><strong>Matricula</strong></td>
@@ -139,23 +139,23 @@
             <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer"><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecIn())%></td>
             <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer"><%=new SimpleDateFormat("dd/MM/yyyy").format(ediVO.getFecFi())%></td>
             <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer"><%=ediVO.getNumPla()%></td>
-            <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer" width="8%">
+            <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer" style="width:8%">
                                 <%if(ediVO.getPrecioM()>0){ %><%=new DecimalFormat("0.00").format(ediVO.getPrecioM())%>
               <%}else{%>Sin Coste<%}%></td>
-            <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer" width="10%">
+            <td onclick="location.href='../ediciones/ediEdicion.jsp?codEdi=<%=ediVO.getIdEdi()%>&urlDes=1&valInfEdi=<%=indInf%>'" style="cursor:pointer" style="width:10%">
                                 <%if(ediVO.getPrecioR()>0){ %><%=new DecimalFormat("0.00").format(ediVO.getPrecioR())%><%}else{%>Sin Coste<%}%></td>
             <td>&nbsp;</td>
             <td><input name="btnAlu<%=ind%>" type="button" value="<%=AluEdiGestion.devNumAluEdi(ediVO.getIdEdi())%>" onClick="parent.abrirListadoAluEdi('<%=ediVO.getIdEdi()%>');" />
               <input type="button" name="btnAluBaj<%=ind%>" id="btnAluBaj<%=ind%>" value="Alumnos Baja" onClick="parent.abrirListadoAluBajEdi('<%=ediVO.getIdEdi()%>');" />
             </td>
-            <td><%if(! AluEdiGestion.edicionTieneAlumnos(ediVO.getIdEdi())){%><img src="../imagenes/papelera.png" width="30" height="30" onclick="window.open('../BajaEdicionServlet?codEdi=<%=ediVO.getIdEdi()%>&codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf%>','_self','')"/><%}%></td>
+            <td><%if(! AluEdiGestion.edicionTieneAlumnos(ediVO.getIdEdi())){%><img src="../imagenes/papelera.png" style="width:30" height="30" onclick="window.open('../BajaEdicionServlet?codEdi=<%=ediVO.getIdEdi()%>&codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf%>','_self','')"/><%}%></td>
         </tr>
       <%}%>
 </table>
-<table width="90%" border="0">
+<table style="width:90%" border="0">
 <tr>
-        <td width="55%" height="40" class="cellBtnSub" scope="col"><%if(indInf > 0){%><a href="./listEdiCurso.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf-10%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="35" height="35" border="0" /></a><%}%></td>
-      <td width="45%" class="cellBtnSub" scope="col"><%if(indSup < vecEdi.size()){%><a href="./listEdiCurso.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf+10%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="35" height="35" border="0" /></a><%}%></td>
+        <td style="width:55%" height="40" class="cellBtnSub" scope="col"><%if(indInf > 0){%><a href="./listEdiCurso.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf-10%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:35" height="35" border="0" /></a><%}%></td>
+      <td style="width:45%" class="cellBtnSub" scope="col"><%if(indSup < vecEdi.size()){%><a href="./listEdiCurso.jsp?codCur=<%=curVO.getIdCur()%>&valInfEdi=<%=indInf+10%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:35" height="35" border="0" /></a><%}%></td>
     </tr>
 </table>
 

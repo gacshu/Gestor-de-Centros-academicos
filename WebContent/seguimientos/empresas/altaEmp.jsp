@@ -10,7 +10,7 @@
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.gestion.ActividadesGestion"%>
 
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Alta Empresa</title>
@@ -193,12 +193,12 @@ function cargarCombos()
 </script>
 <%}%>
 <form action="" method="post" name="frmAltaEmpresa" target="_self" id="frmAltaEmpresa">
- <table width="100%" border="0">
+ <table style="width:100%" border="0">
   <tr class="thDef">
     <th height="50" colspan="3" scope="col">Alta Empresa</th>
   </tr>
 </table>
-<table width="100%" class="tablaApartadosEmpresa" >
+<table style="width:100%" class="tablaApartadosEmpresa" >
 	<tr class="tdDef">
 	  <td colspan="6" class="tdDef"><strong>Datos Fiscales</strong></td>
     </tr>
@@ -208,22 +208,22 @@ function cargarCombos()
 	    <input name="txtRazonSocial" type="text" id="txtRazonSocial" value="<%=empVO.getNombreEmpresa()%>" size="75" maxlength="50" />
       <span class="textfieldRequiredMsg">*</span></span></td>
 	  <td>CIF</td>
-	  <td width="12%"><span id="txtValCIF">
+	  <td style="width:12%"><span id="txtValCIF">
 	    <input name="txtCIF" type="text" id="txtCIF" value="<%=empVO.getCifEmpresa()%>" size="20" maxlength="10" />
 </span></td>
-	  <td width="6%">CNAE</td>
-	  <td width="22%"><span id="txtValCNAE">
+	  <td style="width:6%">CNAE</td>
+	  <td style="width:22%"><span id="txtValCNAE">
 	    <input name="txtCNAE" type="text" id="txtCNAE" <%if(empVO.getCnae()>0){%>value="<%=empVO.getCnae()%><%}%>" size="15" maxlength="10" />
 </span></td>
     </tr>
 	<tr class="tdDef">
-    	<td width="11%">Dirección          
+    	<td style="width:11%">Dirección          
         </td>
-        <td width="41%"><span id="txtValDirEmp">
+        <td style="width:41%"><span id="txtValDirEmp">
           <input name="txtDirEmp" type="text" id="txtDirEmp" value="<%=empVO.getDirEmpresa()%>" size="90" maxlength="150" />
 </span>                                        
       </td>
-        <td width="8%">Código Postal
+        <td style="width:8%">Código Postal
         </td>
         <td colspan="3"><span id="txtValCodPosEmp">
         <input name="txtCodPosEmp" type="text" id="txtCodPosEmp" value="<%=empVO.getCodPostal()%>" size="10" maxlength="5" />
@@ -268,7 +268,7 @@ function cargarCombos()
     </tr>
 </table>
 <br>
-<table width="100%" class="tablaApartadosEmpresa" >
+<table style="width:100%" class="tablaApartadosEmpresa" >
 	<tr class="tdDef">
 	  <td colspan="6" class="tdDef"><strong>Datos Comerciales</strong></td>
     </tr>
@@ -279,12 +279,12 @@ function cargarCombos()
 </span><span class="textfieldRequiredMsg">A value is required.</span></span></td>
     </tr>
 	<tr class="tdDef">
-    	<td width="11%">Dirección          
+    	<td style="width:11%">Dirección          
         </td>
         <td colspan="2"><span id="txtValDirCom">
         <input name="txtDirCom" type="text" id="txtDirCom" value="<%=empVO.getDirCom()%>" size="90" maxlength="150" />
       </span></td>
-        <td width="8%">Código Postal
+        <td style="width:8%">Código Postal
         </td>
         <td colspan="2"><span id="txtValCodPosEmp"><span class="textfieldInvalidFormatMsg">Invalid format.</span></span>                 
           <span id="txtValCodPosCom">
@@ -328,27 +328,27 @@ function cargarCombos()
 	</tr>
     <tr class="tdDef">
         <td colspan="4">&nbsp;</td>
-        <td width="17%"><input type="checkbox" name="chkDatAct" id="chkDatAct" value="true" <%if(empVO.isDatAct()){%>checked="checked"<%}%> />
+        <td style="width:17%"><input type="checkbox" name="chkDatAct" id="chkDatAct" value="true" <%if(empVO.isDatAct()){%>checked="checked"<%}%> />
         Datos Actualizados</td>
-        <td width="23%" class="cellBtnSub"><input name="btnVolcarDatosFiscales" type="button" class="cellBtnSub" id="btnVolcarDatosFiscales" value="Volcar Datos  Fiscales" onclick="volcarDatosComerciales()";/></td>
+        <td style="width:23%" class="cellBtnSub"><input name="btnVolcarDatosFiscales" type="button" class="cellBtnSub" id="btnVolcarDatosFiscales" value="Volcar Datos  Fiscales" onclick="volcarDatosComerciales()";/></td>
     </tr>
 </table>
 <br>
-<table width="100%" class="tdDef">
+<table style="width:100%" class="tdDef">
 	<tr>
-    	<td width="353">Nº Empleados<span id="txtValNumEmp">
+    	<td style="width:353">Nº Empleados<span id="txtValNumEmp">
         <input name="txtNumEmp" type="text" id="txtNumEmp" <%if(empVO.getNumEmp()>0){%>value="<%=empVO.getNumEmp()%><%}%>" size="15" maxlength="9" />
     <span class="textfieldInvalidFormatMsg">*</span></span></td>
-        <td width="297"><input type="checkbox" name="chkAdCon" id="chkAdCon" value="true" <%if(empVO.isConvenioAd()){%>checked="checked"<%}%>/>
+        <td style="width:297"><input type="checkbox" name="chkAdCon" id="chkAdCon" value="true" <%if(empVO.isConvenioAd()){%>checked="checked"<%}%>/>
           Adherido a convenio</td>
-        <td width="398">Fecha Convenio<span id="txtValFecNac"><span id="txtValFecCon">
+        <td style="width:398">Fecha Convenio<span id="txtValFecNac"><span id="txtValFecCon">
           <label>
             <input class="claseForFecha" name="txtFecCon" type="text" id="txtFecCon" size="15" maxlength="10" <%if(empVO.getFecCon().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecCon())%>"<%}%> onchange="document.getElementById('hidFecCon').value = document.getElementById('txtFecCon').value;"/>
           <span class="textfieldInvalidFormatMsg">*</span></label>
 </span><span class="textfieldRequiredMsg">*</span><span class="textfieldInvalidFormatMsg">*</span></span>
 <input type="hidden" name="hidFecCon" id="hidFecCon" <%if(empVO.getFecCon().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecCon())%>"<%}%>/>
 </td>
-        <td width="310">Importa/Exporta
+        <td style="width:310">Importa/Exporta
           <select name="selImpExp" id="selImpExp" tabindex="127">
           <option selected="selected" value="----">----</option>
           <option value="IMPORTA">IMPORTA</option>
@@ -358,39 +358,39 @@ function cargarCombos()
           <script>frmAltaEmpresa.selImpExp.value="<%=empVO.getImpExp()%>";</script>
     </tr>
     </table>
-    <table width="100%" class="tdDef">
+    <table style="width:100%" class="tdDef">
     <tr>
-       <td width="26%"><input type="checkbox" name="chkesCliente" id="chkesCliente" value="true" <%if(empVO.isEsCliente()){%>checked="checked"<%}%>/>
+       <td style="width:26%"><input type="checkbox" name="chkesCliente" id="chkesCliente" value="true" <%if(empVO.isEsCliente()){%>checked="checked"<%}%>/>
          Cliente</td>
-       <td width="22%">Cuota<span id="txtValCuota">
+       <td style="width:22%">Cuota<span id="txtValCuota">
         <input name="txtCuota" type="text" id="txtCuota" <%if(empVO.getCuota()>0){%>value="<%=empVO.getCuota()%><%}%>" size="15" maxlength="9" />
       <span class="textfieldInvalidFormatMsg">*</span></span></td>
-       <td width="52%">Volumen de Negocio<span id="txtValVolNeg">
+       <td style="width:52%">Volumen de Negocio<span id="txtValVolNeg">
         <input name="txtVolNeg" type="text" id="txtVolNeg" value="<%=empVO.getVolNeg()%>" size="75" maxlength="50" />
        </span>       </td>
       </tr>
 </table>
 <br>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
   <tr class="tdDef">
-    <td width="74%"><table width="100%" class="tablaApartadosEmpresa">
+    <td style="width:74%"><table style="width:100%" class="tablaApartadosEmpresa">
   <tr>
     <td colspan="5"><strong>LOPD</strong></td>
     </tr>
   <tr>
-    <td width="25%"><input type="checkbox" name="chkAutCesDat" id="chkAutCesDat" value="true" <%if(empVO.isAutCesDat()){%>checked="checked"<%}%>/>
+    <td style="width:25%"><input type="checkbox" name="chkAutCesDat" id="chkAutCesDat" value="true" <%if(empVO.isAutCesDat()){%>checked="checked"<%}%>/>
     Autoriza Cesión Datos</td>
-    <td width="15%"><input type="checkbox" name="chkAcc" id="chkAcc" value="true" <%if(empVO.isAccArco()){%>checked="checked"<%}%>/>
+    <td style="width:15%"><input type="checkbox" name="chkAcc" id="chkAcc" value="true" <%if(empVO.isAccArco()){%>checked="checked"<%}%>/>
       Acceso</td>
-    <td width="17%"><span id="txtValFecAcc">
+    <td style="width:17%"><span id="txtValFecAcc">
     <label>
       <input class="claseForFecha" name="txtFecAcc" type="text" id="txtFecAcc" size="15" maxlength="10" <%if(empVO.getFecAccArc().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecAccArc())%>"<%}%> onchange="document.getElementById('hidFecAcc').value = document.getElementById('txtFecAcc').value;"/>
       <span class="textfieldInvalidFormatMsg">*</span></label>
     </span>
       <input type="hidden" name="hidFecAcc" id="hidFecAcc" <%if(empVO.getFecAccArc().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecAccArc())%>"<%}%>/></td>
-    <td width="22%"><input type="checkbox" name="chkCancel" id="chkCancel" value="true" <%if(empVO.isCanArco()){%>checked="checked"<%}%>/>
+    <td style="width:22%"><input type="checkbox" name="chkCancel" id="chkCancel" value="true" <%if(empVO.isCanArco()){%>checked="checked"<%}%>/>
       Cancelación</td>
-    <td width="21%"><span id="txtValFecCan">
+    <td style="width:21%"><span id="txtValFecCan">
     <label>
       <input class="claseForFecha" name="txtFecCan" type="text" id="txtFecCan" size="15" maxlength="10" <%if(empVO.getFecCanArc().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecCanArc())%>"<%}%> onchange="document.getElementById('hidFecCan').value = document.getElementById('txtFecCan').value;"/>
       <span class="textfieldInvalidFormatMsg">*</span></label>
@@ -419,7 +419,7 @@ function cargarCombos()
     </table>
 
 </td>
-    <td width="26%"><table width="100%" border="0">
+    <td style="width:26%"><table style="width:100%" border="0">
   <tr>
     <td>&nbsp;</td>
   </tr>

@@ -5,7 +5,7 @@
 <%@ page import = "es.jahernandez.accesodatos.*"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Añadir Seguimiento</title>
@@ -113,15 +113,15 @@ function cargarComboCursos(idCurso)
 </script>
 <%}%>
 <form action="../GuardarSeguimientoServlet?ind=<%=ind%>" method="post" name="frmAnadirSeguimiento" target="_self" id="frmAnadirSeguimiento">
-<table width="100%" border="0">
+<table style="width:100%" border="0">
   <tr>
     <th colspan="4" class="thDef" scope="col">Añadir Seguimiento
         <input type="hidden" name="hidCodAlu" id="hidCodAlu" value="<%=codInt%>" /></th>
   </tr>
   
   <tr>
-    <td width="17%" height="30"><span class="tdDef">Usuario</span></td>
-    <td width="83%"><span id="txtValUsuario">
+    <td style="width:17%" height="30"><span class="tdDef">Usuario</span></td>
+    <td style="width:83%"><span id="txtValUsuario">
             <input name="txtUsuario" type="text" id="txtUsuario" value="<%=usuario.getUsuario()%>" size="25" maxlength="25" readonly="readonly" />
       <span class="textfieldRequiredMsg">*</span></span></td>
     </tr>

@@ -10,7 +10,7 @@
 
 <%@ page import = "es.jahernandez.datos.*"%>
 <%@ page import = "es.jahernandez.accesodatos.*"%>
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cursos interesado</title>
@@ -67,7 +67,7 @@ if(valSup > listSeg.size()) valSup = listSeg.size();
 <%}%>
 <body class="colorFondoPrincipalPestana" >
 <form action="altaSegEmp.jsp?codEmp=<%=codEmp%>" method="post" name="frmSeguimientosInteresado" target="_self" id="frmSeguimientosInteresado">
-  <table width="90%" border="0" class="tablaCursos">
+  <table style="width:90%" border="0" class="tablaCursos">
     <tr>
     <td><strong>Fecha</strong></td>
     <td><strong>Usuario</strong></td>
@@ -86,10 +86,10 @@ if(valSup > listSeg.size()) valSup = listSeg.size();
     <%}%>
  
 </table>
-<table width="100%" border="0">
+<table style="width:100%" border="0">
 <tr>
-    <td width="55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verSegEmp.jsp?ind=<%=valAnt%>&codEmp=<%=codEmp%>"><img src="../imagenes/btnprev.png" alt="&lt;---" width="50" height="50" border="0" /></a><%}%></td>
-    <td width="45%" class="cellBtnSub" scope="col"><%if(valSup < listSeg.size()){%><a href="./verSegEmp.jsp?ind=<%=valSup%>&codEmp=<%=codEmp%>"><img src="../imagenes/btnsig.png" alt="---&gt;" width="50" height="50" border="0" /></a><%}%></td>
+    <td style="width:55%" class="cellBtnSub" scope="col"><%if(valAnt >= 0){%><a href="./verSegEmp.jsp?ind=<%=valAnt%>&codEmp=<%=codEmp%>"><img src="../imagenes/btnprev.png" alt="&lt;---" style="width:50" height="50" border="0" /></a><%}%></td>
+    <td style="width:45%" class="cellBtnSub" scope="col"><%if(valSup < listSeg.size()){%><a href="./verSegEmp.jsp?ind=<%=valSup%>&codEmp=<%=codEmp%>"><img src="../imagenes/btnsig.png" alt="---&gt;" style="width:50" height="50" border="0" /></a><%}%></td>
 </tr>
 </table>
   	

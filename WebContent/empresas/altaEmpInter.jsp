@@ -12,7 +12,7 @@
 
 
 
-<html>
+<html lang="es" xml:lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Alta Empresa</title>
@@ -206,7 +206,7 @@ function cargarCombos()
   <div id="acordeonEmpresa">
     <h3><strong>Datos Fiscales</strong></h3>
     <div>
-   	  <table width="72%" class="tablaApartadosEmpresa" >
+   	  <table style="width:72%" class="tablaApartadosEmpresa" >
             <tr class="tdDef">
                 <td>Razón Social</td>
                 <td>
@@ -215,7 +215,7 @@ function cargarCombos()
                     <span class="textfieldRequiredMsg">*</span></span>
                 </td>
                 <td>CIF</td>
-                <td width="16%">
+                <td style="width:16%">
                   <span id="txtValCIF">
                         <input name="txtCIF" type="text" id="txtCIF" value="<%=empVO.getCifEmpresa()%>" size="20" maxlength="10" />
                   </span>                <span id="txtValCNAE">
@@ -224,13 +224,13 @@ function cargarCombos()
                 </td>
             </tr>
             <tr class="tdDef">
-                <td width="11%">Dirección</td>
-                <td width="60%">
+                <td style="width:11%">Dirección</td>
+                <td style="width:60%">
                   <span id="txtValDirEmp">
                         <input name="txtDirEmp" type="text" id="txtDirEmp" value="<%=empVO.getDirEmpresa()%>" size="90" maxlength="150" />
                   </span>                                        
                 </td>
-                <td width="13%">CNAE</td>
+                <td style="width:13%">CNAE</td>
               <td><span id="txtValCNAE">
                 <input name="txtCNAE" type="text" id="txtCNAE" <%if(empVO.getCnae()>0){%>value="<%=empVO.getCnae()%><%}%>" size="15" maxlength="10" />
 </span></td>
@@ -281,7 +281,7 @@ function cargarCombos()
     </div>  
     <h3><strong>Datos Comerciales</strong></h3>
     <div>
-    	<table width="72%" class="tablaApartadosEmpresa" >
+    	<table style="width:72%" class="tablaApartadosEmpresa" >
 			<tr class="tdDef">
 	  			<td>Nombre comercial</td>
 	  			<td colspan="5">
@@ -293,14 +293,14 @@ function cargarCombos()
                     </span></td>
     		</tr>
 			<tr class="tdDef">
-    			<td width="17%">Dirección</td>
+    			<td style="width:17%">Dirección</td>
         		<td colspan="2">
                 	<span id="txtValDirCom">
         				<input name="txtDirCom" type="text" id="txtDirCom" value="<%=empVO.getDirCom()%>" size="90" maxlength="150" />
       				</span>
                 </td>
-        		<td width="13%">Código Postal</td>
-        		<td width="10%" colspan="2">
+        		<td style="width:13%">Código Postal</td>
+        		<td style="width:10%" colspan="2">
                 	<span id="txtValCodPosEmp">
                     	<span class="textfieldInvalidFormatMsg">*</span>
                     </span>                 
@@ -366,19 +366,19 @@ function cargarCombos()
     </div>
     <h3><strong>Datos Generales</strong></h3>
     <div>
-    	<table width="100%" class="tablaApartadosEmpresa">
+    	<table style="width:100%" class="tablaApartadosEmpresa">
 			<tr class="tdDef">
-    			<td width="230">Nº Empleados
+    			<td style="width:230">Nº Empleados
                 	<span id="txtValNumEmp">
         				<input name="txtNumEmp" type="text" id="txtNumEmp" <%if(empVO.getNumEmp()>0){%>value="<%=empVO.getNumEmp()%><%}%>" size="15" maxlength="9" />
     					<span class="textfieldInvalidFormatMsg">*</span>
                     </span>
                 </td>
-        		<td width="195">
+        		<td style="width:195">
                 	<input type="checkbox" name="chkAdCon" id="chkAdCon" value="true" <%if(empVO.isConvenioAd()){%>checked="checked"<%}%>/>
           				Adherido a convenio
                 </td>
-        		<td width="264">Fecha Convenio
+        		<td style="width:264">Fecha Convenio
                 	<span id="txtValFecNac">
                 		<span id="txtValFecCon">
           					<label>
@@ -390,7 +390,7 @@ function cargarCombos()
                     		<span class="textfieldInvalidFormatMsg">*</span>
                     </span>
                 </td>
-        		<td width="231">Importa/Exporta
+        		<td style="width:231">Importa/Exporta
           			<select name="selImpExp" id="selImpExp" tabindex="127">
           				<option selected="selected" value="----">----</option>
           				<option value="IMPORTA">IMPORTA</option>
@@ -401,19 +401,19 @@ function cargarCombos()
           		<script>frmAltaEmpresa.selImpExp.value="<%=empVO.getImpExp()%>";</script>
     		</tr>
     	</table>
-    	<table width="100%" class="tablaApartadosEmpresa">
+    	<table style="width:100%" class="tablaApartadosEmpresa">
     		<tr class="tdDef">
-       			<td width="11%">
+       			<td style="width:11%">
                 	<input type="checkbox" name="chkesCliente" id="chkesCliente" value="true" <%if(empVO.isEsCliente()){%>checked="checked"<%}%>/>
          			Cliente
                 </td>
-       			<td width="20%">Cuota
+       			<td style="width:20%">Cuota
                 	<span id="txtValCuota">
         				<input name="txtCuota" type="text" id="txtCuota" <%if(empVO.getCuota()>0){%>value="<%=empVO.getCuota()%><%}%>" size="15" maxlength="9" />
      	 				<span class="textfieldInvalidFormatMsg">*</span>
                     </span>
                  </td>
-       			<td width="69%">Volumen de Negocio
+       			<td style="width:69%">Volumen de Negocio
                 	<span id="txtValVolNeg">
         				<input name="txtVolNeg" type="text" id="txtVolNeg" value="<%=empVO.getVolNeg()%>" size="50" maxlength="50" />
        				</span>       
@@ -423,16 +423,16 @@ function cargarCombos()
     </div>
     <h3><strong>LOPD</strong></h3>
     <div>
-    	<table width="100%" border="0">
+    	<table style="width:100%" border="0">
   			<tr class="tdDef">
-    			<td width="74%">
-                	<table width="72%" class="tablaApartadosEmpresa">
+    			<td style="width:74%">
+                	<table style="width:72%" class="tablaApartadosEmpresa">
   						<tr>
-    						<td width="22%"><input type="checkbox" name="chkAutCesDat" id="chkAutCesDat" value="true" <%if(empVO.isAutCesDat()){%>checked="checked"<%}%>/>Autoriza Cesión Datos
+    						<td style="width:22%"><input type="checkbox" name="chkAutCesDat" id="chkAutCesDat" value="true" <%if(empVO.isAutCesDat()){%>checked="checked"<%}%>/>Autoriza Cesión Datos
                             </td>
-    						<td width="18%"><input type="checkbox" name="chkAcc" id="chkAcc" value="true" <%if(empVO.isAccArco()){%>checked="checked"<%}%>/>Acceso
+    						<td style="width:18%"><input type="checkbox" name="chkAcc" id="chkAcc" value="true" <%if(empVO.isAccArco()){%>checked="checked"<%}%>/>Acceso
                             </td>
-    						<td width="19%">
+    						<td style="width:19%">
                             	<span id="txtValFecAcc">
     								<label>
       									<input class="claseForFecha" name="txtFecAcc" type="text" id="txtFecAcc" size="15" maxlength="10" <%if(empVO.getFecAccArc().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecAccArc())%>"<%}%>/>
@@ -440,10 +440,10 @@ function cargarCombos()
                                     </label>
     							</span>
                            </td>
-    					   <td width="17%">
+    					   <td style="width:17%">
                            		<input type="checkbox" name="chkCancel" id="chkCancel" value="true" <%if(empVO.isCanArco()){%>checked="checked"<%}%>/>Cancelación
                            </td>
-    					   <td width="24%">
+    					   <td style="width:24%">
           	                 	<span id="txtValFecCan">
                                     <label>
                                         <input class="claseForFecha" name="txtFecCan" type="text" id="txtFecCan" size="15" maxlength="10" <%if(empVO.getFecCanArc().after(new GregorianCalendar(1900,0,1).getTime())){%>value="<%=new SimpleDateFormat("dd/MM/yyyy").format(empVO.getFecCanArc())%>"<%}%> />

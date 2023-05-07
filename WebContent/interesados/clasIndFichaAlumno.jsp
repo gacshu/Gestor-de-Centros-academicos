@@ -9,7 +9,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="es.jahernandez.accesodatos.CursosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -326,9 +326,9 @@ function cargaFiltro()
 <%}}%>
 
 <form action="" method="post" name="frmClasesInd" id="frmClasesInd">
-<table width="85%" border="0" align="center" class="tablaListados">
+<table style="width:85%" border="0" align="center" class="tablaListados">
   <tr>
-  	<td width="35%" class="tdDef"><select name="lstMesFilt" id="lstMesFilt" on onchange="lstAnnoFilt.value=<%=annoAct%>">
+  	<td style="width:35%" class="tdDef"><select name="lstMesFilt" id="lstMesFilt" on onchange="lstAnnoFilt.value=<%=annoAct%>">
   	  <option value="-1">Seleccione...</option>
   	  <option value="01">Enero</option>
   	  <option value="02">Febrero</option>
@@ -349,10 +349,10 @@ function cargaFiltro()
             <option value="<%=ind%>"><%=ind%></option>
             <%}%>
       </select></td>
-    <td width="12%" class="tdDef">
+    <td style="width:12%" class="tdDef">
     	<input type="button" name="btnVerRecibos" id="btnVerRecibos" value="Ver Clases Mes" onclick="cargaFiltro();"/>
     </td>
-    <td width="21%" class="tdDef"></td>
+    <td style="width:21%" class="tdDef"></td>
     <td colspan="6" class="tdDef"><%if(mostrarTotal){%>
       <strong>Total mes de <%=tablaMeses[mesFiltro-1] + " de " + annoAct%></strong><%}%>
     </td>
@@ -361,11 +361,11 @@ function cargaFiltro()
     </td>
   </tr>
   <tr class="tablaListados">
-    <td width="35%" class="tdDef"><strong>Curso</strong></td>
-    <td width="12%" class="tdDef"><strong>Fecha</strong></td>
+    <td style="width:35%" class="tdDef"><strong>Curso</strong></td>
+    <td style="width:12%" class="tdDef"><strong>Fecha</strong></td>
     <td colspan="2" class="tdDef"><strong>Profesor</strong></td>
     <td colspan="5" class="tdDef"><strong>Tarifa</strong></td>
-    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" width="30" height="30" onclick="habilitaAlta();" style="cursor:pointer"/></td>
+    <td colspan="2" class="tdDef"><img src="../imagenes/newhab.png" style="width:30" height="30" onclick="habilitaAlta();" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       clasIndVO = (ClasesIndivVO) vecClasInd.elementAt(ind);
@@ -378,10 +378,10 @@ function cargaFiltro()
       <td colspan="2" class="tdDef"><select name="lstProf<%=clasIndVO.getIdClaseInd()%>" id="lstProf<%=clasIndVO.getIdClaseInd()%>" disabled="disabled">
     </select></td>
       <td colspan="4"><input name="txtTarifa<%=clasIndVO.getIdClaseInd()%>" type="text" disabled="disabled" id="txtTarifa<%=clasIndVO.getIdClaseInd()%>" value="<%=new DecimalFormat("#######.##").format(clasIndVO.getTarifa())%>" size="10" maxlength="10" /></td>
-      <td width="2%" class="center"><input name="btnEdiClasInd<%=clasIndVO.getIdClaseInd()%>" type="button"  id="btnEdiClasInd<%=clasIndVO.getIdClaseInd()%>" value="E" onclick="editaClaseInd('<%=clasIndVO.getIdClaseInd()%>')" disabled="disabled"/></td>
-      <td width="3%"><img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=clasIndVO.getIdClaseInd()%>');" style="cursor:pointer"/></td>
-      <td width="8%" class="center">
-        <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaClaseInd('<%=clasIndVO.getIdClaseInd()%>','<%=indInf%>','<%=clasIndVO.getIdAlu()%>');" style="cursor:pointer"/> 
+      <td style="width:2%" class="center"><input name="btnEdiClasInd<%=clasIndVO.getIdClaseInd()%>" type="button"  id="btnEdiClasInd<%=clasIndVO.getIdClaseInd()%>" value="E" onclick="editaClaseInd('<%=clasIndVO.getIdClaseInd()%>')" disabled="disabled"/></td>
+      <td style="width:3%"><img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=clasIndVO.getIdClaseInd()%>');" style="cursor:pointer"/></td>
+      <td style="width:8%" class="center">
+        <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaClaseInd('<%=clasIndVO.getIdClaseInd()%>','<%=indInf%>','<%=clasIndVO.getIdAlu()%>');" style="cursor:pointer"/> 
       </td>
   </tr>
   <%}%>
@@ -410,12 +410,12 @@ function cargaFiltro()
   <tr>
     <td height="30" colspan="7" class="center">
       <%if( indInf >= 10){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('clasIndFichaAlumno.jsp?codInt=<%=codAlu%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf - 10)%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('clasIndFichaAlumno.jsp?codInt=<%=codAlu%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf - 10)%>','_self','');">
       <%}%>
       </td>
     <td colspan="2" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecClasInd.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('clasIndFichaAlumno.jsp?codInt=<%=codAlu%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf + 10)%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('clasIndFichaAlumno.jsp?codInt=<%=codAlu%>&strFecha=<%=fecFilt%>&valInfClasInd=<%=(indInf + 10)%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>

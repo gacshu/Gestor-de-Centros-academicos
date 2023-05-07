@@ -14,7 +14,7 @@
 <%@page import="es.jahernandez.accesodatos.AlumnosDAO"%>
 <%@page import="es.jahernandez.accesodatos.ModulosDAO"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <%@ include file="../controlAcceso/includeComAut.jsp"%>
     
@@ -289,7 +289,7 @@ function cargarCombos()
 <%}}%>
 
 <form action="" method="post" name="frmCalif" id="frmCalif">
-<table width="85%" border="0" align="center" class="tablaListados">
+<table style="width:85%" border="0" align="center" class="tablaListados">
   <tr class="tablaListados">
     <td colspan="11" class="tdDef"><span id="valFiltEdi">
       <select name="lstEdi" id="lstEdi">
@@ -321,13 +321,13 @@ function cargarCombos()
           <input name="txtCodEdi" type="hidden" id="txtCodEdi" value="<%=codEdi%>" /></strong></td>
     </tr>
   <tr class="tablaListados">
-    <td width="326" class="tdDef"><strong>M&oacute;dulos</strong></td>
-    <td width="190" class="tdDef"><strong>Evaluaci&oacute;n</strong></td>
+    <td style="width:326" class="tdDef"><strong>M&oacute;dulos</strong></td>
+    <td style="width:190" class="tdDef"><strong>Evaluaci&oacute;n</strong></td>
     <td colspan="2" class="tdDef"><strong>Fecha</strong></td>
     <td colspan="5" class="tdDef"><strong>Nota</strong></td>
     <td colspan="2" class="tdDef">
-    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" width="30" height="30" onclick="window.open('../ImpCalificacionesEdiAluServlet?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&eva=<%=eva%>','_califAlu','');"/>
-    <img src="../imagenes/newhab.png" width="30" height="30" onclick="habilitaAlta();" style="cursor:pointer"/></td>
+    <img  onmouseover="this.src='../imagenes/imprimirGr.png'" onmouseout="this.src='../imagenes/imprimirPe.png'" src="../imagenes/imprimirPe.png" style="width:30" height="30" onclick="window.open('../ImpCalificacionesEdiAluServlet?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&eva=<%=eva%>','_califAlu','');"/>
+    <img src="../imagenes/newhab.png" style="width:30" height="30" onclick="habilitaAlta();" style="cursor:pointer"/></td>
   </tr>
   <%for(int ind = indInf; ind<indSup;ind++){
       califVO = (CalificacionesVO) vecCalif.elementAt(ind);
@@ -356,10 +356,10 @@ function cargarCombos()
         <option value="10">Sobresaliente (10)</option>
       </select></td>
       <script>$("#lstNota<%=califVO.devolverClave()%>").val("<%=califVO.getNota()%>");</script>
-      <td width="24" class="center"><input name="btnEdiCalif<%=califVO.devolverClave()%>" type="button"  id="btnEdiCalif<%=califVO.devolverClave()%>" value="E" onclick="editaCalif('<%=califVO.devolverClave()%>')" disabled="disabled"/></td>
-      <td width="32"><img src="../imagenes/editar.png" width="30" height="30" onclick="habilitaEdi('<%=califVO.devolverClave()%>');" style="cursor:pointer"/></td>
-      <td width="95" class="center">
-        <img src="../imagenes/papelera.png" width="30" height="30" onclick="bajaCalif('<%=califVO.devolverClave()%>');" style="cursor:pointer"/> 
+      <td style="width:24" class="center"><input name="btnEdiCalif<%=califVO.devolverClave()%>" type="button"  id="btnEdiCalif<%=califVO.devolverClave()%>" value="E" onclick="editaCalif('<%=califVO.devolverClave()%>')" disabled="disabled"/></td>
+      <td style="width:32"><img src="../imagenes/editar.png" style="width:30" height="30" onclick="habilitaEdi('<%=califVO.devolverClave()%>');" style="cursor:pointer"/></td>
+      <td style="width:95" class="center">
+        <img src="../imagenes/papelera.png" style="width:30" height="30" onclick="bajaCalif('<%=califVO.devolverClave()%>');" style="cursor:pointer"/> 
       </td>
   </tr>
   <%}%>
@@ -411,12 +411,12 @@ function cargarCombos()
   <tr>
     <td height="30" colspan="7" class="center">
       <%if( indInf >= 10){%>
-      <img src="../imagenes/btnprev.png" width="35" height="35" onclick="window.open('califFichaAlumno.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfCalif=<%=(indInf - 10)%>&eva=<%=eva%>','_self','');">
+      <img src="../imagenes/btnprev.png" style="width:35" height="35" onclick="window.open('califFichaAlumno.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfCalif=<%=(indInf - 10)%>&eva=<%=eva%>','_self','');">
       <%}%>
       </td>
     <td colspan="2" class="center">&nbsp;</td>
     <td colspan="2" class="center"><%if( indSup < vecCalif.size()){%>
-      <img src="../imagenes/btnsig.png" width="35" height="35" onclick="window.open('califFichaAlumno.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfCalif=<%=(indInf + 10)%>&eva=<%=eva%>','_self','');"/>
+      <img src="../imagenes/btnsig.png" style="width:35" height="35" onclick="window.open('califFichaAlumno.jsp?codInt=<%=codAlu%>&codEdi=<%=codEdi%>&valInfCalif=<%=(indInf + 10)%>&eva=<%=eva%>','_self','');"/>
       <%}%></td>
   </tr>
   <tr>
