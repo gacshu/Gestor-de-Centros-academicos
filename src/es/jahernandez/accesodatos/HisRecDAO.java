@@ -33,7 +33,7 @@ public class HisRecDAO
 //Método que guarda un nuevo registro en la base de datos
     public static int guardarHisRec(HisRecVO hisRecVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "INSERT INTO " + TablaHistoricoRecibos.TABLA      + " ( "
                                                            + TablaHistoricoRecibos.CODEDICION + " , "
@@ -48,7 +48,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             // Se pasan los parámetros de la consula sql
             ps.setString (1, hisRecVO.getIdEdi());
@@ -61,21 +61,13 @@ public class HisRecDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+           
             throw exc;
         }
     }
@@ -87,7 +79,7 @@ public class HisRecDAO
     //Domicili  1 busqueda de recibos domiciliados
     public static Vector devRecHisAluEdi(String idCur, String fecIn1, String fecIn2, String codAlu, int pagado,int centro,int domicil, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         ResultSet         rs              = null;
 
         Vector            listaHisRec     = new Vector();
@@ -164,7 +156,7 @@ public class HisRecDAO
                      " ORDER BY " + TablaHistoricoRecibos.CODEDICION;
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -184,20 +176,13 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaHisRec;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -206,7 +191,7 @@ public class HisRecDAO
     //Método que cambia el estado de pagado de un recibo
     public static int cambEstadoPagado(String numRec, String codAlu, boolean estado , Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "UPDATE " + TablaHistoricoRecibos.TABLA     +
                                             " SET "   + TablaHistoricoRecibos.PAGADO    + " = ? " +
@@ -217,7 +202,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setBoolean(1, estado );
@@ -228,20 +213,13 @@ public class HisRecDAO
 
             ps.close();
             Conexion.desconectar(con);
-
+           }
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -250,7 +228,7 @@ public class HisRecDAO
     //Método que devuelve los datos de un recibo
     public static HisRecVO devDatRecHis(String codAlu, String numRec, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         ResultSet         rs              = null;
 
         String            sql             = "SELECT  "   + TablaHistoricoRecibos.CODEDICION + " , "
@@ -267,7 +245,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, numRec);
@@ -289,20 +267,12 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return datHisRec;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -311,7 +281,7 @@ public class HisRecDAO
     //Método que devuelve el número de recibos de un mes
     public static int devNumRecMes(String fecha, Connection con) throws Exception //fecha en formato aaaa/m
     {
-        PreparedStatement       ps       = null;
+        
         ResultSet               rs       = null;
 
         String                  sql      = "SELECT COUNT(" + TablaHistoricoRecibos.CODEDICION + ") AS EXPR1 " +
@@ -322,7 +292,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -333,20 +303,12 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return numRec;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -356,7 +318,7 @@ public class HisRecDAO
     //Método que devuelve si se ha generado un recibo del mes actual de un curso de un alumno
     public static boolean  reciboGenerado(String codAlu, String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            mesAc          = new SimpleDateFormat("MM").format(new Date(System.currentTimeMillis()));
@@ -399,7 +361,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -420,21 +382,13 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return reciboGenerado;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -443,7 +397,7 @@ public class HisRecDAO
     //Método que devuelve los datos de alumno-edición de los recibos generados pero no impresos
     public static Vector devRecGenNoImp(Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "    + TablaHistoricoRecibos.CODEDICION + " , "
@@ -482,7 +436,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setDate(1, new Date(df.parse(fecAct).getTime()));
@@ -507,18 +461,11 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
+           }
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -529,7 +476,7 @@ public class HisRecDAO
     //Método que elimina los datos de historico de una edición
     public static int eliminarDatosHisEdi(String codEdi,Connection con) throws Exception
     {
-        PreparedStatement ps      = null;
+       
 
         int               devRes  = 0;
 
@@ -538,7 +485,7 @@ public class HisRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -546,19 +493,12 @@ public class HisRecDAO
             devRes = ps.executeUpdate();
 
             ps.close();
-
+           }
             return devRes;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -567,7 +507,7 @@ public class HisRecDAO
     //Método que devuelve ell número de recibos generados un mes
     public static int  numeroRecGenMes(String annoBus, String mesBus,Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         int              numRecGen       = 0;
@@ -577,7 +517,7 @@ public class HisRecDAO
                                            " WHERE " + TablaHistoricoRecibos.NUMRECIBO + " LIKE '" + annoBus + "/" + mesBus + "%'";
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -588,21 +528,13 @@ public class HisRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return numRecGen;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(HisRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }

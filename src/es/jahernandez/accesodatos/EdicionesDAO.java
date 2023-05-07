@@ -83,7 +83,7 @@ public class EdicionesDAO
     //Método que devuelve los datos de edición de todas las ediciones
     public static Vector devolverTodosEdi(Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql      = "SELECT " + TablaEdiciones.CODEDI       + " , "
@@ -136,7 +136,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
             rs  = ps.executeQuery();
 
             while (rs.next())
@@ -190,21 +190,12 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -213,7 +204,7 @@ public class EdicionesDAO
     //Devuelve el código de edición generado, si se inserta correctamente
     public static String guardarEdicion(EdicionesVO ediVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
 
         String            nueCodEdi       = generarNuevoCodEdi();
@@ -263,7 +254,7 @@ public class EdicionesDAO
                                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la sql
             ps.setString ( 1, nueCodEdi);
@@ -312,7 +303,7 @@ public class EdicionesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             if (regActualizados > 0)
             {
                 return nueCodEdi;
@@ -324,14 +315,7 @@ public class EdicionesDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -340,7 +324,7 @@ public class EdicionesDAO
     //Método que devuelve los datos de edición de una edición
     public static EdicionesVO devolverDatosEdi(String codEdi,Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql     = "SELECT " + TablaEdiciones.CODEDI       + " , "
@@ -392,7 +376,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -448,19 +432,12 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return datEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -470,7 +447,7 @@ public class EdicionesDAO
     //Método que comprueba si existen plazas libres para una edición
     public static boolean hayPlazasLibres(String codEdicion,Connection con) throws Exception
     {
-        PreparedStatement   ps  = null;
+  
         ResultSet           rs  = null;
 
         String              sql = "SELECT "   + TablaEdiciones.PLAZAS + " AS plazas," +
@@ -486,7 +463,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codEdicion);
@@ -500,21 +477,13 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return numPlazas>numMatric;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
 
@@ -523,7 +492,7 @@ public class EdicionesDAO
     //Método que devuelve los datos de edición de las ediciones de un curso determinado
     public static Vector devolverDatEdiCur(String idCurso,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiciones.CODEDI       + " , "
@@ -576,7 +545,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se le pasa los parámetros a la consulta sql
             ps.setString(1, idCurso);
@@ -635,21 +604,12 @@ public class EdicionesDAO
             rs.close();
             ps.close();
             Conexion.desconectar(con);
-
+           }
             return listaEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -658,7 +618,7 @@ public class EdicionesDAO
       //Método que devuelve los datos de edición de las ediciones disponibles de un curso determinado
     public static Vector devolverDatEdiCurDisp(String idCurso,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiciones.CODEDI       + " , "
@@ -712,7 +672,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se le pasa los parámetros a la consulta sql
             ps.setString(1, idCurso);
@@ -771,19 +731,12 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -792,7 +745,7 @@ public class EdicionesDAO
     //Edita el registro de una edición
     public static int editaEdicion(EdicionesVO ediVO,Connection con) throws Exception
     {
-        PreparedStatement   ps              = null;
+        
 
         int                 regActualizados = 0;
 
@@ -840,7 +793,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan lo parámetros a la consulta sql
             ps.setString ( 1, ediVO.getIdNiv());
@@ -886,19 +839,12 @@ public class EdicionesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -907,7 +853,7 @@ public class EdicionesDAO
     //Método que devuelve si un curso tiene ediciones
     public static boolean devolverHayEdiCur(String idCur,Connection con) throws Exception
     {
-        PreparedStatement   ps        = null;
+        
         ResultSet           rs        = null;
 
         String            sql      = "SELECT " + TablaEdiciones.CODEDI       +
@@ -918,7 +864,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, idCur);
@@ -936,21 +882,13 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return hayEdiCur;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -958,7 +896,7 @@ public class EdicionesDAO
     //Método que elimina los datos de una edicion
     public static int eliminarDatosEdi(String codEdi,Connection con) throws Exception
     {
-        PreparedStatement   ps     = null;
+       
 
         String              sql    = "DELETE FROM "  + TablaEdiciones.TABLA  +
                                      " WHERE "       + TablaEdiciones.CODEDI + " = ? ";
@@ -978,7 +916,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codEdi);
@@ -987,20 +925,12 @@ public class EdicionesDAO
 
             ps.close();
             Conexion.desconectar(con);
-
+           }
             return devRes;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+           
             throw exc;
         }
 
@@ -1009,7 +939,7 @@ public class EdicionesDAO
     //Método que devuelve los datos de edición de todas las ediciones que empiezan a partir de hoy
     public static Vector devolverResNueEdi(Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         String            sql         = "SELECT " + TablaEdiciones.CODEDI       + " , "
@@ -1064,7 +994,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -1119,20 +1049,12 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -1141,7 +1063,7 @@ public class EdicionesDAO
     //Método que devuelve si hay niveles asociados a una edición
     public static boolean estaNivelenEdicion(String codNivel,Connection con) throws Exception
     {
-        PreparedStatement   ps        = null;
+        
         ResultSet           rs        = null;
 
         String              sql       = "SELECT " + TablaEdiciones.CODNIVEL +
@@ -1152,7 +1074,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codNivel);
@@ -1165,20 +1087,12 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return hayNivEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -1186,7 +1100,7 @@ public class EdicionesDAO
     //Método que devuelve los datos de edición de todas las ediciones de un determinado tutor
     public static Vector devolverEdiTutor(String codProf,Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql      = "SELECT " + TablaEdiciones.CODEDI       + " , "
@@ -1240,7 +1154,7 @@ public class EdicionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros
             ps.setString(1, codProf);
@@ -1298,20 +1212,12 @@ public class EdicionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEdi;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.next();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             return null;
         }
     }

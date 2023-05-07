@@ -25,7 +25,7 @@ public class TrastornosDAO
     //Método que devuelve los datos de un trastorno
     public static TrastornosVO devolverDatosTrastorno(String codTrastorno, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaTrastornos.CODTRAST   + " , "
@@ -40,7 +40,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codTrastorno );
@@ -60,20 +60,12 @@ public class TrastornosDAO
 
             rs.close();
             ps.close();
-
+            }
             return trastVO;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO .class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -81,7 +73,7 @@ public class TrastornosDAO
     //Método que devuelve todos los registro de trastorno
     public static Vector devolverTodosTrastornos(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaTrastornos.CODTRAST   + " , "
@@ -96,7 +88,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -115,20 +107,12 @@ public class TrastornosDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaTrast;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -136,7 +120,7 @@ public class TrastornosDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarTrastorno(TrastornosVO trastVO, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaTrastornos.TABLA      + " ( "
                                                           + TablaTrastornos.CODTRAST   + " , "
@@ -151,7 +135,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString (1, nueCodTrast());
@@ -163,19 +147,12 @@ public class TrastornosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
             throw exc;
         }
     }
@@ -233,7 +210,7 @@ public class TrastornosDAO
     //Método que devuelve los datos de trastorno de un alumno
     public static Vector devolverTrastAlu(String codAlu , Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "  + TablaTrastornos.CODTRAST   + " , "
@@ -249,7 +226,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -271,20 +248,12 @@ public class TrastornosDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaTrast;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -292,7 +261,7 @@ public class TrastornosDAO
      //Edita el registro de un trastorno
     public static int editaTrastorno(TrastornosVO trastVO, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "UPDATE " + TablaTrastornos.TABLA      +
                                 " SET "   + TablaTrastornos.CODTIPTRAS + " = ? , "
@@ -304,7 +273,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString (1, trastVO.getCodTipoTrastorno());
@@ -315,20 +284,12 @@ public class TrastornosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -336,7 +297,7 @@ public class TrastornosDAO
     //Borra el registro de un trastorno
     public static int eliminaTrastorno(String codTrastorno, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaTrastornos.TABLA    +
                                             " WHERE "      + TablaTrastornos.CODTRAST + " = ?";
@@ -346,7 +307,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codTrastorno);
@@ -354,19 +315,12 @@ public class TrastornosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -374,7 +328,7 @@ public class TrastornosDAO
     //Borra los trastornos de un alumno
     public static int eliminaTrastornosAlumno(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaTrastornos.TABLA    +
                                             " WHERE "      + TablaTrastornos.CODALU   + " = ?";
@@ -383,7 +337,7 @@ public class TrastornosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAlu);
@@ -391,19 +345,12 @@ public class TrastornosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TrastornosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }

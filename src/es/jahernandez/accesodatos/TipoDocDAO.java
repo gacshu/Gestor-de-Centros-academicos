@@ -26,7 +26,7 @@ public class TipoDocDAO
     //Método que devuelve los datos a mostrar en los combos de Tipo de Documento
     public static Vector devolverDatosTipDoc(Connection con) throws Exception
     {
-        PreparedStatement ps            = null;
+        
         ResultSet         rs            = null;
 
         String            sql           = "SELECT "    + TablaTipoDocumento.CODTIPDOC + " , "
@@ -39,7 +39,7 @@ public class TipoDocDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -55,20 +55,12 @@ public class TipoDocDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaTipDoc;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoDocDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -76,7 +68,7 @@ public class TipoDocDAO
     //Devuelve el tipo de Dni de un documento
     public static String devuelveNombreTipoDoc(int idDoc,Connection con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         String            sql       = "SELECT " + TablaTipoDocumento.NOMBRE    +
@@ -87,7 +79,7 @@ public class TipoDocDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setInt(1, idDoc);
@@ -100,22 +92,13 @@ public class TipoDocDAO
             }
             rs.close();
             ps.close();
-
+           }
             return nombreDoc;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoDocDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+          
             throw exc;
         }
     }

@@ -25,7 +25,7 @@ public class EdiModProfAulaDAO
     //Método que devuelve los datos de un módulo de una edición
     public static EdiModProfAulaVO devolverDatosModEdi(String codMod, String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
@@ -50,7 +50,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codMod);
@@ -80,20 +80,13 @@ public class EdiModProfAulaDAO
 
             rs.close();
             ps.close();
+           }
             return datEMPA;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -102,7 +95,7 @@ public class EdiModProfAulaDAO
     //Método que devuelve los  módulos de una edición
     public static Vector devolverModEdi(String codEdi,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
@@ -128,7 +121,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setString(1, codEdi);
 
@@ -159,19 +152,12 @@ public class EdiModProfAulaDAO
 
             rs.close();
             ps.close();
+           }
             return listaEMPA;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -179,7 +165,7 @@ public class EdiModProfAulaDAO
     //Método que devuelve los  módulos de un profesor
     public static Vector devolverModProf(String codProf,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
@@ -205,7 +191,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setString(1, codProf);
 
@@ -241,20 +227,12 @@ public class EdiModProfAulaDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEMPA;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -262,7 +240,7 @@ public class EdiModProfAulaDAO
     //Método que devuelve los  módulos pendientes de un profesor
     public static Vector devolverModProfPend(String codProf,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaEdiModProfAula.CODEDI       + " , "
@@ -289,7 +267,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setString(1, codProf);
             ps.setDate  (2, new Date(System.currentTimeMillis()));
@@ -319,20 +297,12 @@ public class EdiModProfAulaDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEMPA;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -340,7 +310,7 @@ public class EdiModProfAulaDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarEdiMod(EdiModProfAulaVO empaVO,Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaEdiModProfAula.TABLA        + " ( "
                                                           + TablaEdiModProfAula.CODEDI       + " , "
@@ -363,7 +333,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString ( 1, empaVO.getIdEdi());
@@ -384,18 +354,12 @@ public class EdiModProfAulaDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -403,7 +367,7 @@ public class EdiModProfAulaDAO
    //Método que borra un modulo de una edición
     public static int borrarEdiMod(String codMod, String  codEdi,Connection con) throws Exception
     {
-       PreparedStatement   ps              = null;
+       
 
         String             sql             = "DELETE FROM " + TablaEdiModProfAula.TABLA  +
                                              " WHERE "      + TablaEdiModProfAula.CODMOD + " = ? AND "
@@ -413,7 +377,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la sentencia sql
             ps.setString(1, codMod);
@@ -422,19 +386,14 @@ public class EdiModProfAulaDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+           }
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
+           
             throw exc;
         }
     }
@@ -442,7 +401,7 @@ public class EdiModProfAulaDAO
      //Método que borra todos los módulos de una edición
     public static int borrarModulosEdi(String codEdi,Connection con) throws Exception
     {
-        PreparedStatement   ps              = null;
+        
 
         String              sql             = "DELETE FROM " + TablaEdiModProfAula.TABLA  +
                                               " WHERE "      + TablaEdiModProfAula.CODEDI + " = ? ";
@@ -452,7 +411,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la sentencia sql
             ps.setString(1, codEdi);
@@ -460,20 +419,13 @@ public class EdiModProfAulaDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+           }
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            
             throw exc;
         }
     }
@@ -481,7 +433,7 @@ public class EdiModProfAulaDAO
     //Método que edita un modulo de una edición
     public static int editarEdiModProfAula(EdiModProfAulaVO empaVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -503,7 +455,7 @@ public class EdiModProfAulaDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString ( 1, empaVO.getIdProf());
@@ -524,18 +476,12 @@ public class EdiModProfAulaDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdiModProfAulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }

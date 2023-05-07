@@ -41,7 +41,7 @@ public class CursosDAO
     //Método que devuelve los datos de un curso
     public static CursosVO devolverDatosCurso(String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql = "SELECT " + TablaCursos.CODCURSO  + ","
@@ -57,7 +57,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -77,20 +77,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
-
+           }
             return datCur;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -98,7 +90,7 @@ public class CursosDAO
     //Método que devuelve los datos de curso de todos los cursos
     public static Vector devolverTodosCur(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql = "SELECT " + TablaCursos.CODCURSO  + ","
@@ -113,7 +105,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -132,19 +124,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+           }
             return listaCursos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -153,7 +138,7 @@ public class CursosDAO
     //Devuelve el VALOR MAXIMO de codigo CURSO
     public static String devuelveMaxCur(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql = "SELECT MAX(" + TablaCursos.CODCURSO + ")" +
@@ -163,7 +148,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -174,20 +159,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
-
+           }
             return valMaxCodCurso;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -195,7 +172,7 @@ public class CursosDAO
     //Método que devuelve los datos de búsqueda de alumnos por curso
     public static Vector devolverDatosConsCurso2(String cadenaConsulta , Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         ResultSet         rs              = null;
 
         ResultadoBusqAlu  resBusAlu       = null;
@@ -203,7 +180,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -225,20 +202,13 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+            }
             return listaResBusAlu;
 
         }
        catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
 
@@ -249,7 +219,7 @@ public class CursosDAO
     //no devuelve los datos de los alumnos ya matriculados
     public static Vector devolverDatosAluTipCur(int tipCurso, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "       + TablaAlumnos.TABLA       + "."    + TablaAlumnos.CODALU          + ","
@@ -270,7 +240,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setInt(1, tipCurso);
             rs  = ps.executeQuery();
@@ -292,19 +262,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+           }
             return listaCurAlu;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -317,7 +280,7 @@ public class CursosDAO
     //y si no, sólo los cursos para el nivel especificado
     public static Vector devolverDatosAluCur(String codCurso, String codNivel, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "      + TablaCursosAlumnos.TABLA + "." + TablaCursosAlumnos.CODALUMNO + " , "
@@ -345,7 +308,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros
             ps.setString(1, codCurso);
@@ -374,20 +337,13 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+            }
 
             return listaCurAlu;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -397,7 +353,7 @@ public class CursosDAO
     //no devuelve los datos de los alumnos ya matriculados
     public static Vector devolverDatosConsCurso(String cadenaConsulta, Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         CursosAluVO       curAluVO    = null;
@@ -405,7 +361,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -427,20 +383,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaCurAlu;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -452,7 +400,7 @@ public class CursosDAO
     {
         String nueCodCur = generarNuevoCodCur();
 
-        PreparedStatement ps  = null;
+        
 
         String            sql = "INSERT INTO " + TablaCursos.TABLA + "(" + TablaCursos.CODCURSO  + " , "
                                                                          + TablaCursos.NOMBRE    + " , "
@@ -467,7 +415,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, nueCodCur);
@@ -479,7 +427,7 @@ public class CursosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             if (regActualizados > 0)
             {
                 return nueCodCur;
@@ -491,14 +439,7 @@ public class CursosDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -559,7 +500,7 @@ public class CursosDAO
     //Edita el registro de un curso
     public static int editaCurso(CursosVO curVO, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "UPDATE " + TablaCursos.TABLA     +
                                 " SET "   + TablaCursos.NOMBRE    + " = ? , "
@@ -572,7 +513,7 @@ public class CursosDAO
 
         try
         {
-           ps  = con.prepareStatement(sql);
+          try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, curVO.getNomCur());
@@ -584,18 +525,12 @@ public class CursosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+          }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -603,7 +538,7 @@ public class CursosDAO
     //Método que elimina los datos de un curso
     public static int eliminarDatosCurso(String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "DELETE FROM " + TablaCursos.TABLA    +
                                 " WHERE  "     + TablaCursos.CODCURSO + " = ?";
@@ -623,7 +558,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -631,7 +566,7 @@ public class CursosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             //Se borran los datos del curso-interesado, seguimientos y los niveles del curso
             regActualizados = regActualizados + CursosAluGestion.borrarTodAluCur(codCur);
             regActualizados = regActualizados + CurNivGestion.borrarTodNivCur(codCur);
@@ -641,14 +576,7 @@ public class CursosDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -656,7 +584,7 @@ public class CursosDAO
     //Método que devuelve si hay cursos que pertenezcan a un determinado tipo
     public static boolean  hayCursosTipo(int tipCur, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaCursos.CODCURSO  +
@@ -667,7 +595,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setInt(1, tipCur);
@@ -685,19 +613,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+           }
             return hayCursosTip;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -706,7 +627,7 @@ public class CursosDAO
     //no devuelve los datos de los alumnos ya matriculados
     public static Vector devolverDatosHistMat(Connection con) throws Exception
     {
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         Vector            listaCurAlu = new Vector();
@@ -724,7 +645,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -741,18 +662,12 @@ public class CursosDAO
             }
             rs.close();
             ps.close();
+           }
             return listaCurAlu;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -760,7 +675,7 @@ public class CursosDAO
     //Método que devuelve los datos de los cursos de un determinado tipo
     public static Vector devolverDatCurTip(int codTip,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaCursos.CODCURSO  + ","
@@ -777,7 +692,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setInt(1, codTip);
@@ -798,19 +713,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+           }
             return listaCursos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -818,7 +726,7 @@ public class CursosDAO
     //Método que devuelve los datos de los cursos de un determinado tipo con nombre de longitud limitada para los combos
     public static Vector devolverDatCurTipCombo(int codTip,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaCursos.CODCURSO  + ","
@@ -835,7 +743,7 @@ public class CursosDAO
 
         try
         {
-           ps  = con.prepareStatement(sql);
+          try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setInt(1, codTip);
@@ -860,19 +768,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+          }
             return listaCursos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -880,7 +781,7 @@ public class CursosDAO
     //Método que devuelve los datos de los cursos de un determinado tipo y centro
     public static Vector devolverDatCurTipCen(int codTip, int codCentro,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaCursos.CODCURSO  + ","
@@ -898,7 +799,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setInt(1, codTip);
@@ -920,19 +821,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+           }
             return listaCursos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -940,7 +834,7 @@ public class CursosDAO
      //Método que devuelve los datos de curso de todos los cursos
     public static Vector devolverTodosCurAlfab(Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT "    + TablaCursos.CODCURSO  + ","
@@ -955,7 +849,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -974,19 +868,12 @@ public class CursosDAO
 
             rs.close();
             ps.close();
+           }
             return listaCursos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -995,7 +882,7 @@ public class CursosDAO
      //Método que devuelve el centro de un curso dado
     public static Vector datCentrosCurso(String codCurso, Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT " + TablaCursos.CODCENTRO +
@@ -1006,7 +893,7 @@ public class CursosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
             ps.setString(1, codCurso);
 
             rs  = ps.executeQuery();
@@ -1020,21 +907,13 @@ public class CursosDAO
 
             rs.close();
             ps.close();
-
+           }
             return datCen;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CursosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }

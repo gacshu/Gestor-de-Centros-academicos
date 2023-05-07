@@ -25,7 +25,7 @@ public class TipTrastDAO
      //Método que devuelve los datos de tipo Trastorno
     public static Vector devolverTodTipTrast(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaTipTrast.CODTIPTRAS + " , "
@@ -37,7 +37,7 @@ public class TipTrastDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -74,7 +74,7 @@ public class TipTrastDAO
     //Método que devuelve el nombre de un tipo de trastorno
     public static String devuelveNombreTipoTrastorno(String codTrast,Connection con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         String            sql       = "SELECT " + TablaTipTrast.DESCRIP +
@@ -85,7 +85,7 @@ public class TipTrastDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setString(1, codTrast);
 
@@ -169,7 +169,7 @@ public class TipTrastDAO
     //Método que guarda un tipo trastorno
     public static int guardarTipTrast(TipTrastVO tipTrasVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
         String            nueCodTipTrast  = generarNuevoCodTipTrast();
 
@@ -180,7 +180,7 @@ public class TipTrastDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros a la consulta sql
             ps.setString(1, nueCodTipTrast);
@@ -210,7 +210,7 @@ public class TipTrastDAO
     //Edita el registro de un tipo de trastorno
     public static int editarTipTrast(TipTrastVO tipTrastVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -220,7 +220,7 @@ public class TipTrastDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasasn los parámetros a la consulta sql
             ps.setString(1, tipTrastVO.getDescrip());

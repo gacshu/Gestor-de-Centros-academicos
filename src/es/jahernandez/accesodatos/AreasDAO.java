@@ -26,7 +26,7 @@ public class AreasDAO
      //Metodo que devuelve los datos de area
     public static Vector devolverTodAreas(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         //String            cadenaConsulta = "SELECT * FROM TbNiv";
@@ -39,7 +39,7 @@ public class AreasDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -55,20 +55,12 @@ public class AreasDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaAreas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AreasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -76,7 +68,7 @@ public class AreasDAO
     //MÃ©todo que devuelve el nombre de un Ã¡rea
     public static String devuelveNombreArea(String codArea, Connection con) throws Exception
     {
-        PreparedStatement ps        = null;
+        
         ResultSet         rs        = null;
 
         String            sql       = "SELECT " + TablaArea.NOMBRE       +
@@ -87,7 +79,7 @@ public class AreasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setString(1, codArea);
 
@@ -100,20 +92,12 @@ public class AreasDAO
 
             rs.close();
             ps.close();
-
+           }
             return nombreArea;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AreasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -172,7 +156,7 @@ public class AreasDAO
     //MÃ©todo que guarda un Ã�rea
     public static int guardarArea(AreasVO areaVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -186,7 +170,7 @@ public class AreasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parÃ¡metros a la consulta sql
             ps.setString(1, nueCodArea);
@@ -195,19 +179,12 @@ public class AreasDAO
            regActualizados = ps.executeUpdate();
 
            ps.close();
-
+           }
            return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AreasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -216,7 +193,7 @@ public class AreasDAO
     //Edita el registro de un Ã�rea
     public static int editarArea(AreasVO areaVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -226,7 +203,7 @@ public class AreasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasasn los parÃ¡metros a la consulta sql
             ps.setString(1, areaVO.getNomArea());
@@ -235,19 +212,12 @@ public class AreasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AreasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -255,7 +225,7 @@ public class AreasDAO
 
     public static Vector devolverAreasProf(String codProf, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaArea.CODAREA  + " , "
@@ -271,7 +241,7 @@ public class AreasDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             ps.setString(1, codProf);
 
@@ -289,20 +259,12 @@ public class AreasDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaAreas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AreasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }

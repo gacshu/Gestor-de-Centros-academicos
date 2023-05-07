@@ -79,7 +79,7 @@ public class AulasDAO
     //Método que devuelve los datos de aula de todas las aulas
     public static Vector devolverTodosAula(Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT " + TablaAulas.CODAULA   + ","
@@ -100,7 +100,7 @@ public class AulasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -124,20 +124,12 @@ public class AulasDAO
             }
             rs.close();
             ps.close();
-
+           }
             return listaAulas;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AulasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
              throw exc;
         }
@@ -146,7 +138,7 @@ public class AulasDAO
     //Método que devuelve los datos de aula de un aula
     public static AulasVO devolverDatosAula(String codAul, Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT " + TablaAulas.CODAULA   + ","
@@ -167,7 +159,7 @@ public class AulasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros de la consulta
             ps.setString(1, codAul);
@@ -193,20 +185,12 @@ public class AulasDAO
             }
             rs.close();
             ps.close();
-
+           }
             return datAul;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AulasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -216,7 +200,7 @@ public class AulasDAO
     //Devuelve el código de aula generado, si se inserta correctamente
     public static String guardarAula(AulasVO aulVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            nueCodAul       = generarNuevoCodAula();
 
@@ -238,7 +222,7 @@ public class AulasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros de la consulta
             ps.setString ( 1, nueCodAul);
@@ -256,7 +240,7 @@ public class AulasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             if(regActualizados>0)
             {
                 return  nueCodAul;
@@ -268,14 +252,7 @@ public class AulasDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AulasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -285,7 +262,7 @@ public class AulasDAO
     //Edita el registro de un aula
     public static int editaAula(AulasVO aulVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "UPDATE " + TablaAulas.TABLA     +
                                             " SET   " + TablaAulas.NOMBRE    + " = ? ,"
@@ -303,7 +280,7 @@ public class AulasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros de la consulta
             ps.setString ( 1, aulVO.getNombre());
@@ -320,19 +297,12 @@ public class AulasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-             try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AulasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
 
             throw exc;
         }
@@ -341,7 +311,7 @@ public class AulasDAO
     //Método que devuelve los datos de aula de todas las aulas de un centro
     public static Vector devolverAulasCentro(int codCentro, Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT "  + TablaAulas.CODAULA    + ","
@@ -364,7 +334,7 @@ public class AulasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setInt(1, codCentro);
 
@@ -390,20 +360,12 @@ public class AulasDAO
             }
             rs.close();
             ps.close();
-
+           }
             return listaAulas;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AulasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
              throw exc;
         }

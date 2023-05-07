@@ -27,7 +27,7 @@ public class CalificacionesDAO
     //Método que devuelve los datos de una calificacion
     public static CalificacionesVO devolverDatosCalificacion(String codEdi, String codMod, String codAlu, int evaluacion, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaCalificaciones.CODEDI     + " , "
@@ -46,7 +46,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codEdi);
@@ -70,21 +70,13 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+            }
             return califVO;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -93,7 +85,7 @@ public class CalificacionesDAO
     //Método que devuelve todos los registro de calificaciones
     public static Vector devolverTodasCalificaciones(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaCalificaciones.CODEDI     + " , "
@@ -110,7 +102,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -130,20 +122,12 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaCalif;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -151,7 +135,7 @@ public class CalificacionesDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarCalificacion(CalificacionesVO califVO, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaCalificaciones.TABLA      + " ( "
                                                           + TablaCalificaciones.CODEDI     + " , "
@@ -167,7 +151,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString (1, califVO.getIdEdi());
@@ -180,19 +164,12 @@ public class CalificacionesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw  exc;
         }
     }
@@ -200,7 +177,7 @@ public class CalificacionesDAO
     //Método que devuelve los datos de calificaciones de un alumno y una edición
     public static Vector devolverCalificacionesAluEdi(String codAlu , String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "     + TablaCalificaciones.CODEDI     + " , "
@@ -220,7 +197,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -244,21 +221,12 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaCalif;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -266,7 +234,7 @@ public class CalificacionesDAO
      //Método que devuelve los datos de calificaciones de una edición
     public static Vector devolverCalificacionesEdi(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "    + TablaCalificaciones.CODEDI     + " , "
@@ -286,7 +254,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codEdi);
@@ -309,21 +277,12 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaCalif;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -331,7 +290,7 @@ public class CalificacionesDAO
     //Método que devuelve los datos de calificaciones de un alumno y una edición y evaluacion
     public static Vector devolverCalificacionesAluEdiEva(String codAlu , String codEdi, int codEv, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "     + TablaCalificaciones.CODEDI     + " , "
@@ -351,7 +310,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -376,20 +335,12 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaCalif;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -397,7 +348,7 @@ public class CalificacionesDAO
    //Método que devuelve los datos de calificaciones de una edición y evaluacion
     public static Vector devolverCalificacionesEdiEva(String codEdi, int codEv, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "     + TablaCalificaciones.CODEDI     + " , "
@@ -417,7 +368,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codEdi);
@@ -441,20 +392,12 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaCalif;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -462,7 +405,7 @@ public class CalificacionesDAO
     //Edita el registro de una calificación
     public static int editarCalificacion(CalificacionesVO califVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "UPDATE " + TablaCalificaciones.TABLA      +
                                             " SET "   + TablaCalificaciones.FECHA      + " = ? , "
@@ -475,7 +418,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setDate   (1, new Date(califVO.getFecha().getTime()));
@@ -488,19 +431,12 @@ public class CalificacionesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -508,7 +444,7 @@ public class CalificacionesDAO
     //Borra el registro de una calificación
     public static int eliminaCalificacion (String codEdi, String codMod, String codAlu, int evaluacion, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaCalificaciones.TABLA       +
                                             " WHERE "      + TablaCalificaciones.CODEDI     + " = ? AND "
@@ -521,7 +457,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString (1, codEdi);
@@ -532,19 +468,12 @@ public class CalificacionesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -552,7 +481,7 @@ public class CalificacionesDAO
     //Borra las calificaciones de un alumno
     public static int eliminarCalificAlumno(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaCalificaciones.TABLA      +
                                             " WHERE "      + TablaCalificaciones.CODALU     + " = ? " ;
@@ -562,7 +491,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString (1, codAlu);
@@ -570,19 +499,12 @@ public class CalificacionesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw  exc;
         }
     }
@@ -590,7 +512,7 @@ public class CalificacionesDAO
     //Método que devuelve si un alumno tiene calificaciones
     public static boolean tieneAluClasesInd(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "  + TablaCalificaciones.CODALU +
@@ -601,7 +523,7 @@ public class CalificacionesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -615,20 +537,12 @@ public class CalificacionesDAO
 
             rs.close();
             ps.close();
-
+           }
             return aluTienCalif;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CalificacionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw  exc;
         }
     }

@@ -31,7 +31,7 @@ public class EmpresasDAO
     //Método que devuelve los datos de todas las empresas
     public static Vector devolverTodosEmp(Connection  con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql            = "SELECT " + TablaEmpresas.CODEMPRESA    + " , "
@@ -80,7 +80,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -132,19 +132,12 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
+           }
             return listaEmpresas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -153,7 +146,7 @@ public class EmpresasDAO
     //Devuelve el VALOR MAXIMO de codigo EMPRESA
     public static String devuelveMaxEmp(Connection  con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT MAX(" + TablaEmpresas.CODEMPRESA + ")" +
@@ -163,27 +156,19 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
             rs  = ps.executeQuery();
 
             if(rs.next()) strMaxCodEmp = rs.getString(1);
 
             rs.close();
             ps.close();
-
+           }
             return strMaxCodEmp;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -192,7 +177,7 @@ public class EmpresasDAO
     //Guarda un registro con los datos de EMPRESA
     public static String guardaEmp(EmpresasVO empVO , Connection  con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -239,7 +224,7 @@ public class EmpresasDAO
 
         try
         {
-           ps  = con.prepareStatement(sql);
+          try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             empVO.setIdEmpresa(EmpresasDAO.generarNuevoCodEmp(con));
 
@@ -286,7 +271,7 @@ public class EmpresasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+          }
             if(regActualizados>0)
             {
                 return  empVO.getIdEmpresa(); //regActualizados;
@@ -298,15 +283,7 @@ public class EmpresasDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -369,7 +346,7 @@ public class EmpresasDAO
     //Método que genera un código nuevo de empresa
      public static String generarNuevoCodEmp(Connection  con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql      = "SELECT MAX(" + TablaEmpresas.CODEMPRESA + ") + 1 FROM "  + TablaEmpresas.TABLA;
@@ -378,7 +355,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -389,7 +366,7 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-
+           }
             nuevoCod = nuevoCod.trim();
 
             while (nuevoCod.length() < 8)
@@ -401,15 +378,7 @@ public class EmpresasDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -418,7 +387,7 @@ public class EmpresasDAO
     //Método que devuelve los datos de empresa que se cargan en los combos
     public static Vector devolverDatosEmpCom(Connection  con) throws Exception
     {
-        PreparedStatement ps            = null;
+        
         ResultSet         rs            = null;
 
         String            sql           = "SELECT " + TablaEmpresas.CODEMPRESA + "," +
@@ -433,7 +402,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -449,19 +418,12 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaEmpresas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -472,7 +434,7 @@ public class EmpresasDAO
     //Método que devuelve los datos de una empresa
     public static EmpresasVO devolverDatEmp(String codEmp,Connection  con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
         ResultSet         rs     = null;
 
         String            sql    = "SELECT " + TablaEmpresas.CODEMPRESA    + " , "
@@ -520,7 +482,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se le pasan los parámetros a la consulta sql
             ps.setString(1, codEmp);
@@ -574,21 +536,13 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-
+           }
             return datEmp;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -639,7 +593,7 @@ public class EmpresasDAO
 
         Vector            listBusq  = new Vector();
 
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         EmpresasVO        datEmp    = null;
@@ -706,7 +660,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -758,20 +712,13 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
+           }
             return listBusq;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -779,7 +726,7 @@ public class EmpresasDAO
     //Edita el registro de una empresa
     public static int editaEmpresa(EmpresasVO empVO,Connection  con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
 
         String            sql             = "UPDATE " + TablaEmpresas.TABLA         +
@@ -825,7 +772,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se actualiza el valor de los parametros de la consulta
             ps.setString ( 1, empVO.getNombreEmpresa());
@@ -870,20 +817,12 @@ public class EmpresasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+           
             throw exc;
         }
     }
@@ -891,7 +830,7 @@ public class EmpresasDAO
     //Método que devuelve el nombre de una actividad de una empresa
     public static String devolverActividad(String codAct ,Connection  con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT NomAct FROM TbAct WHERE idAct = ?";
@@ -900,7 +839,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros a la consulta sql
             ps.setString(1, codAct);
@@ -914,19 +853,12 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-
+           }
             return nomActDev;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
 
             throw exc;
         }
@@ -935,7 +867,7 @@ public class EmpresasDAO
     //Método que devuelve el nombre de la provincia de una empresa
     public static String devolverProvincia(String codProv,Connection  con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         String            sql       = "SELECT Ciudad FROM TbCPo WHERE NCodigo = ?";
@@ -944,7 +876,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la sentencia sql
             ps.setString(1, codProv);
@@ -955,20 +887,13 @@ public class EmpresasDAO
             {
                 nomProDev = rs.getString(1);
             }
-
+           }
             return nomProDev;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -985,7 +910,7 @@ public class EmpresasDAO
         }
         else
         {
-            PreparedStatement ps              = null;
+            
             ResultSet         rs              = null;
 
             String            sql             = "DELETE FROM " + TablaEmpresas.TABLA      +
@@ -1001,7 +926,7 @@ public class EmpresasDAO
             {
                 try
                 {
-                    ps  = con.prepareStatement(sql);
+                   try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
                     //Se pasan los parámetros a la consulta sql
                     ps.setString(1,codEmp);
@@ -1009,19 +934,12 @@ public class EmpresasDAO
                     regActualizados = ps.executeUpdate();
 
                     rs.close();
-
+                   }
                     return regActualizados;
                 }
                 catch (Exception exc)
                 {
-                    try
-                    {
-                        ps.close();
-                    }
-                    catch (SQLException ex)
-                    {
-                        Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
 
                     throw exc;
                 }
@@ -1037,7 +955,7 @@ public class EmpresasDAO
     //Método que devuelve si una empresa tiene alumnos
     public static boolean devolverEmpresaTieneAlu(String codEmp,Connection  con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         String            sql       = "SELECT " + TablaAlumnos.CODALU     +
@@ -1046,7 +964,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codEmp);
@@ -1066,19 +984,11 @@ public class EmpresasDAO
                 ps.close();
                 return false; //No hay alumnos que pertenezcan a la empresa
             }
-
+           }
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EdicionesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -1087,7 +997,7 @@ public class EmpresasDAO
     //Devuelve el nombre de la empresa
     public static String devuelveNombreEmpresa(String idEmpresa,Connection  con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT " + TablaEmpresas.NOMBRE     +
@@ -1099,7 +1009,7 @@ public class EmpresasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, idEmpresa);
@@ -1113,20 +1023,12 @@ public class EmpresasDAO
 
             rs.close();
             ps.close();
-
+           }
             return nomEmpresa;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(EmpresasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }

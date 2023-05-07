@@ -28,7 +28,7 @@ public class SegEmpDAO
     //Método que devuelve los datos de un seguimiento
     public static SegEmpVO devolverDatosSeg(String codSeg, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
         ResultSet         rs  = null;
 
         String            sql = "SELECT " + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " , "
@@ -43,7 +43,7 @@ public class SegEmpDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros de la sentencia sql
             ps.setString(1, codSeg);
@@ -63,21 +63,13 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-
+           }
             return datSeg;
 
         }
         catch (Exception exp)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exp;
         }
@@ -86,7 +78,7 @@ public class SegEmpDAO
     //Método que devuelve los datos de todos los seguimientos
     public static Vector devolverTodosSeg(Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql = "SELECT " + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " , "
@@ -102,7 +94,7 @@ public class SegEmpDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -121,21 +113,12 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaSeg;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -198,7 +181,7 @@ public class SegEmpDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarSeg(SegEmpVO segVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
         String            nueCodSeg       = generarNuevoCodSeg();
@@ -213,7 +196,7 @@ public class SegEmpDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros a la consulta sql
             ps.setString(1, nueCodSeg);
@@ -225,19 +208,12 @@ public class SegEmpDAO
             regActualizados = ps.executeUpdate();
 
            ps.close();
-
+           }
            return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -246,7 +222,7 @@ public class SegEmpDAO
     //Edita el registro de un seguimiento
     public static int editaSeg(SegEmpVO segVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -258,7 +234,7 @@ public class SegEmpDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasasn los parámetros a la consulta sql
             ps.setString(1, segVO.getIncidencias());
@@ -269,19 +245,12 @@ public class SegEmpDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -290,7 +259,7 @@ public class SegEmpDAO
     //Método que devuelve los datos de seguimiento de una empresa
     public static Vector devolverSegEmp(String codEmp, Connection con) throws Exception
     {
-       PreparedStatement ps       = null;
+       
        ResultSet         rs       = null;
 
        String            sql      = "SELECT "    + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " , "
@@ -307,7 +276,7 @@ public class SegEmpDAO
 
        try
        {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codEmp);
@@ -329,20 +298,12 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaSeg;
        }
        catch (Exception exp)
        {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exp;
        }
@@ -351,7 +312,7 @@ public class SegEmpDAO
     //Método que elimina todos los seguimientos de una empresa
     public static int eliminaSegEmp(String codEmp, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
 
         String            sql             = "DELETE FROM " + TablaSeguimientoEmpresas.TABLA      +
@@ -359,7 +320,7 @@ public class SegEmpDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codEmp);
@@ -367,19 +328,12 @@ public class SegEmpDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-             try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -387,14 +341,14 @@ public class SegEmpDAO
     //Método que elimina un registro de seguimiento
     public static int eliminaSeg(String codSeg, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
 
         String            sql             = "DELETE FROM " + TablaSeguimientoEmpresas.TABLA          +
                                             " WHERE "      + TablaSeguimientoEmpresas.CODSEGUIMIENTO + " = ? ";
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codSeg);
@@ -402,20 +356,12 @@ public class SegEmpDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-             try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+           
             throw exc;
         }
     }
@@ -423,7 +369,7 @@ public class SegEmpDAO
     //Método que devuelve el número de seguimientos de una empresa
     public static int devolverNumSeg(String codEmp, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql            = "SELECT COUNT(" + TablaSeguimientoEmpresas.CODEMPRESA + ")" +
@@ -433,7 +379,7 @@ public class SegEmpDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros de la consulta sql
             ps.setString(1, codEmp);
@@ -447,21 +393,13 @@ public class SegEmpDAO
 
             rs.close();
             ps.close();
-
+           }
             return numSeg;
         }
 
         catch (Exception exp)
         {
-            try
-            {
-               rs.close();
-               ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SegEmpDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
 
             throw exp;
         }

@@ -28,7 +28,7 @@ public class ClasesIndivDAO
     //Método que devuelve los datos de una clase individual
     public static ClasesIndivVO devolverDatosClaseIndiv(String codClasInd, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaClasesIndiv.CODCLASEIND + " , "
@@ -44,7 +44,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codClasInd );
@@ -65,21 +65,13 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+            }
             return claIndVO;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO .class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
 
@@ -88,7 +80,7 @@ public class ClasesIndivDAO
     //Método que devuelve todos los registro de clases individuales
     public static Vector devolverTodasClasesIndividuales(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaClasesIndiv.CODCLASEIND + " , "
@@ -105,7 +97,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -125,20 +117,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaClaInd;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -146,7 +130,7 @@ public class ClasesIndivDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarClasInd(ClasesIndivVO claIndVO, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaClasesIndiv.TABLA       + " ( "
                                                           + TablaClasesIndiv.CODCLASEIND + " , "
@@ -162,7 +146,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString (1, nueCodClasInd());
@@ -175,18 +159,12 @@ public class ClasesIndivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -246,7 +224,7 @@ public class ClasesIndivDAO
     //Método que devuelve los datos de clases individuales de un alumno
     public static Vector devolverClasesIndAlu(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "  + TablaClasesIndiv.CODCLASEIND + " , "
@@ -263,7 +241,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -286,20 +264,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaClaInd;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -307,7 +277,7 @@ public class ClasesIndivDAO
      //Edita el registro de una clase individual
     public static int editarClaseInd(ClasesIndivVO claIndVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "UPDATE " + TablaClasesIndiv.TABLA       +
                                             " SET "   + TablaClasesIndiv.FECHACLASE  + " = ? , "
@@ -319,7 +289,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setDate   (1, new Date(claIndVO.getFecClase().getTime()));
@@ -330,19 +300,12 @@ public class ClasesIndivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -350,7 +313,7 @@ public class ClasesIndivDAO
     //Borra el registro de una clase individual
     public static int eliminaClaseInd(String codClaInd, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaClasesIndiv.TABLA       +
                                             " WHERE "      + TablaClasesIndiv.CODCLASEIND + " = ?";
@@ -360,7 +323,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codClaInd);
@@ -368,19 +331,12 @@ public class ClasesIndivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -388,7 +344,7 @@ public class ClasesIndivDAO
     //Borra las clases individuales de un alumno
     public static int eliminarClasIndAlumno(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaClasesIndiv.TABLA    +
                                             " WHERE "      + TablaClasesIndiv.CODALU   + " = ?";
@@ -399,7 +355,7 @@ public class ClasesIndivDAO
         try
         {
             con = Conexion.conectar();
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codAlu);
@@ -407,19 +363,12 @@ public class ClasesIndivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -427,7 +376,7 @@ public class ClasesIndivDAO
     //Método que devuelve si un alumno tiene clases individuales
     public static boolean tieneAluClasesInd(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "  + TablaClasesIndiv.CODCLASEIND +
@@ -438,7 +387,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -452,20 +401,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return aluTienClases;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -473,7 +414,7 @@ public class ClasesIndivDAO
     //Método que devuelve los datos de clases individuales de un alumno y un mes y año concreto ordenados for fecha
     public static Vector devolverClasesIndAluMes(String codAlu, String strFecMesAnno, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
@@ -507,7 +448,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -531,19 +472,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaClaInd;
         }
         catch (Exception exc)
         {
-            try
-            {
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -551,7 +485,7 @@ public class ClasesIndivDAO
     //Método que devuelve los datos de clases individuales de un mes y año concreto ordenados por alumno y fecha
     public static Vector devolverClasesIndMes(String strFecMesAnno, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
@@ -585,7 +519,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setDate  (1, fechaIni);
@@ -608,20 +542,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaClaInd;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -629,7 +555,7 @@ public class ClasesIndivDAO
     //Método que devuelve el importe total de las clases de un alumno en un mes
     public static float devolverImporteClaseAluMes(String codAlu, String strFecMesAnno, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
@@ -657,7 +583,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -672,20 +598,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return impTotal;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -693,7 +611,7 @@ public class ClasesIndivDAO
     //Método que devuelve los datos de clases individuales de un profesor
     public static Vector devolverClasesIndProf(String codProf , Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "      + TablaClasesIndiv.CODCLASEIND + " , "
@@ -711,7 +629,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codProf);
@@ -734,20 +652,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaClaInd;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -755,7 +665,7 @@ public class ClasesIndivDAO
     //Método que devuelve los datos de clases individuales de un profesor y un mes y año concreto ordenados for fecha
     public static Vector devolverClasesIndProfMes(String codProf, String strFecMesAnno, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
         int               annoIn       = new Integer(strFecMesAnno.substring(2,6)).intValue();
         int               mesIn        = new Integer(strFecMesAnno.substring(0,2)).intValue();
@@ -789,7 +699,7 @@ public class ClasesIndivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codProf);
@@ -813,20 +723,12 @@ public class ClasesIndivDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaClaInd;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ClasesIndivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }

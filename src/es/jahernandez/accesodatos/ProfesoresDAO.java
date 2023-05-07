@@ -29,7 +29,7 @@ public class ProfesoresDAO
     //Método que devuelve los datos de búsqueda de profesores
     public static Vector devolverDatosConsultaProf(DatosBusqProfVO datBus, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         Vector            listaProf      = new Vector();
@@ -103,7 +103,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -133,20 +133,12 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaProf;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -155,7 +147,7 @@ public class ProfesoresDAO
     //Método que devuelve los datos de un profesor
     public static ProfesoresVO devolverDatosProfesor(String codProf, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         ProfesoresVO      datProf      = null;
@@ -181,7 +173,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se añaden los parámetros a la consulta sql
             ps.setString(1,codProf);
@@ -213,20 +205,12 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-
+           }
             return datProf;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -235,7 +219,7 @@ public class ProfesoresDAO
     //Método que devuelve los datos de todos los profesores
     public static Vector devolverTodosProf(Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT " + TablaProfesores.CODPROFESOR   + " , "
@@ -261,7 +245,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs = ps.executeQuery();
 
@@ -292,20 +276,13 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaProf;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
+            
 
             throw exc;
         }
@@ -314,7 +291,7 @@ public class ProfesoresDAO
     //Edita el registro de un profesor
     public static int editaProfesor(ProfesoresVO profVO,Connection con) throws Exception
     {
-        PreparedStatement   ps       = null;
+        
         ProfesoresVO        profPrev = new ProfesoresVO();
 
         int                 regActualizados = 0;
@@ -346,7 +323,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString ( 1, profVO.getNombre());
@@ -369,19 +346,12 @@ public class ProfesoresDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -391,7 +361,7 @@ public class ProfesoresDAO
     //**Retocar
     public static int borraRegProf(String codProf,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -411,7 +381,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codProf);
@@ -419,7 +389,7 @@ public class ProfesoresDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             //eliminar datos areas de profesor
             //if (AreaProgDAO.borraAreasProf(codProf) >= 0)
             //{
@@ -435,14 +405,7 @@ public class ProfesoresDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -451,7 +414,7 @@ public class ProfesoresDAO
     //Da de alta un nuevo profesor
     public static String insertaProfesor(ProfesoresVO profVO,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "INSERT INTO " + TablaProfesores.TABLA + " ("
                                                            + TablaProfesores.CODPROFESOR   + " , "
@@ -483,7 +446,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             profVO.setIdProf(generarNuevoCodProf());
             profVO.setFecAlt(new Date(System.currentTimeMillis()));
@@ -511,7 +474,7 @@ public class ProfesoresDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             if(regActualizados>0)
             {
                 return  profVO.getIdProf(); //regActualizados;
@@ -523,14 +486,7 @@ public class ProfesoresDAO
         }
         catch (Exception exc)
         {
-             try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
 
             throw exc;
         }
@@ -589,7 +545,7 @@ public class ProfesoresDAO
     //Devuelve la provincia del profesor
     public static String devolverNombreProv(String codProv,Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         ResultSet         rs              = null;
 
         String            sql             = "SELECT " + TablaProvincias.NOMBRE  +
@@ -600,7 +556,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1, codProv);
@@ -614,20 +570,12 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-
+           }
             return nombreProvincia;
         }
         catch (Exception exc)
         {
-             try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -636,7 +584,7 @@ public class ProfesoresDAO
     //Método que devuelve si ya existe el dato identificativo de un alumno
     public static boolean existeDniProfesor(String numDoc,Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT " + TablaProfesores.CODPROFESOR +
@@ -653,7 +601,7 @@ public class ProfesoresDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros de la consulta sql
             ps.setString(1,numDoc);
@@ -671,21 +619,13 @@ public class ProfesoresDAO
 
             rs.close();
             ps.close();
-
+           }
             return existeDNI;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ProfesoresDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }

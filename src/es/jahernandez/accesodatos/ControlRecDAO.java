@@ -24,7 +24,7 @@ public class ControlRecDAO
     public static boolean generadosRecMes(String fecha, int codCen, Connection con) throws Exception
     {
 
-        PreparedStatement ps    = null;
+ 
 
         String            sql   = "SELECT " + TablaControlRecibos.CODCENTRO + " , "
                                             + TablaControlRecibos.FECHA     +
@@ -37,7 +37,7 @@ public class ControlRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, fecha);
@@ -56,21 +56,13 @@ public class ControlRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return recGen;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ControlRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
 }
@@ -80,7 +72,7 @@ public class ControlRecDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarControlRec(ControlRecVO contRecVO, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
 
         String            sql    = "INSERT INTO " + TablaControlRecibos.TABLA     + " ( "
                                                   + TablaControlRecibos.FECHA     + " , "
@@ -91,7 +83,7 @@ public class ControlRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, contRecVO.getFecha());
@@ -100,19 +92,12 @@ public class ControlRecDAO
             regAct = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regAct;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ControlRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -120,7 +105,7 @@ public class ControlRecDAO
     //Devuelve si si han generado los recibos
     public static boolean generadosRec(String fecha, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
         ResultSet         rs     = null;
 
         String            sql    = "SELECT " + TablaControlRecibos.CODCENTRO + " , "
@@ -133,7 +118,7 @@ public class ControlRecDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, fecha);
@@ -151,20 +136,12 @@ public class ControlRecDAO
 
             rs.close();
             ps.close();
-
+           }
             return recGen;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ControlRecDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }

@@ -29,7 +29,7 @@ public class CentrosDAO
     public static Vector datComCentros(Connection con) throws Exception
     {
 
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT "    + TablaCentros.CODCENTRO + ","
@@ -42,7 +42,7 @@ public class CentrosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
             rs  = ps.executeQuery();
 
             while (rs.next())
@@ -56,21 +56,13 @@ public class CentrosDAO
 
             rs.close();
             ps.close();
-
+           }
             return listCentros;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CentrosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -79,7 +71,7 @@ public class CentrosDAO
     //Método que devuelve el nombre de un centro
     public static String nomCentro(String idCen, Connection con) throws Exception
     {
-        PreparedStatement ps      = null;
+       
         ResultSet         rs      = null;
 
         String            sql     = "SELECT " + TablaCentros.NOMBRE    +
@@ -90,7 +82,7 @@ public class CentrosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se le pasan los parámetros a la consulta sql
             ps.setInt(1, new Integer(idCen).intValue());
@@ -105,21 +97,13 @@ public class CentrosDAO
 
             rs.close();
             ps.close();
-
+           }
             return strCen;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CentrosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -128,7 +112,7 @@ public class CentrosDAO
     //Método que devuelve los datos de un centro
     public static CentrosVO datCentro(int idCen, Connection con) throws Exception
     {
-        PreparedStatement ps      = null;
+       
         ResultSet         rs      = null;
 
         String            sql     = "SELECT " + TablaCentros.CODCENTRO + " ,"
@@ -140,7 +124,7 @@ public class CentrosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se le pasan los parámetros a la consulta sql
             ps.setInt(1, idCen);
@@ -158,21 +142,13 @@ public class CentrosDAO
 
             rs.close();
             ps.close();
-
+           }
             return cenVO;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CentrosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -182,7 +158,7 @@ public class CentrosDAO
     //Devuelve el nuevo código de centro generado
     public static int generarNuevoCodCentro(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT MAX(" + TablaCentros.CODCENTRO + ") AS " + TablaCentros.CODCENTRO +
@@ -192,7 +168,7 @@ public class CentrosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
             rs = ps.executeQuery();
 
             if(rs.next())
@@ -202,21 +178,13 @@ public class CentrosDAO
 
             rs.close();
             ps.close();
-
+            }
             return nuevoCod;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CentrosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -226,7 +194,7 @@ public class CentrosDAO
     //Método que guarda un Centro
     public static int guardarCentro(CentrosVO cenVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = 0;
 
@@ -240,7 +208,7 @@ public class CentrosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros a la consulta sql
             ps.setInt   (1, nueCodCentro);
@@ -249,19 +217,12 @@ public class CentrosDAO
            regActualizados = ps.executeUpdate();
 
            ps.close();
-
+           }
            return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CentrosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -270,7 +231,7 @@ public class CentrosDAO
     //Edita el registro de un Centro
     public static int editarCentro(CentrosVO cenVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         int               regActualizados = -1;
 
@@ -280,7 +241,7 @@ public class CentrosDAO
         try
         {
 
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasasn los parámetros a la consulta sql
             ps.setString(1, cenVO.getNombreCentro());
@@ -289,19 +250,12 @@ public class CentrosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CentrosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }

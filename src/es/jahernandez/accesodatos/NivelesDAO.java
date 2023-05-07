@@ -29,7 +29,7 @@ public class NivelesDAO
     //Método que devuelve los datos de un nivel
     public static NivelesVO devolverDatosNivel(String codNiv,Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaNiveles.CODNIVEL  + " , "
@@ -43,7 +43,7 @@ public class NivelesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codNiv);
@@ -62,21 +62,13 @@ public class NivelesDAO
 
             rs.close();
             ps.close();
-
+            }
             return datNiv;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(NivelesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -84,7 +76,7 @@ public class NivelesDAO
     //Método que devuelve los datos de nivel
     public static Vector devolverTodosNiv(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaNiveles.CODNIVEL  + " , "
@@ -98,7 +90,7 @@ public class NivelesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -116,20 +108,12 @@ public class NivelesDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaNiveles;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(NivelesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -138,7 +122,7 @@ public class NivelesDAO
     public static int guardarNivel(NivelesVO nivVO,Connection con) throws Exception
     {
         String            nueCodNiv      = generarNuevoCodNiv();
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaNiveles.TABLA     + " ( "
                                                           + TablaNiveles.CODNIVEL  + " , "
@@ -152,7 +136,7 @@ public class NivelesDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, nueCodNiv);
@@ -163,18 +147,12 @@ public class NivelesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(NivelesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -231,7 +209,7 @@ public class NivelesDAO
     //Método que devuelve los datos de nivel de un determinado curso
     public static Vector devolverNivCur(String codCur ,Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql          = "SELECT " + TablaNiveles.CODNIVEL  + " , "
@@ -245,7 +223,7 @@ public class NivelesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codCur);
@@ -266,20 +244,12 @@ public class NivelesDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaNiveles;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(NivelesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -287,7 +257,7 @@ public class NivelesDAO
      //Edita el registro de un curso
     public static int editaNivel(NivelesVO nivVO,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "UPDATE " + TablaNiveles.TABLA     +
                                 " SET "   + TablaNiveles.NOMBRE    + " = ? , "
@@ -298,7 +268,7 @@ public class NivelesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, nivVO.getNomNiv());
@@ -308,19 +278,12 @@ public class NivelesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(NivelesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+         
             throw exc;
         }
     }
@@ -328,7 +291,7 @@ public class NivelesDAO
     //Edita el registro de un curso
     public static int eliminaNivel(String codNivel,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "DELETE FROM " + TablaNiveles.TABLA  +
                                 " WHERE "      + TablaNiveles.CODNIVEL + " = ?";
@@ -344,7 +307,7 @@ public class NivelesDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codNivel);
@@ -352,19 +315,12 @@ public class NivelesDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(NivelesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+       
             throw exc;
         }
     }

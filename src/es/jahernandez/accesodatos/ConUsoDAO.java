@@ -28,7 +28,7 @@ public class ConUsoDAO
     //Método que devuelve los datos de control de un usuario activo
     public static ConUsuVO buscarUsuario(String user, String password, Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT " + TablaControl.USUARIO   + ","
@@ -47,7 +47,7 @@ public class ConUsoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, user);
@@ -68,20 +68,13 @@ public class ConUsoDAO
             }
             rs.close();
             ps.close();
-
+           }
             return conUsoVO;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -91,7 +84,7 @@ public class ConUsoDAO
     //Método que devuelve los datos de control de todos los usuarios que no son administradores
     public static Vector devTodUsuarios(Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String            sql        = "SELECT " + TablaControl.USUARIO   + ","
@@ -110,7 +103,7 @@ public class ConUsoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
             rs  = ps.executeQuery();
 
             while (rs.next())
@@ -129,21 +122,13 @@ public class ConUsoDAO
 
             rs.close();
             ps.close();
-
+           }
             return listUsers;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -154,7 +139,7 @@ public class ConUsoDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarUser(ConUsuVO conUsVO, String usuario,Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         int               resulSql   = 0;
 
         //String            sql        = "INSERT INTO TbControl(usuario,password,nivelAcceso,nombre,idCentro) VALUES(?,?,?,?,?)";
@@ -168,7 +153,7 @@ public class ConUsoDAO
                                        " VALUES(?,?,?,?,?,?,?)";
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString (1, conUsVO.getUsuario());
@@ -182,7 +167,7 @@ public class ConUsoDAO
             resulSql = ps.executeUpdate();
 
             ps.close();
-
+           }
            //Opciones de seguridad
            //Desactivado temporalmente
            /*
@@ -200,14 +185,7 @@ public class ConUsoDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -216,7 +194,7 @@ public class ConUsoDAO
     //Método que elimina un registro en la base de datos
     public static int borrarUser(String login, String usuario,Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         int               resulSql   = 0;
 
         String            sql        = "DELETE FROM " + TablaControl.TABLA   +
@@ -224,7 +202,7 @@ public class ConUsoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, login);
@@ -232,7 +210,7 @@ public class ConUsoDAO
             resulSql = ps.executeUpdate();
 
             ps.close();
-
+           }
             //Registro de seuuridad
             //Desactivado temporalmente
             /*LogSegVO logSegVO  = new LogSegVO();
@@ -249,14 +227,7 @@ public class ConUsoDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -265,7 +236,7 @@ public class ConUsoDAO
     //Método que devuelve los datos de un usuario
     public static ConUsuVO devDatUsuario(String user, String usuario,Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         ResultSet         rs         = null;
 
         String              sql      = "SELECT " + TablaControl.USUARIO   + ","
@@ -284,7 +255,7 @@ public class ConUsoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, user);
@@ -316,21 +287,13 @@ public class ConUsoDAO
             }
             rs.close();
             ps.close();
-
+           }
             return conUsoVO;
 
         }
         catch (Exception exc)
         {
-           try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -339,7 +302,7 @@ public class ConUsoDAO
     //Método que edita los datos de un usuario
     public static int editaUser(ConUsuVO conVO, String usuario, Connection con) throws Exception
     {
-        PreparedStatement ps         = null;
+        
         int               resulSql   = 0;
 
         String            sql        = "UPDATE " + TablaControl.TABLA  + " SET " + TablaControl.PASSWORD  + " = ? , "
@@ -352,7 +315,7 @@ public class ConUsoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString (1, DigestUtils.md5Hex(conVO.getPassword()));
@@ -366,7 +329,7 @@ public class ConUsoDAO
             resulSql = ps.executeUpdate();
 
             ps.close();
-
+           }
             //Datos de control
             //Desactivado temporalmente
             /*LogSegVO logSegVO  = new LogSegVO();
@@ -381,14 +344,7 @@ public class ConUsoDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                Conexion.desconectar(con);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }

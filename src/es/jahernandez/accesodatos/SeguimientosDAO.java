@@ -27,7 +27,7 @@ public class SeguimientosDAO
     //Método que devuelve los datos de un seguimiento
     public static SeguimientosVO devolverDatosSeg(String codSeg, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
         ResultSet         rs     = null;
 
         String            sql    = "SELECT " + TablaSeguimientos.CODSEGUIMIENTO + " , "
@@ -43,7 +43,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codSeg);
@@ -64,20 +64,12 @@ public class SeguimientosDAO
 
             rs.close();
             ps.close();
-
+           }
             return datSeg;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -86,7 +78,7 @@ public class SeguimientosDAO
     //Método que devuelve los datos de seguimiento
     public static Vector devolverTodosSeg(Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql    = "SELECT " + TablaSeguimientos.CODSEGUIMIENTO + " , "
@@ -103,7 +95,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -123,20 +115,12 @@ public class SeguimientosDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaSeg;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
 
             throw exc;
         }
@@ -196,7 +180,7 @@ public class SeguimientosDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarSeg(SeguimientosVO segVO, Connection con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
 
         String            nueCodSeg = generarNuevoCodSeg();
 
@@ -213,7 +197,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, nueCodSeg);
@@ -226,19 +210,12 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -247,7 +224,7 @@ public class SeguimientosDAO
     //Edita el registro de un seguimiento
     public static int editaSeg(SeguimientosVO segVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "UPDATE " + TablaSeguimientos.TABLA          +
                                             " SET "   + TablaSeguimientos.CODCURSO       + " = ? ,"
@@ -260,7 +237,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, segVO.getIdCur());
@@ -272,19 +249,12 @@ public class SeguimientosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
 
             throw exc;
         }
@@ -293,7 +263,7 @@ public class SeguimientosDAO
     //Método que devuelve los datos de seguimiento de un alumno
     public static Vector devolverSegAlu(String codAl, Connection con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         String            sql       = "SELECT "    + TablaSeguimientos.CODSEGUIMIENTO + " , "
@@ -312,7 +282,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codAl);
@@ -334,19 +304,12 @@ public class SeguimientosDAO
             }
             rs.close();
             ps.close();
-
+           }
             return listaSeg;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+         
 
             return null;
         }
@@ -355,7 +318,7 @@ public class SeguimientosDAO
     //Método que devuelve los datos de seguimiento de un curso
     public static Vector devolverSegCur(String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql      = "SELECT "     + TablaSeguimientos.CODSEGUIMIENTO + " , "
@@ -373,7 +336,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -395,20 +358,12 @@ public class SeguimientosDAO
             }
             rs.close();
             ps.close();
-
+           }
             return listaSeg;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
@@ -417,7 +372,7 @@ public class SeguimientosDAO
     //Método que elimina todos los seguimientos de un alumno
     public static int eliminaSegAlu(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA     +
                                             " WHERE "      + TablaSeguimientos.CODALUMNO + " = ?";
@@ -426,26 +381,19 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codAlu);
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -454,7 +402,7 @@ public class SeguimientosDAO
     //Método que elimina todos los seguimientos de un curso
     public static int eliminaSegCur(String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA    +
                                             " WHERE "      + TablaSeguimientos.CODCURSO + " = ?";
@@ -462,26 +410,19 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -490,7 +431,7 @@ public class SeguimientosDAO
     //Método que elimina un registro de seguimiento
     public static int eliminaSeg(String codSeg, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaSeguimientos.TABLA          +
                                             " WHERE "      + TablaSeguimientos.CODSEGUIMIENTO + " = ?";
@@ -499,26 +440,19 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codSeg);
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(SeguimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -527,7 +461,7 @@ public class SeguimientosDAO
     //Método que devuelve el número de seguimientos de un alumno
     public static int devolverNumSeg(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
         ResultSet         rs     = null;
 
         String            sql    = "SELECT COUNT(" + TablaSeguimientos.CODALUMNO + " ) " +
@@ -538,7 +472,7 @@ public class SeguimientosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codAlu);
@@ -552,21 +486,13 @@ public class SeguimientosDAO
 
             rs.close();
             ps.close();
-
+           }
             return numSeg;
         }
 
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ConUsoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }

@@ -26,7 +26,7 @@ public class CurNivDAO
     //Método que guarda los niveles de un curso
     public static int guardarNivCur(String codCur, String codNiv, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "INSERT INTO " + TablaCursoNiveles.TABLA + " (" + TablaCursoNiveles.CODCURSO + " , "
                                                                                 + TablaCursoNiveles.CODNIV   + ")  " +
@@ -35,7 +35,7 @@ public class CurNivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -44,20 +44,13 @@ public class CurNivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CurNivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -66,7 +59,7 @@ public class CurNivDAO
     public static Vector devolverCurNiv(String codCur, Connection con) throws Exception
     {
 
-        PreparedStatement ps          = null;
+       
         ResultSet         rs          = null;
 
         String            sql         = "SELECT "      + TablaCursoNiveles.TABLA   + "." + TablaCursoNiveles.CODCURSO     + " , "
@@ -83,7 +76,7 @@ public class CurNivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -102,20 +95,12 @@ public class CurNivDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaNivCur;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CurNivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -123,7 +108,7 @@ public class CurNivDAO
     //Método que elimina un nivel de un curso
     public static int eliminarNivCur(String codNiv, String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "DELETE FROM " + TablaCursoNiveles.TABLA    +
                                 " WHERE "      + TablaCursoNiveles.CODCURSO + " = ? AND "
@@ -133,7 +118,7 @@ public class CurNivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -142,7 +127,7 @@ public class CurNivDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             //Se actualiza los niveles de interes de los  alumnos
             CursosAluGestion.ediNivCurAlu(codCur);
 
@@ -151,14 +136,7 @@ public class CurNivDAO
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CurNivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 
@@ -167,7 +145,7 @@ public class CurNivDAO
     //Borra los datos de nivel de un curso
     public static int borraCurNiv(String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
 
         String            sql    = "DELETE FROM " + TablaCursoNiveles.TABLA    +
                                    " WHERE  "     + TablaCursoNiveles.CODCURSO + " = ? ";
@@ -176,7 +154,7 @@ public class CurNivDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -184,20 +162,13 @@ public class CurNivDAO
             regAct = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regAct;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CurNivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -205,7 +176,7 @@ public class CurNivDAO
     //Borra todos los datos de un curso
     public static int borrarTodNivCur(String codCur, Connection con) throws Exception
     {
-        PreparedStatement ps     = null;
+        
 
         String            sql    = "DELETE FROM " + TablaCursoNiveles.TABLA    +
                                    " WHERE  "     + TablaCursoNiveles.CODCURSO +  " = ? ";
@@ -213,7 +184,7 @@ public class CurNivDAO
         int               regAct = 0;
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codCur);
@@ -221,20 +192,13 @@ public class CurNivDAO
             regAct = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regAct;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(CurNivDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
 

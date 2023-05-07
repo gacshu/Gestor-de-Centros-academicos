@@ -22,7 +22,7 @@ public class BancosDAO
 
      public static String devolverNombreBanco(String codBan, Connection con) throws Exception
      {
-        PreparedStatement ps     = null;
+        
         ResultSet         rs     = null;
 
         String            sql    = "SELECT " + TablaBancos.NOMBRE   +
@@ -34,7 +34,7 @@ public class BancosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, codBan);
@@ -48,20 +48,12 @@ public class BancosDAO
 
             rs.close();
             ps.close();
-
+           }
             return nomBan;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(BancosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
 

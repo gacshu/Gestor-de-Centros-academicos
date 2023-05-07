@@ -26,7 +26,7 @@ public class TipoCursoDAO
     //Método que devuelve los datos a mostrar en los combos de Tipo de Curso
     public static Vector devolverDatosTipCur(Connection con) throws Exception
     {
-        PreparedStatement ps            = null;
+        
         ResultSet         rs            = null;
 
         String            sql           = "SELECT "    + TablaTipoCurso.CODTIPOCURSO + " , "
@@ -40,7 +40,7 @@ public class TipoCursoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -56,20 +56,12 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaTipCur;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoCursoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
             throw exc;
         }
     }
@@ -77,7 +69,7 @@ public class TipoCursoDAO
     //Método que devuelve los datos a mostrar en los combos de Tipo de Curso
     public static TipoCursoVO devolverTipCur(int codTipo,Connection con) throws Exception
     {
-        PreparedStatement ps            = null;
+        
         ResultSet         rs            = null;
 
         String            sql           = "SELECT " + TablaTipoCurso.CODTIPOCURSO + " , "
@@ -89,7 +81,7 @@ public class TipoCursoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setInt(1, codTipo);
 
@@ -105,20 +97,12 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-
+           }
             return tipCursoVO;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoCursoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -126,7 +110,7 @@ public class TipoCursoDAO
     //Mátodo que devuelve el nombre de un tipo de curso
     public static String devuelveNombreTipo(int codTipoCur,Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         String            sql      = "SELECT " + TablaTipoCurso.NOMBRE       +
@@ -137,7 +121,7 @@ public class TipoCursoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             ps.setInt(1, codTipoCur);
 
@@ -150,20 +134,12 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-
+           }
             return nombreTip;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoCursoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -171,7 +147,7 @@ public class TipoCursoDAO
     //Método que genera un nuevo código de tipo curso
     public static int generarNuevoCodTipCur(Connection con) throws Exception
     {
-        PreparedStatement ps       = null;
+        
         ResultSet         rs       = null;
 
         int               nuevCod  = -99;
@@ -181,7 +157,7 @@ public class TipoCursoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -192,20 +168,12 @@ public class TipoCursoDAO
 
             rs.close();
             ps.close();
-
+           }
             return nuevCod;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoCursoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -214,7 +182,7 @@ public class TipoCursoDAO
     //Método que guarda un tipo de curso
     public static int guardarTipoCurso(TipoCursoVO tipCurVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
         int               nueCodTipCurs   = TipoCursoGestion.generarNuevoCodTipCur();
 
@@ -225,7 +193,7 @@ public class TipoCursoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se introducen los parámetros a la consulta sql
             ps.setInt   (1, nueCodTipCurs);
@@ -234,19 +202,12 @@ public class TipoCursoDAO
            regActualizados = ps.executeUpdate();
 
            ps.close();
-
+           }
            return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoCursoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             throw exc;
         }
@@ -256,7 +217,7 @@ public class TipoCursoDAO
     public static int editarTipoCurso(TipoCursoVO tipCurVO, Connection con) throws Exception
     {
 
-        PreparedStatement ps              = null;
+        
         int               regActualizados = 0;
 
         String            sql             = "UPDATE " + TablaTipoCurso.TABLA     +
@@ -265,7 +226,7 @@ public class TipoCursoDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasasn los parámetros a la consulta sql
             ps.setString(1, tipCurVO.getNomTipCurso());
@@ -274,19 +235,12 @@ public class TipoCursoDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(TipoCursoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }

@@ -27,7 +27,7 @@ public class FaltasDAO
     //Método que devuelve los datos de una falta
     public static FaltasVO devolverDatosFalta(String codEdi, String codMod, String codAlu, java.util.Date fecha, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaFaltas.CODEDI + " , "
@@ -45,7 +45,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codEdi);
@@ -68,21 +68,13 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-
+            }
             return faltaVO;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
 
@@ -91,7 +83,7 @@ public class FaltasDAO
     //Método que devuelve todos los registro de faltas
     public static Vector devolverTodasFaltas(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaFaltas.CODEDI + " , "
@@ -106,7 +98,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -125,20 +117,12 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaFaltas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -146,7 +130,7 @@ public class FaltasDAO
     //Método que guarda un nuevo registro en la base de datos
     public static int guardarFalta(FaltasVO faltaVO, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaFaltas.TABLA  + " ( "
                                                           + TablaFaltas.CODEDI + " , "
@@ -161,7 +145,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString (1, faltaVO.getIdEdi());
@@ -173,18 +157,12 @@ public class FaltasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -192,7 +170,7 @@ public class FaltasDAO
     //Método que devuelve los datos de falta de un alumno y una edición
     public static Vector devolverFaltasAluEdi(String codAlu , String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "    + TablaFaltas.CODEDI + " , "
@@ -210,7 +188,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -233,20 +211,12 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaFaltas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -254,7 +224,7 @@ public class FaltasDAO
     //Método que devuelve el número de faltas de un alumno y una edición
     public static int devolverNumFaltasAluEdi(String codAlu , String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT COUNT(*)" +
@@ -267,7 +237,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -282,20 +252,12 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-
+           }
             return numFaltas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -303,7 +265,7 @@ public class FaltasDAO
     //Método que devuelve los datos de falta de una edición
     public static Vector devolverFaltasEdi(String codEdi, Connection con) throws Exception
     {
-        PreparedStatement ps           = null;
+        
         ResultSet         rs           = null;
 
         String            sql          = "SELECT "    + TablaFaltas.CODEDI + " , "
@@ -321,7 +283,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codEdi);
@@ -343,20 +305,12 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaFaltas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }
@@ -365,7 +319,7 @@ public class FaltasDAO
     //Edita el registro de una falta
     public static int editarFalta(FaltasVO faltaVO, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "UPDATE " + TablaFaltas.TABLA   +
                                             " SET "   + TablaFaltas.JUSTIF  + " = ?  " +
@@ -377,7 +331,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setBoolean(1, faltaVO.isJustificada());
@@ -389,19 +343,12 @@ public class FaltasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -409,7 +356,7 @@ public class FaltasDAO
     //Borra el registro de una falta
     public static int eliminaFalta (String codEdi, String codMod, String codAlu, java.util.Date fecha, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaFaltas.TABLA              +
                                             " WHERE "      + TablaFaltas.CODEDI + " = ? AND "
@@ -422,7 +369,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString (1, codEdi);
@@ -433,19 +380,12 @@ public class FaltasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -453,7 +393,7 @@ public class FaltasDAO
     //Borra las faltas de un alumno
     public static int eliminarFaltasAlumno(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps              = null;
+        
 
         String            sql             = "DELETE FROM " + TablaFaltas.TABLA            +
                                             " WHERE "      + TablaFaltas.CODALU + " = ? " ;
@@ -463,7 +403,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString (1, codAlu);
@@ -471,19 +411,12 @@ public class FaltasDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -491,7 +424,7 @@ public class FaltasDAO
     //Método que devuelve si un alumno tiene faltas
     public static boolean tieneAluFaltas(String codAlu, Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql            = "SELECT "  + TablaFaltas.CODALU +
@@ -502,7 +435,7 @@ public class FaltasDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codAlu);
@@ -516,20 +449,12 @@ public class FaltasDAO
 
             rs.close();
             ps.close();
-
+           }
             return aluTieneFaltas;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(FaltasDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             throw exc;
         }
     }

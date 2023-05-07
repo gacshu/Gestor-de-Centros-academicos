@@ -26,7 +26,7 @@ public class ModulosDAO
     //Método que devuelve los datos de un módulo
     public static ModulosVO devolverDatosModulo(String codMod,Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaModulos.CODMODULO   + " , "
@@ -42,7 +42,7 @@ public class ModulosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codMod);
@@ -63,21 +63,13 @@ public class ModulosDAO
 
             rs.close();
             ps.close();
-
+            }
             return datMod;
 
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ModulosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -85,7 +77,7 @@ public class ModulosDAO
     //Método que devuelve los datos de módulo
     public static Vector devolverTodosMod(Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            cadenaConsulta = "SELECT " + TablaModulos.CODMODULO   + " , "
@@ -101,7 +93,7 @@ public class ModulosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             rs  = ps.executeQuery();
 
@@ -121,20 +113,12 @@ public class ModulosDAO
 
             rs.close();
             ps.close();
-
+            }
             return listaModulos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ModulosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -143,7 +127,7 @@ public class ModulosDAO
     public static int guardarModulo(ModulosVO modVO,Connection con) throws Exception
     {
         String            nueCodMod      = generarNuevoCodMod();
-        PreparedStatement ps             = null;
+       
 
         String            cadenaConsulta = "INSERT INTO " + TablaModulos.TABLA       + " ( "
                                                           + TablaModulos.CODMODULO   + " , "
@@ -158,7 +142,7 @@ public class ModulosDAO
 
         try
         {
-            ps  = con.prepareStatement(cadenaConsulta);
+            try (PreparedStatement ps  = con.prepareStatement(cadenaConsulta)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, nueCodMod);
@@ -171,18 +155,12 @@ public class ModulosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
+            }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ModulosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -242,7 +220,7 @@ public class ModulosDAO
     //Método que devuelve los módulos de un curso
     public static Vector devolverModCur(String codCur,Connection con) throws Exception
     {
-        PreparedStatement ps             = null;
+       
         ResultSet         rs             = null;
 
         String            sql            = "SELECT " + TablaModulos.CODMODULO   + " , "
@@ -259,7 +237,7 @@ public class ModulosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta
             ps.setString(1, codCur);
@@ -282,20 +260,12 @@ public class ModulosDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaModulos;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ModulosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -304,7 +274,7 @@ public class ModulosDAO
     public static int editaModulo(ModulosVO modVO,Connection con) throws Exception
     {
 
-        PreparedStatement ps  = null;
+        
 
         String            sql = "UPDATE " + TablaModulos.TABLA       +
                                 " SET "   + TablaModulos.NOMBRE      + " = ? , "
@@ -317,7 +287,7 @@ public class ModulosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, modVO.getNombre());
@@ -329,19 +299,12 @@ public class ModulosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ModulosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -349,7 +312,7 @@ public class ModulosDAO
     //Elimina el registro de un módulo
     public static int eliminaModulo(String codMod,Connection con) throws Exception
     {
-        PreparedStatement ps  = null;
+        
 
         String            sql = "DELETE FROM " + TablaModulos.TABLA     +
                                 " WHERE "      + TablaModulos.CODMODULO + " = ?";
@@ -360,7 +323,7 @@ public class ModulosDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Pasamos los parámetros a la consulta sql
             ps.setString(1, codMod);
@@ -368,19 +331,12 @@ public class ModulosDAO
             regActualizados = ps.executeUpdate();
 
             ps.close();
-
+           }
             return regActualizados;
         }
         catch (Exception exc)
         {
-            try
-            {
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ModulosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            t
             throw exc;
         }
     }

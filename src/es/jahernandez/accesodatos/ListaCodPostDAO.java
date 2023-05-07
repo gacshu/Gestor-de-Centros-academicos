@@ -24,7 +24,7 @@ public class ListaCodPostDAO
     //Método que devuelve los datos a mostrar en los combos de Provincia
     public static Vector devolverDatProv(Connection con) throws Exception
     {
-        PreparedStatement ps            = null;
+        
         ResultSet         rs            = null;
 
         String            sql           = "SELECT "    + TablaProvincias.CODPROV + " , "
@@ -38,7 +38,7 @@ public class ListaCodPostDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             rs  = ps.executeQuery();
 
@@ -54,20 +54,12 @@ public class ListaCodPostDAO
 
             rs.close();
             ps.close();
-
+           }
             return listaCP;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ListaCodPostDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             throw exc;
         }
     }
@@ -75,7 +67,7 @@ public class ListaCodPostDAO
     //Devuelve el nombre de la provincia
     public static String devuelveNombreProv(String idProv,Connection con) throws Exception
     {
-        PreparedStatement ps        = null;
+       
         ResultSet         rs        = null;
 
         String            sql       = "SELECT "  + TablaProvincias.NOMBRE  +
@@ -86,7 +78,7 @@ public class ListaCodPostDAO
 
         try
         {
-            ps  = con.prepareStatement(sql);
+           try (PreparedStatement ps  = con.prepareStatement(sql)) {
 
             //Se pasan los parámetros a la consulta sql
             ps.setString(1, idProv);
@@ -100,20 +92,12 @@ public class ListaCodPostDAO
 
             rs.close();
             ps.close();
-
+           }
             return nomProv;
         }
         catch (Exception exc)
         {
-            try
-            {
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(ListaCodPostDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
             throw exc;
         }
